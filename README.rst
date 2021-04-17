@@ -56,8 +56,34 @@ python code::
     mintickprice.find_tick_price('DCE', 'l2009')
     mintickprice.find_tick_price('SHFE', 'cu2009')
 
+合约交易时间
+^^^^^^^^^^^^^
+
+python code::
+
+    # 获取单个合约交易时间表
+    from nature_analysis.trade_time import tradetime
+    print(tradetime.get_time_list('DCE', 'l2009'))
+
+输出：[[540, 615], [630, 690], [810, 900], [1260, 1500]]
+
+| [540, 615] 对应上午9点到上午10点15分
+| .
+| .
+| .
+| [1260, 1500] 对应晚上9点到次日凌晨1点
+
+python code::
+
+    # 判断某个时刻是否在交易时间内
+    from nature_analysis.trade_time import tradetime
+    print(tradetime.is_trade_time('DCE', 'l2109', '2020-10-10 12:10:10'))
+
+输出：False
+
 主力合约判断
 ^^^^^^^^^^^^^
+
 | 判断持仓量，成交量大约某个阈值的天数占所有交易天数的比重来判断合约是否是主力合约。
 | 阈值一共有三个分别为[10000 100000 1000000]
 
@@ -80,6 +106,27 @@ python code::
 3. 持仓量大于1000000&& 成交量大于1000000占所有天数的比重是百分0.02，即很少天数满足
 
 一般通过判断阈值10000，比重大于百分之五十即可判定是主力合约
+
+合约对协整判断
+^^^^^^^^^^^^^^
+
+判断两个合约对是否满足协整检验，采用adfuller算法P
+
+python code::
+
+    from nature_analysis.coint import coint
+
+    coint.paramInput['dataRootPath'] = '/share/baidunetdisk/reconstruct/tick'
+
+    coint.paramInput['instruments1']['exchangeId'] = 'DCE'
+    coint.paramInput['instruments1']['instrumentId'] = 'c2105'
+    coint.paramInput['instruments2']['exchangeId'] = 'DCE'
+    coint.paramInput['instruments2']['instrumentId'] = 'm2105'
+
+    coint.paramInput['duration']['begin'] = '2021-01-01'
+    coint.paramInput['duration']['end'] = '2121-03-01'
+    result = coint.get_coint()
+    print(result)
 
 后续功能开发
 ------------

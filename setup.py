@@ -6,7 +6,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name="nature_analysis",
-    version="1.1",
+    version="1.1.1",
     author="zhoufan",
     author_email="zhoufan@cdsslh.com",
     description="Nature layer",
@@ -19,7 +19,8 @@ setup(
     install_requires = [
         'numpy>=1.19.1',
         'data_generator>=1.4',
-        'pytz>=2021.1'
+        'pytz>=2021.1',
+        'statsmodels>=0.12.2'
     ],
 
     # 你要安装的包，通过 setuptools.find_packages 找到当前目录下有哪些包
