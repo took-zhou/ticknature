@@ -128,6 +128,22 @@ python code::
     result = coint.get_coint()
     print(result)
 
+合约可交易时间点提取
+^^^^^^^^^^^^^^^^^^^^^
+在拟交易的一天内，逐个读取期货的每笔分时数据，逐个计算每个交易点的价格
+
+python code::
+
+    from nature_analysis.trade_point import tradepoint
+    tradepoint.get_trade_point('SHFE', 'cu2109', '20210329', include_night=True)
+
+基于提取出的交易点，生成相应的峰
+
+python code::
+
+    from nature_analysis.trade_point import tradepoint
+    tradepoint.get_trade_spectrum('SHFE', 'cu2109', '20210329', include_night=True)
+
 后续功能开发
 ------------
 
