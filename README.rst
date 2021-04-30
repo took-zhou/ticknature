@@ -63,15 +63,16 @@ python code::
 
     # 获取单个合约交易时间表
     from nature_analysis.trade_time import tradetime
-    print(tradetime.get_time_list('DCE', 'l2009'))
+    print(tradetime.get_trade_time('SHFE', 'cu2009'))
 
-输出：[[540, 615], [630, 690], [810, 900], [1260, 1500]]
+输出：{'morning': [[540, 615], [630, 690]], 'afternoon': [[810, 900]], 'night': [[1260, 1440], [0, 60]]}
 
 | [540, 615] 对应上午9点到上午10点15分
 | .
 | .
 | .
-| [1260, 1500] 对应晚上9点到次日凌晨1点
+| [1260, 1440] 对应晚上9点到晚上12点
+| [0, 60] 对应凌晨0点到凌晨1点
 
 python code::
 
@@ -143,6 +144,18 @@ python code::
 
     from nature_analysis.trade_point import tradepoint
     tradepoint.get_trade_spectrum('SHFE', 'cu2109', '20210329', include_night=True)
+
+合约交易日期提取
+^^^^^^^^^^^^^^^^^
+获取某个合约的所有交易日期
+
+python code::
+
+    from nature_analysis.trade_data import tradedata
+    tradedata.get_trade_data('DCE', 'c2105')
+
+返回值：['20200716', '20210205', '20210329'...'20210428', '20210426']
+
 
 后续功能开发
 ------------

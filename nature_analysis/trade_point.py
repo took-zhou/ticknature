@@ -191,8 +191,9 @@ class tradePoint():
 
         # 逐个确定所有的趋势区间
         # trend_period_list = []
-        spectrum = [date, 'beginning_tradepoint='+str(beginning)]
-        if max_id != None and min_id != None:  
+        spectrum = []
+        timelist = []
+        if max_id != None and min_id != None:
             trend_period_first_id = min(max_id,min_id)
             trend_period_second_id = max(max_id,min_id)
             trend_period_second_id_adjust = None
@@ -210,7 +211,9 @@ class tradePoint():
                     elif subprice <= (subprice_list[trend_period_second_id]-trend_threshold):
                         #trend_period_list.append([trend_period_first_id,trend_period_second_id])
                         peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*1000,8)
+                        # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
                         spectrum.append(peak_range)
+                        timelist.append(element_df.index[trend_period_second_id])
 
                         if trend_period_second_id_adjust != None and trend_period_second_id_adjust > trend_period_second_id:
                             trend_period_first_id = trend_period_second_id_adjust
@@ -226,7 +229,9 @@ class tradePoint():
                     elif subprice >= (subprice_list[trend_period_second_id]+trend_threshold):
                         #trend_period_list.append([trend_period_first_id,trend_period_second_id])
                         peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*1000,8)
+                        # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
                         spectrum.append(peak_range)
+                        timelist.append(element_df.index[trend_period_second_id])
 
                         if trend_period_second_id_adjust != None and trend_period_second_id_adjust > trend_period_second_id:
                             trend_period_first_id = trend_period_second_id_adjust
@@ -239,9 +244,13 @@ class tradePoint():
             if abs(subprice_list[trend_period_first_id]-subprice_list[trend_period_second_id]) >= trend_threshold:
                 #trend_period_list.append([trend_period_first_id,trend_period_second_id])
                 peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*1000,8)
+                # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
                 spectrum.append(peak_range)
+                timelist.append(element_df.index[trend_period_second_id])
 
-        return spectrum
+        ret = pd.Series(spectrum, index=timelist)
+
+        return ret
 
     def get_trade_point(self, exch, ins, day_data, include_night=False, include_extern_word=False):
         today_element_df = self.generate_data(exch, ins, day_data, include_night)
@@ -264,8 +273,3 @@ class tradePoint():
         return self.trend_period_of_each_element_and_spectrum_generate(day_data, trade_point)
 
 tradepoint = tradePoint()
-a = tradepoint.get_trade_point('SHFE', 'cu2109', '20210329', include_night=True, include_extern_word=True)
-print(a)
-
-b = tradepoint.get_trade_spectrum('SHFE', 'cu2109', '20210329', include_night=True)
-print(b)
