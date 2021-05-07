@@ -156,6 +156,33 @@ python code::
 
 返回值：['20200716', '20210205', '20210329'...'20210428', '20210426']
 
+交易所包含的合约提取
+^^^^^^^^^^^^^^^^^^^^^^
+
+python code::
+
+    from nature_analysis.trade_data import tradedata
+    tradedata.get_instruments('DCE')
+
+返回值：['c2109', 'pg2109', 'pp2201',...'jd2112', 'eb2204']
+
+获取特定品种, 特定月份最新合约名称
+
+python code::
+
+    from nature_analysis.trade_data import tradedata
+    tradedata.get_last_instrument('DCE', 'c2011')
+
+返回值：'c2111'
+
+获取合约是否在交割月
+
+python code::
+
+    from nature_analysis.trade_data import tradedata
+    tradedata.is_delivery_month('DCE', 'c2011')
+
+返回值：False or True
 
 后续功能开发
 ------------

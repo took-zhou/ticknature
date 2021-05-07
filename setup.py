@@ -6,7 +6,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name="nature_analysis",
-    version="1.1.2",
+    version="1.1.3",
     author="zhoufan",
     author_email="zhoufan@cdsslh.com",
     description="Nature layer",

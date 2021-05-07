@@ -50,6 +50,7 @@ class minTickPrice():
         self.CZCE['UR'] = 20
         self.CZCE['SA'] = 20
         self.CZCE['PF'] = 10
+        self.CZCE['PK'] = 10
 
         self.DCE['c'] = 10
         self.DCE['cs'] = 10
@@ -65,12 +66,13 @@ class minTickPrice():
         self.DCE['l'] = 25
         self.DCE['v'] = 25
         self.DCE['pp'] = 5
-        self.DCE['j'] = 100
-        self.DCE['jm'] = 60
-        self.DCE['i'] = 100
+        self.DCE['j'] = 50
+        self.DCE['jm'] = 30
+        self.DCE['i'] = 50
         self.DCE['eg'] = 10
         self.DCE['eb'] = 5
         self.DCE['pg'] = 20
+        self.DCE['lh'] = 80
 
         self.INE['sc'] = 100
         self.INE['lu'] = 10

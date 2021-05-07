@@ -72,6 +72,7 @@ class tradeTime():
         self.CZCE['UR'] = self.day_time_dict1
         self.CZCE['SA'] = self.time_compose3
         self.CZCE['PF'] = self.time_compose3
+        self.CZCE['PK'] = self.day_time_dict1
 
         self.DCE['c'] = self.time_compose3
         self.DCE['cs'] = self.time_compose3
@@ -93,6 +94,7 @@ class tradeTime():
         self.DCE['eg'] = self.time_compose3
         self.DCE['eb'] = self.time_compose3
         self.DCE['pg'] = self.time_compose3
+        self.DCE['lh'] = self.day_time_dict1
 
         self.INE['sc'] = self.time_compose2
         self.INE['lu'] = self.time_compose3
@@ -134,6 +136,9 @@ class tradeTime():
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(temp):
                 return self.CFFEX[temp]
+
+        if 'efp' in ins:
+            return {}
 
     def find_all(self):
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}

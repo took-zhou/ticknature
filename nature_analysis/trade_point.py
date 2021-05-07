@@ -163,15 +163,23 @@ class tradePoint():
         return df6
 
     # 操作：确定改天的所有趋势区间并提炼频谱峰值
-    def trend_period_of_each_element_and_spectrum_generate(self, date, element_df):  
+    def trend_period_of_each_element_and_spectrum_generate(self, date, element_df, trend_threshold = 1):
         # 确定首个趋势区间
         # index_list = element_df.index.values.tolist()
+        spectrum = []
+        timelist = []
+
+        if str(type(element_df)) == "<class 'NoneType'>":
+            ret = pd.Series(spectrum, index=timelist)
+            return ret
+
         subprice_list = element_df['trading_point'].values.tolist()
 
-        beginning = subprice_list[0]
+        if len(subprice_list) == 0:
+            ret = pd.Series(spectrum, index=timelist)
+            return ret
 
-        # 至少变动5元认为是一个新趋势的开始，前一个趋势的结束
-        trend_threshold = 3
+        beginning = subprice_list[0]
 
         j = 0
         max_id = None
@@ -191,8 +199,7 @@ class tradePoint():
 
         # 逐个确定所有的趋势区间
         # trend_period_list = []
-        spectrum = []
-        timelist = []
+
         if max_id != None and min_id != None:
             trend_period_first_id = min(max_id,min_id)
             trend_period_second_id = max(max_id,min_id)
@@ -270,6 +277,7 @@ class tradePoint():
 
     def get_trade_spectrum(self, exch, ins, day_data, include_night=False, include_extern_word=True):
         trade_point = self.get_trade_point(exch, ins, day_data, include_night=True, include_extern_word=True)
-        return self.trend_period_of_each_element_and_spectrum_generate(day_data, trade_point)
+        threshold = 3 * minticksize.find_tick_size(exch, ins)
+        return self.trend_period_of_each_element_and_spectrum_generate(day_data, trade_point, threshold)
 
 tradepoint = tradePoint()

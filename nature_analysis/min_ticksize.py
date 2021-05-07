@@ -50,6 +50,7 @@ class minTickSize():
         self.CZCE['UR'] = 1
         self.CZCE['SA'] = 1
         self.CZCE['PF'] = 2
+        self.CZCE['PK'] = 2
 
         self.DCE['c'] = 1
         self.DCE['cs'] = 1
@@ -65,12 +66,13 @@ class minTickSize():
         self.DCE['l'] = 5
         self.DCE['v'] = 5
         self.DCE['pp'] = 1
-        self.DCE['j'] = 1
-        self.DCE['jm'] = 1
-        self.DCE['i'] = 1
+        self.DCE['j'] = 0.5
+        self.DCE['jm'] = 0.5
+        self.DCE['i'] = 0.5
         self.DCE['eg'] = 1
         self.DCE['eb'] = 1
         self.DCE['pg'] = 1
+        self.DCE['lh'] = 5
 
         self.INE['sc'] = 0.1
         self.INE['lu'] = 1
