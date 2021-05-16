@@ -9,7 +9,7 @@ class tradePoint():
         self.csv_root_path = '/share/baidunetdisk/reconstruct/tick/'
 
     #读取该csv文件对于的分时数据
-    def daytime_raw_data_reading(self, daytime_file_root):
+    def _daytime_raw_data_reading(self, daytime_file_root):
         # 读取白天数据
         subprice_daytime = pd.read_csv(daytime_file_root, encoding = 'utf-8') 
         # 删除首行数据，因为该行数据容易出问题，导致后面设置时间index过不去
@@ -20,7 +20,7 @@ class tradePoint():
         return subprice
 
     # 读取该csv文件对于的分时数据
-    def nighttime_raw_data_reading(self, nighttime_file_root):
+    def _nighttime_raw_data_reading(self, nighttime_file_root):
         subprice_nighttime = pd.read_csv(nighttime_file_root, encoding = 'utf-8') 
         subprice_nighttime= subprice_nighttime.drop([0])
         subprice = subprice_nighttime
@@ -28,7 +28,7 @@ class tradePoint():
         return subprice
 
     # 对已经读取的分时数据设置毫秒级别的时间index
-    def millisecond_timeindex_setting(self, subprice, date):
+    def _millisecond_timeindex_setting(self, subprice, date):
         # 添加时间index
         # 将'TradingDay','    UpdateTime'和'UpdateMillisec'合并成一个新列
         # 将'UpdateMillisec'的数据类型从int变为str,从而实现列信息的合并
@@ -82,7 +82,7 @@ class tradePoint():
 
         return subprice
 
-    def generate_data(self, exch, ins, day_data, include_night=False):
+    def _generate_data(self, exch, ins, day_data, include_night=False):
         # 判断该日期到底是星期几
         ins_time_of_week = pd.to_datetime(day_data, format = '%Y-%m-%d').dayofweek + 1
         ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
@@ -113,18 +113,18 @@ class tradePoint():
         # print(ins_daytime_file_root)
         if os.path.exists(ins_daytime_file_root) == True:
             # 读取白天数据
-            subprice = self.daytime_raw_data_reading(ins_daytime_file_root)
+            subprice = self._daytime_raw_data_reading(ins_daytime_file_root)
             # 对已经读取的分时数据设置毫秒级别的时间index
-            subprice = self.millisecond_timeindex_setting(subprice, day_data)
+            subprice = self._millisecond_timeindex_setting(subprice, day_data)
             subprice_daytime = subprice
 
             # print(ins_nighttime_file_root)
             #读取昨天夜晚分时数据,并将昨天夜晚数据和与白天数据合并
             if os.path.exists(ins_nighttime_file_root) == True and include_night == True:
                 # 读取夜晚数据
-                subprice = self.nighttime_raw_data_reading(ins_nighttime_file_root)
+                subprice = self._nighttime_raw_data_reading(ins_nighttime_file_root)
                 # 对已经读取的分时数据设置毫秒级别的时间index
-                subprice = self.millisecond_timeindex_setting(subprice, night_date)
+                subprice = self._millisecond_timeindex_setting(subprice, night_date)
                 subprice_nighttime = subprice
                 # 白天数据与晚上数据合并为一个dataframe
                 subprice = subprice_nighttime.append(subprice_daytime)
@@ -137,7 +137,7 @@ class tradePoint():
         return element_df
 
     # 确定所有ask-bid_trading_point
-    def ask_bid_trading_point_df(self, element_df_, ticksize_):
+    def _ask_bid_trading_point_df(self, element_df_, ticksize_):
         element_df = element_df_.copy()
         # element_df['Volume_change'] = element_df[['    Volume']].diff(axis = 'index')['    Volume']
         # ask_bid_1元平稳博弈阶段划分
@@ -163,7 +163,7 @@ class tradePoint():
         return df6
 
     # 操作：确定改天的所有趋势区间并提炼频谱峰值
-    def trend_period_of_each_element_and_spectrum_generate(self, date, element_df, trend_threshold = 1):
+    def _trend_period_of_each_element_and_spectrum_generate(self, date, element_df, trend_threshold = 1, spectrum_type='ratio'):
         # 确定首个趋势区间
         # index_list = element_df.index.values.tolist()
         spectrum = []
@@ -179,7 +179,7 @@ class tradePoint():
             ret = pd.Series(spectrum, index=timelist)
             return ret
 
-        beginning = subprice_list[0]
+        beginning = element_df['OpenPrice'].values.tolist()[0]
 
         j = 0
         max_id = None
@@ -217,8 +217,11 @@ class tradePoint():
                         trend_period_second_id_adjust = j
                     elif subprice <= (subprice_list[trend_period_second_id]-trend_threshold):
                         #trend_period_list.append([trend_period_first_id,trend_period_second_id])
-                        peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*1000,8)
-                        # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
+                        if spectrum_type == 'ratio':
+                            peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*100,4)
+                            # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
+                        elif spectrum_type == 'value':
+                            peak_range = subprice_list[trend_period_second_id]-beginning
                         spectrum.append(peak_range)
                         timelist.append(element_df.index[trend_period_second_id])
 
@@ -234,9 +237,11 @@ class tradePoint():
                     elif subprice == subprice_list[trend_period_second_id]:
                         trend_period_second_id_adjust = j
                     elif subprice >= (subprice_list[trend_period_second_id]+trend_threshold):
-                        #trend_period_list.append([trend_period_first_id,trend_period_second_id])
-                        peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*1000,8)
-                        # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
+                        if spectrum_type == 'ratio':
+                            peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*100,4)
+                            # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
+                        elif spectrum_type == 'value':
+                            peak_range = subprice_list[trend_period_second_id]-beginning
                         spectrum.append(peak_range)
                         timelist.append(element_df.index[trend_period_second_id])
 
@@ -249,9 +254,11 @@ class tradePoint():
                 j = j + 1
 
             if abs(subprice_list[trend_period_first_id]-subprice_list[trend_period_second_id]) >= trend_threshold:
-                #trend_period_list.append([trend_period_first_id,trend_period_second_id])
-                peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*1000,8)
-                # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
+                if spectrum_type == 'ratio':
+                    peak_range = round((subprice_list[trend_period_second_id]-beginning)/beginning*100,4)
+                    # print("%f %f %f"%(subprice_list[trend_period_second_id], beginning, peak_range))
+                elif spectrum_type == 'value':
+                    peak_range = subprice_list[trend_period_second_id]-beginning
                 spectrum.append(peak_range)
                 timelist.append(element_df.index[trend_period_second_id])
 
@@ -260,14 +267,45 @@ class tradePoint():
         return ret
 
     def get_trade_point(self, exch, ins, day_data, include_night=False, include_extern_word=False):
-        today_element_df = self.generate_data(exch, ins, day_data, include_night)
+        """ 生成可交易点
+
+        一档行情中提取申卖价和申买价相差最小变动单位的作为可交易点。优点： 方便交易 不丢失价格变动趋势 简化数据量
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            day_data: 日期
+            include_night: 是否包含夜市数据
+            include_extern_word: 是否包含扩展内容。是：可交易时间除了时间外还有深度行情的其他信息 否：可交易时间点只包含时间信息
+
+        Returns:
+            返回的数据格式是 dataframe 格式，包含交易点价格等其他信息
+
+        Examples:
+            >>> from nature_analysis.trade_point import tradepoint
+            >>> tradepoint.get_trade_point('SHFE', 'cu2109', '20210329', include_night=True)
+            Timeindex
+            2021-03-26 21:03:47.500    66390.0
+            2021-03-26 21:18:04.000    66500.0
+            2021-03-26 21:23:11.000    66500.0
+            2021-03-26 21:25:18.000    66590.0
+            2021-03-26 21:28:22.000    66550.0
+                                        ...
+            2021-03-29 14:33:34.000    66670.0
+            2021-03-29 14:35:57.500    66670.0
+            2021-03-29 14:37:55.500    66660.0
+            2021-03-29 14:42:43.500    66690.0
+            2021-03-29 14:59:42.000    66590.0
+            Name: trading_point, Length: 68, dtype: float64
+        """
+        today_element_df = self._generate_data(exch, ins, day_data, include_night)
 
         #print(today_element_df)
         if today_element_df.size > 0:
             # 提取数据中的ask-bid-trading-point
             #print(today_element_df)
             ticksize = minticksize.find_tick_size(exch, ins)
-            today_trading_point_df = self.ask_bid_trading_point_df(today_element_df, ticksize)
+            today_trading_point_df = self._ask_bid_trading_point_df(today_element_df, ticksize)
             #print(today_trading_point_df)
 
             if include_extern_word == False:
@@ -275,9 +313,103 @@ class tradePoint():
             else:
                 return today_trading_point_df
 
-    def get_trade_spectrum(self, exch, ins, day_data, include_night=False, include_extern_word=True):
-        trade_point = self.get_trade_point(exch, ins, day_data, include_night=True, include_extern_word=True)
+    def get_trade_spectrum(self, exch, ins, day_data, include_night=False, spectrum_type='ratio'):
+        """ 基于可交易时间点生成峰
+
+        生成的峰可以反应出价格波动的趋势
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            day_data: 日期
+            include_night: 是否包含夜市数据
+            type: 峰值类型 'ratio' - 百分比'value' - 绝对值
+
+        Returns:
+            返回的数据格式是 dataframe 格式，包含峰值信息
+
+        Examples:
+            >>> from nature_analysis.trade_point import tradepoint
+            >>> tradepoint.get_trade_spectrum('SHFE', 'cu2109', '20210329', include_night=True)
+            2021-03-26 21:25:18.000    1.202827
+            2021-03-26 21:28:22.000    0.601413
+            2021-03-26 21:38:58.000    1.653887
+            2021-03-26 21:42:49.000    0.150353
+            2021-03-26 22:47:05.500    5.112013
+            2021-03-26 22:48:11.500    4.510600
+            2021-03-26 23:04:46.500    7.216960
+            2021-03-29 09:19:03.000    2.405653
+            2021-03-29 09:20:41.000    2.856713
+            2021-03-29 09:33:50.500    1.503533
+            2021-03-29 10:46:23.000    2.856713
+            2021-03-29 13:39:40.500   -0.902120
+            2021-03-29 14:10:14.000    0.601413
+            2021-03-29 14:13:34.500   -0.751767
+            2021-03-29 14:42:43.500    2.706360
+            2021-03-29 14:59:42.000    1.202827
+            dtype: float64
+        """
+        trade_point = self.get_trade_point(exch, ins, day_data, include_night, include_extern_word=True)
         threshold = 3 * minticksize.find_tick_size(exch, ins)
-        return self.trend_period_of_each_element_and_spectrum_generate(day_data, trade_point, threshold)
+        return self._trend_period_of_each_element_and_spectrum_generate(day_data, trade_point, threshold, spectrum_type)
+
+    {
+        'open':{
+
+        },
+        
+    }
+    def get_trade_arc(self, exch, ins, day_data, include_night=False):
+        """ 基于峰生成弧
+
+        生成的弧反应大的趋势
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            day_data: 日期
+            include_night: 是否包含夜市数据
+
+        Returns:
+            返回的数据格式是 list 格式，包含弧度信息
+
+        Examples:
+            >>> from nature_analysis.trade_point import tradepoint
+            >>> tradepoint.get_trade_arc('SHFE', 'cu2109', '20210329', include_night=True)
+            ['20210329#SHFE#1.20282664_0.60141332_1.65388663_0.15035333_5.11201323_4.51059991_7.21695986_2.40565329_
+            2.85671328_1.5035333_2.85671328_', '20210329#SHFE#-0.90211998_', '20210329#SHFE#0.60141332_', 
+            '20210329#SHFE#-0.75176665_', '20210329#SHFE#2.70635995_1.20282664_']
+        """
+        peak_list = self.get_trade_spectrum(exch, ins, day_data, include_night).tolist()
+        first_peak = peak_list[0]
+        arc_list = []
+        arc = day_data + '#' + exch + '#' + str(first_peak) + '_'
+        i = 0
+        while (i+1) < len(peak_list):
+            second_peak = peak_list[i+1]
+
+            if first_peak * second_peak > 0:
+                arc = arc + str(second_peak) + '_'
+                i = i + 1
+            elif first_peak * second_peak < 0:
+                arc_list.append(arc)
+                first_peak = second_peak
+                arc = day_data + '#' + exch + '#' + str(first_peak) + '_'
+                i = i + 1
+
+            elif first_peak * second_peak == 0:
+                if (i + 2) < len(peak_list):
+                    third_peak = peak_list[i+2]
+                    arc_list.append(arc)
+                    first_peak = third_peak
+                    arc = day_data + '#' + exch + '#' + str(first_peak) + '_'
+                    i = i + 2
+                else:
+                    arc = arc+str(second_peak) + '_'
+                    i = i + 1
+
+        arc_list.append(arc)
+
+        return arc_list
 
 tradepoint = tradePoint()
