@@ -87,6 +87,20 @@ class minTickSize():
         self.CFFEX['TF'] = 0.005
 
     def find_tick_size(self, exch, ins):
+        """ 最小价格变动单位
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+
+        Returns:
+            数值
+
+        Examples:
+            >>> from nature_analysis.min_ticksize import minticksize
+            >>> minticksize.find_tick_size('DCE', 'l2009')
+            5
+        """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
@@ -105,6 +119,27 @@ class minTickSize():
                 return self.CFFEX[temp]
 
     def find_all(self):
+        """ 所有合约品种的最小价格变动单位
+
+        Args:
+            没有
+
+        Returns:
+            返回的数据格式是 dict
+
+        Examples:
+            >>> from nature_analysis.min_ticksize import minticksize
+            >>> minticksize.find_tick_size('DCE', 'l2009')
+            {'SHFE': {'cu': 10, 'al': 5, 'zn': 5, 'pb': 5, 'ni': 10, 'sn': 10, 'au': 0.02, \
+            'ag': 1, 'rb': 1, 'wr': 1, 'hc': 1, 'ss': 5, 'sc': 0.1, 'lu': 1, 'fu': 1, 'bu': 2, \
+            'ru': 5, 'nr': 5, 'sp': 2}, 'CZCE': {'WH': 1, 'PM': 1, 'CF': 5, 'SR': 1, 'OI': 1, \
+            'RI': 1, 'RS': 1, 'RM': 1, 'JR': 1, 'LR': 1, 'CY': 5, 'AP': 1, 'CJ': 5, 'TA': 2, \
+            'MA': 1, 'FG': 1, 'ZC': 0.2, 'SF': 2, 'SM': 2, 'UR': 1, 'SA': 1, 'PF': 2, 'PK': 2}, \
+            'DCE': {'c': 1, 'cs': 1, 'a': 1, 'b': 1, 'm': 1, 'y': 2, 'p': 2, 'fb': 0.05, 'bb': 0.05, \
+            'jd': 1, 'rr': 1, 'l': 5, 'v': 5, 'pp': 1, 'j': 0.5, 'jm': 0.5, 'i': 0.5, 'eg': 1, \
+            'eb': 1, 'pg': 1, 'lh': 5}, 'INE': {'sc': 0.1, 'lu': 1, 'nr': 5, 'bc': 10}, 'CFFEX': \
+            {'IF': 0.2, 'IC': 0.2, 'IH': 0.2, 'TS': 0.005, 'T': 0.005, 'TF': 0.005}}
+        """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
 minticksize = minTickSize()

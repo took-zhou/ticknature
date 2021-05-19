@@ -3,10 +3,11 @@ from datetime import timedelta
 import os
 
 from nature_analysis.min_ticksize import minticksize
+from nature_analysis.global_config import tick_root_path
 
 class tradePoint():
     def __init__(self):
-        self.csv_root_path = '/share/baidunetdisk/reconstruct/tick/'
+        self.csv_root_path = tick_root_path
 
     #读取该csv文件对于的分时数据
     def _daytime_raw_data_reading(self, daytime_file_root):
@@ -353,12 +354,6 @@ class tradePoint():
         threshold = 3 * minticksize.find_tick_size(exch, ins)
         return self._trend_period_of_each_element_and_spectrum_generate(day_data, trade_point, threshold, spectrum_type)
 
-    {
-        'open':{
-
-        },
-        
-    }
     def get_trade_arc(self, exch, ins, day_data, include_night=False):
         """ 基于峰生成弧
 

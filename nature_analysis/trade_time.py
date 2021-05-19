@@ -109,17 +109,47 @@ class tradeTime():
         self.CFFEX['T'] = self.day_time_dict3
 
     def is_trade_time(self, exch, ins, timestring):
+        """ 判断是否在交易时间段
+
+        Args:
+            exch: 交易所简称
+            ins: 合约
+            timestring: 判断时间，string类型
+        Returns:
+            返回的数据类型是 bool
+
+        Examples:
+            >>> from nature_analysis.trade_time import tradetime
+            >>> tradetime.is_trade_time('DCE', 'l2109', '2020-10-10 12:10:10')
+            False
+            >>> tradetime.is_trade_time('DCE', 'l2109', '2020-10-10 11:10:10')
+            True
+        """
         ret = False
-        time_list = self.get_trade_time(exch, ins)
+        time_dict = self.get_trade_time(exch, ins)
         str_list = timestring.split(":")
         local_min = int(str_list[0][-2:]) * 60 + int(str_list[1][-2:])
-        for item in time_list:
-            if item[0] <= local_min <= item[1]:
+        for item in time_dict:
+            if time_dict[item][0] <= local_min <= time_dict[item][1]:
                 ret = True
 
         return ret
 
     def get_trade_time(self, exch, ins):
+        """ 获取单个合约交易时间表
+
+        Args:
+            exch: 交易所简称
+            ins: 合约
+        Returns:
+            返回的数据类型是 dict ，包含各个时段的时间. 数值 = H*60 + M
+
+        Examples:
+            >>> from nature_analysis.trade_time import tradetime
+            >>> tradetime.get_trade_time('SHFE', 'cu2009')
+            {'morning_first_half': [540, 615], 'morning_second_half': [630, 690], \
+            'afternoon': [810, 900], 'night_first_half': [1260, 1440], 'night_second_half': [0, 60]}
+        """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
@@ -141,6 +171,23 @@ class tradeTime():
             return {}
 
     def find_all(self):
+        """ 获取所有期货的交易时间表
+
+        Args:
+            没有
+        Returns:
+            返回的数据类型是 dict ，包含各个时段的时间. 数值 = H*60 + M
+
+        Examples:
+            >>> from nature_analysis.trade_time import tradetime
+            >>> tradetime.find_all()
+            {'SHFE': {'cu': {'morning_first_half': [540, 615], 'morning_second_half': [630, 690], \
+            'afternoon': [810, 900], 'night_first_half': [1260, 1440], 'night_second_half': [0, 60]}, \
+            'al': {'morning_first_half': [540, 615], 'morning_second_half': [630, 690], \
+            'afternoon': [810, 900], 'night_first_half': [1260, 1440], 'night_second_half': [0, 60]},\
+            ...
+            'T': {'morning': [555, 690], 'afternoon': [780, 915]}}}
+        """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
 tradetime = tradeTime()

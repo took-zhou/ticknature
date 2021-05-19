@@ -1,0 +1,1 @@
+tick_root_path = '/share/baidunetdisk/reconstruct/tick'

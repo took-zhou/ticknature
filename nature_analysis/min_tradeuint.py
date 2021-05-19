@@ -87,6 +87,20 @@ class minTradeUint():
         self.CFFEX['T'] = 1000000
 
     def find_trade_unit(self, exch, ins):
+        """ 一手交易单位
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+
+        Returns:
+            数值
+
+        Examples:
+            >>> from nature_analysis.min_tradeuint import mintradeuint
+            >>> mintradeuint.find_trade_unit('DCE', 'l2009')
+            5
+        """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
@@ -105,6 +119,27 @@ class minTradeUint():
                 return self.CFFEX[temp]
 
     def find_all(self):
+        """ 所有合约品种的一手交易单位
+
+        Args:
+            没有
+
+        Returns:
+            返回的数据格式是 dict
+
+        Examples:
+            >>> from nature_analysis.min_tradeuint import mintradeuint
+            >>> mintradeuint.all('DCE', 'l2009')
+            {'SHFE': {'cu': 5, 'al': 5, 'zn': 5, 'pb': 5, 'ni': 1, 'sn': 1, 'au': 1000, 'ag': 15, \
+            'rb': 10, 'wr': 10, 'hc': 10, 'ss': 5, 'sc': 1000, 'lu': 10, 'fu': 10, 'bu': 10, \
+            'ru': 10, 'nr': 10, 'sp': 10}, 'CZCE': {'WH': 20, 'PM': 50, 'CF': 5, 'SR': 10, 'OI': 10, \
+            'RI': 20, 'RS': 10, 'RM': 10, 'JR': 20, 'LR': 20, 'CY': 5, 'AP': 10, 'CJ': 5, 'TA': 5, \
+            'MA': 10, 'FG': 20, 'ZC': 100, 'SF': 5, 'SM': 5, 'UR': 20, 'SA': 20, 'PF': 5, 'PK': 5}, \
+            'DCE': {'c': 10, 'cs': 10, 'a': 10, 'b': 10, 'm': 10, 'y': 10, 'p': 10, 'fb': 500, \
+            'bb': 500, 'jd': 10, 'rr': 10, 'l': 5, 'v': 5, 'pp': 5, 'j': 100, 'jm': 60, 'i': 100, \
+            'eg': 10, 'eb': 5, 'pg': 20, 'lh': 16}, 'INE': {'sc': 1000, 'lu': 10, 'nr': 10, 'bc': 5}, \
+            'CFFEX': {'IF': 300, 'IC': 200, 'IH': 300, 'TS': 2000000, 'TF': 1000000, 'T': 1000000}}
+        """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
 mintradeuint = minTradeUint()
