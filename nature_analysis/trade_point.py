@@ -8,6 +8,8 @@ from nature_analysis.global_config import tick_root_path
 class tradePoint():
     def __init__(self):
         self.csv_root_path = tick_root_path
+        self.leap_month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31]
+        self.common_month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31]
 
     #读取该csv文件对于的分时数据
     def _daytime_raw_data_reading(self, daytime_file_root):
@@ -33,7 +35,7 @@ class tradePoint():
         # 添加时间index
         # 将'TradingDay','    UpdateTime'和'UpdateMillisec'合并成一个新列
         # 将'UpdateMillisec'的数据类型从int变为str,从而实现列信息的合并
-        subprice['Timepoint'] = subprice['TradingDay'] + subprice['    UpdateTime'] + subprice['UpdateMillisec'].apply(str)
+        time_string = subprice['TradingDay'] + subprice['    UpdateTime'] + subprice['UpdateMillisec'].apply(str)
         # print(subprice[['Timepoint']])
         year_list = []
         month_list = []
@@ -43,7 +45,7 @@ class tradePoint():
         second_list = []
         ms_list = []
 
-        for timepoint in subprice['Timepoint'].values.tolist():
+        for timepoint in time_string.values.tolist():
             hour_minute_second_ms = timepoint.split(' ')[1]
             hour = hour_minute_second_ms[1:3]
             minute = hour_minute_second_ms[4:6]
@@ -52,10 +54,31 @@ class tradePoint():
             year = date[0:4]
             month = date[4:6]
 
-            if int(hour) <= 3:
-                day = str(int(date[6:]) + 1)
+            # 如果是闰年
+            if (int(year)%4 == 0 and int(year)%100!=0) or (int(year)%400 == 0):
+                if int(hour) <= 3:
+                    if self.leap_month_days[int(month)-1] == int(date[6:]):
+                        day = '01'
+                        if int(month) == 12:
+                            month = '01'
+                        else:
+                            month = str(int(month) + 1)
+                    else:
+                        day = str(int(date[6:]) + 1)
+                else:
+                    day = date[6:]
             else:
-                day = date[6:]
+                if int(hour) <= 3:
+                    if self.common_month_days[int(month)-1] == int(date[6:]):
+                        day = '01'
+                        if int(month) == 12:
+                            month = '01'
+                        else:
+                            month = str(int(month) + 1)
+                    else:
+                        day = str(int(date[6:]) + 1)
+                else:
+                    day = date[6:]
 
             year_list.append(year)
             month_list.append(month)
@@ -64,7 +87,6 @@ class tradePoint():
             minute_list.append(minute)
             second_list.append(second)
             ms_list.append(ms)
-        
 
         df = pd.DataFrame({'year': year_list,
                         'month': month_list,
@@ -406,5 +428,46 @@ class tradePoint():
         arc_list.append(arc)
 
         return arc_list
+
+    def get_trade_sentence(self, exch, ins, day_data, include_night=False):
+        trade_point = self.get_trade_point(exch, ins, day_data, include_night, include_extern_word=False)
+        threshold = minticksize.find_tick_size(exch, ins)
+
+        trade_point_list = list(trade_point)
+        word_start_TP = trade_point_list[0]
+        word_end_TP = trade_point_list[0]
+        
+        positive_word_exist = 0
+        negative_word_exist = 0
+        sentence = 's#'
+        for TP in trade_point_list[1:]:
+            if TP > word_end_TP:
+                if negative_word_exist == 0:
+                    word_end_TP = TP
+                    positive_word_exist = positive_word_exist + 1
+                elif negative_word_exist > 0:
+                    word = word_end_TP - word_start_TP
+                    sentence = sentence +str(word)+'_'
+                    negative_word_exist = 0
+                    word_start_TP = word_end_TP
+                    word_end_TP = TP
+                    positive_word_exist = positive_word_exist + 1
+
+            elif TP < word_end_TP:
+                if positive_word_exist == 0:
+                    word_end_TP = TP
+                    negative_word_exist = negative_word_exist + 1
+                elif positive_word_exist > 0:
+                    word = word_end_TP - word_start_TP
+                    sentence = sentence +str(word)+'_'
+                    positive_word_exist = 0
+                    word_start_TP = word_end_TP
+                    word_end_TP = TP
+                    negative_word_exist = negative_word_exist + 1
+        if negative_word_exist > 0 or positive_word_exist > 0:
+            word = word_end_TP - word_start_TP
+            sentence = sentence +str(word)+'_'
+        
+        return sentence
 
 tradepoint = tradePoint()

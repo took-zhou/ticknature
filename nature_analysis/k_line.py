@@ -11,6 +11,8 @@ from nature_analysis.global_config import tick_root_path
 class K_line():
     def __init__(self):
         self.csv_root_path = tick_root_path
+        self.leap_month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31]
+        self.common_month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31]
 
     #读取该csv文件对于的分时数据
     def _daytime_raw_data_reading(self, daytime_file_root):
@@ -55,10 +57,31 @@ class K_line():
             year = date[0:4]
             month = date[4:6]
 
-            if int(hour) <= 3:
-                day = str(int(date[6:]) + 1)
+            # 如果是闰年
+            if (int(year)%4 == 0 and int(year)%100!=0) or (int(year)%400 == 0):
+                if int(hour) <= 3:
+                    if self.leap_month_days[int(month)-1] == int(date[6:]):
+                        day = '01'
+                        if int(month) == 12:
+                            month = '01'
+                        else:
+                            month = str(int(month) + 1)
+                    else:
+                        day = str(int(date[6:]) + 1)
+                else:
+                    day = date[6:]
             else:
-                day = date[6:]
+                if int(hour) <= 3:
+                    if self.common_month_days[int(month)-1] == int(date[6:]):
+                        day = '01'
+                        if int(month) == 12:
+                            month = '01'
+                        else:
+                            month = str(int(month) + 1)
+                    else:
+                        day = str(int(date[6:]) + 1)
+                else:
+                    day = date[6:]
 
             year_list.append(year)
             month_list.append(month)
@@ -67,7 +90,6 @@ class K_line():
             minute_list.append(minute)
             second_list.append(second)
             ms_list.append(ms)
-        
 
         df = pd.DataFrame({'year': year_list,
                         'month': month_list,
@@ -178,8 +200,72 @@ class K_line():
 
         mpl.rcParams['lines.linewidth'] = .5
 
-        print(ohlcv)
         mpf.plot(ohlcv, **kwargs, style=s, show_nontrading = False, savefig = path)
+
+    def __get_last_line(self, filename):
+        """
+        get last line of a file
+        :param filename: file name
+        :return: last line or None for empty file
+        """
+        try:
+            filesize = os.path.getsize(filename)
+            if filesize == 0:
+                return None
+            else:
+                with open(filename, 'rb') as fp: # to use seek from end, must use mode 'rb'
+                    offset = -8                 # initialize offset
+                    while -offset < filesize:   # offset cannot exceed file size
+                        fp.seek(offset, 2)      # read # offset chars from eof(represent by number '2')
+                        lines = fp.readlines()  # read from fp to eof
+                        if len(lines) >= 2:     # if contains at least 2 lines
+                            return lines[-1]    # then last line is totally included
+                        else:
+                            offset *= 2         # enlarge offset
+                    fp.seek(0)
+                    lines = fp.readlines()
+                    return lines[-1]
+        except FileNotFoundError:
+            print(filename + ' not found!')
+            return None
+
+    def _get_Ts_k_line(self, exch, ins, day_data, period='1T', include_night=False, save_path=''):
+        today_element_df = self._generate_data(exch, ins, day_data, include_night)
+        if '    LastPrice' in today_element_df.columns and '    Volume' in today_element_df.columns:
+            bars = today_element_df['    LastPrice'].resample(period, label='right').ohlc()
+            volumes = today_element_df['    Volume'].resample(period, label='right').last() \
+                - today_element_df['    Volume'].resample(period, label='right').first()
+            ohlcv = pd.concat([bars, volumes], axis=1)
+            ohlcv = ohlcv[ohlcv['    Volume'] > 0].dropna()
+
+            ohlcv.rename(columns={'open': 'Open', 'high': 'High', \
+                'low': 'Low', 'close': 'Close', '    Volume': 'Volume'}, inplace=True)
+
+            if save_path != '':
+                _dir = '%s/%s/%s/' % (save_path, exch, ins)
+                if not os.path.exists(_dir):
+                    os.makedirs(_dir)
+
+                _path = '%s/%s/%s/%s_%s.jpg' % (save_path, exch, ins, ins, day_data)
+                self._save(exch, ins, ohlcv, _path)
+        else:
+            ohlcv = pd.DataFrame({'open':[], 'High':[],'Low':[],'Close':[],'Volume':[]})
+            ohlcv.index.name = 'Timeindex'
+
+        return ohlcv
+
+    def _get_1D_k_line(self, exch, ins, day_data, period='1D', include_night=False, save_path=''):
+        ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
+        df = pd.read_csv(ins_daytime_file_root)
+        bottom = df.tail(1)
+
+        last_line = self._millisecond_timeindex_setting(bottom.copy(), day_data)
+        ohlcv = last_line[['OpenPrice', 'HighestPrice', 'LowestPrice', 'ClosePrice', '    Volume']].copy()
+
+        ohlcv.rename(columns={'OpenPrice': 'Open', 'HighestPrice': 'High', \
+            'LowestPrice': 'Low', 'ClosePrice': 'Close', '    Volume': 'Volume'}, inplace=True)
+
+        return ohlcv
 
     def get_k_line(self, exch, ins, day_data, period='1T', include_night=False, save_path=''):
         """ k 线生成
@@ -188,7 +274,7 @@ class K_line():
             exch: 交易所简称
             ins: 合约代码
             day_data: 日期
-            period: K 线周期 例如 1T 5T 15T 60T
+            period: K 线周期 例如 1T 5T 15T 30T 60T 1D
             include_night: 是否包含夜市数据
             save_path: 默认不保存数据，如果填写路径的话，会将k线数据以图片的形式保存下来
         Returns:
@@ -210,24 +296,26 @@ class K_line():
             2021-05-12 10:40:00  2820.0  2820.0  2820.0  2820.0    49.0
             2021-05-12 11:10:00  2820.0  2835.0  2820.0  2835.0   318.0
         """
-        today_element_df = self._generate_data(exch, ins, day_data, include_night)
-        bars = today_element_df['    LastPrice'].resample(period, label='right').ohlc()
-        volumes = today_element_df['    Volume'].resample(period, label='right').last() \
-            - today_element_df['    Volume'].resample(period, label='right').first()
-        ohlcv = pd.concat([bars, volumes], axis=1)
-        ohlcv = ohlcv[ohlcv['    Volume'] > 0].dropna()
-
-        ohlcv.rename(columns={'open': 'Open', 'high': 'High', \
-            'low': 'Low', 'close': 'Close', '    Volume': 'Volume'}, inplace=True)
-
-        if save_path != '':
-            _dir = '%s/%s/%s/' % (save_path, exch, ins)
-            if not os.path.exists(_dir):
-                os.makedirs(_dir)
-
-            _path = '%s/%s/%s/%s_%s.jpg' % (save_path, exch, ins, ins, day_data)
-            self._save(exch, ins, ohlcv, _path)
-
-        return ohlcv
+        if 'T' in period:
+            return self._get_Ts_k_line(exch, ins, day_data, period, include_night, save_path)
+        elif 'D' in period:
+            return self._get_1D_k_line(exch, ins, day_data, period, include_night, '')
 
 kline = K_line()
+
+if __name__=="__main__":
+    # from nature_analysis.trade_data import tradedata
+    # import re
+
+    # DCE_list = tradedata.get_instruments('DCE', True)
+    # want_list = [item for item in DCE_list if ''.join(re.findall(r'[A-Za-z]', item)) == 'c' or \
+    #     ''.join(re.findall(r'[A-Za-z]', item)) == 'cs' or \
+    #     ''.join(re.findall(r'[A-Za-z]', item)) == 'm']
+
+    # for ins in want_list:
+    #     data_list = tradedata.get_trade_data('DCE', ins)
+    #     for data in data_list:
+    #         ohlcv_df = kline.get_k_line('DCE', ins, data, '1T', True, '.')
+
+    a=kline.get_k_line('DCE', 'c2105', '20210512', '1D', True)
+    print(a)

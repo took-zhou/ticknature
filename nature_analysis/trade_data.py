@@ -73,8 +73,6 @@ class tradeData():
             >>> nature_analysis.trade_data import tradedata
             >>> tradedata.get_last_instrument('DCE', 'c2105')
            'c2105'
-           >>> tradedata.get_last_instrument('DCE', 'c2103')
-           'c2203'
         """
         resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)',ins)
         kind = resplit[0][1]
@@ -112,8 +110,6 @@ class tradeData():
             >>> nature_analysis.trade_data import tradedata
             >>> tradedata.is_delivery_month('DCE', 'c2105')
            True
-           >>> tradedata.is_delivery_month('DCE', 'c2103')
-           False
         """
         resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)',ins)
         kind = resplit[0][1]

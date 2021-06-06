@@ -1,1 +1,7 @@
 tick_root_path = '/share/baidunetdisk/reconstruct/tick'
+m1_kline_root_path = '/share/quantation/temp_data/m1_kline'
+m5_kline_root_path = '/share/quantation/temp_data/m5_kline'
+m15_kline_root_path = '/share/quantation/temp_data/m15_kline'
+m30_kline_root_path = '/share/quantation/temp_data/m30_kline'
+m60_kline_root_path = '/share/quantation/temp_data/m60_kline'
+d1_kline_root_path = '/share/quantation/temp_data/d1_kline'
