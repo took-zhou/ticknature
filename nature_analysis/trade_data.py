@@ -42,7 +42,7 @@ class tradeData():
             返回的数据类型是 list， 包含该交易所下面所有的合约
 
         Examples:
-            >>> nature_analysis.trade_data import tradedata
+            >>> from nature_analysis.trade_data import tradedata
             >>> tradedata.get_instruments('DCE', True)
            ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
         """

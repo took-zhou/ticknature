@@ -18,11 +18,11 @@ sys.path.insert(0, os.path.abspath('../../nature_analysis'))
 # -- Project information -----------------------------------------------------
 
 project = 'nature_analysis'
-copyright = '2021, chaodai'
-author = 'chaodai'
+copyright = '2021, Chaodai'
+author = 'Chaodai'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.3'
+release = '1.0'
 
 
 # -- General configuration ---------------------------------------------------

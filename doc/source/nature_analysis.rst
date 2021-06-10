@@ -28,10 +28,26 @@ nature\_analysis.dominant module
    :undoc-members:
    :show-inheritance:
 
+nature\_analysis.global\_config module
+--------------------------------------
+
+.. automodule:: nature_analysis.global_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 nature\_analysis.k\_line module
 -------------------------------
 
 .. automodule:: nature_analysis.k_line
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+nature\_analysis.mean\_line module
+----------------------------------
+
+.. automodule:: nature_analysis.mean_line
    :members:
    :undoc-members:
    :show-inheritance:
@@ -80,6 +96,14 @@ nature\_analysis.trade\_time module
 -----------------------------------
 
 .. automodule:: nature_analysis.trade_time
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+nature\_analysis.word\_index module
+-----------------------------------
+
+.. automodule:: nature_analysis.word_index
    :members:
    :undoc-members:
    :show-inheritance:

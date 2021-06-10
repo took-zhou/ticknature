@@ -1,5 +1,5 @@
 .. nature_analysis documentation master file, created by
-   sphinx-quickstart on Sun May 16 11:38:16 2021.
+   sphinx-quickstart on Sun Jun  6 11:38:27 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 

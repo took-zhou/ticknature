@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import timedelta
 import os
+import numpy as np
 
 from nature_analysis.min_ticksize import minticksize
 from nature_analysis.global_config import tick_root_path
@@ -14,9 +15,7 @@ class tradePoint():
     #读取该csv文件对于的分时数据
     def _daytime_raw_data_reading(self, daytime_file_root):
         # 读取白天数据
-        subprice_daytime = pd.read_csv(daytime_file_root, encoding = 'utf-8') 
-        # 删除首行数据，因为该行数据容易出问题，导致后面设置时间index过不去
-        subprice_daytime = subprice_daytime.drop([0])
+        subprice_daytime = pd.read_csv(daytime_file_root, encoding = 'utf-8')
         # print(subprice_daytime)
         subprice = subprice_daytime
 
@@ -24,8 +23,8 @@ class tradePoint():
 
     # 读取该csv文件对于的分时数据
     def _nighttime_raw_data_reading(self, nighttime_file_root):
-        subprice_nighttime = pd.read_csv(nighttime_file_root, encoding = 'utf-8') 
-        subprice_nighttime= subprice_nighttime.drop([0])
+        subprice_nighttime = pd.read_csv(nighttime_file_root, encoding = 'utf-8')
+        # print(subprice_nighttime)
         subprice = subprice_nighttime
 
         return subprice
@@ -35,8 +34,6 @@ class tradePoint():
         # 添加时间index
         # 将'TradingDay','    UpdateTime'和'UpdateMillisec'合并成一个新列
         # 将'UpdateMillisec'的数据类型从int变为str,从而实现列信息的合并
-        time_string = subprice['TradingDay'] + subprice['    UpdateTime'] + subprice['UpdateMillisec'].apply(str)
-        # print(subprice[['Timepoint']])
         year_list = []
         month_list = []
         day_list = []
@@ -45,48 +42,50 @@ class tradePoint():
         second_list = []
         ms_list = []
 
-        for timepoint in time_string.values.tolist():
-            hour_minute_second_ms = timepoint.split(' ')[1]
-            hour = hour_minute_second_ms[1:3]
-            minute = hour_minute_second_ms[4:6]
-            second = hour_minute_second_ms[7:9]
-            ms = hour_minute_second_ms[10:]
-            year = date[0:4]
-            month = date[4:6]
+        if 'UpdateTime' in subprice.columns:
+            time_string = subprice['UpdateTime']
 
-            # 如果是闰年
-            if (int(year)%4 == 0 and int(year)%100!=0) or (int(year)%400 == 0):
-                if int(hour) <= 3:
-                    if self.leap_month_days[int(month)-1] == int(date[6:]):
-                        day = '01'
-                        if int(month) == 12:
-                            month = '01'
-                        else:
-                            month = str(int(month) + 1)
-                    else:
-                        day = str(int(date[6:]) + 1)
-                else:
-                    day = date[6:]
-            else:
-                if int(hour) <= 3:
-                    if self.common_month_days[int(month)-1] == int(date[6:]):
-                        day = '01'
-                        if int(month) == 12:
-                            month = '01'
-                        else:
-                            month = str(int(month) + 1)
-                    else:
-                        day = str(int(date[6:]) + 1)
-                else:
-                    day = date[6:]
+            for hour_minute_second_ms in time_string.values.tolist():
+                hour = hour_minute_second_ms[0:2]
+                minute = hour_minute_second_ms[3:5]
+                second = hour_minute_second_ms[6:8]
+                ms = hour_minute_second_ms[9:]
+                year = date[0:4]
+                month = date[4:6]
 
-            year_list.append(year)
-            month_list.append(month)
-            day_list.append(day)
-            hour_list.append(hour)
-            minute_list.append(minute)
-            second_list.append(second)
-            ms_list.append(ms)
+                # 如果是闰年
+                if (int(year)%4 == 0 and int(year)%100!=0) or (int(year)%400 == 0):
+                    if int(hour) <= 3:
+                        if self.leap_month_days[int(month)-1] == int(date[6:]):
+                            day = '01'
+                            if int(month) == 12:
+                                month = '01'
+                            else:
+                                month = str(int(month) + 1)
+                        else:
+                            day = str(int(date[6:]) + 1)
+                    else:
+                        day = date[6:]
+                else:
+                    if int(hour) <= 3:
+                        if self.common_month_days[int(month)-1] == int(date[6:]):
+                            day = '01'
+                            if int(month) == 12:
+                                month = '01'
+                            else:
+                                month = str(int(month) + 1)
+                        else:
+                            day = str(int(date[6:]) + 1)
+                    else:
+                        day = date[6:]
+
+                year_list.append(year)
+                month_list.append(month)
+                day_list.append(day)
+                hour_list.append(hour)
+                minute_list.append(minute)
+                second_list.append(second)
+                ms_list.append(ms)
 
         df = pd.DataFrame({'year': year_list,
                         'month': month_list,
@@ -105,27 +104,35 @@ class tradePoint():
 
         return subprice
 
-    def _generate_data(self, exch, ins, day_data, include_night=False):
+    def generate_data(self, exch, ins, day_data, include_night=False):
+        """ 获取分数数据
+
+        获取分时数据，打上timeindex标签
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            day_data: 日期
+            include_night: 是否包含夜市数据
+
+        Returns:
+            返回的数据格式是 dataframe 格式，包含分数数据信息
+
+        Examples:
+            >>> from nature_analysis.trade_point import tradepoint
+            >>> tradepoint.generate_data('SHFE', 'cu2109', '20210329', include_night=True)
+        """
         # 判断该日期到底是星期几
         ins_time_of_week = pd.to_datetime(day_data, format = '%Y-%m-%d').dayofweek + 1
         ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
+        ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
 
         # 获取夜市时间
         if ins_time_of_week == 1:
-            two_day_before = pd.to_datetime(day_data, format = '%Y-%m-%d') + timedelta(days = -2)
-            split = str(two_day_before).split('-')
-            # 合约存储文件对应的日期
-            ins_night_date = split[0] + split[1] + split[2].split(' ')[0]
-            ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, ins_night_date)
-
             three_day_before = pd.to_datetime(day_data, format = '%Y-%m-%d') + timedelta(days = -3)
             split = str(three_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         else:
-            # 合约存储文件对应的日期
-            ins_night_date = day_data
-            ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, ins_night_date)
-
             one_day_before = pd.to_datetime(day_data, format = '%Y-%m-%d') + timedelta(days = -1)
             split = str(one_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
@@ -133,15 +140,12 @@ class tradePoint():
         # 读取改天白天分时数据
         element_df = pd.DataFrame()
 
-        # print(ins_daytime_file_root)
         if os.path.exists(ins_daytime_file_root) == True:
             # 读取白天数据
             subprice = self._daytime_raw_data_reading(ins_daytime_file_root)
             # 对已经读取的分时数据设置毫秒级别的时间index
             subprice = self._millisecond_timeindex_setting(subprice, day_data)
             subprice_daytime = subprice
-
-            # print(ins_nighttime_file_root)
             #读取昨天夜晚分时数据,并将昨天夜晚数据和与白天数据合并
             if os.path.exists(ins_nighttime_file_root) == True and include_night == True:
                 # 读取夜晚数据
@@ -154,6 +158,11 @@ class tradePoint():
             else:
                 subprice = subprice_daytime
 
+            # 剔除没有开盘的数据
+            subprice = subprice[np.isnan(subprice['OpenPrice']) == False]
+            subprice = subprice[subprice['OpenPrice'] != 0.0]
+            subprice = subprice[subprice['OpenPrice'] <= 100000000]
+
             if subprice.size !=0:
                 element_df = subprice.sort_index()  
 
@@ -165,7 +174,7 @@ class tradePoint():
         # element_df['Volume_change'] = element_df[['    Volume']].diff(axis = 'index')['    Volume']
         # ask_bid_1元平稳博弈阶段划分
         df1 = element_df[['AskPrice1']]
-        s = element_df['    BidPrice1']
+        s = element_df['BidPrice1']
         df2 = df1.sub(s, axis='index')
         element_df['ask1-bid1'] = df2['AskPrice1']
 
@@ -178,7 +187,7 @@ class tradePoint():
         df5 = df3.loc[df3['AskPrice1_change'] < 0]
 
         df4 = df4.copy()
-        df4['trading_point'] = df4['    BidPrice1']
+        df4['trading_point'] = df4['BidPrice1']
         df5 = df5.copy()
         df5['trading_point'] = df5['AskPrice1']
         df6 = df4.append(df5).sort_index()
@@ -321,7 +330,7 @@ class tradePoint():
             2021-03-29 14:59:42.000    66590.0
             Name: trading_point, Length: 68, dtype: float64
         """
-        today_element_df = self._generate_data(exch, ins, day_data, include_night)
+        today_element_df = self.generate_data(exch, ins, day_data, include_night)
 
         #print(today_element_df)
         if today_element_df.size > 0:
@@ -335,6 +344,8 @@ class tradePoint():
                 return today_trading_point_df['trading_point']
             else:
                 return today_trading_point_df
+        else:
+            return today_element_df
 
     def get_trade_spectrum(self, exch, ins, day_data, include_night=False, spectrum_type='ratio'):
         """ 基于可交易时间点生成峰
