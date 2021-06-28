@@ -50,29 +50,29 @@ class tradeTime():
         self.SHFE['nr'] = self.time_compose3
         self.SHFE['sp'] = self.time_compose3
 
-        self.CZCE['WH'] = self.day_time_dict1
-        self.CZCE['PM'] = self.day_time_dict1
-        self.CZCE['CF'] = self.time_compose3
-        self.CZCE['SR'] = self.time_compose3
-        self.CZCE['OI'] = self.time_compose3
-        self.CZCE['RI'] = self.day_time_dict1
-        self.CZCE['RS'] = self.day_time_dict1
-        self.CZCE['RM'] = self.time_compose3
-        self.CZCE['JR'] = self.day_time_dict1
-        self.CZCE['LR'] = self.day_time_dict1
-        self.CZCE['CY'] = self.time_compose3
-        self.CZCE['AP'] = self.day_time_dict1
-        self.CZCE['CJ'] = self.day_time_dict1
-        self.CZCE['TA'] = self.time_compose3
-        self.CZCE['MA'] = self.time_compose3
-        self.CZCE['FG'] = self.time_compose3
-        self.CZCE['ZC'] = self.time_compose3
-        self.CZCE['SF'] = self.day_time_dict1
-        self.CZCE['SM'] = self.day_time_dict1
-        self.CZCE['UR'] = self.day_time_dict1
-        self.CZCE['SA'] = self.time_compose3
-        self.CZCE['PF'] = self.time_compose3
-        self.CZCE['PK'] = self.day_time_dict1
+        self.CZCE['wh'] = self.day_time_dict1
+        self.CZCE['pm'] = self.day_time_dict1
+        self.CZCE['cf'] = self.time_compose3
+        self.CZCE['sr'] = self.time_compose3
+        self.CZCE['oi'] = self.time_compose3
+        self.CZCE['ri'] = self.day_time_dict1
+        self.CZCE['rs'] = self.day_time_dict1
+        self.CZCE['rm'] = self.time_compose3
+        self.CZCE['jr'] = self.day_time_dict1
+        self.CZCE['lr'] = self.day_time_dict1
+        self.CZCE['cy'] = self.time_compose3
+        self.CZCE['ap'] = self.day_time_dict1
+        self.CZCE['cj'] = self.day_time_dict1
+        self.CZCE['ta'] = self.time_compose3
+        self.CZCE['ma'] = self.time_compose3
+        self.CZCE['fg'] = self.time_compose3
+        self.CZCE['zc'] = self.time_compose3
+        self.CZCE['sf'] = self.day_time_dict1
+        self.CZCE['sm'] = self.day_time_dict1
+        self.CZCE['ur'] = self.day_time_dict1
+        self.CZCE['sa'] = self.time_compose3
+        self.CZCE['pf'] = self.time_compose3
+        self.CZCE['pk'] = self.day_time_dict1
 
         self.DCE['c'] = self.time_compose3
         self.DCE['cs'] = self.time_compose3
@@ -101,12 +101,12 @@ class tradeTime():
         self.INE['nr'] = self.time_compose3
         self.INE['bc'] = self.time_compose1
 
-        self.CFFEX['IF'] = self.day_time_dict2
-        self.CFFEX['IC'] = self.day_time_dict2
-        self.CFFEX['IH'] = self.day_time_dict2
-        self.CFFEX['TS'] = self.day_time_dict3
-        self.CFFEX['TF'] = self.day_time_dict3
-        self.CFFEX['T'] = self.day_time_dict3
+        self.CFFEX['if'] = self.day_time_dict2
+        self.CFFEX['ic'] = self.day_time_dict2
+        self.CFFEX['ih'] = self.day_time_dict2
+        self.CFFEX['ts'] = self.day_time_dict3
+        self.CFFEX['tf'] = self.day_time_dict3
+        self.CFFEX['t'] = self.day_time_dict3
 
     def is_trade_time(self, exch, ins, timestring):
         """ 判断是否在交易时间段
@@ -128,9 +128,9 @@ class tradeTime():
         ret = False
         time_dict = self.get_trade_time(exch, ins)
         str_list = timestring.split(":")
-        local_min = int(str_list[0][-2:]) * 60 + int(str_list[1][-2:])
+        local_second = int(str_list[0][-2:]) * 3600 + int(str_list[1][-2:]) * 60 + int(str_list[2][:2])
         for item in time_dict:
-            if time_dict[item][0] <= local_min <= time_dict[item][1]:
+            if time_dict[item][0]*60 <= local_second <= time_dict[item][1]*60:
                 ret = True
 
         return ret

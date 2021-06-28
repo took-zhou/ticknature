@@ -28,29 +28,29 @@ class minTickPrice():
         self.SHFE['nr'] = 50
         self.SHFE['sp'] = 20
 
-        self.CZCE['WH'] = 20
-        self.CZCE['PM'] = 50
-        self.CZCE['CF'] = 25
-        self.CZCE['SR'] = 10
-        self.CZCE['OI'] = 10
-        self.CZCE['RI'] = 20
-        self.CZCE['RS'] = 10
-        self.CZCE['RM'] = 10
-        self.CZCE['JR'] = 20
-        self.CZCE['LR'] = 20
-        self.CZCE['CY'] = 25
-        self.CZCE['AP'] = 10
-        self.CZCE['CJ'] = 25
-        self.CZCE['TA'] = 10
-        self.CZCE['MA'] = 10
-        self.CZCE['FG'] = 20
-        self.CZCE['ZC'] = 20
-        self.CZCE['SF'] = 10
-        self.CZCE['SM'] = 10
-        self.CZCE['UR'] = 20
-        self.CZCE['SA'] = 20
-        self.CZCE['PF'] = 10
-        self.CZCE['PK'] = 10
+        self.CZCE['wh'] = 20
+        self.CZCE['pm'] = 50
+        self.CZCE['cf'] = 25
+        self.CZCE['sr'] = 10
+        self.CZCE['oi'] = 10
+        self.CZCE['ri'] = 20
+        self.CZCE['rs'] = 10
+        self.CZCE['rm'] = 10
+        self.CZCE['jr'] = 20
+        self.CZCE['lr'] = 20
+        self.CZCE['cy'] = 25
+        self.CZCE['sp'] = 10
+        self.CZCE['cj'] = 25
+        self.CZCE['ta'] = 10
+        self.CZCE['ma'] = 10
+        self.CZCE['fg'] = 20
+        self.CZCE['zc'] = 20
+        self.CZCE['sf'] = 10
+        self.CZCE['sm'] = 10
+        self.CZCE['ur'] = 20
+        self.CZCE['sa'] = 20
+        self.CZCE['pf'] = 10
+        self.CZCE['pk'] = 10
 
         self.DCE['c'] = 10
         self.DCE['cs'] = 10
@@ -79,12 +79,12 @@ class minTickPrice():
         self.INE['nr'] = 50
         self.INE['bc'] = 50
 
-        self.CFFEX['IF'] = 60
-        self.CFFEX['IC'] = 40
-        self.CFFEX['IH'] = 60
-        self.CFFEX['TS'] = 10000
-        self.CFFEX['TF'] = 5000
-        self.CFFEX['T'] = 5000
+        self.CFFEX['if'] = 60
+        self.CFFEX['ic'] = 40
+        self.CFFEX['ih'] = 60
+        self.CFFEX['ts'] = 10000
+        self.CFFEX['tf'] = 5000
+        self.CFFEX['t'] = 5000
 
     def find_tick_price(self, exch, ins):
         """ 最小盈利变动单位

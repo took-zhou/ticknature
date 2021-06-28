@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import timedelta
 import os
 import numpy as np
-
+from nature_analysis.trade_time import tradetime
 from nature_analysis.min_ticksize import minticksize
 from nature_analysis.global_config import tick_root_path
 
@@ -158,6 +158,9 @@ class tradePoint():
             else:
                 subprice = subprice_daytime
 
+            # 剔除时间不对的数据
+            subprice = subprice.loc[[item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item)) == True]]
+
             # 剔除没有开盘的数据
             subprice = subprice[np.isnan(subprice['OpenPrice']) == False]
             subprice = subprice[subprice['OpenPrice'] != 0.0]
@@ -181,7 +184,7 @@ class tradePoint():
         df3 = element_df.loc[element_df['ask1-bid1'] == ticksize_]
         df3 = df3.copy()
         df3['AskPrice1_change'] = df3[['AskPrice1']].diff(axis = 'index')['AskPrice1']
-        df3 = df3.loc[df3['AskPrice1_change'] != 0].dropna()
+        df3 = df3.loc[df3['AskPrice1_change'] != 0].dropna(axis=0, subset = ["AskPrice1_change"])
 
         df4 = df3.loc[df3['AskPrice1_change'] > 0]
         df5 = df3.loc[df3['AskPrice1_change'] < 0]

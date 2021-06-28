@@ -28,29 +28,29 @@ class minTradeUint():
         self.SHFE['nr'] = 10
         self.SHFE['sp'] = 10
 
-        self.CZCE['WH'] = 20
-        self.CZCE['PM'] = 50
-        self.CZCE['CF'] = 5
-        self.CZCE['SR'] = 10
-        self.CZCE['OI'] = 10
-        self.CZCE['RI'] = 20
-        self.CZCE['RS'] = 10
-        self.CZCE['RM'] = 10
-        self.CZCE['JR'] = 20
-        self.CZCE['LR'] = 20
-        self.CZCE['CY'] = 5
-        self.CZCE['AP'] = 10
-        self.CZCE['CJ'] = 5
-        self.CZCE['TA'] = 5
-        self.CZCE['MA'] = 10
-        self.CZCE['FG'] = 20
-        self.CZCE['ZC'] = 100
-        self.CZCE['SF'] = 5
-        self.CZCE['SM'] = 5
-        self.CZCE['UR'] = 20
-        self.CZCE['SA'] = 20
-        self.CZCE['PF'] = 5
-        self.CZCE['PK'] = 5
+        self.CZCE['wh'] = 20
+        self.CZCE['pm'] = 50
+        self.CZCE['cf'] = 5
+        self.CZCE['sr'] = 10
+        self.CZCE['oi'] = 10
+        self.CZCE['ri'] = 20
+        self.CZCE['rs'] = 10
+        self.CZCE['rm'] = 10
+        self.CZCE['jr'] = 20
+        self.CZCE['lr'] = 20
+        self.CZCE['cy'] = 5
+        self.CZCE['ap'] = 10
+        self.CZCE['cj'] = 5
+        self.CZCE['ta'] = 5
+        self.CZCE['ma'] = 10
+        self.CZCE['fg'] = 20
+        self.CZCE['zc'] = 100
+        self.CZCE['sf'] = 5
+        self.CZCE['sm'] = 5
+        self.CZCE['ur'] = 20
+        self.CZCE['sa'] = 20
+        self.CZCE['pf'] = 5
+        self.CZCE['pk'] = 5
 
         self.DCE['c'] = 10
         self.DCE['cs'] = 10
@@ -79,12 +79,12 @@ class minTradeUint():
         self.INE['nr'] = 10
         self.INE['bc'] = 5
 
-        self.CFFEX['IF'] = 300
-        self.CFFEX['IC'] = 200
-        self.CFFEX['IH'] = 300
-        self.CFFEX['TS'] = 2000000
-        self.CFFEX['TF'] = 1000000
-        self.CFFEX['T'] = 1000000
+        self.CFFEX['if'] = 300
+        self.CFFEX['ic'] = 200
+        self.CFFEX['ih'] = 300
+        self.CFFEX['ts'] = 2000000
+        self.CFFEX['tf'] = 1000000
+        self.CFFEX['t'] = 1000000
 
     def find_trade_unit(self, exch, ins):
         """ 一手交易单位

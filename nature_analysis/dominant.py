@@ -55,6 +55,13 @@ class dominantFuture:
                     if self._valid_dominant3(last_line) != False:
                         self.valid_count3 = self.valid_count3 + 1
 
+    def get_ov(self, exch, ins, day_data):
+        ins_file_root = '%s/%s/%s/%s/%s_%s.csv'%(tick_root_path, exch, exch, ins, ins, day_data)
+        last_line = self.__get_last_line(ins_file_root)
+        volume = float(last_line.decode().strip().split(',')[8])
+        open_interest = float(last_line.decode().strip().split(',')[10])
+
+        return [volume, open_interest]
 
     def genConfidence(self, exch, ins, time_begin = '', time_end = ''):
         """ 判断合约在特定时间段内是否是主力合约
