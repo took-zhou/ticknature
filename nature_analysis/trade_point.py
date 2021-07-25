@@ -1,3 +1,4 @@
+from re import sub
 import pandas as pd
 from datetime import timedelta
 import os
@@ -5,6 +6,7 @@ import numpy as np
 from nature_analysis.trade_time import tradetime
 from nature_analysis.min_ticksize import minticksize
 from nature_analysis.global_config import tick_root_path
+pd.set_option('display.max_rows', None)
 
 class tradePoint():
     def __init__(self):
@@ -42,14 +44,21 @@ class tradePoint():
         second_list = []
         ms_list = []
 
-        if 'UpdateTime' in subprice.columns:
-            time_string = subprice['UpdateTime']
+        # 剔除一个文件中有重复的内容
+        if 'UpdateTime' in subprice.columns or 'Time' in subprice.columns:
+            if 'UpdateTime' in subprice.columns:
+                time_string = subprice['UpdateTime']
+            else:
+                time_string = subprice['Time']
 
             for hour_minute_second_ms in time_string.values.tolist():
                 hour = hour_minute_second_ms[0:2]
                 minute = hour_minute_second_ms[3:5]
                 second = hour_minute_second_ms[6:8]
-                ms = hour_minute_second_ms[9:]
+                if len(hour_minute_second_ms) > 9:
+                    ms = hour_minute_second_ms[9:]
+                else:
+                    ms = '000'
                 year = date[0:4]
                 month = date[4:6]
 
@@ -124,8 +133,6 @@ class tradePoint():
         """
         # 判断该日期到底是星期几
         ins_time_of_week = pd.to_datetime(day_data, format = '%Y-%m-%d').dayofweek + 1
-        ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
-        ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
 
         # 获取夜市时间
         if ins_time_of_week == 1:
@@ -137,6 +144,14 @@ class tradePoint():
             split = str(one_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
 
+        # 2018年2月1号之后的夜市文件名称和日市文件名称相同
+        if day_data < '20180201':
+            ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
+            ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, night_date)
+        else:
+            ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
+            ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
+
         # 读取改天白天分时数据
         element_df = pd.DataFrame()
 
@@ -145,6 +160,15 @@ class tradePoint():
             subprice = self._daytime_raw_data_reading(ins_daytime_file_root)
             # 对已经读取的分时数据设置毫秒级别的时间index
             subprice = self._millisecond_timeindex_setting(subprice, day_data)
+            
+            # 剔除时间不对的数据
+            if len(subprice) > 0:
+                time_right_index = [item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item), 'day') == True]
+                if len(time_right_index) > 0:
+                    subprice = subprice.loc[time_right_index]
+                else:
+                    subprice = pd.DataFrame()
+
             subprice_daytime = subprice
             #读取昨天夜晚分时数据,并将昨天夜晚数据和与白天数据合并
             if os.path.exists(ins_nighttime_file_root) == True and include_night == True:
@@ -152,21 +176,32 @@ class tradePoint():
                 subprice = self._nighttime_raw_data_reading(ins_nighttime_file_root)
                 # 对已经读取的分时数据设置毫秒级别的时间index
                 subprice = self._millisecond_timeindex_setting(subprice, night_date)
+                
+                # 剔除时间不对的数据
+                if len(subprice) > 0:
+                    time_right_index = [item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item), 'night') == True]
+                    if len(time_right_index) > 0:
+                        subprice = subprice.loc[time_right_index]
+                    else:
+                        subprice = pd.DataFrame()
+
                 subprice_nighttime = subprice
                 # 白天数据与晚上数据合并为一个dataframe
                 subprice = subprice_nighttime.append(subprice_daytime)
             else:
                 subprice = subprice_daytime
 
-            # 剔除时间不对的数据
-            subprice = subprice.loc[[item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item)) == True]]
+            # 剔除OpenPrice异常的数据
+            if subprice.size != 0 and 'OpenPrice' in subprice.columns:
+                subprice = subprice[np.isnan(subprice['OpenPrice']) == False]
+                subprice = subprice[subprice['OpenPrice'] != 0.0]
+                subprice = subprice[subprice['OpenPrice'] <= 100000000]
 
-            # 剔除没有开盘的数据
-            subprice = subprice[np.isnan(subprice['OpenPrice']) == False]
-            subprice = subprice[subprice['OpenPrice'] != 0.0]
-            subprice = subprice[subprice['OpenPrice'] <= 100000000]
+            # 剔除TradeVolume为0的数据
+            if subprice.size != 0 and 'TradeVolume' in subprice.columns:
+                subprice = subprice[subprice['TradeVolume'] != 0.0]
 
-            if subprice.size !=0:
+            if subprice.size != 0:
                 element_df = subprice.sort_index()  
 
         return element_df
@@ -176,25 +211,44 @@ class tradePoint():
         element_df = element_df_.copy()
         # element_df['Volume_change'] = element_df[['    Volume']].diff(axis = 'index')['    Volume']
         # ask_bid_1元平稳博弈阶段划分
-        df1 = element_df[['AskPrice1']]
-        s = element_df['BidPrice1']
-        df2 = df1.sub(s, axis='index')
-        element_df['ask1-bid1'] = df2['AskPrice1']
+        if 'AskPrice1' in element_df.columns and 'BidPrice1' in element_df.columns:
+            df1 = element_df[['AskPrice1']]
+            s = element_df['BidPrice1']
+            df2 = df1.sub(s, axis='index')
+            element_df['ask1-bid1'] = df2['AskPrice1']
 
-        df3 = element_df.loc[element_df['ask1-bid1'] == ticksize_]
-        df3 = df3.copy()
-        df3['AskPrice1_change'] = df3[['AskPrice1']].diff(axis = 'index')['AskPrice1']
-        df3 = df3.loc[df3['AskPrice1_change'] != 0].dropna(axis=0, subset = ["AskPrice1_change"])
+            df3 = element_df.loc[element_df['ask1-bid1'] == ticksize_]
+            df3 = df3.copy()
+            df3['AskPrice1_change'] = df3[['AskPrice1']].diff(axis = 'index')['AskPrice1']
+            df3 = df3.loc[df3['AskPrice1_change'] != 0].dropna(axis=0, subset = ["AskPrice1_change"])
 
-        df4 = df3.loc[df3['AskPrice1_change'] > 0]
-        df5 = df3.loc[df3['AskPrice1_change'] < 0]
+            df4 = df3.loc[df3['AskPrice1_change'] > 0]
+            df5 = df3.loc[df3['AskPrice1_change'] < 0]
 
-        df4 = df4.copy()
-        df4['trading_point'] = df4['BidPrice1']
-        df5 = df5.copy()
-        df5['trading_point'] = df5['AskPrice1']
-        df6 = df4.append(df5).sort_index()
+            df4 = df4.copy()
+            df4['trading_point'] = df4['BidPrice1']
+            df5 = df5.copy()
+            df5['trading_point'] = df5['AskPrice1']
+            df6 = df4.append(df5).sort_index()
+        elif 'AskPrice' in element_df.columns and 'BidPrice' in element_df.columns:
+            df1 = element_df[['AskPrice']]
+            s = element_df['BidPrice']
+            df2 = df1.sub(s, axis='index')
+            element_df['ask1-bid1'] = df2['AskPrice']
 
+            df3 = element_df.loc[element_df['ask1-bid1'] == ticksize_]
+            df3 = df3.copy()
+            df3['AskPrice_change'] = df3[['AskPrice']].diff(axis = 'index')['AskPrice']
+            df3 = df3.loc[df3['AskPrice_change'] != 0].dropna(axis=0, subset = ["AskPrice_change"])
+
+            df4 = df3.loc[df3['AskPrice_change'] > 0]
+            df5 = df3.loc[df3['AskPrice_change'] < 0]
+
+            df4 = df4.copy()
+            df4['trading_point'] = df4['BidPrice']
+            df5 = df5.copy()
+            df5['trading_point'] = df5['AskPrice']
+            df6 = df4.append(df5).sort_index()
         return df6
 
     # 操作：确定改天的所有趋势区间并提炼频谱峰值
@@ -444,6 +498,26 @@ class tradePoint():
         return arc_list
 
     def get_trade_sentence(self, exch, ins, day_data, include_night=False):
+        """ 基于可交易点生成语句
+
+        生成的弧反应大的趋势
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            day_data: 日期
+            include_night: 是否包含夜市数据
+
+        Returns:
+            返回的数据格式是 list 格式，包含弧度信息
+
+        Examples:
+            >>> from nature_analysis.trade_point import get_trade_sentence
+            >>> tradepoint.get_trade_sentence('SHFE', 'cu2109', '20210329', include_night=True)
+            ['20210329#SHFE#1.20282664_0.60141332_1.65388663_0.15035333_5.11201323_4.51059991_7.21695986_2.40565329_
+            2.85671328_1.5035333_2.85671328_', '20210329#SHFE#-0.90211998_', '20210329#SHFE#0.60141332_', 
+            '20210329#SHFE#-0.75176665_', '20210329#SHFE#2.70635995_1.20282664_']
+        """
         trade_point = self.get_trade_point(exch, ins, day_data, include_night, include_extern_word=False)
         threshold = minticksize.find_tick_size(exch, ins)
 

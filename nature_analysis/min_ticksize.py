@@ -28,29 +28,29 @@ class minTickSize():
         self.SHFE['nr'] = 5
         self.SHFE['sp'] = 2
 
-        self.CZCE['wh'] = 1
-        self.CZCE['pm'] = 1
-        self.CZCE['cf'] = 5
-        self.CZCE['sr'] = 1
-        self.CZCE['oi'] = 1
-        self.CZCE['ri'] = 1
-        self.CZCE['rs'] = 1
-        self.CZCE['rm'] = 1
-        self.CZCE['jr'] = 1
-        self.CZCE['lr'] = 1
-        self.CZCE['cy'] = 5
-        self.CZCE['ap'] = 1
-        self.CZCE['cj'] = 5
-        self.CZCE['ta'] = 2
-        self.CZCE['ma'] = 1
-        self.CZCE['fg'] = 1
-        self.CZCE['zc'] = 0.2
-        self.CZCE['sf'] = 2
-        self.CZCE['sm'] = 2
-        self.CZCE['ur'] = 1
-        self.CZCE['sa'] = 1
-        self.CZCE['pf'] = 2
-        self.CZCE['pk'] = 2
+        self.CZCE['WH'] = 1
+        self.CZCE['PM'] = 1
+        self.CZCE['CF'] = 5
+        self.CZCE['SR'] = 1
+        self.CZCE['OI'] = 1
+        self.CZCE['RI'] = 1
+        self.CZCE['RS'] = 1
+        self.CZCE['RM'] = 1
+        self.CZCE['JR'] = 1
+        self.CZCE['LR'] = 1
+        self.CZCE['CY'] = 5
+        self.CZCE['AP'] = 1
+        self.CZCE['CJ'] = 5
+        self.CZCE['TA'] = 2
+        self.CZCE['MA'] = 1
+        self.CZCE['FG'] = 1
+        self.CZCE['ZC'] = 0.2
+        self.CZCE['SF'] = 2
+        self.CZCE['SM'] = 2
+        self.CZCE['UR'] = 1
+        self.CZCE['SA'] = 1
+        self.CZCE['PF'] = 2
+        self.CZCE['PK'] = 2
 
         self.DCE['c'] = 1
         self.DCE['cs'] = 1
@@ -79,12 +79,12 @@ class minTickSize():
         self.INE['nr'] = 5
         self.INE['bc'] = 10
 
-        self.CFFEX['if'] = 0.2
-        self.CFFEX['ic'] = 0.2
-        self.CFFEX['ih'] = 0.2
-        self.CFFEX['ts'] = 0.005
-        self.CFFEX['t'] = 0.005
-        self.CFFEX['tf'] = 0.005
+        self.CFFEX['IF'] = 0.2
+        self.CFFEX['IC'] = 0.2
+        self.CFFEX['IH'] = 0.2
+        self.CFFEX['TS'] = 0.005
+        self.CFFEX['T'] = 0.005
+        self.CFFEX['TF'] = 0.005
 
     def find_tick_size(self, exch, ins):
         """ 最小价格变动单位

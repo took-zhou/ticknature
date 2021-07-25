@@ -59,17 +59,23 @@ class K_line():
             elif subject == 'lastprice':
                 bars = today_element_df['LastPrice'].resample(period, label='right').ohlc()
 
-            volumes = today_element_df['Volume'].resample(period, label='right').last() \
-                - today_element_df['Volume'].resample(period, label='right').first()
+            if 'TradeVolume' in today_element_df.columns:
+                volumes = today_element_df['TradeVolume'].resample(period, label='right').last() \
+                    - today_element_df['TradeVolume'].resample(period, label='right').first()
+            elif 'Volume' in today_element_df.columns:
+                volumes = today_element_df['Volume'].resample(period, label='right').last() \
+                    - today_element_df['Volume'].resample(period, label='right').first()
 
             openInterest = today_element_df['OpenInterest'].resample(period, label='right').last() \
                 - today_element_df['OpenInterest'].resample(period, label='right').first()
 
             ohlcv = pd.concat([bars, volumes, openInterest], axis=1)
-            ohlcv = ohlcv[ohlcv['Volume'] > 0].dropna()
-
-            ohlcv.rename(columns={'open': 'Open', 'high': 'High', \
-                'low': 'Low', 'close': 'Close', 'Volume': 'Volume', 'OpenInterest': 'OpenInterest'}, inplace=True)
+            if 'Volume' in ohlcv.columns:
+                ohlcv = ohlcv[ohlcv['Volume'] > 0].dropna()
+                ohlcv.rename(columns={'open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close'}, inplace=True)
+            elif 'TradeVolume' in ohlcv.columns:
+                ohlcv = ohlcv[ohlcv['TradeVolume'] > 0].dropna()
+                ohlcv.rename(columns={'open': 'Open', 'high': 'High', 'low': 'Low', 'close': 'Close', 'TradeVolume': 'Volume'}, inplace=True)
         else:
             ohlcv = pd.DataFrame({'open':[], 'High':[],'Low':[],'Close':[],'Volume':[], 'OpenInterest':[]})
             ohlcv.index.name = 'Timeindex'
