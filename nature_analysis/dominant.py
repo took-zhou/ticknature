@@ -6,6 +6,8 @@ import time
 import sys
 import numpy as np
 import re
+import pandas as pd
+from nature_analysis.trade_point import tradepoint
 from nature_analysis.global_config import tick_root_path
 
 class dominantFuture:
@@ -35,8 +37,7 @@ class dominantFuture:
         self.total_count = 0
         self.instrument = ''
 
-    def _walk_path(self):
-        print(self.paramInput['dataRootPath'])
+    def _walk_path(self, exch, ins):
         for root, dirs, files in os.walk(self.paramInput['dataRootPath']):
             if dirs != []:
                 print('invalid path')
@@ -47,19 +48,75 @@ class dominantFuture:
                     exit(-1)
                 if self._valid_time(f) != False:
                     self.total_count = self.total_count + 1
-                    last_line = self.__get_last_line(os.path.join(root, f))
-                    if self._valid_dominant1(last_line) != False:
+                    vo_value = self.get_vo(exch, ins, f.split('.')[0].split('_')[-1])
+                    if self._valid_dominant1(vo_value) != False:
                         self.valid_count1 = self.valid_count1 + 1
-                    if self._valid_dominant2(last_line) != False:
+                    if self._valid_dominant2(vo_value) != False:
                         self.valid_count2 = self.valid_count2 + 1
-                    if self._valid_dominant3(last_line) != False:
+                    if self._valid_dominant3(vo_value) != False:
                         self.valid_count3 = self.valid_count3 + 1
 
-    def get_ov(self, exch, ins, day_data):
-        ins_file_root = '%s/%s/%s/%s/%s_%s.csv'%(tick_root_path, exch, exch, ins, ins, day_data)
-        last_line = self.__get_last_line(ins_file_root)
-        volume = float(last_line.decode().strip().split(',')[8])
-        open_interest = float(last_line.decode().strip().split(',')[10])
+    def _valid_dominant1(self, vo_value):
+        if vo_value[0] >= self.paramInput['threshold1']['volume'] and \
+             vo_value[1] >= self.paramInput['threshold1']['open_interest']:
+            return True
+        else:
+            return False
+
+    def _valid_dominant2(self, vo_value):
+        if vo_value[0] >= self.paramInput['threshold2']['volume'] and \
+             vo_value[1] >= self.paramInput['threshold2']['open_interest']:
+            return True
+        else:
+            return False
+
+    def _valid_dominant3(self, vo_value):
+        if vo_value[0] >= self.paramInput['threshold3']['volume'] and \
+             vo_value[1] >= self.paramInput['threshold3']['open_interest']:
+            return True
+        else:
+            return False
+
+    def _valid_time(self, file):
+        ret = False
+        now_t = time.mktime(time.strptime(file.split('_')[-1].split('.')[0], "%Y%m%d"))
+        if self.paramInput['duration']['begin'] == '' or  self.paramInput['duration']['end'] == '':
+            ret = True
+        else:
+            begin_t = time.mktime(time.strptime(self.paramInput['duration']['begin'], "%Y-%m-%d"))
+            end_t = time.mktime(time.strptime(self.paramInput['duration']['end'], "%Y-%m-%d"))
+
+            if now_t <= end_t and now_t >= begin_t:
+                ret = True
+        return ret
+
+    def get_vo(self, exch, ins, day_data):
+        """ 获取当天合约的持仓量和成交量
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            day_data: 日期
+        Returns:
+            [volume, open_interest]
+
+        Examples:
+            >>> from nature_analysis.dominant import dominant
+            >>> dominant.get_ov('DCE', 'c2105', '20210414')
+            [112712.0, 262937.0]
+        """
+        volume = 0.0
+        open_interest = 0.0
+        data_df = tradepoint.generate_data(exch, ins, day_data, include_night=False)
+
+        if data_df.size != 0 and 'TradeVolume' in data_df.columns:
+            data_df = data_df[data_df['TradeVolume'] != 0.0]
+            volume = data_df['TradeVolume'][-1]
+            open_interest = data_df['OpenInterest'][-1]
+        elif data_df.size != 0 and 'Volume' in data_df.columns:
+            data_df = data_df[data_df['Volume'] != 0.0]
+            volume = data_df['Volume'][-1]
+            open_interest = data_df['OpenInterest'][-1]
 
         return [volume, open_interest]
 
@@ -87,8 +144,8 @@ class dominantFuture:
         self.paramInput['duration']["begin"] = time_begin
         self.paramInput['duration']["begin"] = time_end
         self.paramInput['dataRootPath'] = '%s/%s/%s/%s'%(tick_root_path, exch, exch, ins)
-        self.instrument = self.paramInput['dataRootPath'].split('/')[-1]
-        self._walk_path()
+        self.instrument = ins
+        self._walk_path(exch, ins)
         if self.total_count == 0:
             return [self.instrument, 0, 0, 0]
         else:
@@ -97,72 +154,5 @@ class dominantFuture:
                     round((self.valid_count2/self.total_count),2),\
                     round((self.valid_count3/self.total_count),2)
                     ]
-
-    def _valid_dominant1(self, line):
-        volume = float(line.decode().strip().split(',')[11])
-        open_interest = float(line.decode().strip().split(',')[13])
-        if volume >= self.paramInput['threshold1']['volume'] and \
-             open_interest >= self.paramInput['threshold1']['open_interest']:
-            return True
-        else:
-            return False
-
-    def _valid_dominant2(self, line):
-        volume = float(line.decode().strip().split(',')[11])
-        open_interest = float(line.decode().strip().split(',')[13])
-        if volume >= self.paramInput['threshold2']['volume'] and \
-             open_interest >= self.paramInput['threshold2']['open_interest']:
-            return True
-        else:
-            return False
-
-    def _valid_dominant3(self, line):
-        volume = float(line.decode().strip().split(',')[11])
-        open_interest = float(line.decode().strip().split(',')[13])
-        if volume >= self.paramInput['threshold3']['volume'] and \
-             open_interest >= self.paramInput['threshold3']['open_interest']:
-            return True
-        else:
-            return False
-
-    def __get_last_line(self, filename):
-        """
-        get last line of a file
-        :param filename: file name
-        :return: last line or None for empty file
-        """
-        try:
-            filesize = os.path.getsize(filename)
-            if filesize == 0:
-                return None
-            else:
-                with open(filename, 'rb') as fp: # to use seek from end, must use mode 'rb'
-                    offset = -8                 # initialize offset
-                    while -offset < filesize:   # offset cannot exceed file size
-                        fp.seek(offset, 2)      # read # offset chars from eof(represent by number '2')
-                        lines = fp.readlines()  # read from fp to eof
-                        if len(lines) >= 2:     # if contains at least 2 lines
-                            return lines[-1]    # then last line is totally included
-                        else:
-                            offset *= 2         # enlarge offset
-                    fp.seek(0)
-                    lines = fp.readlines()
-                    return lines[-1]
-        except FileNotFoundError:
-            print(filename + ' not found!')
-            return None
-
-    def _valid_time(self, file):
-        ret = False
-        now_t = time.mktime(time.strptime(file.split('_')[-1].split('.')[0], "%Y%m%d"))
-        if self.paramInput['duration']['begin'] == '' or  self.paramInput['duration']['end'] == '':
-            ret = True
-        else:
-            begin_t = time.mktime(time.strptime(self.paramInput['duration']['begin'], "%Y-%m-%d"))
-            end_t = time.mktime(time.strptime(self.paramInput['duration']['end'], "%Y-%m-%d"))
-
-            if now_t <= end_t and now_t >= begin_t:
-                ret = True
-        return ret
 
 dominant = dominantFuture()

@@ -145,7 +145,7 @@ class tradePoint():
             night_date = split[0] + split[1] + split[2].split(' ')[0]
 
         # 2018年2月1号之后的夜市文件名称和日市文件名称相同
-        if day_data < '20180201':
+        if day_data < '20180201' and not('20161101' <= day_data <= '20161231'):
             ins_daytime_file_root = '%s/%s/%s/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, day_data)
             ins_nighttime_file_root = '%s/%s/%s_night/%s/%s_%s.csv'%(self.csv_root_path, exch, exch, ins, ins, night_date)
         else:

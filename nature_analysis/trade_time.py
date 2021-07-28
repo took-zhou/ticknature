@@ -69,8 +69,10 @@ class tradeTime():
         self.CZCE['CJ_old'] = self.day_time_dict1
         self.CZCE['TA_old'] = self.time_compose4
         self.CZCE['MA_old'] = self.time_compose4
+        self.CZCE['ME_old'] = self.time_compose4
         self.CZCE['FG_old'] = self.time_compose4
         self.CZCE['ZC_old'] = self.time_compose4
+        self.CZCE['TC_old'] = self.time_compose4
         self.CZCE['SF_old'] = self.day_time_dict1
         self.CZCE['SM_old'] = self.day_time_dict1
         self.CZCE['UR_old'] = self.day_time_dict1
@@ -93,8 +95,10 @@ class tradeTime():
         self.CZCE['CJ'] = self.day_time_dict1
         self.CZCE['TA'] = self.time_compose3
         self.CZCE['MA'] = self.time_compose3
+        self.CZCE['ME'] = self.time_compose3
         self.CZCE['FG'] = self.time_compose3
         self.CZCE['ZC'] = self.time_compose3
+        self.CZCE['TC'] = self.time_compose3
         self.CZCE['SF'] = self.day_time_dict1
         self.CZCE['SM'] = self.day_time_dict1
         self.CZCE['UR'] = self.day_time_dict1

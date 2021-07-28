@@ -73,7 +73,7 @@ class checkTick:
 
         return result
 
-    def specific_test(self, exch, ins,):
+    def specific_test(self, exch, ins):
         """ 针对特定合约测试中信数据可靠性
 
         通过分析分时数据判断有效性
@@ -100,6 +100,7 @@ class checkTick:
             if tickdata.size > 0:
                 last_price_list = [item for item in list(tickdata['LastPrice']) if np.isnan(item) == False and item != 0.0]
 
+                open_price = last_price_list[0]
                 max_price = max(last_price_list)
                 min_price = min(last_price_list)
                 close_price = last_price_list[-1]
@@ -123,12 +124,12 @@ class checkTick:
 chectick = checkTick()
 
 if __name__ == '__main__':
-    ret = chectick.random_sample(10)
-
-    for item in ret:
-        print(item)
-
-    # ret = chectick.specific_test('CZCE', 'MA805')
+    # ret = chectick.random_sample(10)
 
     # for item in ret:
     #     print(item)
+
+    ret = chectick.specific_test('DCE', 'l1705')
+
+    for item in ret:
+        print(item)

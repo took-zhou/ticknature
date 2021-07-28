@@ -95,33 +95,27 @@ class K_line():
         else:
             today_element_df = tradepoint.generate_data(exch, ins, day_data, include_night)
 
+        ohlcv = pd.DataFrame({'Open':[], 'High':[],'Low':[],'Close':[],'Volume':[], 'OpenInterest':[]})
+        ohlcv.index.name = 'Timeindex'
+
         if today_element_df.size > 0:
             if subject == 'lastprice':
-                last_line = today_element_df.tail(1)
-
-                ohlcv = last_line[['OpenPrice']].copy()
-                ohlcv['HighestPrice'] = max(today_element_df['LastPrice'])
-                ohlcv['LowestPrice'] = min(today_element_df['LastPrice'])
-                ohlcv['ClosePrice'] = last_line['LastPrice']
-                ohlcv['Volume'] = last_line['Volume']
-                ohlcv['OpenInterest'] = last_line['OpenInterest']
-                ohlcv.rename(columns={'OpenPrice': 'Open', 'HighestPrice': 'High', \
-                    'LowestPrice': 'Low', 'ClosePrice': 'Close', 'Volume': 'Volume', 'OpenInterest': 'OpenInterest'}, inplace=True)
-
+                ohlcv['Open'] = [today_element_df['LastPrice'][0]]
+                ohlcv['High'] = [max(today_element_df['LastPrice'])]
+                ohlcv['Low'] = [min(today_element_df['LastPrice'])]
+                ohlcv['Close'] = [today_element_df['LastPrice'][-1]]
             elif subject == 'tradepoint':
-                last_line = today_element_df.tail(1)
+                ohlcv['Open'] = [today_element_df['trading_point'][0]]
+                ohlcv['High'] = [max(today_element_df['trading_point'])]
+                ohlcv['Low'] = [min(today_element_df['trading_point'])]
+                ohlcv['Close'] = [today_element_df['trading_point'][-1]]
 
-                ohlcv = last_line[['OpenPrice']].copy()
-                ohlcv['HighestPrice'] = max(today_element_df['trading_point'])
-                ohlcv['LowestPrice'] = min(today_element_df['trading_point'])
-                ohlcv['ClosePrice'] = last_line['trading_point']
-                ohlcv['Volume'] = last_line['Volume']
-                ohlcv['OpenInterest'] = last_line['OpenInterest']
-                ohlcv.rename(columns={'OpenPrice': 'Open', 'HighestPrice': 'High', \
-                    'LowestPrice': 'Low', 'ClosePrice': 'Close', 'Volume': 'Volume', 'OpenInterest': 'OpenInterest'}, inplace=True)
-        else:
-            ohlcv = pd.DataFrame({'open':[], 'High':[],'Low':[],'Close':[],'Volume':[], 'OpenInterest':[]})
-            ohlcv.index.name = 'Timeindex'
+            if 'Volume' in today_element_df.columns:
+                ohlcv['Volume'] = [today_element_df['Volume'][-1]]
+            elif 'TradeVolume' in today_element_df.columns:
+                ohlcv['Volume'] = [today_element_df['TradeVolume'][-1]]
+            ohlcv['OpenInterest'] = [today_element_df['OpenInterest'][-1]]
+            ohlcv.index=[today_element_df.index[-1]]
 
         if save_path != '':
             if not os.path.exists(save_path):

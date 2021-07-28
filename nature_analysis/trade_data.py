@@ -57,7 +57,7 @@ class tradeData():
         sorted_data = sorted(all_day_list)
         temp_ret = []
         for item in sorted_data:
-            [day_volume, day_openinterest] = dominant.get_ov(exch, ins, item)
+            [day_volume, day_openinterest] = dominant.get_vo(exch, ins, item)
             if day_volume > volume and day_openinterest > openinterest:
                 temp_ret.append(item)
             else:
@@ -96,6 +96,7 @@ class tradeData():
         self.absolute_path = '%s/%s/%s'%(self.root_path, exch, exch)
         for item in os.listdir(self.absolute_path):
             if exit_night == True:
+                print(exch, item)
                 for key in tradetime.get_trade_time(exch, item):
                     if 'night' in key:
                         ret.append(item)
@@ -168,7 +169,7 @@ class tradeData():
 
         return ret
 
-    def is_active(self, exch, ins, data, volume=0, openinterest=0):
+    def is_active(self, exch, ins, _data, volume=0, openinterest=0):
         """ 判断该合约特定天是否是活跃
 
         Args:
@@ -185,7 +186,7 @@ class tradeData():
             >>> tradedata.is_delivery_month('DCE', 'c2105')
            True
         """
-        [day_volume, day_openinterest] = dominant.get_ov(exch, ins, _data)
+        [day_volume, day_openinterest] = dominant.get_vo(exch, ins, _data)
         if day_volume > volume and day_openinterest > openinterest:
             return True
         else:

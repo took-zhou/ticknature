@@ -43,8 +43,10 @@ class minTickPrice():
         self.CZCE['CJ'] = 25
         self.CZCE['TA'] = 10
         self.CZCE['MA'] = 10
+        self.CZCE['ME'] = 50
         self.CZCE['FG'] = 20
         self.CZCE['ZC'] = 20
+        self.CZCE['TC'] = 40
         self.CZCE['SF'] = 10
         self.CZCE['SM'] = 10
         self.CZCE['UR'] = 20

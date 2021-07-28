@@ -43,8 +43,10 @@ class minTradeUint():
         self.CZCE['CJ'] = 5
         self.CZCE['TA'] = 5
         self.CZCE['MA'] = 10
+        self.CZCE['ME'] = 50
         self.CZCE['FG'] = 20
         self.CZCE['ZC'] = 100
+        self.CZCE['TC'] = 200
         self.CZCE['SF'] = 5
         self.CZCE['SM'] = 5
         self.CZCE['UR'] = 20

@@ -43,8 +43,10 @@ class minTickSize():
         self.CZCE['CJ'] = 5
         self.CZCE['TA'] = 2
         self.CZCE['MA'] = 1
+        self.CZCE['ME'] = 1
         self.CZCE['FG'] = 1
         self.CZCE['ZC'] = 0.2
+        self.CZCE['TC'] = 0.2
         self.CZCE['SF'] = 2
         self.CZCE['SM'] = 2
         self.CZCE['UR'] = 1
