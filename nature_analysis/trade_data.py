@@ -2,7 +2,7 @@ import os
 import re
 import datetime
 import pandas as pd
-from nature_analysis.dominant import dominant
+from nature_analysis.active import activefuture
 from nature_analysis.trade_time import tradetime
 from nature_analysis.global_config import tick_root_path
 from nature_analysis.global_config import d1_kline_root_path
@@ -31,7 +31,8 @@ class tradeData():
         for item in os.listdir(self.absolute_path):
             ret.append(item.split('_')[-1].split('.')[0])
 
-        return ret
+        sorted_data = sorted(ret)
+        return sorted_data
 
     def get_active_data(self, exch, ins, volume=0, openinterest=0):
         """ 合约过去的交易日获取
@@ -49,15 +50,12 @@ class tradeData():
            ['20200716', '20210205', ... '20200902', '20210428', '20210506', '20210426']
         """
         ret = []
-        all_day_list = []
-        self.absolute_path = '%s/%s/%s/%s'%(self.root_path, exch, exch, ins)
-        for item in os.listdir(self.absolute_path):
-            all_day_list.append(item.split('_')[-1].split('.')[0])
+        temp_ret = []
+        sorted_data = self.get_trade_data(exch, ins)
 
-        sorted_data = sorted(all_day_list)
         temp_ret = []
         for item in sorted_data:
-            [day_volume, day_openinterest] = dominant.get_vo(exch, ins, item)
+            [day_volume, day_openinterest] = activefuture.get_vo(exch, ins, item)
             if day_volume > volume and day_openinterest > openinterest:
                 temp_ret.append(item)
             else:
@@ -96,7 +94,6 @@ class tradeData():
         self.absolute_path = '%s/%s/%s'%(self.root_path, exch, exch)
         for item in os.listdir(self.absolute_path):
             if exit_night == True:
-                print(exch, item)
                 for key in tradetime.get_trade_time(exch, item):
                     if 'night' in key:
                         ret.append(item)
@@ -186,7 +183,7 @@ class tradeData():
             >>> tradedata.is_delivery_month('DCE', 'c2105')
            True
         """
-        [day_volume, day_openinterest] = dominant.get_vo(exch, ins, _data)
+        [day_volume, day_openinterest] = activefuture.get_vo(exch, ins, _data)
         if day_volume > volume and day_openinterest > openinterest:
             return True
         else:

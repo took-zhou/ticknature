@@ -1,158 +1,204 @@
 #!/usr/bin/python
 # coding=utf-8
-import os
-import datetime
-import time
 import sys
-import numpy as np
 import re
-import pandas as pd
-from nature_analysis.trade_point import tradepoint
 from nature_analysis.global_config import tick_root_path
+from nature_analysis.trade_data import tradedata
 
 class dominantFuture:
     def __init__(self):
-        self.paramInput = {
-            'dataRootPath': '',
-            'duration':{
-                "begin": "",
-                "end": ""
-            },
-            'threshold1': {
-                'volume': 10*1000,
-                'open_interest': 10*1000
-            },
-            'threshold2': {
-                'volume': 100*1000,
-                'open_interest': 100*1000
-            },
-            'threshold3': {
-                'volume': 1000*1000,
-                'open_interest': 1000*1000
-            }
-        }
-        self.valid_count1 = 0
-        self.valid_count2 = 0
-        self.valid_count3 = 0
-        self.total_count = 0
-        self.instrument = ''
+        self.root_path = tick_root_path
 
-    def _walk_path(self, exch, ins):
-        for root, dirs, files in os.walk(self.paramInput['dataRootPath']):
-            if dirs != []:
-                print('invalid path')
-                exit(-1)
-            for f in files:
-                if f.split('.')[-1] != 'csv':
-                    print('invalid path')
-                    exit(-1)
-                if self._valid_time(f) != False:
-                    self.total_count = self.total_count + 1
-                    vo_value = self.get_vo(exch, ins, f.split('.')[0].split('_')[-1])
-                    if self._valid_dominant1(vo_value) != False:
-                        self.valid_count1 = self.valid_count1 + 1
-                    if self._valid_dominant2(vo_value) != False:
-                        self.valid_count2 = self.valid_count2 + 1
-                    if self._valid_dominant3(vo_value) != False:
-                        self.valid_count3 = self.valid_count3 + 1
+        self.SHFE = {}
+        self.CZCE = {}
+        self.DCE = {}
+        self.INE = {}
+        self.CFFEX = {}
 
-    def _valid_dominant1(self, vo_value):
-        if vo_value[0] >= self.paramInput['threshold1']['volume'] and \
-             vo_value[1] >= self.paramInput['threshold1']['open_interest']:
-            return True
-        else:
-            return False
+        self.month1_1 = {'01': ['08', '09', '10', '11']}
+        self.month1_2 = {'01': ['09', '10', '11']}
+        self.month2 = {'02': []}
+        self.month3 = {'03': []}
+        self.month4 = {'04': []}
+        self.month5 = {'05': ['12', '01', '02', '03']}
+        self.month6 = {'06': []}
+        self.month7 = {'07': []}
+        self.month8 = {'08': []}
+        self.month9 = {'09': ['04', '05', '06', '07']}
+        self.month10 = {'10': ['05', '06', '07', '08']}
+        self.month11 = {'11': []}
+        self.month12 = {'12': []}
 
-    def _valid_dominant2(self, vo_value):
-        if vo_value[0] >= self.paramInput['threshold2']['volume'] and \
-             vo_value[1] >= self.paramInput['threshold2']['open_interest']:
-            return True
-        else:
-            return False
+        self.dominant_compose1 = {'01': ['08', '09', '10', '11'], '05': ['12', '01', '02', '03'], '09': ['04', '05', '06', '07']}
+        self.dominant_compose2 = {'01': ['09', '10', '11'], '05': ['12', '01', '02', '03'], '10': ['05', '06', '07', '08']}
 
-    def _valid_dominant3(self, vo_value):
-        if vo_value[0] >= self.paramInput['threshold3']['volume'] and \
-             vo_value[1] >= self.paramInput['threshold3']['open_interest']:
-            return True
-        else:
-            return False
+        self.SHFE['cu'] = {}
+        self.SHFE['al'] = {}
+        self.SHFE['zn'] = {}
+        self.SHFE['pb'] = {}
+        self.SHFE['ni'] = {}
+        self.SHFE['sn'] = {}
+        self.SHFE['au'] = {}
+        self.SHFE['ag'] = {}
+        self.SHFE['rb'] = {}
+        self.SHFE['wr'] = {}
+        self.SHFE['hc'] = {}
+        self.SHFE['ss'] = {}
+        self.SHFE['sc'] = {}
+        self.SHFE['lu'] = {}
+        self.SHFE['fu'] = {}
+        self.SHFE['bu'] = {}
+        self.SHFE['ru'] = {}
+        self.SHFE['nr'] = {}
+        self.SHFE['sp'] = {}
 
-    def _valid_time(self, file):
-        ret = False
-        now_t = time.mktime(time.strptime(file.split('_')[-1].split('.')[0], "%Y%m%d"))
-        if self.paramInput['duration']['begin'] == '' or  self.paramInput['duration']['end'] == '':
-            ret = True
-        else:
-            begin_t = time.mktime(time.strptime(self.paramInput['duration']['begin'], "%Y-%m-%d"))
-            end_t = time.mktime(time.strptime(self.paramInput['duration']['end'], "%Y-%m-%d"))
+        self.CZCE['WH'] = {}
+        self.CZCE['PM'] = {}
+        self.CZCE['CF'] = self.dominant_compose1
+        self.CZCE['SR'] = self.dominant_compose1
+        self.CZCE['OI'] = self.dominant_compose1
+        self.CZCE['RI'] = {}
+        self.CZCE['RS'] = {}
+        self.CZCE['RM'] = self.dominant_compose1
+        self.CZCE['JR'] = {}
+        self.CZCE['LR'] = {}
+        self.CZCE['CY'] = self.dominant_compose1
+        self.CZCE['AP'] = self.dominant_compose2
+        self.CZCE['CJ'] = self.dominant_compose1
+        self.CZCE['TA'] = self.dominant_compose1
+        self.CZCE['MA'] = self.dominant_compose1
+        self.CZCE['ME'] = self.dominant_compose1
+        self.CZCE['FG'] = self.dominant_compose1
+        self.CZCE['ZC'] = self.dominant_compose1
+        self.CZCE['TC'] = self.dominant_compose1
+        self.CZCE['SF'] = self.dominant_compose1
+        self.CZCE['SM'] = self.dominant_compose1
+        self.CZCE['UR'] = self.dominant_compose1
+        self.CZCE['SA'] = self.dominant_compose1
+        self.CZCE['PF'] = self.dominant_compose1
+        self.CZCE['PK'] = self.dominant_compose1
 
-            if now_t <= end_t and now_t >= begin_t:
-                ret = True
+        self.DCE['c'] = {}
+        self.DCE['cs'] = {}
+        self.DCE['a'] = {}
+        self.DCE['b'] = {}
+        self.DCE['m'] = {}
+        self.DCE['y'] = {}
+        self.DCE['p'] = {}
+        self.DCE['fb'] = {}
+        self.DCE['bb'] = {}
+        self.DCE['jd'] = {}
+        self.DCE['rr'] = {}
+        self.DCE['l'] = {}
+        self.DCE['v'] = {}
+        self.DCE['pp'] = {}
+        self.DCE['j'] = {}
+        self.DCE['jm'] = {}
+        self.DCE['i'] = {}
+        self.DCE['eg'] = {}
+        self.DCE['eb'] = {}
+        self.DCE['pg'] = {}
+        self.DCE['lh'] = {}
+
+        self.INE['sc'] = {}
+        self.INE['lu'] = {}
+        self.INE['nr'] = {}
+        self.INE['bc'] = {}
+
+        self.CFFEX['IF'] = {}
+        self.CFFEX['IC'] = {}
+        self.CFFEX['IH'] = {}
+        self.CFFEX['TS'] = {}
+        self.CFFEX['TF'] = {}
+        self.CFFEX['T'] = {}
+
+    def get_month(self, exch, ins):
+        """ 获取主力合约月份
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+
+        Returns:
+            返回的数据类型是 list， 包含所有的主力合约月份
+
+        Examples:
+            >>> from nature_analysis.dominant import dominant
+            >>> dominant.get_month('CZCE', 'MA')
+           ['01', '05', '09']
+        """
+        temp_dict = {}
+        if exch == 'SHFE':
+            if self.SHFE.__contains__(ins):
+                temp_dict = self.SHFE[ins]
+        elif exch == 'CZCE':
+            if self.CZCE.__contains__(ins):
+                temp_dict =  self.CZCE[ins]
+        elif exch == 'DCE':
+            if self.DCE.__contains__(ins):
+                temp_dict =  self.DCE[ins]
+        elif exch == 'INE':
+            if self.INE.__contains__(ins):
+                temp_dict =  self.INE[ins]
+        elif exch == 'CFFEX':
+            if self.CFFEX.__contains__(ins):
+                temp_dict =  self.CFFEX[ins]
+
+        if 'efp' in ins:
+            temp_dict =  {}
+
+        ret = []
+        for item in temp_dict:
+            ret.append(item)
+
         return ret
 
-    def get_vo(self, exch, ins, day_data):
-        """ 获取当天合约的持仓量和成交量
+    def get_data(self, exch, ins):
+        """ 合约过去的交易日获取
 
         Args:
             exch: 交易所简称
             ins: 合约代码
-            day_data: 日期
+
         Returns:
-            [volume, open_interest]
+            返回的数据类型是 list， 包含所有的日期数据
 
         Examples:
             >>> from nature_analysis.dominant import dominant
-            >>> dominant.get_ov('DCE', 'c2105', '20210414')
-            [112712.0, 262937.0]
+            >>> dominant.get_data('DCE', 'c2105')
+           ['20200716', '20210205', ... '20200902', '20210428', '20210506', '20210426']
         """
-        volume = 0.0
-        open_interest = 0.0
-        data_df = tradepoint.generate_data(exch, ins, day_data, include_night=False)
+        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp_dict = {}
+        if exch == 'SHFE':
+            if self.SHFE.__contains__(temp):
+                temp_dict = self.SHFE[temp]
+        elif exch == 'CZCE':
+            if self.CZCE.__contains__(temp):
+                temp_dict = self.CZCE[temp]
+        elif exch == 'DCE':
+            if self.DCE.__contains__(temp):
+                temp_dict = self.DCE[temp]
+        elif exch == 'INE':
+            if self.INE.__contains__(temp):
+                temp_dict = self.INE[temp]
+        elif exch == 'CFFEX':
+            if self.CFFEX.__contains__(temp):
+                temp_dict = self.CFFEX[temp]
 
-        if data_df.size != 0 and 'TradeVolume' in data_df.columns:
-            data_df = data_df[data_df['TradeVolume'] != 0.0]
-            volume = data_df['TradeVolume'][-1]
-            open_interest = data_df['OpenInterest'][-1]
-        elif data_df.size != 0 and 'Volume' in data_df.columns:
-            data_df = data_df[data_df['Volume'] != 0.0]
-            volume = data_df['Volume'][-1]
-            open_interest = data_df['OpenInterest'][-1]
+        if 'efp' in ins:
+            temp_dict =  {}
 
-        return [volume, open_interest]
-
-    def genConfidence(self, exch, ins, time_begin = '', time_end = ''):
-        """ 判断合约在特定时间段内是否是主力合约
-
-        通过这个时间段内的每天结束时成交量和持仓量来判断
-
-        Args:
-            exch: 交易所简称
-            ins: 合约代码
-            time_begin: 开始时间
-            time_end: 结束时间
-        Returns:
-            返回数据类型是 list，包含不同阈值下面的置信度
-            result[1] 持仓量大于10000&&成交量大于10000占所有天数的比重是百分百
-            result[2] 持仓量大于100000&&成交量大于100000占所有天数的比重是百分百
-            result[3] 持仓量大于1000000&& 成交量大于1000000占所有天数的比重是百分0.02
-
-        Examples:
-            >>> from nature_analysis.dominant import dominant
-            >>> dominant.genConfidence('DCE', 'c2105')
-            ['c2105', 0.96, 0.75, 0.01]
-        """
-        self.paramInput['duration']["begin"] = time_begin
-        self.paramInput['duration']["begin"] = time_end
-        self.paramInput['dataRootPath'] = '%s/%s/%s/%s'%(tick_root_path, exch, exch, ins)
-        self.instrument = ins
-        self._walk_path(exch, ins)
-        if self.total_count == 0:
-            return [self.instrument, 0, 0, 0]
-        else:
-            return [self.instrument,\
-                    round((self.valid_count1/self.total_count),2),\
-                    round((self.valid_count2/self.total_count),2),\
-                    round((self.valid_count3/self.total_count),2)
-                    ]
+        ret = []
+        if ins[-2:] in temp_dict:
+            month_list = temp_dict[ins[-2:]]
+            sorted_data = tradedata.get_trade_data(exch, ins)
+            ret = [item for item in sorted_data if item[4:6] in month_list]
+        return ret
 
 dominant = dominantFuture()
+
+months = dominant.get_month('CZCE', 'FG')
+print(months)
+datas = dominant.get_data('CZCE', 'FG805')
+print(datas)
