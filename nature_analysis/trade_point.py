@@ -2,6 +2,7 @@ from re import sub
 import pandas as pd
 from datetime import timedelta
 import os
+import math
 import numpy as np
 from nature_analysis.trade_time import tradetime
 from nature_analysis.min_ticksize import minticksize
@@ -160,14 +161,12 @@ class tradePoint():
             subprice = self._daytime_raw_data_reading(ins_daytime_file_root)
             # 对已经读取的分时数据设置毫秒级别的时间index
             subprice = self._millisecond_timeindex_setting(subprice, day_data)
-            
+
             # 剔除时间不对的数据
             if len(subprice) > 0:
-                time_right_index = [item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item), 'day') == True]
-                if len(time_right_index) > 0:
-                    subprice = subprice.loc[time_right_index]
-                else:
-                    subprice = pd.DataFrame()
+                time_wrong_index = [item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item), 'day') == False]
+                if len(time_wrong_index) > 0:
+                    subprice.drop(time_wrong_index ,inplace = True)
 
             subprice_daytime = subprice
             #读取昨天夜晚分时数据,并将昨天夜晚数据和与白天数据合并
@@ -179,11 +178,9 @@ class tradePoint():
                 
                 # 剔除时间不对的数据
                 if len(subprice) > 0:
-                    time_right_index = [item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item), 'night') == True]
-                    if len(time_right_index) > 0:
-                        subprice = subprice.loc[time_right_index]
-                    else:
-                        subprice = pd.DataFrame()
+                    time_wrong_index = [item for item in subprice.index if tradetime.is_trade_time(exch, ins, str(item), 'night') == False]
+                    if len(time_wrong_index) > 0:
+                        subprice.drop(time_wrong_index ,inplace = True)
 
                 subprice_nighttime = subprice
                 # 白天数据与晚上数据合并为一个dataframe
@@ -202,7 +199,7 @@ class tradePoint():
                 subprice = subprice[subprice['TradeVolume'] != 0.0]
 
             if subprice.size != 0:
-                element_df = subprice.sort_index()  
+                element_df = subprice.sort_index()
 
         return element_df
 
@@ -217,8 +214,10 @@ class tradePoint():
             df2 = df1.sub(s, axis='index')
             element_df['ask1-bid1'] = df2['AskPrice1']
 
-            df3 = element_df.loc[element_df['ask1-bid1'] == ticksize_]
-            df3 = df3.copy()
+            ask1_bid1_wrong_index = [index for index, item in element_df['ask1-bid1'].items() if math.isclose(item, ticksize_, rel_tol=0.000001) == False]
+            if len(ask1_bid1_wrong_index) > 0:
+                element_df.drop(ask1_bid1_wrong_index, inplace = True)
+            df3 = element_df.copy()
             df3['AskPrice1_change'] = df3[['AskPrice1']].diff(axis = 'index')['AskPrice1']
             df3 = df3.loc[df3['AskPrice1_change'] != 0].dropna(axis=0, subset = ["AskPrice1_change"])
 
@@ -236,8 +235,12 @@ class tradePoint():
             df2 = df1.sub(s, axis='index')
             element_df['ask1-bid1'] = df2['AskPrice']
 
-            df3 = element_df.loc[element_df['ask1-bid1'] == ticksize_]
-            df3 = df3.copy()
+            ask1_bid1_wrong_index = [index for index, item in element_df['ask1-bid1'].items() if math.isclose(item, ticksize_, rel_tol=0.000001) == False]
+            if len(ask1_bid1_wrong_index) > 0:
+                element_df.drop(ask1_bid1_wrong_index, inplace = True)
+
+            df3 = element_df.copy()
+
             df3['AskPrice_change'] = df3[['AskPrice']].diff(axis = 'index')['AskPrice']
             df3 = df3.loc[df3['AskPrice_change'] != 0].dropna(axis=0, subset = ["AskPrice_change"])
 
@@ -559,3 +562,7 @@ class tradePoint():
         return sentence
 
 tradepoint = tradePoint()
+
+if __name__=="__main__":
+    points = tradepoint.get_trade_point('CZCE', 'ZC805', '20171226', include_night=True)
+    print(points)

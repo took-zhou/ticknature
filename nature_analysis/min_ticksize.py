@@ -131,7 +131,7 @@ class minTickSize():
 
         Examples:
             >>> from nature_analysis.min_ticksize import minticksize
-            >>> minticksize.find_tick_size('DCE', 'l2009')
+            >>> minticksize.find_all()
             {'SHFE': {'cu': 10, 'al': 5, 'zn': 5, 'pb': 5, 'ni': 10, 'sn': 10, 'au': 0.02, \
             'ag': 1, 'rb': 1, 'wr': 1, 'hc': 1, 'ss': 5, 'sc': 0.1, 'lu': 1, 'fu': 1, 'bu': 2, \
             'ru': 5, 'nr': 5, 'sp': 2}, 'CZCE': {'WH': 1, 'PM': 1, 'CF': 5, 'SR': 1, 'OI': 1, \

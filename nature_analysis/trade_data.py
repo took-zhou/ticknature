@@ -5,7 +5,7 @@ import pandas as pd
 from nature_analysis.active import activefuture
 from nature_analysis.trade_time import tradetime
 from nature_analysis.global_config import tick_root_path
-from nature_analysis.global_config import d1_kline_root_path
+from nature_analysis.global_config import naturedata_root_path
 
 class tradeData():
     def __init__(self):
@@ -28,10 +28,15 @@ class tradeData():
         """
         ret = []
         self.absolute_path = '%s/%s/%s/%s'%(self.root_path, exch, exch, ins)
-        for item in os.listdir(self.absolute_path):
-            ret.append(item.split('_')[-1].split('.')[0])
+        if os.path.exists(self.absolute_path) == False:
+            sorted_data = []
+        else:
+            for item in os.listdir(self.absolute_path):
+                datastr = item.split('_')[-1].split('.')[0]
+                if datetime.datetime.strptime(datastr, "%Y%m%d").weekday() + 1 != 6 and datetime.datetime.strptime(datastr, "%Y%m%d").weekday() + 1 != 7:
+                    ret.append(datastr)
 
-        sorted_data = sorted(ret)
+            sorted_data = sorted(ret)
         return sorted_data
 
     def get_active_data(self, exch, ins, volume=0, openinterest=0):
@@ -114,7 +119,7 @@ class tradeData():
             返回的数据类型是 string， 该品种 月份最新合约代码
 
         Examples:
-            >>> nature_analysis.trade_data import tradedata
+            >>> from nature_analysis.trade_data import tradedata
             >>> tradedata.get_last_instrument('DCE', 'c2105')
            'c2105'
         """
@@ -151,7 +156,7 @@ class tradeData():
             返回的数据类型是 bool
 
         Examples:
-            >>> nature_analysis.trade_data import tradedata
+            >>> from nature_analysis.trade_data import tradedata
             >>> tradedata.is_delivery_month('DCE', 'c2105')
            True
         """
@@ -179,8 +184,8 @@ class tradeData():
             返回的数据类型是 bool
 
         Examples:
-            >>> nature_analysis.trade_data import tradedata
-            >>> tradedata.is_delivery_month('DCE', 'c2105')
+            >>> from nature_analysis.trade_data import tradedata
+            >>> tradedata.is_active('DCE', 'c2105', '20210410', 10000, 300000)
            True
         """
         [day_volume, day_openinterest] = activefuture.get_vo(exch, ins, _data)
@@ -195,16 +200,18 @@ class tradeData():
         Args:
             exch: 交易所简称
             ins: 合约
+            _data: 日期
+            _bias: 变动阈值, 百分比1.0-->1.0%
 
         Returns:
             返回的数据类型是 bool
 
         Examples:
-            >>> nature_analysis.trade_data import tradedata
-            >>> tradedata.is_delivery_month('DCE', 'c2105')
-           True
+            >>> from nature_analysis.trade_data import tradedata
+            >>> tradedata.is_up('CZCE', 'MA105', '20210409')
+           False
         """
-        _path = '%s/%s/%s/%s_%s.csv'%(d1_kline_root_path, exch, ins, ins, _data)
+        _path = '%s/tradepoint/d1_kline/%s/%s/%s_%s.csv'%(naturedata_root_path, exch, ins, ins, _data)
         res = pd.read_csv(_path)
         if (res['Close']-res['Open']).values[0] >= res['Open'].values[0]*_bias/100:
             return True
@@ -217,16 +224,18 @@ class tradeData():
         Args:
             exch: 交易所简称
             ins: 合约
+            _data: 日期
+            _bias: 变动阈值, 百分比1.0-->1.0%
 
         Returns:
             返回的数据类型是 bool
 
         Examples:
-            >>> nature_analysis.trade_data import tradedata
-            >>> tradedata.is_delivery_month('DCE', 'c2105')
-           True
+            >>> from nature_analysis.trade_data import tradedata
+            >>> tradedata.is_down('DCE', 'c2105', '20210409')
+           False
         """
-        _path = '%s/%s/%s/%s_%s.csv'%(d1_kline_root_path, exch, ins, ins, _data)
+        _path = '%s/tradepoint/d1_kline/%s/%s/%s_%s.csv'%(naturedata_root_path, exch, ins, ins, _data)
         res = pd.read_csv(_path)
         if (res['Close']-res['Open']).values[0] <= -res['Open'].values[0]*_bias/100:
             return True

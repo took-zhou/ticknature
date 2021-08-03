@@ -198,7 +198,8 @@ class dominantFuture:
 
 dominant = dominantFuture()
 
-months = dominant.get_month('CZCE', 'FG')
-print(months)
-datas = dominant.get_data('CZCE', 'FG805')
-print(datas)
+if __name__=="__main__":
+    months = dominant.get_month('CZCE', 'FG')
+    print(months)
+    datas = dominant.get_data('CZCE', 'FG805')
+    print(datas)

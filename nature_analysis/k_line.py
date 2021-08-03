@@ -6,20 +6,15 @@ import matplotlib as mpl
 from cycler import cycler
 import numpy as np
 
-from nature_analysis.min_ticksize import minticksize
 from nature_analysis.global_config import tick_root_path
+from nature_analysis.global_config import naturedata_root_path
 from nature_analysis.trade_point import tradepoint
-from nature_analysis.global_config import m10_kline_root_path
-from nature_analysis.global_config import m1_kline_root_path
-from nature_analysis.global_config import m5_kline_root_path
-from nature_analysis.global_config import m15_kline_root_path
-from nature_analysis.global_config import m30_kline_root_path
-from nature_analysis.global_config import m60_kline_root_path
-from nature_analysis.global_config import d1_kline_root_path
+from nature_analysis.min_ticksize import minticksize
 
 class K_line():
     def __init__(self):
         self.csv_root_path = tick_root_path
+        self.period2file = {'1T':'m1', '5T':'m5', '10T':'m10', '15T':'m15', '30T':'m30', '60T':'m60', '1D':'d1'}
 
     def _mkdir(self, path):
         if not os.path.exists(path):
@@ -27,25 +22,6 @@ class K_line():
 
     def _save(self, ohlcv, path):
         ohlcv.to_csv(path)
-
-    def _get_root_path(self, period):
-        _path = ''
-        if period == '1T':
-            _path = m1_kline_root_path
-        elif period == '5T':
-            _path = m5_kline_root_path
-        elif period == '10T':
-            _path = m10_kline_root_path
-        elif period == '15T':
-            _path = m15_kline_root_path
-        elif period == '30T':
-            _path = m30_kline_root_path
-        elif period == '60T':
-            _path = m60_kline_root_path
-        elif period == '1D':
-            _path = d1_kline_root_path
-
-        return _path
 
     def _get_Ts_k_line(self, exch, ins, day_data, period='1T', subject='lastprice', include_night=False, save_path=''):
         if subject == 'tradepoint':
@@ -96,7 +72,6 @@ class K_line():
             today_element_df = tradepoint.generate_data(exch, ins, day_data, include_night)
 
         ohlcv = pd.DataFrame({'Open':[], 'High':[],'Low':[],'Close':[],'Volume':[], 'OpenInterest':[]})
-        ohlcv.index.name = 'Timeindex'
 
         if today_element_df.size > 0:
             if subject == 'lastprice':
@@ -116,6 +91,7 @@ class K_line():
                 ohlcv['Volume'] = [today_element_df['TradeVolume'][-1]]
             ohlcv['OpenInterest'] = [today_element_df['OpenInterest'][-1]]
             ohlcv.index=[today_element_df.index[-1]]
+            ohlcv.index.name = 'Timeindex'
 
         if save_path != '':
             if not os.path.exists(save_path):
@@ -416,20 +392,20 @@ class K_line():
 
         return ret_df
 
-    def read_k_line(self, exch, ins, period = '1T', time_list = []):
+    def read_k_line(self, exch, ins, day_data, period = '1T', subject='lastprice', include_night=False):
         """ 获取特定时间范围内的k线构成的word数据
 
         Args:
             exch: 交易所简称
             ins: 合约代码
             period: 提取数据的周期，默认是一分钟周期
-            time_list: 时间list集合
+            day_data: 时间list集合
         Returns:
             返回的数据格式是 dataframe 格式，包含word信息
 
         Examples:
             >>> from nature_analysis.k_line import kline
-            >>> kline.read_k_line('CZCE', 'ma901', '10T', ['20180802', '20180803'])
+            >>> kline.read_k_line('CZCE', 'MA901', ['20180802', '20180803'], '10T')
                                                         word
             Timeindex
             2018-08-01 21:10:00  000007_-00004_000001_00011400
@@ -442,13 +418,15 @@ class K_line():
             2018-08-03 11:30:00  000004_-00004_000004_00006000
             2018-08-03 13:40:00  000000_-00002_000000_00000700
         """
-        root_path = self._get_root_path(period) + '/' + exch + '/' + ins
+        root_path = '%s/%s/%s_kline/%s/%s'%(naturedata_root_path, subject, self.period2file[period], exch, ins)
 
-        if time_list == []:
+        if day_data == []:
             file_list = os.listdir(root_path)
             want_file_list = [os.path.join(root_path, item)  for item in file_list]
-        else:
-            want_file_list = [os.path.join(root_path, '%s_%s.csv'%(ins, item))  for item in time_list]
+        elif isinstance(day_data, list):
+            want_file_list = [os.path.join(root_path, '%s_%s.csv'%(ins, item))  for item in day_data]
+        elif isinstance(day_data ,str):
+            want_file_list = [os.path.join(root_path, '%s_%s.csv'%(ins, day_data))]
 
         ohlcv = pd.DataFrame(columns = ["Timeindex", "Open", "High", "Low", "Close", "Volume", "OpenInterest"])
         for item in want_file_list:
@@ -542,8 +520,8 @@ if __name__=="__main__":
     #     for data in data_list:
     #         ohlcv_df = kline.get_k_line('DCE', ins, data, '1T', True, '.')
 
-    # a=kline.get_k_line('DCE', 'c2105', '20210512', '1D', True)
-    # print(a)
+    a=kline.get_k_line('DCE', 'c2105', '20210412', '1D', 'tradepoint', True)
+    print(a)
 
     # ohlcv_df = kline.get_k_line('CZCE', 'ma109', '20210325', '10T', 'lastprice', True)
 
@@ -551,8 +529,8 @@ if __name__=="__main__":
     # kline.plot_k_line('CZCE ma109', ohlcv_df, 'example.jpg')
 
 
-    from nature_analysis.trade_data import tradedata
-    data_list = tradedata.get_active_data('CZCE', 'ma109', 10000, 300000)
-    ohlcv_df = kline.read_k_line('CZCE', 'ma109', '10T', data_list[0:10])
+    # from nature_analysis.trade_data import tradedata
+    # data_list = tradedata.get_active_data('CZCE', 'ma109', 10000, 300000)
+    # ohlcv_df = kline.read_k_line('CZCE', 'ma109', '10T', data_list[0:10])
 
-    kline.plot_k_line('CZCE ma109', ohlcv_df, 'ma109_czce_1.jpg')
+    # kline.plot_k_line('CZCE ma109', ohlcv_df, 'ma109_czce_1.jpg')

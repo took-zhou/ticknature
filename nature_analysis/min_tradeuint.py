@@ -132,7 +132,7 @@ class minTradeUint():
 
         Examples:
             >>> from nature_analysis.min_tradeuint import mintradeuint
-            >>> mintradeuint.all('DCE', 'l2009')
+            >>> mintradeuint.find_all()
             {'SHFE': {'cu': 5, 'al': 5, 'zn': 5, 'pb': 5, 'ni': 1, 'sn': 1, 'au': 1000, 'ag': 15, \
             'rb': 10, 'wr': 10, 'hc': 10, 'ss': 5, 'sc': 1000, 'lu': 10, 'fu': 10, 'bu': 10, \
             'ru': 10, 'nr': 10, 'sp': 10}, 'CZCE': {'WH': 20, 'PM': 50, 'CF': 5, 'SR': 10, 'OI': 10, \
