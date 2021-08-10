@@ -90,7 +90,7 @@ class K_line():
             elif 'TradeVolume' in today_element_df.columns:
                 ohlcv['Volume'] = [today_element_df['TradeVolume'][-1]]
             ohlcv['OpenInterest'] = [today_element_df['OpenInterest'][-1]]
-            ohlcv.index=[today_element_df.index[-1]]
+            ohlcv.index=[today_element_df.index[-1].date()]
             ohlcv.index.name = 'Timeindex'
 
         if save_path != '':
@@ -179,7 +179,7 @@ class K_line():
 
         if today_element_df.size > 0:
             ohlc = pd.DataFrame({'Open':[today_element_df[0]], 'High':[max(today_element_df)],'Low':[min(today_element_df)],'Close':[today_element_df[-1]]})
-            ohlc.index = [today_element_df.index[-1]]
+            ohlc.index = [today_element_df.index[-1].date()]
             ohlc.index.name = 'Timeindex'
         else:
             ohlc = pd.DataFrame({'open':[], 'High':[],'Low':[],'Close':[]})
@@ -406,17 +406,10 @@ class K_line():
         Examples:
             >>> from nature_analysis.k_line import kline
             >>> kline.read_k_line('CZCE', 'MA901', ['20180802', '20180803'], '10T')
-                                                        word
+                        Open    High     Low   Close  Volume  OpenInterest
             Timeindex
-            2018-08-01 21:10:00  000007_-00004_000001_00011400
-            2018-08-01 21:20:00  000006_000000_000004_00005000
-            2018-08-01 21:30:00  000002_-00001_000000_00001300
-            .
-            .
-            .
-            2018-08-03 11:20:00  000005_-00002_000000_00014400
-            2018-08-03 11:30:00  000004_-00004_000004_00006000
-            2018-08-03 13:40:00  000000_-00002_000000_00000700
+            2018-08-02  3015.0  3096.0  3010.0  3093.0  292132      320158.0
+            2018-08-03  3089.0  3200.0  3077.0  3200.0  466340      370216.0
         """
         root_path = '%s/%s/%s_kline/%s/%s'%(naturedata_root_path, subject, self.period2file[period], exch, ins)
 
@@ -431,7 +424,10 @@ class K_line():
         ohlcv = pd.DataFrame(columns = ["Timeindex", "Open", "High", "Low", "Close", "Volume", "OpenInterest"])
         for item in want_file_list:
             filename = item.split('/')[-1].split('.')[0]
-            ohlcv = ohlcv.append(pd.read_csv(item))
+            try:
+                ohlcv = ohlcv.append(pd.read_csv(item))
+            except:
+                continue
 
         ohlcv.index = pd.to_datetime(ohlcv['Timeindex'])
 
@@ -520,8 +516,8 @@ if __name__=="__main__":
     #     for data in data_list:
     #         ohlcv_df = kline.get_k_line('DCE', ins, data, '1T', True, '.')
 
-    a=kline.get_k_line('DCE', 'c2105', '20210412', '1D', 'tradepoint', True)
-    print(a)
+    a=kline.read_k_line('CZCE', 'MA509', '20150408', '1D')
+    print(type(a))
 
     # ohlcv_df = kline.get_k_line('CZCE', 'ma109', '20210325', '10T', 'lastprice', True)
 

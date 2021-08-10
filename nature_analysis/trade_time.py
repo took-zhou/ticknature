@@ -1,5 +1,7 @@
 import sys
 import re
+import datetime
+import pandas as pd
 
 class tradeTime():
     def __init__(self):
@@ -140,6 +142,22 @@ class tradeTime():
         self.CFFEX['TF'] = self.day_time_dict3
         self.CFFEX['T'] = self.day_time_dict3
 
+    def _get_night_data(self, datastring):
+        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+
+        if ins_time_of_week == 1:
+            three_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -3)
+            split = str(three_day_before).split('-')
+            night_date = split[0] + split[1] + split[2].split(' ')[0]
+        elif 1 < ins_time_of_week <= 5:
+            one_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -1)
+            split = str(one_day_before).split('-')
+            night_date = split[0] + split[1] + split[2].split(' ')[0]
+        else:
+            night_date = ''
+
+        return night_date
+
     def is_trade_time(self, exch, ins, timestring, time_type='all'):
         """ 判断是否在交易时间段
 
@@ -147,7 +165,7 @@ class tradeTime():
             exch: 交易所简称
             ins: 合约
             timestring: 判断时间，string类型
-            time_type: 'all'日市+夜市 'day' 日市 'night' 夜市 
+            time_type: 'all'日市+夜市 'day' 日市 'night' 夜市
         Returns:
             返回的数据类型是 bool
 
@@ -174,12 +192,14 @@ class tradeTime():
                     ret = True
         return ret
 
-    def get_trade_time(self, exch, ins, timestr=''):
+    def get_trade_time(self, exch, ins, timestr='', timetype='H:M'):
         """ 获取单个合约交易时间表
 
         Args:
             exch: 交易所简称
             ins: 合约
+            timestr: 日期
+            timetype： 输出格式 H:M 或 Y-m-d H:M:S
         Returns:
             返回的数据类型是 dict ，包含各个时段的时间.
 
@@ -190,26 +210,43 @@ class tradeTime():
                 'night_first_half': ['21:00', '24:00'], 'night_second_half': ['00:00', '01:00']}
         """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        ret = {}
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
-                return self.SHFE[temp]
+                ret = self.SHFE[temp].copy()
         elif exch == 'CZCE':
             if timestr != '' and timestr < '2019-12-12':
                 temp = temp + '_old'
             if self.CZCE.__contains__(temp):
-                return self.CZCE[temp]
+                ret = self.CZCE[temp].copy()
         elif exch == 'DCE':
             if self.DCE.__contains__(temp):
-                return self.DCE[temp]
+                ret = self.DCE[temp].copy()
         elif exch == 'INE':
             if self.INE.__contains__(temp):
-                return self.INE[temp]
+                ret = self.INE[temp].copy()
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(temp):
-                return self.CFFEX[temp]
+                ret = self.CFFEX[temp].copy()
 
-        if 'efp' in ins:
-            return {}
+        if timetype == 'H:M':
+            if 'efp' in ins:
+                return {}
+            else:
+                return ret
+
+        elif timetype == 'Y-m-d H:M:S':
+            for item in ret:
+                if 'night' in item:
+                    night_data = self._get_night_data(timestr)
+                    ret[item] = [datetime.datetime.strptime(night_data+item2, '%Y%m%d%H:%M').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                else:
+                    ret[item] = [datetime.datetime.strptime(timestr+item2, '%Y%m%d%H:%M').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+
+            if 'efp' in ins:
+                return {}
+            else:
+                return ret
 
     def find_all(self):
         """ 获取所有期货的交易时间表
@@ -229,7 +266,8 @@ class tradeTime():
 tradetime = tradeTime()
 
 if __name__=="__main__":
-    print(tradetime.get_trade_time('CZCE', 'SF705'))
+    print(tradetime.get_trade_time('CZCE', 'MA109', '20210508', 'Y-m-d H:M:S'))
+    #print(tradetime.get_trade_time('CZCE', 'MA705', '20200101', 'Y-m-d H:M:S'))
     # print(tradetime.get_trade_time('DCE', 'l2101'))
     # print(tradetime.get_trade_time('SHFE', 'cu2009'))
     # print(tradetime.get_trade_time('SHFE', 'al2101'))

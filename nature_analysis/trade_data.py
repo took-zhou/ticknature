@@ -80,12 +80,12 @@ class tradeData():
 
         return max_length_data
 
-    def get_instruments(self, exch, exit_night=True):
+    def get_instruments(self, exch, check_exit_night=False):
         """ 交易所过去的合约提取
 
         Args:
             exch: 交易所简称
-            exit_night: 是否包含夜市数据
+            check_exit_night: 是否包含夜市数据
 
         Returns:
             返回的数据类型是 list， 包含该交易所下面所有的合约
@@ -98,7 +98,7 @@ class tradeData():
         ret = []
         self.absolute_path = '%s/%s/%s'%(self.root_path, exch, exch)
         for item in os.listdir(self.absolute_path):
-            if exit_night == True:
+            if check_exit_night == True:
                 for key in tradetime.get_trade_time(exch, item):
                     if 'night' in key:
                         ret.append(item)
@@ -107,6 +107,69 @@ class tradeData():
                 ret.append(item)
 
         return ret
+
+    def get_prev_data(self, datastring, prev=1):
+        """ 获取前几天工作日
+
+        Args:
+            datastring: 日市时间
+            prev: 前几天，默认是1
+
+        Returns:
+            返回的数据类型是 string, 代表时间
+
+        Examples:
+            >>> from nature_analysis.trade_data import tradedata
+            >>> tradedata.get_prev_data('20210806')
+           '20210805'
+        """
+        # 判断该日期到底是星期几
+        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+
+        # 获取前一日时间
+        if ins_time_of_week == 1:
+            three_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -3)
+            split = str(three_day_before).split('-')
+            prev_date = split[0] + split[1] + split[2].split(' ')[0]
+        elif 1 < ins_time_of_week <= 5:
+            one_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -1)
+            split = str(one_day_before).split('-')
+            prev_date = split[0] + split[1] + split[2].split(' ')[0]
+        else:
+            prev_date = ''
+
+        return prev_date
+
+    def get_night_data(self, datastring):
+        """ 获取日市的夜市时间
+
+        Args:
+            datastring: 日市时间
+
+        Returns:
+            返回的数据类型是 string, 代表夜市时间
+
+        Examples:
+            >>> from nature_analysis.trade_data import tradedata
+            >>> tradedata.get_night_data('20210806')
+           '20210805'
+        """
+        # 判断该日期到底是星期几
+        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+
+        # 获取夜市时间
+        if ins_time_of_week == 1:
+            three_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -3)
+            split = str(three_day_before).split('-')
+            night_date = split[0] + split[1] + split[2].split(' ')[0]
+        elif 1 < ins_time_of_week <= 5:
+            one_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -1)
+            split = str(one_day_before).split('-')
+            night_date = split[0] + split[1] + split[2].split(' ')[0]
+        else:
+            night_date = ''
+
+        return night_date
 
     def get_last_instrument(self, exch, ins):
         """ 获取特定品种, 特定月份最新合约名称

@@ -7,6 +7,8 @@ import numpy as np
 from nature_analysis.trade_time import tradetime
 from nature_analysis.min_ticksize import minticksize
 from nature_analysis.global_config import tick_root_path
+from nature_analysis.global_config import naturedata_root_path
+
 pd.set_option('display.max_rows', None)
 
 class tradePoint():
@@ -14,6 +16,9 @@ class tradePoint():
         self.csv_root_path = tick_root_path
         self.leap_month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31]
         self.common_month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 ,31]
+
+    def _save(self, tradepoint, path):
+        tradepoint.to_csv(path)
 
     #读取该csv文件对于的分时数据
     def _daytime_raw_data_reading(self, daytime_file_root):
@@ -224,10 +229,14 @@ class tradePoint():
             df4 = df3.loc[df3['AskPrice1_change'] > 0]
             df5 = df3.loc[df3['AskPrice1_change'] < 0]
 
+            # df4 = df4.copy()
+            # df4['trading_point'] = df4['BidPrice1']
+            # df5 = df5.copy()
+            # df5['trading_point'] = df5['AskPrice1']
             df4 = df4.copy()
-            df4['trading_point'] = df4['BidPrice1']
+            df4['trading_point'] = df4['AskPrice1']
             df5 = df5.copy()
-            df5['trading_point'] = df5['AskPrice1']
+            df5['trading_point'] = df5['BidPrice1']
             df6 = df4.append(df5).sort_index()
         elif 'AskPrice' in element_df.columns and 'BidPrice' in element_df.columns:
             df1 = element_df[['AskPrice']]
@@ -247,10 +256,14 @@ class tradePoint():
             df4 = df3.loc[df3['AskPrice_change'] > 0]
             df5 = df3.loc[df3['AskPrice_change'] < 0]
 
+            # df4 = df4.copy()
+            # df4['trading_point'] = df4['BidPrice']
+            # df5 = df5.copy()
+            # df5['trading_point'] = df5['AskPrice']
             df4 = df4.copy()
-            df4['trading_point'] = df4['BidPrice']
+            df4['trading_point'] = df4['AskPrice']
             df5 = df5.copy()
-            df5['trading_point'] = df5['AskPrice']
+            df5['trading_point'] = df5['BidPrice']
             df6 = df4.append(df5).sort_index()
         return df6
 
@@ -358,7 +371,7 @@ class tradePoint():
 
         return ret
 
-    def get_trade_point(self, exch, ins, day_data, include_night=False, include_extern_word=False):
+    def get_trade_point(self, exch, ins, day_data, include_night=False, include_extern_word=False, save_path=''):
         """ 生成可交易点
 
         一档行情中提取申卖价和申买价相差最小变动单位的作为可交易点。优点： 方便交易 不丢失价格变动趋势 简化数据量
@@ -390,6 +403,7 @@ class tradePoint():
             2021-03-29 14:59:42.000    66590.0
             Name: trading_point, Length: 68, dtype: float64
         """
+        tradepoint_df = ''
         today_element_df = self.generate_data(exch, ins, day_data, include_night)
 
         #print(today_element_df)
@@ -401,11 +415,20 @@ class tradePoint():
             #print(today_trading_point_df)
 
             if include_extern_word == False:
-                return today_trading_point_df['trading_point']
+                tradepoint_df = today_trading_point_df['trading_point']
             else:
-                return today_trading_point_df
+                tradepoint_df = today_trading_point_df
+
+            if save_path != '':
+                if not os.path.exists(save_path):
+                    os.makedirs(save_path)
+
+                _path = '%s/%s_%s.csv' % (save_path, ins, day_data)
+                self._save(tradepoint_df, _path)
         else:
-            return today_element_df
+            tradepoint_df = pd.Series(data=None, index=None, dtype='float64', name='trading_point')
+
+        return tradepoint_df
 
     def get_trade_spectrum(self, exch, ins, day_data, include_night=False, spectrum_type='ratio'):
         """ 基于可交易时间点生成峰
@@ -500,69 +523,147 @@ class tradePoint():
 
         return arc_list
 
-    def get_trade_sentence(self, exch, ins, day_data, include_night=False):
+    def get_trade_sentence(self, exch, ins, trade_point, offset):
         """ 基于可交易点生成语句
 
         生成的弧反应大的趋势
 
         Args:
-            exch: 交易所简称
-            ins: 合约代码
-            day_data: 日期
-            include_night: 是否包含夜市数据
+            trade_point: trapoint值
+            offset: 合约代码
 
         Returns:
-            返回的数据格式是 list 格式，包含弧度信息
+            返回的数据格式是 list 格式，语句信息
 
         Examples:
-            >>> from nature_analysis.trade_point import get_trade_sentence
-            >>> tradepoint.get_trade_sentence('SHFE', 'cu2109', '20210329', include_night=True)
-            ['20210329#SHFE#1.20282664_0.60141332_1.65388663_0.15035333_5.11201323_4.51059991_7.21695986_2.40565329_
-            2.85671328_1.5035333_2.85671328_', '20210329#SHFE#-0.90211998_', '20210329#SHFE#0.60141332_', 
-            '20210329#SHFE#-0.75176665_', '20210329#SHFE#2.70635995_1.20282664_']
+            >>> from nature_analysis.trade_point import tradepoint
+            >>> datas = tradepoint.get_trade_point('SHFE', 'cu2109', '20210329', include_night=True)
+            >>> tradepoint.get_trade_sentence('SHFE', 'cu2109', datas, 3)
+                        start_index  start_value               end_index  end_value  value
+            0  2021-03-26 21:03:47.500      66380.0 2021-03-26 21:25:18.000    66600.0  220.0
+            1  2021-03-26 21:25:18.000      66600.0 2021-03-26 21:28:22.000    66540.0  -60.0
+            2  2021-03-26 21:28:22.000      66540.0 2021-03-26 21:38:58.000    66630.0   90.0
+            3  2021-03-26 21:38:58.000      66630.0 2021-03-26 21:42:30.000    66530.0 -100.0
+            4  2021-03-26 21:42:30.000      66530.0 2021-03-26 22:39:34.500    66850.0  320.0
+            5  2021-03-26 22:39:34.500      66850.0 2021-03-26 22:48:11.500    66800.0  -50.0
+            6  2021-03-26 22:48:11.500      66800.0 2021-03-26 23:04:46.500    67000.0  200.0
+            7  2021-03-26 23:04:46.500      67000.0 2021-03-29 09:16:02.500    66690.0 -310.0
         """
-        trade_point = self.get_trade_point(exch, ins, day_data, include_night, include_extern_word=False)
         threshold = minticksize.find_tick_size(exch, ins)
 
-        trade_point_list = list(trade_point)
-        word_start_TP = trade_point_list[0]
-        word_end_TP = trade_point_list[0]
-        
+        word_start_value = trade_point[0]
+        word_start_index = trade_point.index[0]
+
+        word_end_value = trade_point[0]
+        word_end_index = trade_point.index[0]
+
         positive_word_exist = 0
         negative_word_exist = 0
-        sentence = 's#'
-        for TP in trade_point_list[1:]:
-            if TP > word_end_TP:
+        sentence = {'start_index':[], 'start_value':[], 'end_index':[], 'end_value':[], 'value':[]}
+        for index, value in trade_point[1:].items():
+            if value - word_end_value >= threshold*offset:
                 if negative_word_exist == 0:
-                    word_end_TP = TP
+                    word_end_value = value
+                    word_end_index = index
                     positive_word_exist = positive_word_exist + 1
                 elif negative_word_exist > 0:
-                    word = word_end_TP - word_start_TP
-                    sentence = sentence +str(word)+'_'
+                    word = word_end_value - word_start_value
+                    sentence['start_index'].append(word_start_index)
+                    sentence['start_value'].append(word_start_value)
+                    sentence['end_index'].append(word_end_index)
+                    sentence['end_value'].append(word_end_value)
+                    sentence['value'].append(word)
                     negative_word_exist = 0
-                    word_start_TP = word_end_TP
-                    word_end_TP = TP
+                    word_start_value = word_end_value
+                    word_start_index = word_end_index
+                    word_end_value = value
+                    word_end_index = index
                     positive_word_exist = positive_word_exist + 1
 
-            elif TP < word_end_TP:
+            elif word_end_value - value >= threshold*offset:
                 if positive_word_exist == 0:
-                    word_end_TP = TP
+                    word_end_value = value
+                    word_end_index = index
                     negative_word_exist = negative_word_exist + 1
                 elif positive_word_exist > 0:
-                    word = word_end_TP - word_start_TP
-                    sentence = sentence +str(word)+'_'
+                    word = word_end_value - word_start_value
+                    sentence['start_index'].append(word_start_index)
+                    sentence['start_value'].append(word_start_value)
+                    sentence['end_index'].append(word_end_index)
+                    sentence['end_value'].append(word_end_value)
+                    sentence['value'].append(word)
                     positive_word_exist = 0
-                    word_start_TP = word_end_TP
-                    word_end_TP = TP
+                    word_start_value = word_end_value
+                    word_start_index = word_end_index
+                    word_end_value = value
+                    word_end_index = index
                     negative_word_exist = negative_word_exist + 1
         if negative_word_exist > 0 or positive_word_exist > 0:
-            word = word_end_TP - word_start_TP
-            sentence = sentence +str(word)+'_'
-        
-        return sentence
+            word = word_end_value - word_start_value
+            sentence['start_index'].append(word_start_index)
+            sentence['start_value'].append(word_start_value)
+            sentence['end_index'].append(word_end_index)
+            sentence['end_value'].append(word_end_value)
+            sentence['value'].append(word)
+
+        return pd.DataFrame.from_dict(sentence)
+
+    def read_trade_point(self, exch, ins, day_data, time_slice='all'):
+        """ 获取特定时间范围内的k线构成的word数据
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+            period: 提取数据的周期，默认是一分钟周期
+            day_data: 时间list集合
+            time_slice: morning afternoon night all
+        Returns:
+            返回的数据格式是 dataframe 格式，包含word信息
+
+        Examples:
+            >>> from nature_analysis.trade_point import tradepoint
+            >>> tradepoint.read_trade_point('CZCE', 'MA901', ['20180802', '20180803'])
+                                trading_point
+            Timeindex
+            2017-08-01 21:00:03          2415
+            2017-08-01 21:00:07          2414
+            2017-08-01 21:00:11          2413
+            ...
+        """
+        root_path = '%s/tradepoint/tradepoint/%s/%s'%(naturedata_root_path, exch, ins)
+
+        if day_data == []:
+            file_list = os.listdir(root_path)
+            want_file_list = [os.path.join(root_path, item)  for item in file_list]
+        elif isinstance(day_data, list):
+            want_file_list = [os.path.join(root_path, '%s_%s.csv'%(ins, item))  for item in day_data]
+        elif isinstance(day_data ,str):
+            want_file_list = [os.path.join(root_path, '%s_%s.csv'%(ins, day_data))]
+
+        tradepoint_df = pd.DataFrame(columns = ["Timeindex", "trading_point"])
+        for item in want_file_list:
+            filename = item.split('/')[-1].split('.')[0]
+            datastr = filename.split('_')[-1]
+            time_dict = tradetime.get_trade_time(exch, ins, datastr, 'Y-m-d H:M:S')
+            need_item  = [item for item in time_dict if time_slice in item]
+            try:
+                file_data = pd.read_csv(item)
+                file_data.index = pd.to_datetime(file_data['Timeindex'])
+                sorted_file_data = file_data.sort_index()
+                sorted_file_data.pop('Timeindex')
+
+                if need_item == []:
+                    tradepoint_df = tradepoint_df.append(sorted_file_data)
+                else:
+                    for item in need_item:
+                        tradepoint_df = tradepoint_df.append(sorted_file_data.truncate(before = time_dict[item][0], after = time_dict[item][1]))
+            except:
+                continue
+
+        return tradepoint_df['trading_point']
 
 tradepoint = tradePoint()
 
 if __name__=="__main__":
-    points = tradepoint.get_trade_point('CZCE', 'ZC805', '20171226', include_night=True)
+    points = tradepoint.read_trade_point('CZCE', 'MA509', '20150407', time_slice='afternoon')
     print(points)
