@@ -57,6 +57,8 @@ class tradePoint():
             else:
                 time_string = subprice['Time']
 
+            prev_second = ''
+            prev_ms = ''
             for hour_minute_second_ms in time_string.values.tolist():
                 hour = hour_minute_second_ms[0:2]
                 minute = hour_minute_second_ms[3:5]
@@ -65,6 +67,10 @@ class tradePoint():
                     ms = hour_minute_second_ms[9:]
                 else:
                     ms = '000'
+                if second == prev_second and (ms == '0' or ms == '00' or ms == '000'):
+                    ms = str(int(prev_ms)+100)
+                prev_second = second
+                prev_ms = ms
                 year = date[0:4]
                 month = date[4:6]
 
@@ -209,63 +215,40 @@ class tradePoint():
         return element_df
 
     # 确定所有ask-bid_trading_point
-    def _ask_bid_trading_point_df(self, element_df_, ticksize_):
-        element_df = element_df_.copy()
+    def _ask_bid_trading_point_df(self, element_df, ticksize_):
         # element_df['Volume_change'] = element_df[['    Volume']].diff(axis = 'index')['    Volume']
         # ask_bid_1元平稳博弈阶段划分
         if 'AskPrice1' in element_df.columns and 'BidPrice1' in element_df.columns:
-            df1 = element_df[['AskPrice1']]
-            s = element_df['BidPrice1']
-            df2 = df1.sub(s, axis='index')
-            element_df['ask1-bid1'] = df2['AskPrice1']
+            element_df['ask1-bid1'] = element_df['AskPrice1'] - element_df['BidPrice1']
 
             ask1_bid1_wrong_index = [index for index, item in element_df['ask1-bid1'].items() if math.isclose(item, ticksize_, rel_tol=0.000001) == False]
             if len(ask1_bid1_wrong_index) > 0:
                 element_df.drop(ask1_bid1_wrong_index, inplace = True)
-            df3 = element_df.copy()
-            df3['AskPrice1_change'] = df3[['AskPrice1']].diff(axis = 'index')['AskPrice1']
-            df3 = df3.loc[df3['AskPrice1_change'] != 0].dropna(axis=0, subset = ["AskPrice1_change"])
 
-            df4 = df3.loc[df3['AskPrice1_change'] > 0]
-            df5 = df3.loc[df3['AskPrice1_change'] < 0]
+            element_df['AskPrice1_change'] = element_df['AskPrice1'].diff()
+            up_df = (element_df.loc[element_df['AskPrice1_change'] > 0]).copy()
+            down_df = (element_df.loc[element_df['AskPrice1_change'] < 0]).copy()
 
-            # df4 = df4.copy()
-            # df4['trading_point'] = df4['BidPrice1']
-            # df5 = df5.copy()
-            # df5['trading_point'] = df5['AskPrice1']
-            df4 = df4.copy()
-            df4['trading_point'] = df4['AskPrice1']
-            df5 = df5.copy()
-            df5['trading_point'] = df5['BidPrice1']
-            df6 = df4.append(df5).sort_index()
+            up_df['trading_point'] = up_df['AskPrice1']
+            down_df['trading_point'] = down_df['BidPrice1']
+            ret_df = up_df.append(down_df).sort_index()
+
         elif 'AskPrice' in element_df.columns and 'BidPrice' in element_df.columns:
-            df1 = element_df[['AskPrice']]
-            s = element_df['BidPrice']
-            df2 = df1.sub(s, axis='index')
-            element_df['ask1-bid1'] = df2['AskPrice']
+            element_df['ask1-bid1'] = element_df['AskPrice'] - element_df['BidPrice']
 
             ask1_bid1_wrong_index = [index for index, item in element_df['ask1-bid1'].items() if math.isclose(item, ticksize_, rel_tol=0.000001) == False]
             if len(ask1_bid1_wrong_index) > 0:
                 element_df.drop(ask1_bid1_wrong_index, inplace = True)
 
-            df3 = element_df.copy()
+            element_df['AskPrice_change'] = element_df['AskPrice'].diff()
+            up_df = (element_df.loc[element_df['AskPrice_change'] > 0]).copy()
+            down_df = (element_df.loc[element_df['AskPrice_change'] < 0]).copy()
 
-            df3['AskPrice_change'] = df3[['AskPrice']].diff(axis = 'index')['AskPrice']
-            df3 = df3.loc[df3['AskPrice_change'] != 0].dropna(axis=0, subset = ["AskPrice_change"])
+            up_df['trading_point'] = up_df['AskPrice']
+            down_df['trading_point'] = down_df['BidPrice']
+            ret_df = up_df.append(down_df).sort_index()
 
-            df4 = df3.loc[df3['AskPrice_change'] > 0]
-            df5 = df3.loc[df3['AskPrice_change'] < 0]
-
-            # df4 = df4.copy()
-            # df4['trading_point'] = df4['BidPrice']
-            # df5 = df5.copy()
-            # df5['trading_point'] = df5['AskPrice']
-            df4 = df4.copy()
-            df4['trading_point'] = df4['AskPrice']
-            df5 = df5.copy()
-            df5['trading_point'] = df5['BidPrice']
-            df6 = df4.append(df5).sort_index()
-        return df6
+        return ret_df
 
     # 操作：确定改天的所有趋势区间并提炼频谱峰值
     def _trend_period_of_each_element_and_spectrum_generate(self, date, element_df, trend_threshold = 1, spectrum_type='ratio'):
@@ -665,5 +648,5 @@ class tradePoint():
 tradepoint = tradePoint()
 
 if __name__=="__main__":
-    points = tradepoint.read_trade_point('CZCE', 'MA509', '20150407', time_slice='afternoon')
+    points = tradepoint.get_trade_point('CZCE', 'AP110', '20210615')
     print(points)

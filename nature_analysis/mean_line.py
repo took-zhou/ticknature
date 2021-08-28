@@ -44,5 +44,5 @@ class meanLine():
         return klines.rolling(sample).mean()[-sample:]['Close']
 
 mline = meanLine()
-print(mline.get_mean_line('CZCE', 'MA105', '20210512', '1D', 20))
+#print(mline.get_mean_line('CZCE', 'MA105', '20210512', '1D', 20))
 # print(mline.get_mean_line('CZCE', 'MA105', '20210512', '1D', 5))
