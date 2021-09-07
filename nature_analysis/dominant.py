@@ -112,6 +112,43 @@ class dominantFuture:
         self.CFFEX['TF'] = {}
         self.CFFEX['T'] = {}
 
+    def get_year(self, exch, ins):
+        """ 获取主力合约月份
+
+        Args:
+            exch: 交易所简称
+            ins: 合约代码
+
+        Returns:
+            返回的数据类型是 list， 包含所有的主力合约月份
+
+        Examples:
+            >>> from nature_analysis.dominant import dominant
+            >>> dominant.get_year('CZCE', 'MA')
+            {'01': ['08', '09', '10', '11'], '05': ['12', '01', '02', '03'], '09': ['04', '05', '06', '07']}
+        """
+        temp_dict = {}
+        if exch == 'SHFE':
+            if self.SHFE.__contains__(ins):
+                temp_dict = self.SHFE[ins]
+        elif exch == 'CZCE':
+            if self.CZCE.__contains__(ins):
+                temp_dict =  self.CZCE[ins]
+        elif exch == 'DCE':
+            if self.DCE.__contains__(ins):
+                temp_dict =  self.DCE[ins]
+        elif exch == 'INE':
+            if self.INE.__contains__(ins):
+                temp_dict =  self.INE[ins]
+        elif exch == 'CFFEX':
+            if self.CFFEX.__contains__(ins):
+                temp_dict =  self.CFFEX[ins]
+
+        if 'efp' in ins:
+            temp_dict =  {}
+
+        return temp_dict
+
     def get_month(self, exch, ins):
         """ 获取主力合约月份
 
@@ -199,6 +236,8 @@ class dominantFuture:
 dominant = dominantFuture()
 
 if __name__=="__main__":
+    years = dominant.get_year('CZCE', 'FG')
+    print(years)
     months = dominant.get_month('CZCE', 'FG')
     print(months)
     datas = dominant.get_data('CZCE', 'FG805')
