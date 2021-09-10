@@ -108,6 +108,38 @@ class tradeData():
 
         return ret
 
+    def get_trade_data(self, timestring):
+        """ 获取tick数据对应的交易日
+
+        Args:
+            timestring: tick数据时间
+
+        Returns:
+            返回的数据类型是 string, 代表时间
+
+        Examples:
+            >>> from nature_analysis.trade_data import tradedata
+            >>> tradedata.get_trade_data('2021-05-14-09:02:22.0')
+           '20210514'
+        """
+        ret = ''
+        split_timestr = timestring.split('-')
+
+        if split_timestr[-1] >= '21:00:00' or split_timestr[-1] <= '02:30:00':
+            # 判断该日期到底是星期几
+            ins_time_of_week = pd.to_datetime(timestring, format = '%Y-%m-%d-%H:%M:%S.%f').dayofweek + 1
+
+            if ins_time_of_week == 5:
+                three_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d-%H:%M:%S.%f') + datetime.timedelta(days = 3)
+                ret = '%04d%02d%02d'%(three_day_after.year, three_day_after.month, three_day_after.day)
+            else:
+                one_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d-%H:%M:%S.%f') + datetime.timedelta(days = 1)
+                ret = '%04d%02d%02d'%(one_day_after.year, one_day_after.month, one_day_after.day)
+        else:
+            ret = split_timestr[0] + split_timestr[1] + split_timestr[2]
+
+        return ret
+
     def get_prev_data(self, datastring, prev=1):
         """ 获取前几天工作日
 
