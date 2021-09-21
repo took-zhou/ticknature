@@ -108,7 +108,7 @@ class tradeData():
 
         return ret
 
-    def get_trade_data(self, timestring):
+    def get_tick_data(self, timestring):
         """ 获取tick数据对应的交易日
 
         Args:
@@ -119,7 +119,7 @@ class tradeData():
 
         Examples:
             >>> from nature_analysis.trade_data import tradedata
-            >>> tradedata.get_trade_data('2021-05-14-09:02:22.0')
+            >>> tradedata.get_tick_data('2021-05-14-09:02:22.0')
            '20210514'
         """
         ret = ''
