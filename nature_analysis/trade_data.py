@@ -123,20 +123,21 @@ class tradeData():
            '20210514'
         """
         ret = ''
-        split_timestr = timestring.split('-')
+        split_timestr = timestring.split(' ')
 
-        if split_timestr[-1] >= '21:00:00' or split_timestr[-1] <= '02:30:00':
+        if split_timestr[-1] >= '20:55:00' or split_timestr[-1] <= '02:35:00':
             # 判断该日期到底是星期几
-            ins_time_of_week = pd.to_datetime(timestring, format = '%Y-%m-%d-%H:%M:%S.%f').dayofweek + 1
+            ins_time_of_week = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
 
             if ins_time_of_week == 5:
-                three_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d-%H:%M:%S.%f') + datetime.timedelta(days = 3)
+                three_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days = 3)
                 ret = '%04d%02d%02d'%(three_day_after.year, three_day_after.month, three_day_after.day)
             else:
-                one_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d-%H:%M:%S.%f') + datetime.timedelta(days = 1)
+                one_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days = 1)
                 ret = '%04d%02d%02d'%(one_day_after.year, one_day_after.month, one_day_after.day)
         else:
-            ret = split_timestr[0] + split_timestr[1] + split_timestr[2]
+            split_ymd = split_timestr[0].split('-')
+            ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
 
         return ret
 
