@@ -2,8 +2,11 @@
 # coding=utf-8
 import sys
 import re
+import os
 from nature_analysis.global_config import tick_root_path
 from nature_analysis.trade_data import tradedata
+from nature_analysis.trade_time import tradetime
+from nature_analysis.instrument_info import instrumentinfo
 
 class dominantFuture:
     def __init__(self):
@@ -78,27 +81,27 @@ class dominantFuture:
         self.CZCE['PF'] = self.dominant_compose1
         self.CZCE['PK'] = self.dominant_compose1
 
-        self.DCE['c'] = {}
-        self.DCE['cs'] = {}
-        self.DCE['a'] = {}
-        self.DCE['b'] = {}
-        self.DCE['m'] = {}
-        self.DCE['y'] = {}
-        self.DCE['p'] = {}
-        self.DCE['fb'] = {}
-        self.DCE['bb'] = {}
-        self.DCE['jd'] = {}
-        self.DCE['rr'] = {}
-        self.DCE['l'] = {}
-        self.DCE['v'] = {}
-        self.DCE['pp'] = {}
-        self.DCE['j'] = {}
-        self.DCE['jm'] = {}
-        self.DCE['i'] = {}
-        self.DCE['eg'] = {}
-        self.DCE['eb'] = {}
-        self.DCE['pg'] = {}
-        self.DCE['lh'] = {}
+        self.DCE['c'] = self.dominant_compose1
+        self.DCE['cs'] = self.dominant_compose1
+        self.DCE['a'] = self.dominant_compose1
+        self.DCE['b'] = self.dominant_compose1
+        self.DCE['m'] = self.dominant_compose1
+        self.DCE['y'] = self.dominant_compose1
+        self.DCE['p'] = self.dominant_compose1
+        self.DCE['fb'] = self.dominant_compose1
+        self.DCE['bb'] = self.dominant_compose1
+        self.DCE['jd'] = self.dominant_compose1
+        self.DCE['rr'] = self.dominant_compose1
+        self.DCE['l'] = self.dominant_compose1
+        self.DCE['v'] = self.dominant_compose1
+        self.DCE['pp'] = self.dominant_compose1
+        self.DCE['j'] = self.dominant_compose1
+        self.DCE['jm'] = self.dominant_compose1
+        self.DCE['i'] = self.dominant_compose1
+        self.DCE['eg'] = self.dominant_compose1
+        self.DCE['eb']  = self.dominant_compose1
+        self.DCE['pg'] = self.dominant_compose1
+        self.DCE['lh'] = self.dominant_compose1
 
         self.INE['sc'] = {}
         self.INE['lu'] = {}
@@ -189,6 +192,40 @@ class dominantFuture:
             ret.append(item)
 
         return ret
+
+    def get_instruments(self, exch, ins_type='', check_exit_night=False):
+        """ 交易所过去的合约提取
+
+        Args:
+            exch: 交易所简称
+            check_exit_night: 是否包含夜市数据
+
+        Returns:
+            返回的数据类型是 list， 包含该交易所下面所有的合约
+
+        Examples:
+            >>> from nature_analysis.dominant import dominant
+            >>> dominant.get_instruments('CZCE', False)
+           ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
+        """
+        ret = []
+        self.absolute_path = '%s/%s/%s'%(self.root_path, exch, exch)
+        for item in os.listdir(self.absolute_path):
+            if check_exit_night == True:
+                for key in tradetime.get_trade_time(exch, item):
+                    if 'night' in key:
+                        _ins_type = instrumentinfo.find_ins_type(exch, item)
+                        months = self.get_month(exch, _ins_type)
+                        if item[-2:] in months:
+                            ret.append(item)
+                        break
+            else:
+                _ins_type = instrumentinfo.find_ins_type(exch, item)
+                months = self.get_month(exch, _ins_type)
+                if item[-2:] in months:
+                    ret.append(item)
+
+        return [item for item in ret if ins_type in item]
 
     def get_data(self, exch, ins):
         """ 合约过去的交易日获取
