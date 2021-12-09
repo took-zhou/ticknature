@@ -3,15 +3,13 @@
 import sys
 import re
 import os
-from nature_analysis.global_config import tick_root_path
-from nature_analysis.trade_data import tradedata
-from nature_analysis.trade_time import tradetime
+
+from tickmine.api import get_date
+from tickmine.api import get_ins
 from nature_analysis.instrument_info import instrumentinfo
 
 class dominantFuture:
     def __init__(self):
-        self.root_path = tick_root_path
-
         self.SHFE = {}
         self.CZCE = {}
         self.DCE = {}
@@ -35,36 +33,36 @@ class dominantFuture:
         self.dominant_compose1 = {'01': ['08', '09', '10', '11'], '05': ['12', '01', '02', '03'], '09': ['04', '05', '06', '07']}
         self.dominant_compose2 = {'01': ['09', '10', '11'], '05': ['12', '01', '02', '03'], '10': ['05', '06', '07', '08']}
 
-        self.SHFE['cu'] = {}
-        self.SHFE['al'] = {}
-        self.SHFE['zn'] = {}
-        self.SHFE['pb'] = {}
-        self.SHFE['ni'] = {}
-        self.SHFE['sn'] = {}
-        self.SHFE['au'] = {}
-        self.SHFE['ag'] = {}
-        self.SHFE['rb'] = {}
-        self.SHFE['wr'] = {}
-        self.SHFE['hc'] = {}
-        self.SHFE['ss'] = {}
-        self.SHFE['sc'] = {}
-        self.SHFE['lu'] = {}
-        self.SHFE['fu'] = {}
-        self.SHFE['bu'] = {}
-        self.SHFE['ru'] = {}
-        self.SHFE['nr'] = {}
-        self.SHFE['sp'] = {}
+        self.SHFE['cu'] = self.dominant_compose1
+        self.SHFE['al'] = self.dominant_compose1
+        self.SHFE['zn'] = self.dominant_compose1
+        self.SHFE['pb'] = self.dominant_compose1
+        self.SHFE['ni'] = self.dominant_compose1
+        self.SHFE['sn'] = self.dominant_compose1
+        self.SHFE['au'] = self.dominant_compose1
+        self.SHFE['ag'] = self.dominant_compose1
+        self.SHFE['rb'] = self.dominant_compose1
+        self.SHFE['wr'] = self.dominant_compose1
+        self.SHFE['hc'] = self.dominant_compose1
+        self.SHFE['ss'] = self.dominant_compose1
+        self.SHFE['sc'] = self.dominant_compose1
+        self.SHFE['lu'] = self.dominant_compose1
+        self.SHFE['fu'] = self.dominant_compose1
+        self.SHFE['bu'] = self.dominant_compose1
+        self.SHFE['ru'] = self.dominant_compose1
+        self.SHFE['nr'] = self.dominant_compose1
+        self.SHFE['sp'] = self.dominant_compose1
 
-        self.CZCE['WH'] = {}
-        self.CZCE['PM'] = {}
+        self.CZCE['WH'] = self.dominant_compose1
+        self.CZCE['PM'] = self.dominant_compose1
         self.CZCE['CF'] = self.dominant_compose1
         self.CZCE['SR'] = self.dominant_compose1
         self.CZCE['OI'] = self.dominant_compose1
-        self.CZCE['RI'] = {}
-        self.CZCE['RS'] = {}
+        self.CZCE['RI'] = self.dominant_compose1
+        self.CZCE['RS'] = self.dominant_compose1
         self.CZCE['RM'] = self.dominant_compose1
-        self.CZCE['JR'] = {}
-        self.CZCE['LR'] = {}
+        self.CZCE['JR'] = self.dominant_compose1
+        self.CZCE['LR'] = self.dominant_compose1
         self.CZCE['CY'] = self.dominant_compose1
         self.CZCE['AP'] = self.dominant_compose2
         self.CZCE['CJ'] = self.dominant_compose1
@@ -103,17 +101,17 @@ class dominantFuture:
         self.DCE['pg'] = self.dominant_compose1
         self.DCE['lh'] = self.dominant_compose1
 
-        self.INE['sc'] = {}
-        self.INE['lu'] = {}
-        self.INE['nr'] = {}
-        self.INE['bc'] = {}
+        self.INE['sc'] = self.dominant_compose1
+        self.INE['lu'] = self.dominant_compose1
+        self.INE['nr'] = self.dominant_compose1
+        self.INE['bc'] = self.dominant_compose1
 
-        self.CFFEX['IF'] = {}
-        self.CFFEX['IC'] = {}
-        self.CFFEX['IH'] = {}
-        self.CFFEX['TS'] = {}
-        self.CFFEX['TF'] = {}
-        self.CFFEX['T'] = {}
+        self.CFFEX['IF'] = self.dominant_compose1
+        self.CFFEX['IC'] = self.dominant_compose1
+        self.CFFEX['IH'] = self.dominant_compose1
+        self.CFFEX['TS'] = self.dominant_compose1
+        self.CFFEX['TF'] = self.dominant_compose1
+        self.CFFEX['T'] = self.dominant_compose1
 
     def get_year(self, exch, ins):
         """ 获取主力合约月份
@@ -193,41 +191,42 @@ class dominantFuture:
 
         return ret
 
-    def get_instruments(self, exch, ins_type='', check_exit_night=False):
+    def get_instruments(self, exch, ins_type=''):
         """ 交易所过去的合约提取
 
         Args:
             exch: 交易所简称
-            check_exit_night: 是否包含夜市数据
+            ins_type: 制定类型
 
         Returns:
             返回的数据类型是 list， 包含该交易所下面所有的合约
 
         Examples:
             >>> from nature_analysis.dominant import dominant
-            >>> dominant.get_instruments('CZCE', False)
+            >>> dominant.get_instruments('CZCE')
            ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
         """
-        ret = []
-        self.absolute_path = '%s/%s/%s'%(self.root_path, exch, exch)
-        for item in os.listdir(self.absolute_path):
-            if check_exit_night == True:
-                for key in tradetime.get_trade_time(exch, item):
-                    if 'night' in key:
-                        _ins_type = instrumentinfo.find_ins_type(exch, item)
-                        months = self.get_month(exch, _ins_type)
-                        if item[-2:] in months:
-                            ret.append(item)
-                        break
-            else:
-                _ins_type = instrumentinfo.find_ins_type(exch, item)
-                months = self.get_month(exch, _ins_type)
-                if item[-2:] in months:
-                    ret.append(item)
+        temp_ret = []
+        instruments = get_ins(exch, ins_type, client_api='tcp://192.168.0.102:8100')
+        for item in instruments:
+            _ins_type = instrumentinfo.find_ins_type(exch, item)
+            months = self.get_month(exch, _ins_type)
+            if item[-2:] in months:
+                temp_ret.append(item)
 
-        return [item for item in ret if ins_type in item]
+        if exch == 'CZCE':
+            ret_list1 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '5' <= item[-3] <= '9']
+            ret_list2 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '0' <= item[-3] < '5']
+            ret_list1.sort()
+            ret_list2.sort()
+            ret_list = ret_list1 + ret_list2
+        else:
+            ret_list = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item))]
+            ret_list.sort()
 
-    def get_data(self, exch, ins):
+        return ret_list
+
+    def get_date(self, exch, ins):
         """ 合约过去的交易日获取
 
         Args:
@@ -239,7 +238,7 @@ class dominantFuture:
 
         Examples:
             >>> from nature_analysis.dominant import dominant
-            >>> dominant.get_data('DCE', 'c2105')
+            >>> dominant.get_date('DCE', 'c2105')
            ['20200716', '20210205', ... '20200902', '20210428', '20210506', '20210426']
         """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
@@ -266,16 +265,18 @@ class dominantFuture:
         ret = []
         if ins[-2:] in temp_dict:
             month_list = temp_dict[ins[-2:]]
-            sorted_data = tradedata.get_trade_data(exch, ins)
+            sorted_data = get_date(exch, ins, client_api='tcp://192.168.0.102:8100')
             ret = [item for item in sorted_data if item[4:6] in month_list]
         return ret
 
 dominant = dominantFuture()
 
 if __name__=="__main__":
-    years = dominant.get_year('CZCE', 'FG')
-    print(years)
-    months = dominant.get_month('CZCE', 'FG')
-    print(months)
-    datas = dominant.get_data('CZCE', 'FG805')
-    print(datas)
+    # years = dominant.get_year('CZCE', 'FG')
+    # print(years)
+    # months = dominant.get_month('CZCE', 'FG')
+    # print(months)
+    # datas = dominant.get_date('CZCE', 'FG805')
+    # print(datas)
+    ins = dominant.get_instruments('CZCE', 'FG')
+    print(ins)

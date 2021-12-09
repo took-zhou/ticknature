@@ -1,18 +1,11 @@
-import pandas as pd
-from datetime import timedelta
-import os
-
-from nature_analysis.min_ticksize import minticksize
-from nature_analysis.global_config import tick_root_path
-from nature_analysis.trade_data import tradedata
-from nature_analysis.trade_point import tradepoint
-from nature_analysis.k_line import kline
+from tickmine.api import get_kline
+from tickmine.api import get_date
 
 class meanLine():
     def __init__(self):
         pass
 
-    def get_mean_line(self, exch, ins, day_data, period='1D', sample='10'):
+    def get_mean_line(self, exch, ins, day_data, time_slice=[], sample='10'):
         """ 均线提取
 
         Args:
@@ -37,12 +30,8 @@ class meanLine():
             2021-05-12    2483.50
             Name: Close, dtype: float64
         """
-        data_list = tradedata.get_trade_data(exch, ins)
-        wanted_list = [item for item in data_list if item <= day_data][-(sample*2-1):]
-        klines = kline.read_k_line(exch, ins, wanted_list, '1D')
-
-        return klines.rolling(sample).mean()[-sample:]['Close']
+        klines = get_kline(exch, ins, day_data, time_slice, period = '1T')
+        return klines.rolling(sample).mean()['Close']
 
 mline = meanLine()
-#print(mline.get_mean_line('CZCE', 'MA105', '20210512', '1D', 20))
-# print(mline.get_mean_line('CZCE', 'MA105', '20210512', '1D', 5))
+#print(mline.get_mean_line('CZCE', 'MA105', '20210112', ['09:00:00', '09:30:00'], 5))

@@ -22,8 +22,8 @@ class t_mean():
             >>> tmean.score('DCE', 'c2105', '20210201', '20210202', ['21:00:00', '23:00:00'])
             0.37185
         """
-        data1 = get_tradepoint(exch, ins, _data1, time_slice)
-        data2 = get_tradepoint(exch, ins, _data2, time_slice)
+        data1 = get_tradepoint(exch, ins, _data1, time_slice, client_api='tcp://192.168.0.102:8100')
+        data2 = get_tradepoint(exch, ins, _data2, time_slice, client_api='tcp://192.168.0.102:8100')
 
         if len(data1) <= 1 or len(data2) <= 1:
             return 100.0
@@ -45,6 +45,9 @@ class t_mean():
 
         concat_data = pd.concat([ratio_data1, ratio_data2], axis=1).dropna()
 
-        return sum(abs(concat_data['point1']-concat_data['point2'])) / len(concat_data)
+        if len(concat_data) == 0:
+            return 100.0
+        else:
+            return sum(abs(concat_data['point1']-concat_data['point2'])) / len(concat_data)
 
 tmean = t_mean()
