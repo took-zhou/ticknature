@@ -84,9 +84,9 @@ class minTickPrice():
         self.CFFEX['IF'] = 60
         self.CFFEX['IC'] = 40
         self.CFFEX['IH'] = 60
-        self.CFFEX['TS'] = 10000
-        self.CFFEX['TF'] = 5000
-        self.CFFEX['T'] = 5000
+        self.CFFEX['TS'] = 100
+        self.CFFEX['TF'] = 50
+        self.CFFEX['T'] = 50
 
     def find_tick_price(self, exch, ins):
         """ 最小盈利变动单位

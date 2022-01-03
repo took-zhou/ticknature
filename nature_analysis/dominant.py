@@ -32,6 +32,7 @@ class dominantFuture:
 
         self.dominant_compose1 = {'01': ['08', '09', '10', '11'], '05': ['12', '01', '02', '03'], '09': ['04', '05', '06', '07']}
         self.dominant_compose2 = {'01': ['09', '10', '11'], '05': ['12', '01', '02', '03'], '10': ['05', '06', '07', '08']}
+        self.dominant_compose3 = {'03': ['11', '12', '01'], '06': ['02', '03', '04'], '09': ['05', '06', '07'], '12': ['08', '09', '10']}
 
         self.SHFE['cu'] = self.dominant_compose1
         self.SHFE['al'] = self.dominant_compose1
@@ -106,12 +107,12 @@ class dominantFuture:
         self.INE['nr'] = self.dominant_compose1
         self.INE['bc'] = self.dominant_compose1
 
-        self.CFFEX['IF'] = self.dominant_compose1
-        self.CFFEX['IC'] = self.dominant_compose1
-        self.CFFEX['IH'] = self.dominant_compose1
-        self.CFFEX['TS'] = self.dominant_compose1
-        self.CFFEX['TF'] = self.dominant_compose1
-        self.CFFEX['T'] = self.dominant_compose1
+        self.CFFEX['IF'] = self.dominant_compose3
+        self.CFFEX['IC'] = self.dominant_compose3
+        self.CFFEX['IH'] = self.dominant_compose3
+        self.CFFEX['TS'] = self.dominant_compose3
+        self.CFFEX['TF'] = self.dominant_compose3
+        self.CFFEX['T'] = self.dominant_compose3
 
     def get_year(self, exch, ins):
         """ 获取主力合约月份
