@@ -85,9 +85,9 @@ class minTradeUint():
         self.CFFEX['IF'] = 300
         self.CFFEX['IC'] = 200
         self.CFFEX['IH'] = 300
-        self.CFFEX['TS'] = 2000000
-        self.CFFEX['TF'] = 1000000
-        self.CFFEX['T'] = 1000000
+        self.CFFEX['TS'] = 20000
+        self.CFFEX['TF'] = 10000
+        self.CFFEX['T'] = 10000
 
     def find_trade_unit(self, exch, ins):
         """ 一手交易单位
