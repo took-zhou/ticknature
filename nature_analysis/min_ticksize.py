@@ -20,12 +20,9 @@ class minTickSize():
         self.SHFE['wr'] = 1
         self.SHFE['hc'] = 1
         self.SHFE['ss'] = 5
-        self.SHFE['sc'] = 0.1
-        self.SHFE['lu'] = 1
         self.SHFE['fu'] = 1
         self.SHFE['bu'] = 2
         self.SHFE['ru'] = 5
-        self.SHFE['nr'] = 5
         self.SHFE['sp'] = 2
 
         self.CZCE['WH'] = 1

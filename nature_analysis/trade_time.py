@@ -48,12 +48,9 @@ class tradeTime():
         self.SHFE['wr'] = self.day_time_dict1
         self.SHFE['hc'] = self.time_compose3
         self.SHFE['ss'] = self.time_compose1
-        self.SHFE['sc'] = self.time_compose2
-        self.SHFE['lu'] = self.time_compose3
         self.SHFE['fu'] = self.time_compose3
         self.SHFE['bu'] = self.time_compose3
         self.SHFE['ru'] = self.time_compose3
-        self.SHFE['nr'] = self.time_compose3
         self.SHFE['sp'] = self.time_compose3
 
         self.CZCE['WH_old'] = self.day_time_dict1

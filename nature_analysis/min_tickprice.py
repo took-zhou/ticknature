@@ -20,12 +20,9 @@ class minTickPrice():
         self.SHFE['wr'] = 10
         self.SHFE['hc'] = 10
         self.SHFE['ss'] = 25
-        self.SHFE['sc'] = 100
-        self.SHFE['lu'] = 10
         self.SHFE['fu'] = 10
         self.SHFE['bu'] = 20
         self.SHFE['ru'] = 50
-        self.SHFE['nr'] = 50
         self.SHFE['sp'] = 20
 
         self.CZCE['WH'] = 20

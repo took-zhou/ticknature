@@ -20,12 +20,9 @@ class minTradeUint():
         self.SHFE['wr'] = 10
         self.SHFE['hc'] = 10
         self.SHFE['ss'] = 5
-        self.SHFE['sc'] = 1000
-        self.SHFE['lu'] = 10
         self.SHFE['fu'] = 10
         self.SHFE['bu'] = 10
         self.SHFE['ru'] = 10
-        self.SHFE['nr'] = 10
         self.SHFE['sp'] = 10
 
         self.CZCE['WH'] = 20

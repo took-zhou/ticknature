@@ -20,12 +20,9 @@ class instrumentInfo():
         self.SHFE['wr'] = '线材'
         self.SHFE['hc'] = '热轧卷板'
         self.SHFE['ss'] = '不锈钢'
-        self.SHFE['sc'] = '原油'
-        self.SHFE['lu'] = '低硫燃料油'
         self.SHFE['fu'] = '燃料油'
         self.SHFE['bu'] = '沥青'
         self.SHFE['ru'] = '天然橡胶'
-        self.SHFE['nr'] = '20号胶'
         self.SHFE['sp'] = '纸浆'
 
         self.CZCE['WH'] = '强麦'

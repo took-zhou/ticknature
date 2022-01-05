@@ -46,12 +46,9 @@ class dominantFuture:
         self.SHFE['wr'] = self.dominant_compose1
         self.SHFE['hc'] = self.dominant_compose1
         self.SHFE['ss'] = self.dominant_compose1
-        self.SHFE['sc'] = self.dominant_compose1
-        self.SHFE['lu'] = self.dominant_compose1
         self.SHFE['fu'] = self.dominant_compose1
         self.SHFE['bu'] = self.dominant_compose1
         self.SHFE['ru'] = self.dominant_compose1
-        self.SHFE['nr'] = self.dominant_compose1
         self.SHFE['sp'] = self.dominant_compose1
 
         self.CZCE['WH'] = self.dominant_compose1

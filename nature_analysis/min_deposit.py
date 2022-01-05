@@ -20,12 +20,9 @@ class minDeposit():
         self.SHFE['wr'] = 0.1
         self.SHFE['hc'] = 0.1
         self.SHFE['ss'] = 0.09
-        self.SHFE['sc'] = 0.05
-        self.SHFE['lu'] = 0.1
         self.SHFE['fu'] = 0.1
         self.SHFE['bu'] = 0.1
         self.SHFE['ru'] = 0.1
-        self.SHFE['nr'] = 0.1
         self.SHFE['sp'] = 0.09
 
         self.CZCE['WH'] = 0.07
