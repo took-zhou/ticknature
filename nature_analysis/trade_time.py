@@ -1,4 +1,3 @@
-import sys
 import re
 import datetime
 import pandas as pd
@@ -263,10 +262,10 @@ class tradeTime():
 tradetime = tradeTime()
 
 if __name__=="__main__":
-    print(tradetime.get_trade_time('CZCE', 'MA109', '20210508', 'Y-m-d H:M:S'))
-    #print(tradetime.get_trade_time('CZCE', 'MA705', '20200101', 'Y-m-d H:M:S'))
-    # print(tradetime.get_trade_time('DCE', 'l2101'))
-    # print(tradetime.get_trade_time('SHFE', 'cu2009'))
-    # print(tradetime.get_trade_time('SHFE', 'al2101'))
-    # print(tradetime.is_trade_time('CZCE', 'MA109', '2019-05-10 23:10:10'))
-    # print(tradetime.find_all())
+    print(tradetime.get_trade_time('CZCE', 'MA109', '20210506', 'Y-m-d H:M:S'))
+    print(tradetime.get_trade_time('CZCE', 'MA705', '20200101', 'Y-m-d H:M:S'))
+    print(tradetime.get_trade_time('DCE', 'l2101'))
+    print(tradetime.get_trade_time('SHFE', 'cu2009'))
+    print(tradetime.get_trade_time('SHFE', 'al2101'))
+    print(tradetime.is_trade_time('CZCE', 'MA109', '2019-05-10 23:10:10'))
+    print(tradetime.find_all())

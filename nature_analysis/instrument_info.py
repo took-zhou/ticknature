@@ -1,4 +1,3 @@
-import sys
 import re
 
 class instrumentInfo():
@@ -133,7 +132,7 @@ class instrumentInfo():
                     ret.append(self.CFFEX[item])
 
         return ret
-    
+
     def find_chinese_name(self, exch, ins):
         """ 查询英文合约对应的中文名称
 
@@ -193,3 +192,4 @@ if __name__=="__main__":
     print(instrumentinfo.find_ins('SHFE', 'english'))
     print(instrumentinfo.find_chinese_name('CZCE', 'MA109'))
     print(instrumentinfo.find_ins_type('CZCE', 'MA109'))
+    print(instrumentinfo.find_last_instrument('CZCE', 'MA105'))

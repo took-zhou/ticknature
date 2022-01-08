@@ -1,9 +1,7 @@
 #!/usr/bin/python
 # coding=utf-8
-import sys
 import re
-import os
-
+import datetime
 from tickmine.api import get_date
 from tickmine.api import get_ins
 from nature_analysis.instrument_info import instrumentinfo
@@ -48,9 +46,9 @@ class dominantFuture:
         self.SHFE['wr'] = self.dominant_compose4
         self.SHFE['hc'] = self.dominant_compose4
         self.SHFE['ss'] = self.dominant_compose4
-        self.SHFE['fu'] = self.dominant_compose4
+        self.SHFE['fu'] = self.dominant_compose1
         self.SHFE['bu'] = self.dominant_compose4
-        self.SHFE['ru'] = self.dominant_compose4
+        self.SHFE['ru'] = self.dominant_compose1
         self.SHFE['sp'] = self.dominant_compose4
 
         self.CZCE['WH'] = self.dominant_compose1
@@ -191,41 +189,6 @@ class dominantFuture:
 
         return ret
 
-    def get_instruments(self, exch, ins_type=''):
-        """ 交易所过去的合约提取
-
-        Args:
-            exch: 交易所简称
-            ins_type: 制定类型
-
-        Returns:
-            返回的数据类型是 list， 包含该交易所下面所有的合约
-
-        Examples:
-            >>> from nature_analysis.dominant import dominant
-            >>> dominant.get_instruments('CZCE')
-           ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
-        """
-        temp_ret = []
-        instruments = get_ins(exch, ins_type, client_api='tcp://192.168.0.102:8100')
-        for item in instruments:
-            _ins_type = instrumentinfo.find_ins_type(exch, item)
-            months = self.get_month(exch, _ins_type)
-            if item[-2:] in months:
-                temp_ret.append(item)
-
-        if exch == 'CZCE':
-            ret_list1 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '5' <= item[-3] <= '9']
-            ret_list2 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '0' <= item[-3] < '5']
-            ret_list1.sort()
-            ret_list2.sort()
-            ret_list = ret_list1 + ret_list2
-        else:
-            ret_list = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item))]
-            ret_list.sort()
-
-        return ret_list
-
     def get_date(self, exch, ins):
         """ 合约过去的交易日获取
 
@@ -265,18 +228,89 @@ class dominantFuture:
         ret = []
         if ins[-2:] in temp_dict:
             month_list = temp_dict[ins[-2:]]
-            sorted_data = get_date(exch, ins, client_api='tcp://192.168.0.102:8100')
+            sorted_data = get_date(exch, ins)
             ret = [item for item in sorted_data if item[4:6] in month_list]
+        return ret
+
+    def get_instruments(self, exch, ins_type=''):
+        """ 交易所过去的合约提取
+
+        Args:
+            exch: 交易所简称
+            ins_type: 制定类型
+
+        Returns:
+            返回的数据类型是 list， 包含该交易所下面所有的合约
+
+        Examples:
+            >>> from nature_analysis.dominant import dominant
+            >>> dominant.get_instruments('CZCE')
+           ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
+        """
+        temp_ret = []
+        instruments = get_ins(exch, ins_type)
+        for item in instruments:
+            _ins_type = instrumentinfo.find_ins_type(exch, item)
+            months = self.get_month(exch, _ins_type)
+            if item[-2:] in months:
+                temp_ret.append(item)
+
+        if exch == 'CZCE':
+            ret_list1 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '5' <= item[-3] <= '9']
+            ret_list2 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '0' <= item[-3] < '5']
+            ret_list1.sort()
+            ret_list2.sort()
+            ret_list = ret_list1 + ret_list2
+        else:
+            ret_list = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item))]
+            ret_list.sort()
+
+        return ret_list
+
+
+    def get_newest_instrument(self, exch, ins_type):
+        """ 获取合约品种最新的主力合约
+
+        Args:
+            exch: 交易所简称
+            ins_type: 合约品种
+
+        Returns:
+            返回的数据类型是字符串，合约名称
+
+        Examples:
+            >>> from nature_analysis.dominant import dominant
+            >>> dominant.get_newest_instrument('DCE', 'c')
+           'c2205'
+        """
+        ret = ''
+        now_time = datetime.datetime.now()
+        year_list = dominant.get_year(exch, ins_type)
+        for key_item in year_list:
+            for mon_item in year_list[key_item]:
+                if mon_item == '%02d'%now_time.month:
+                    if '%02d'%now_time.month > key_item:
+                        if exch == 'CZCE':
+                            ret = '%s%s%s'%(ins_type, str(now_time.year+1)[-1], key_item)
+                        else:
+                            ret = '%s%s%s'%(ins_type, str(now_time.year+1)[-2:], key_item)
+                    else:
+                        if exch == 'CZCE':
+                            ret = '%s%s%s'%(ins_type, str(now_time.year)[-1], key_item)
+                        else:
+                            ret = '%s%s%s'%(ins_type, str(now_time.year)[-2:], key_item)
+
         return ret
 
 dominant = dominantFuture()
 
 if __name__=="__main__":
-    # years = dominant.get_year('CZCE', 'FG')
-    # print(years)
-    # months = dominant.get_month('CZCE', 'FG')
-    # print(months)
-    # datas = dominant.get_date('CZCE', 'FG805')
-    # print(datas)
+    years = dominant.get_year('CZCE', 'FG')
+    print(years)
+    months = dominant.get_month('CZCE', 'FG')
+    print(months)
+    datas = dominant.get_date('CZCE', 'FG805')
+    print(datas)
     ins = dominant.get_instruments('CZCE', 'FG')
+    ins = dominant.get_newest_instrument('SHFE', 'au')
     print(ins)
