@@ -62,8 +62,8 @@ class minTickPrice():
         self.DCE['bb'] = 25
         self.DCE['jd'] = 10
         self.DCE['rr'] = 10
-        self.DCE['l'] = 25
-        self.DCE['v'] = 25
+        self.DCE['l'] = 5
+        self.DCE['v'] = 5
         self.DCE['pp'] = 5
         self.DCE['j'] = 50
         self.DCE['jm'] = 30

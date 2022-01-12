@@ -2,6 +2,8 @@ import re
 
 class instrumentInfo():
     def __init__(self):
+        self.once_used = ['ME', 'TC']
+
         self.SHFE = {}
         self.CZCE = {}
         self.DCE = {}
@@ -39,10 +41,10 @@ class instrumentInfo():
         self.CZCE['CJ'] = '红枣'
         self.CZCE['TA'] = 'PTA'
         self.CZCE['MA'] = '甲醇'
-        self.CZCE['ME'] = '甲醇'
+        self.CZCE['ME'] = '甲醇(曾用)'
         self.CZCE['FG'] = '玻璃'
         self.CZCE['ZC'] = '动力煤'
-        self.CZCE['TC'] = '动力煤'
+        self.CZCE['TC'] = '动力煤(曾用)'
         self.CZCE['SF'] = '硅铁'
         self.CZCE['SM'] = '锰硅'
         self.CZCE['UR'] = '尿素'
@@ -84,7 +86,7 @@ class instrumentInfo():
         self.CFFEX['T'] = '10年期国债'
         self.CFFEX['TF'] = '5年期国债'
 
-    def find_ins(self, exch, type='english'):
+    def find_ins(self, exch, type='english', include_once_used=False):
         """ 交易所包含的合约
 
         Args:
@@ -131,9 +133,14 @@ class instrumentInfo():
                 elif type == 'chinese':
                     ret.append(self.CFFEX[item])
 
-        return ret
+        if include_once_used==False and type == 'english':
+            temp_ret = [item for item in ret if item not in self.once_used]
+        elif include_once_used==False and type == 'chinese':
+            temp_ret = [item for item in ret if '曾用' not in item]
 
-    def find_chinese_name(self, exch, ins):
+        return temp_ret
+
+    def find_chinese_name(self, exch, ins, include_once_used=False):
         """ 查询英文合约对应的中文名称
 
         Args:
@@ -151,19 +158,24 @@ class instrumentInfo():
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
-                return self.SHFE[temp]
+                ret = self.SHFE[temp]
         elif exch == 'CZCE':
             if self.CZCE.__contains__(temp):
-                return self.CZCE[temp]
+                ret = self.CZCE[temp]
         elif exch == 'DCE':
             if self.DCE.__contains__(temp):
-                return self.DCE[temp]
+                ret = self.DCE[temp]
         elif exch == 'INE':
             if self.INE.__contains__(temp):
-                return self.INE[temp]
+                ret = self.INE[temp]
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(temp):
-                return self.CFFEX[temp]
+                ret = self.CFFEX[temp]
+
+        if include_once_used==False:
+            temp_ret = [item for item in ret if item not in self.once_used]
+
+        return temp_ret
 
     def find_ins_type(self, exch, ins):
         """ 查询英文合约对应的品种

@@ -62,8 +62,8 @@ class minTickSize():
         self.DCE['bb'] = 0.05
         self.DCE['jd'] = 1
         self.DCE['rr'] = 1
-        self.DCE['l'] = 5
-        self.DCE['v'] = 5
+        self.DCE['l'] = 1
+        self.DCE['v'] = 1
         self.DCE['pp'] = 1
         self.DCE['j'] = 0.5
         self.DCE['jm'] = 0.5
