@@ -195,6 +195,36 @@ class instrumentInfo():
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         return temp
 
+    def find_exch(self, ins):
+        """ 查询合约对应的交易所
+
+        Args:
+            ins: 合约代码
+
+        Returns:
+            数值
+
+        Examples:
+            >>> from nature_analysis.instrument_info import instrumentinfo
+            >>> instrumentinfo.find_exch('MA109')
+            DCE
+        """
+        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+
+        ret = ''
+        if temp in self.SHFE.keys():
+            ret = 'SHFE'
+        elif temp in self.DCE.keys():
+            ret = 'DCE'
+        elif temp in self.CZCE.keys():
+            ret = 'CZCE'
+        elif temp in self.CFFEX.keys():
+            ret = 'CFFEX'
+        elif temp in self.INE.keys():
+            ret = 'INE'
+
+        return ret
+
 instrumentinfo = instrumentInfo()
 
 if __name__=="__main__":
