@@ -268,7 +268,6 @@ class dominantFuture:
 
         return ret_list
 
-
     def get_newest_instrument(self, exch, ins_type):
         """ 获取合约品种最新的主力合约
 
