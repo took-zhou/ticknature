@@ -10,30 +10,30 @@ class tradeTime():
         self.INE = {}
         self.CFFEX = {}
         # 郑商所，大商所，上期所，能源中心交易白天时间
-        self.day_time_dict1 = {'morning_first_half': ['09:00', '10:15'], 'morning_second_half': ['10:30', '11:30'], 'afternoon': ['13:30', '15:00']}
+        self.day_time_dict1 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00']}
         
         # 中金所股指期货交易时间
-        self.day_time_dict2 = {'morning': ['09:30', '11:30'], 'afternoon': ['13:00', '15:00']}
+        self.day_time_dict2 = {'morning': ['09:30:00', '11:30:00'], 'afternoon': ['13:00:00', '15:00:00']}
         # 中金所国债交易时间
-        self.day_time_dict3 = {'morning': ['09:15', '11:30'], 'afternoon': ['13:00', '15:15']}
+        self.day_time_dict3 = {'morning': ['09:15:00', '11:30:00'], 'afternoon': ['13:00:00', '15:15:00']}
 
         # 夜9点到凌晨2点半
-        self.night_time_dict1 = {'night_first_half': ['21:00', '24:00'], 'night_second_half': ['00:00', '02:30']}
+        self.night_time_dict1 = {'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '02:30:00']}
         # 夜9点到凌晨1点
-        self.night_time_dict2 = {'night_first_half': ['21:00', '24:00'], 'night_second_half': ['00:00', '01:00']}
+        self.night_time_dict2 = {'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '01:00:00']}
         # 夜9点到夜11点
-        self.night_time_dict3 = {'night': ['21:00', '23:00']}
+        self.night_time_dict3 = {'night': ['21:00:00', '23:00:00']}
         # 夜9点到夜11点半
-        self.night_time_dict4 = {'night': ['21:00', '23:30']}
+        self.night_time_dict4 = {'night': ['21:00:00', '23:30:00']}
 
-        self.time_compose1 = {'morning_first_half': ['09:00', '10:15'], 'morning_second_half': ['10:30', '11:30'], 'afternoon': ['13:30', '15:00'], \
-            'night_first_half': ['21:00', '24:00'], 'night_second_half': ['00:00', '01:00']}
-        self.time_compose2 = {'morning_first_half': ['09:00', '10:15'], 'morning_second_half': ['10:30', '11:30'], 'afternoon': ['13:30', '15:00'], \
-            'night_first_half': ['21:00', '24:00'], 'night_second_half': ['00:00', '02:30']}
-        self.time_compose3 = {'morning_first_half': ['09:00', '10:15'], 'morning_second_half': ['10:30', '11:30'], 'afternoon': ['13:30', '15:00'], \
-            'night': ['21:00', '23:00']}
-        self.time_compose4 = {'morning_first_half': ['09:00', '10:15'], 'morning_second_half': ['10:30', '11:30'], 'afternoon': ['13:30', '15:00'], \
-            'night': ['21:00', '23:30']}
+        self.time_compose1 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
+            'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '01:00:00']}
+        self.time_compose2 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
+            'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '02:30:00']}
+        self.time_compose3 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
+            'night': ['21:00:00', '23:00:00']}
+        self.time_compose4 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
+            'night': ['21:00:00', '23:30:00']}
 
         self.SHFE['cu'] = self.time_compose1
         self.SHFE['al'] = self.time_compose1
@@ -188,7 +188,7 @@ class tradeTime():
                     ret = True
         return ret
 
-    def get_trade_time(self, exch, ins, timestr='', timetype='H:M'):
+    def get_trade_time(self, exch, ins, timestr='', timetype='H:M:S'):
         """ 获取单个合约交易时间表
 
         Args:
@@ -202,8 +202,8 @@ class tradeTime():
         Examples:
             >>> from nature_analysis.trade_time import tradetime
             >>> tradetime.get_trade_time('SHFE', 'cu2009')
-            {'morning_first_half': ['09:00', '10:15'], 'morning_second_half': ['10:30', '11:30'], 'afternoon': ['13:30', '15:00'], \
-                'night_first_half': ['21:00', '24:00'], 'night_second_half': ['00:00', '01:00']}
+            {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
+                'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '01:00:00']}
         """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         ret = {}
@@ -225,7 +225,7 @@ class tradeTime():
             if self.CFFEX.__contains__(temp):
                 ret = self.CFFEX[temp].copy()
 
-        if timetype == 'H:M':
+        if timetype == 'H:M:S':
             if 'efp' in ins:
                 return {}
             else:

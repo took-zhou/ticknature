@@ -39,7 +39,7 @@ class tradeDate():
 
         return ret
 
-    def get_prev_date(self, datastring, prev=1):
+    def get_prev_date(self, datastring):
         """ 获取前几天工作日
 
         Args:
@@ -70,6 +70,38 @@ class tradeDate():
             prev_date = ''
 
         return prev_date
+
+    def get_after_date(self, datastring):
+        """ 获取前几天工作日
+
+        Args:
+            datastring: 日市时间
+            prev: 后几天，默认是1
+
+        Returns:
+            返回的数据类型是 string, 代表时间
+
+        Examples:
+            >>> from nature_analysis.trade_date import tradedate
+            >>> tradedate.get_after_date('20210806')
+           '20210805'
+        """
+        # 判断该日期到底是星期几
+        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+
+        # 获取前一日时间
+        if ins_time_of_week == 5:
+            three_day_after = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = 3)
+            split = str(three_day_after).split('-')
+            after_date = split[0] + split[1] + split[2].split(' ')[0]
+        elif 1 <= ins_time_of_week <= 4:
+            one_day_after = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = 1)
+            split = str(one_day_after).split('-')
+            after_date = split[0] + split[1] + split[2].split(' ')[0]
+        else:
+            after_date = ''
+
+        return after_date
 
     def get_night_date(self, datastring):
         """ 获取日市的夜市时间
@@ -131,5 +163,5 @@ class tradeDate():
 tradedate = tradeDate()
 
 if __name__=="__main__":
-    ret = tradedate.is_delivery_month('CZCE', 'MA201')
+    ret = tradedate.get_after_date('20211011')
     print(ret)
