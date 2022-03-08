@@ -22,18 +22,18 @@ class instrumentInfo():
         self.SHFE['hc'] = '热轧卷板'
         self.SHFE['ss'] = '不锈钢'
         self.SHFE['fu'] = '燃料油'
-        self.SHFE['bu'] = '沥青'
+        self.SHFE['bu'] = '石油沥青'
         self.SHFE['ru'] = '天然橡胶'
         self.SHFE['sp'] = '纸浆'
 
         self.CZCE['WH'] = '强麦'
         self.CZCE['PM'] = '普麦'
-        self.CZCE['CF'] = '棉一'
+        self.CZCE['CF'] = '棉花'
         self.CZCE['SR'] = '白糖'
-        self.CZCE['OI'] = '菜油'
+        self.CZCE['OI'] = '菜籽油'
         self.CZCE['RI'] = '早籼稻'
-        self.CZCE['RS'] = '油籽'
-        self.CZCE['RM'] = '菜粕'
+        self.CZCE['RS'] = '油菜籽'
+        self.CZCE['RM'] = '菜籽粕'
         self.CZCE['JR'] = '粳稻'
         self.CZCE['LR'] = '晚籼稻'
         self.CZCE['CY'] = '棉纱'
@@ -54,17 +54,17 @@ class instrumentInfo():
 
         self.DCE['c'] = '玉米'
         self.DCE['cs'] = '玉米淀粉'
-        self.DCE['a'] = '豆一'
-        self.DCE['b'] = '豆二'
+        self.DCE['a'] = '黄大豆1号'
+        self.DCE['b'] = '黄大豆2号'
         self.DCE['m'] = '豆粕'
         self.DCE['y'] = '豆油'
         self.DCE['p'] = '棕榈油'
-        self.DCE['fb'] = '纤板'
-        self.DCE['bb'] = '胶板'
+        self.DCE['fb'] = '纤维板'
+        self.DCE['bb'] = '胶合板'
         self.DCE['jd'] = '鸡蛋'
         self.DCE['rr'] = '粳米'
-        self.DCE['l'] = '塑料'
-        self.DCE['v'] = 'pvc'
+        self.DCE['l'] = '聚乙烯'
+        self.DCE['v'] = '聚氯乙烯'
         self.DCE['pp'] = '聚丙烯'
         self.DCE['j'] = '焦炭'
         self.DCE['jm'] = '焦煤'
@@ -79,9 +79,9 @@ class instrumentInfo():
         self.INE['nr'] = '20号胶'
         self.INE['bc'] = '国际铜'
 
-        self.CFFEX['IF'] = '沪深300'
-        self.CFFEX['IC'] = '中证500'
-        self.CFFEX['IH'] = '上证50'
+        self.CFFEX['IF'] = '沪深300股指'
+        self.CFFEX['IC'] = '中证500股指'
+        self.CFFEX['IH'] = '上证50股指'
         self.CFFEX['TS'] = '2年期国债'
         self.CFFEX['T'] = '10年期国债'
         self.CFFEX['TF'] = '5年期国债'
@@ -140,7 +140,7 @@ class instrumentInfo():
 
         return temp_ret
 
-    def find_chinese_name(self, exch, ins, include_once_used=False):
+    def find_chinese_name(self, exch, ins):
         """ 查询英文合约对应的中文名称
 
         Args:
@@ -155,7 +155,9 @@ class instrumentInfo():
             >>> instrumentinfo.find_chinese_name('DCE', 'MA109')
             甲醇
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
+
+        ret = ''
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
                 ret = self.SHFE[temp]
@@ -171,11 +173,11 @@ class instrumentInfo():
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(temp):
                 ret = self.CFFEX[temp]
+            elif temp == 'IO':
+                # IO对应沪深300股指期权，IF对应沪深300股指期货
+                ret = self.CFFEX['IF']
 
-        if include_once_used==False:
-            temp_ret = [item for item in ret if item not in self.once_used]
-
-        return temp_ret
+        return ret
 
     def find_ins_type(self, exch, ins):
         """ 查询英文合约对应的品种
@@ -192,7 +194,7 @@ class instrumentInfo():
             >>> instrumentinfo.find_ins_type('DCE', 'MA109')
             MA
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
         return temp
 
     def find_exch(self, ins):
@@ -209,7 +211,7 @@ class instrumentInfo():
             >>> instrumentinfo.find_exch('MA109')
             DCE
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
 
         ret = ''
         if temp in self.SHFE.keys():
@@ -228,10 +230,10 @@ class instrumentInfo():
 instrumentinfo = instrumentInfo()
 
 if __name__=="__main__":
-    print(instrumentinfo.find_ins('CZCE', 'chinese'))
-    print(instrumentinfo.find_ins('DCE', 'chinese'))
-    print(instrumentinfo.find_ins('INE', 'english'))
-    print(instrumentinfo.find_ins('SHFE', 'english'))
-    print(instrumentinfo.find_chinese_name('CZCE', 'MA109'))
-    print(instrumentinfo.find_ins_type('CZCE', 'MA109'))
-    print(instrumentinfo.find_last_instrument('CZCE', 'MA105'))
+    # print(instrumentinfo.find_ins('CZCE', 'chinese'))
+    # print(instrumentinfo.find_ins('DCE', 'chinese'))
+    # print(instrumentinfo.find_ins('INE', 'english'))
+    # print(instrumentinfo.find_ins('SHFE', 'english'))
+    print(instrumentinfo.find_chinese_name('CFFEX', 'IO109C200'))
+    # print(instrumentinfo.find_ins_type('CZCE', 'MA109'))
+    # print(instrumentinfo.find_last_instrument('CZCE', 'MA105'))
