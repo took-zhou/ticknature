@@ -259,6 +259,12 @@ class tradeTime():
         """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
+    def get_offset_time(self, timestring, _offset):
+        time_list = timestring.split(':')
+        integral_time = int(time_list[0]) * 3600 + int(time_list[1]) * 60 + int(time_list[2])
+        integral_time = integral_time + _offset
+        return '%02d:%02d:%02d'%(int(integral_time/3600), int((integral_time%3600)/60), (integral_time%3600)%60)
+
 tradetime = tradeTime()
 
 if __name__=="__main__":
