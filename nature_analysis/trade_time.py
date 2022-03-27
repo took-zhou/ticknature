@@ -18,18 +18,18 @@ class tradeTime():
         self.day_time_dict3 = {'morning': ['09:15:00', '11:30:00'], 'afternoon': ['13:00:00', '15:15:00']}
 
         # 夜9点到凌晨2点半
-        self.night_time_dict1 = {'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '02:30:00']}
+        self.night_time_dict1 = {'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '02:30:00']}
         # 夜9点到凌晨1点
-        self.night_time_dict2 = {'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '01:00:00']}
+        self.night_time_dict2 = {'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
         # 夜9点到夜11点
         self.night_time_dict3 = {'night': ['21:00:00', '23:00:00']}
         # 夜9点到夜11点半
         self.night_time_dict4 = {'night': ['21:00:00', '23:30:00']}
 
         self.time_compose1 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-            'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '01:00:00']}
+            'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
         self.time_compose2 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-            'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '02:30:00']}
+            'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '02:30:00']}
         self.time_compose3 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
             'night': ['21:00:00', '23:00:00']}
         self.time_compose4 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
@@ -188,14 +188,14 @@ class tradeTime():
                     ret = True
         return ret
 
-    def get_trade_time(self, exch, ins, timestr='', timetype='H:M:S'):
+    def get_trade_time(self, exch, ins, timestr='', timetype='%H:%M:%S'):
         """ 获取单个合约交易时间表
 
         Args:
             exch: 交易所简称
             ins: 合约
             timestr: 日期
-            timetype： 输出格式 H:M 或 Y-m-d H:M:S
+            timetype： 输出格式 %H:%M:%S 或 %Y-%m-%d %H:%M:%S
         Returns:
             返回的数据类型是 dict ，包含各个时段的时间.
 
@@ -203,7 +203,7 @@ class tradeTime():
             >>> from nature_analysis.trade_time import tradetime
             >>> tradetime.get_trade_time('SHFE', 'cu2009')
             {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-                'night_first_half': ['21:00:00', '24:00:00'], 'night_second_half': ['00:00:00', '01:00:00']}
+                'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
         """
         temp = ''.join(re.findall(r'[A-Za-z]', ins))
         ret = {}
@@ -211,7 +211,7 @@ class tradeTime():
             if self.SHFE.__contains__(temp):
                 ret = self.SHFE[temp].copy()
         elif exch == 'CZCE':
-            if timestr != '' and timestr < '2019-12-12':
+            if timestr != '' and timestr < '20191212':
                 temp = temp + '_old'
             if self.CZCE.__contains__(temp):
                 ret = self.CZCE[temp].copy()
@@ -225,19 +225,22 @@ class tradeTime():
             if self.CFFEX.__contains__(temp):
                 ret = self.CFFEX[temp].copy()
 
-        if timetype == 'H:M:S':
+        if timetype == '%H:%M:%S':
             if 'efp' in ins:
                 return {}
             else:
                 return ret
 
-        elif timetype == 'Y-m-d H:M:S':
+        elif timetype == '%Y-%m-%d %H:%M:%S':
             for item in ret:
-                if 'night' in item:
+                if item == 'night' or item == 'night_first_half':
                     night_data = self._get_night_data(timestr)
-                    ret[item] = [datetime.datetime.strptime(night_data+item2, '%Y%m%d%H:%M').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                    ret[item] = [datetime.datetime.strptime(night_data+item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                elif item == 'night_second_half':
+                    night_data = self._get_night_data(timestr)
+                    ret[item] = [(datetime.datetime.strptime(night_data+item2, '%Y%m%d%H:%M:%S') + datetime.timedelta(days = 1)).strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
                 else:
-                    ret[item] = [datetime.datetime.strptime(timestr+item2, '%Y%m%d%H:%M').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                    ret[item] = [datetime.datetime.strptime(timestr+item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
 
             if 'efp' in ins:
                 return {}
@@ -268,10 +271,10 @@ class tradeTime():
 tradetime = tradeTime()
 
 if __name__=="__main__":
-    print(tradetime.get_trade_time('CZCE', 'MA109', '20210506', 'Y-m-d H:M:S'))
-    print(tradetime.get_trade_time('CZCE', 'MA705', '20200101', 'Y-m-d H:M:S'))
-    print(tradetime.get_trade_time('DCE', 'l2101'))
-    print(tradetime.get_trade_time('SHFE', 'cu2009'))
-    print(tradetime.get_trade_time('SHFE', 'al2101'))
-    print(tradetime.is_trade_time('CZCE', 'MA109', '2019-05-10 23:10:10'))
-    print(tradetime.find_all())
+    print(tradetime.get_trade_time('CZCE', 'MA109', '20210506', '%Y-%m-%d %H:%M:%S'))
+    print(tradetime.get_trade_time('CZCE', 'MA705', '20190101', '%Y-%m-%d %H:%M:%S'))
+    # print(tradetime.get_trade_time('DCE', 'l2101'))
+    # print(tradetime.get_trade_time('SHFE', 'cu2009'))
+    # print(tradetime.get_trade_time('SHFE', 'al2101'))
+    # # print(tradetime.is_trade_time('CZCE', 'MA109', '2019-05-10 23:10:10'))
+    # print(tradetime.find_all())
