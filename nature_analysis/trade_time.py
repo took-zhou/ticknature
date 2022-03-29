@@ -272,7 +272,7 @@ tradetime = tradeTime()
 
 if __name__=="__main__":
     print(tradetime.get_trade_time('CZCE', 'MA109', '20210506', '%Y-%m-%d %H:%M:%S'))
-    print(tradetime.get_trade_time('CZCE', 'MA705', '20190101', '%Y-%m-%d %H:%M:%S'))
+    # print(tradetime.get_trade_time('CZCE', 'MA705', '20190101', '%Y-%m-%d %H:%M:%S'))
     # print(tradetime.get_trade_time('DCE', 'l2101'))
     # print(tradetime.get_trade_time('SHFE', 'cu2009'))
     # print(tradetime.get_trade_time('SHFE', 'al2101'))

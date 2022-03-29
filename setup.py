@@ -21,7 +21,8 @@ setup(
         'pytz>=2021.1',
         'statsmodels>=0.12.2',
         'mplfinance>=0.12.7a17',
-        'tickmine>=1.0.0'
+        'tickmine>=1.0.0',
+        'pytest>=7.0.1'
     ],
 
     # 你要安装的包，通过 setuptools.find_packages 找到当前目录下有哪些包
