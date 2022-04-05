@@ -134,18 +134,9 @@ class geckoInvest:
         return [profit, hand_time]
 
     def get_result(self):
-
-        # print(self.date_list)
-        # print(self.open_time_list)
-        # print(self.open_price_list)
-        # print(self.close_time_list)
-        # print(self.close_price_list)
-        # print(self.hand_time_list)
-        # print(self.profit_list)
-
         date_list = [datetime.datetime.strptime(item, "%Y%m%d") for item in self.date_list]
         ret_df = pd.DataFrame({'ins': self.ins_list, 'dir': self.dir_list, 'open_time': self.open_time_list, 'open_price': self.open_price_list, \
-            'close_time': self.close_time_list, 'close_price': self.close_price_list, 'hand_time(s)': self.hand_time_list, \
+            'close_time': self.close_time_list, 'close_price': self.close_price_list, 'hand_time': self.hand_time_list, \
             'profit': self.profit_list}, index=date_list)
 
         ret_df.sort_index(inplace=True)
@@ -164,7 +155,7 @@ class geckoInvest:
             index_i = np.argmax(profit_cumsum[:index_j])
             self.result['max_drawdown'] =profit_cumsum[index_j] - profit_cumsum[index_i]
 
-        self.result['average_holding_time(s)'] = sum(ret_df.hand_time_list) / len(ret_df.hand_time_list)
+        self.result['average_holding_time(s)'] = sum(ret_df.hand_time) / len(ret_df.hand_time)
         self.result['profit_money'] = sum([item for item in ret_df.profit if item > 0])
         self.result['loss_money'] = sum([item for item in ret_df.profit if item < 0])
 
