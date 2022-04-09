@@ -23,7 +23,7 @@ class tradeDate():
         ret = ''
         split_timestr = timestring.split(' ')
 
-        if split_timestr[-1] >= '20:55:00' or split_timestr[-1] <= '02:35:00':
+        if '20:55:00' <= split_timestr[-1] <= '24:00:00':
             # 判断该日期到底是星期几
             ins_time_of_week = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
 
@@ -33,6 +33,16 @@ class tradeDate():
             else:
                 one_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days = 1)
                 ret = '%04d%02d%02d'%(one_day_after.year, one_day_after.month, one_day_after.day)
+        elif '00:00:00' <= split_timestr[-1] <= '03:00:00':
+            # 判断该日期到底是星期几
+            ins_time_of_week = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
+
+            if ins_time_of_week == 6:
+                two_day_after = pd.to_datetime(timestring, format = '%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days = 2)
+                ret = '%04d%02d%02d'%(two_day_after.year, two_day_after.month, two_day_after.day)
+            else:
+                split_ymd = split_timestr[0].split('-')
+                ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
         else:
             split_ymd = split_timestr[0].split('-')
             ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
