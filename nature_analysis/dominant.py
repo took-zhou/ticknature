@@ -252,6 +252,7 @@ class dominantFuture:
            ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
         """
         temp_ret = []
+        ins_type = re.split('([0-9]+)', ins_type)[0]
         instruments = get_ins(exch, ins_type)
         for item in instruments:
             _ins_type = instrumentinfo.find_ins_type(exch, item)
@@ -288,6 +289,7 @@ class dominantFuture:
         """
         ret = ''
         now_time = datetime.datetime.now()
+        ins_type = re.split('([0-9]+)', ins_type)[0]
         year_list = dominant.get_year(exch, ins_type)
         for key_item in year_list:
             for mon_item in year_list[key_item]:
