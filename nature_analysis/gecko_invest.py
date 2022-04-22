@@ -75,7 +75,7 @@ class geckoInvest:
         if 'BidPrice' in rawtick.columns or 'AskPrice' in rawtick.columns:
             rawtick.rename(columns={'BidPrice': 'BidPrice1', 'AskPrice': 'AskPrice1'}, inplace=True)
 
-        # print(rawtick)
+        print('day trader: %s %s %s'%(exch , ins, date))
         if dir == 'buy_more':
             close_price = rawtick['BidPrice1'][-1]
             close_time = rawtick.index[-1]
@@ -88,7 +88,7 @@ class geckoInvest:
                     close_time = index
                     break
                 # 时间止损
-                if '16:00:00' >= str(index).split(' ')[-1] >= finish_time:
+                if '16:00:00' >= str(index).split(' ')[-1] > finish_time:
                     close_price = item['BidPrice1']
                     close_time = index
                     break
@@ -109,7 +109,7 @@ class geckoInvest:
                     close_time = index
                     break
                 # 时间止损
-                if '16:00:00' >= str(index).split(' ')[-1] >= finish_time:
+                if '16:00:00' >= str(index).split(' ')[-1] > finish_time:
                     close_price = item['AskPrice1']
                     close_time = index
                     break
@@ -153,28 +153,23 @@ class geckoInvest:
         else:
             return commission[0] + commission[4]
 
-    def get_result(self, file_list=[]):
+    def get_result(self, file_list=[], is_save=True):
         if len(file_list) == 0:
             ret_df = self.get_df_from_day_trader()
         else:
             ret_df = self.get_df_from_file_list(file_list)
 
-        return self.get_summary(ret_df)
+        ret_df = self.is_single_drop(ret_df)
+        return self.get_summary(ret_df, is_save)
 
-    def get_df_from_file_list(self, file_list):
-        ret_df = pd.DataFrame(columns = ['Timeindex', 'ins', 'dir', 'open_time', 'open_price', 'close_time', 'close_price', 'hand_time', 'profit'])
+    def is_single_drop(self, _df):
+        ret_df = _df.copy()
 
-        for item in file_list:
-            temp_df = pd.read_csv(item)
-            temp_df.dropna(axis=0, how='any', inplace=True)
-            temp_df.rename(columns={'Unnamed: 0': 'Timeindex'}, inplace=True)
-
-            ret_df = ret_df.append(temp_df)
-
+        ret_df['Timeindex'] = ret_df.index
         ret_df.sort_values('open_time', inplace=True)
         ret_df.index = range(len(ret_df))
 
-        prev_row = pd.Series()
+        prev_row = pd.Series([], dtype='float64')
         time_wrong_index = []
         for index, row in ret_df.iterrows():
             if len(prev_row) != 0:
@@ -186,6 +181,29 @@ class geckoInvest:
 
         if len(time_wrong_index) > 0:
             ret_df.drop(time_wrong_index, inplace = True)
+
+        ret_df.set_index('Timeindex', inplace = True)
+        ret_df.sort_index(inplace=True)
+        ret_df.index.name = 'Timeindex'
+
+        return ret_df
+
+    def get_df_from_file_list(self, file_list):
+        ret_df = pd.DataFrame(columns = ['Timeindex', 'ins', 'dir', 'open_time', 'open_price', 'close_time', 'close_price', 'hand_time', 'profit', 'comm', 'margin'])
+
+        if isinstance(file_list, list):
+            for item in file_list:
+                temp_df = pd.read_csv(item)
+                temp_df.dropna(axis=0, how='any', inplace=True)
+                temp_df.rename(columns={'Unnamed: 0': 'Timeindex'}, inplace=True)
+
+                ret_df = ret_df.append(temp_df)
+        elif isinstance(file_list, str):
+            temp_df = pd.read_csv(file_list)
+            temp_df.dropna(axis=0, how='any', inplace=True)
+            temp_df.rename(columns={'Unnamed: 0': 'Timeindex'}, inplace=True)
+
+            ret_df = ret_df.append(temp_df)
 
         date_list = [datetime.datetime.strptime(item, "%Y-%m-%d") for item in ret_df.Timeindex]
         ret_df['Timeindex'] = date_list
@@ -208,14 +226,11 @@ class geckoInvest:
 
         return ret_df
 
-    def apply_commission(self, ret_df):
-        ret_df
+    def get_summary(self, ret_df, is_save=True):
+        temp_profit_df = (ret_df.profit - ret_df.comm).copy()
+        self.result['annualized_returns'] = sum(temp_profit_df)/((ret_df.index[-1] - ret_df.index[0] ).days + 1)*355
 
-    def get_summary(self, ret_df):
-        ret_df.profit = ret_df.profit - ret_df.comm
-        self.result['annualized_returns'] = sum(ret_df.profit)/(ret_df.index[-1] - ret_df.index[0]).days*355
-
-        profit_cumsum = np.array(ret_df.profit).cumsum()
+        profit_cumsum = np.array(temp_profit_df).cumsum()
         index_j = np.argmax(np.maximum.accumulate(profit_cumsum) - profit_cumsum)
         if index_j == 0:
             self.result['max_drawdown'] = 0
@@ -224,32 +239,37 @@ class geckoInvest:
             self.result['max_drawdown'] =profit_cumsum[index_j] - profit_cumsum[index_i]
 
         self.result['average_holding_time(s)'] = sum(ret_df.hand_time) / len(ret_df.hand_time)
-        self.result['profit_money'] = sum([item for item in ret_df.profit if item > 0])
-        self.result['loss_money'] = sum([item for item in ret_df.profit if item < 0])
+        self.result['profit_money'] = sum([item for item in temp_profit_df if item > 0])
+        self.result['loss_money'] = sum([item for item in temp_profit_df if item < 0])
 
         if self.result['loss_money'] == 0.0:
             self.result['profit_loss_money_ratio'] = 'very large'
         else:
             self.result['profit_loss_money_ratio'] =  self.result['profit_money'] / self.result['loss_money']
 
-        self.result['profit_count'] = len([item for item in ret_df.profit if item > 0])
-        self.result['loss_count'] = len([item for item in ret_df.profit if item < 0])
+        self.result['profit_count'] = len([item for item in temp_profit_df if item > 0])
+        self.result['loss_count'] = len([item for item in temp_profit_df if item < 0])
         if self.result['loss_count'] == 0:
             self.result['profit_loss_count_ratio'] = 'very large'
         else:
             self.result['profit_loss_count_ratio'] = self.result['profit_count'] / self.result['loss_count']
 
-        ins_type = [re.split('([0-9]+)', item)[0] for item in ret_df.ins]
+        if is_save:
+            ins_type = [re.split('([0-9]+)', item)[0] for item in ret_df.ins]
 
-        self.file_name = '%s/%s_%.2f_%d.csv'%(self.base_dir, '_'.join(list(set(ins_type))), self.result['annualized_returns'], os.getpid())
-        ret_df.to_csv(self.file_name)
+            self.file_name = '%s/%s_%.2f_%d.csv'%(self.base_dir, '_'.join(list(set(ins_type))), self.result['annualized_returns'], os.getpid())
+            ret_df.to_csv(self.file_name)
 
-        with open(self.file_name,mode='a',newline='',encoding='utf8') as cfa:
-            wf = csv.writer(cfa)
-            for key,value in self.result.items():
-                wf.writerow([key,value])
-        cfa.close()
+            with open(self.file_name,mode='a',newline='',encoding='utf8') as cfa:
+                wf = csv.writer(cfa)
+                for key,value in self.result.items():
+                    wf.writerow([key,value])
+            cfa.close()
 
         return self.result
 
 geckoinvest = geckoInvest()
+# ret = geckoinvest.get_df_from_file_list(['/home/tsaodai/.record/2022-04-19/SF_RM_PK_WH_CJ_AP_OI_FG_ZC_SM_CF_MA_SR_CY_PF_JR_UR_TA_SA_27304_594.csv'])
+# ret=geckoinvest.is_single_drop(ret)
+# print(ret)
+# print(len(ret))

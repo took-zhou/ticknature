@@ -27,6 +27,8 @@ def test_dominant():
     assert(len(ret)>10)
     ret = dominant.get_newest_instrument('CZCE', 'TA')
     assert(ret=='TA209')
+    ret = dominant.get_newest_instrument('CZCE', 'TA209')
+    assert(ret!='')
 
 def test_instrument_info():
     from nature_analysis.instrument_info import instrumentinfo

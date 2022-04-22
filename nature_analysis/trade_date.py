@@ -1,6 +1,7 @@
 import re
 import datetime
 import pandas as pd
+from tickmine.api import get_date
 
 class tradeDate():
     def __init__(self):
@@ -49,7 +50,7 @@ class tradeDate():
 
         return ret
 
-    def get_prev_date(self, datastring):
+    def get_prev_date(self, exch, ins, datastring):
         """ 获取前几天工作日
 
         Args:
@@ -65,23 +66,27 @@ class tradeDate():
            '20210805'
         """
         # 判断该日期到底是星期几
-        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
-
-        # 获取前一日时间
-        if ins_time_of_week == 1:
-            three_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -3)
-            split = str(three_day_before).split('-')
-            prev_date = split[0] + split[1] + split[2].split(' ')[0]
-        elif 1 < ins_time_of_week <= 5:
-            one_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -1)
-            split = str(one_day_before).split('-')
-            prev_date = split[0] + split[1] + split[2].split(' ')[0]
+        prev_date = ''
+        date_list = get_date(exch, ins)
+        index = date_list.index(datastring)
+        if index != 0:
+            prev_date = date_list[index-1]
         else:
-            prev_date = ''
+            ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+
+            # 获取前一日时间
+            if ins_time_of_week == 1:
+                three_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -3)
+                split = str(three_day_before).split('-')
+                prev_date = split[0] + split[1] + split[2].split(' ')[0]
+            elif 1 < ins_time_of_week <= 5:
+                one_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -1)
+                split = str(one_day_before).split('-')
+                prev_date = split[0] + split[1] + split[2].split(' ')[0]
 
         return prev_date
 
-    def get_after_date(self, datastring):
+    def get_after_date(self, exch, ins, datastring):
         """ 获取前几天工作日
 
         Args:
@@ -97,19 +102,23 @@ class tradeDate():
            '20210805'
         """
         # 判断该日期到底是星期几
-        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
-
-        # 获取前一日时间
-        if ins_time_of_week == 5:
-            three_day_after = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = 3)
-            split = str(three_day_after).split('-')
-            after_date = split[0] + split[1] + split[2].split(' ')[0]
-        elif 1 <= ins_time_of_week <= 4:
-            one_day_after = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = 1)
-            split = str(one_day_after).split('-')
-            after_date = split[0] + split[1] + split[2].split(' ')[0]
+        after_date = ''
+        date_list = get_date(exch, ins)
+        index = date_list.index(datastring)
+        if index != len(date_list):
+            after_date = date_list[index+1]
         else:
-            after_date = ''
+            ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+
+            # 获取前一日时间
+            if ins_time_of_week == 5:
+                three_day_after = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = 3)
+                split = str(three_day_after).split('-')
+                after_date = split[0] + split[1] + split[2].split(' ')[0]
+            elif 1 <= ins_time_of_week <= 4:
+                one_day_after = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = 1)
+                split = str(one_day_after).split('-')
+                after_date = split[0] + split[1] + split[2].split(' ')[0]
 
         return after_date
 
