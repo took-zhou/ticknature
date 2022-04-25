@@ -68,9 +68,8 @@ class tradeDate():
         # 判断该日期到底是星期几
         prev_date = ''
         date_list = get_date(exch, ins)
-        index = date_list.index(datastring)
-        if index != 0:
-            prev_date = date_list[index-1]
+        if datastring in date_list and date_list.index(datastring) != 0:
+            prev_date = date_list[date_list.index(datastring)-1]
         else:
             ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
 
@@ -104,9 +103,8 @@ class tradeDate():
         # 判断该日期到底是星期几
         after_date = ''
         date_list = get_date(exch, ins)
-        index = date_list.index(datastring)
-        if index != len(date_list):
-            after_date = date_list[index+1]
+        if datastring in date_list and date_list.index(datastring) != (len(date_list)-1):
+            after_date = date_list[date_list.index(datastring)+1]
         else:
             ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
 
@@ -182,5 +180,7 @@ class tradeDate():
 tradedate = tradeDate()
 
 if __name__=="__main__":
-    ret = tradedate.get_after_date('20211011')
+    ret = tradedate.get_prev_date('CZCE', 'TA209', '20220424')
+    print(ret)
+    ret = tradedate.get_after_date('CZCE', 'TA209', '20220424')
     print(ret)

@@ -272,7 +272,7 @@ class dominantFuture:
 
         return ret_list
 
-    def get_newest_instrument(self, exch, ins_type):
+    def get_newest_instrument(self, exch, ins_type, special_time=''):
         """ 获取合约品种最新的主力合约
 
         Args:
@@ -288,7 +288,12 @@ class dominantFuture:
            'c2205'
         """
         ret = ''
-        now_time = datetime.datetime.now()
+
+        if special_time != '':
+            now_time = datetime.datetime.strptime(special_time, "%Y-%m-%d %H:%M:%S")
+        else:
+            now_time = datetime.datetime.now()
+
         ins_type = re.split('([0-9]+)', ins_type)[0]
         year_list = dominant.get_year(exch, ins_type)
         for key_item in year_list:
