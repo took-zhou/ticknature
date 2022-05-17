@@ -44,19 +44,95 @@ class geckoInvest:
         self.file_name = ''
 
     def day_trader(self, exch , ins, date, timelist, dir, profit_limit, loss_limit, subject='level1'):
-        # single_conn = sqlite3.connect('orders.db', check_same_thread=False)
-        # single_conn.execute('pragma synchronous = off')
+        start_time = timelist[0]
+        stop_time = timelist[1]
+        finish_time = timelist[2]
 
-        # command = 'create table if not exists %s_order_hist (exch TEXT,ins TEXT,date TEXT,start_time TEXT,stop_time TEXT,\
-        #     end_time TEXT,dir TEXT,profit_limit REAL,loss_limit REAL,open_time TEXT,open_price REAL,close_time TEXT,\
-        #     close_price REAL,hand_time TEXT, profit REAL)'%(strategy)
-        # single_conn.execute(command)
+        if finish_time <= start_time <= '16:00:00':
+            return
 
-        # ret = single_conn.execute('select open_time, open_price, close_time, close_price, profit from %s_order_hist where exch=%s, \
-        #     ins=%s, date=%s, starte_time=%s, stop_time=%s, end_time=%s, dir=%s, profit_limit=%f, loss_limit=%f'%(strategy)).fetchall()
+        if subject == 'level1':
+            rawtick = get_level1(exch , ins, date, [start_time, finish_time])
+        else:
+            rawtick = get_rawtick(exch , ins, date, [start_time, finish_time])
 
-        # single_conn.commit()
-        # single_conn.close()
+        if rawtick.size <= 1:
+            return [0, 0]
+
+        if 'BidPrice' in rawtick.columns or 'AskPrice' in rawtick.columns:
+            rawtick.rename(columns={'BidPrice': 'BidPrice1', 'AskPrice': 'AskPrice1'}, inplace=True)
+
+        print('day trader: %s %s %s'%(exch , ins, date))
+        if dir == 'buy_more':
+            close_price = rawtick['BidPrice1'][-1]
+            close_time = rawtick.index[-1]
+            open_price = rawtick['AskPrice1'][0]
+            open_time = rawtick.index[0]
+            for index, item in rawtick.iterrows():
+                # 止盈
+                if item['BidPrice1'] - open_price >= profit_limit:
+                    close_price = item['BidPrice1']
+                    close_time = index
+                    break
+                # 时间止损
+                if '16:00:00' >= str(index).split(' ')[-1] > finish_time:
+                    close_price = item['BidPrice1']
+                    close_time = index
+                    break
+                # 巨量损失止损
+                if open_price - item['BidPrice1'] >= loss_limit:
+                    close_price = item['BidPrice1']
+                    close_time = index
+                    break
+        elif dir == 'sell_short':
+            close_price = rawtick['AskPrice1'][-1]
+            close_time = rawtick.index[-1]
+            open_price = rawtick['BidPrice1'][0]
+            open_time = rawtick.index[0]
+            for index, item in rawtick.iterrows():
+                # 止盈
+                if open_price - item['AskPrice1'] >= profit_limit:
+                    close_price = item['AskPrice1']
+                    close_time = index
+                    break
+                # 时间止损
+                if '16:00:00' >= str(index).split(' ')[-1] > finish_time:
+                    close_price = item['AskPrice1']
+                    close_time = index
+                    break
+                # 巨量损失止损
+                if item['BidPrice1'] - open_price >= loss_limit:
+                    close_price = item['BidPrice1']
+                    close_time = index
+                    break
+
+        if dir == 'buy_more':
+            profit = mintradeuint.find_trade_unit(exch, ins)*(close_price - open_price)
+            hand_time = (close_time - open_time).seconds
+        else:
+            profit = mintradeuint.find_trade_unit(exch, ins)*(open_price - close_price)
+            hand_time = (close_time - open_time).seconds
+
+        self.ins_list.append(ins)
+        self.date_list.append(date)
+        self.open_time_list.append(open_time)
+        self.open_price_list.append(open_price)
+        self.close_time_list.append(close_time)
+        self.close_price_list.append(close_price)
+        self.hand_time_list.append(hand_time)
+        self.profit_list.append(profit)
+        self.dir_list.append(dir)
+
+        temp_comm = self.get_commission(exch, ins, open_time, open_price, close_time, close_price)
+        self.comm_list.append(temp_comm)
+
+        temp_deposit = mindeposit.find_deposit(exch, ins)*max(open_price, close_price)*\
+            mintradeuint.find_trade_unit(exch, ins)
+        self.margin_list.append(temp_deposit)
+
+        return [profit, hand_time]
+
+    def day_trader2(self, exch , ins, date, timelist, dir, profit_limit, loss_limit, tyr_count=5, subject='level1'):
         start_time = timelist[0]
         stop_time = timelist[1]
         finish_time = timelist[2]
@@ -227,8 +303,15 @@ class geckoInvest:
         return ret_df
 
     def get_summary(self, ret_df, is_save=True):
+        if ret_df.size == 0:
+            print('result is null')
+            return
+
+        average_cost = np.mean(ret_df.margin)
+
         temp_profit_df = (ret_df.profit - ret_df.comm).copy()
         self.result['annualized_returns'] = sum(temp_profit_df)/((ret_df.index[-1] - ret_df.index[0] ).days + 1)*355
+        self.result['apr'] = round(self.result['annualized_returns']/average_cost, 2)
 
         profit_cumsum = np.array(temp_profit_df).cumsum()
         index_j = np.argmax(np.maximum.accumulate(profit_cumsum) - profit_cumsum)
@@ -238,6 +321,7 @@ class geckoInvest:
             index_i = np.argmax(profit_cumsum[:index_j])
             self.result['max_drawdown'] =profit_cumsum[index_j] - profit_cumsum[index_i]
 
+        self.result['mdr'] = round(self.result['max_drawdown']/average_cost, 2)
         self.result['average_holding_time(s)'] = sum(ret_df.hand_time) / len(ret_df.hand_time)
         self.result['profit_money'] = sum([item for item in temp_profit_df if item > 0])
         self.result['loss_money'] = sum([item for item in temp_profit_df if item < 0])
@@ -257,7 +341,7 @@ class geckoInvest:
         if is_save:
             ins_type = [re.split('([0-9]+)', item)[0] for item in ret_df.ins]
 
-            self.file_name = '%s/%s_%.2f_%d.csv'%(self.base_dir, '_'.join(list(set(ins_type))), self.result['annualized_returns'], os.getpid())
+            self.file_name = '%s/%s_%d_%.2f.csv'%(self.base_dir, '_'.join(list(set(ins_type))), os.getpid(), self.result['annualized_returns'])
             ret_df.to_csv(self.file_name)
 
             with open(self.file_name,mode='a',newline='',encoding='utf8') as cfa:
@@ -266,7 +350,22 @@ class geckoInvest:
                     wf.writerow([key,value])
             cfa.close()
 
+        self.clear()
+
         return self.result
+
+    def clear(self):
+        self.ins_list.clear()
+        self.date_list.clear()
+        self.open_time_list.clear()
+        self.open_price_list.clear()
+        self.close_time_list.clear()
+        self.close_price_list.clear()
+        self.hand_time_list.clear()
+        self.profit_list.clear()
+        self.dir_list.clear()
+        self.comm_list.clear()
+        self.margin_list.clear()
 
 geckoinvest = geckoInvest()
 # ret = geckoinvest.get_df_from_file_list(['/home/tsaodai/.record/2022-04-19/SF_RM_PK_WH_CJ_AP_OI_FG_ZC_SM_CF_MA_SR_CY_PF_JR_UR_TA_SA_27304_594.csv'])
