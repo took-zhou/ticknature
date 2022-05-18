@@ -98,7 +98,7 @@ class minTickPrice():
             数值
 
         Examples:
-            >>> from nature_analysis.min_tickprice import mintickprice
+            >>> from ticknature.min_tickprice import mintickprice
             >>> mintickprice.find_tick_price('DCE', 'l2009')
             25
         """
@@ -129,7 +129,7 @@ class minTickPrice():
             返回的数据格式是 dict
 
         Examples:
-            >>> from nature_analysis.min_tickprice import mintickprice
+            >>> from ticknature.min_tickprice import mintickprice
             >>> mintickprice.find_all()
             {'SHFE': {'cu': 50, 'al': 25, 'zn': 25, 'pb': 25, 'ni': 10, 'sn': 10, 'au': 20, 'ag': 15, 'rb': 10, \
             'wr': 10, 'hc': 10, 'ss': 25, 'sc': 100, 'lu': 10, 'fu': 10, 'bu': 20, 'ru': 50, 'nr': 50, 'sp': 20}, \

@@ -18,7 +18,7 @@ class meanLine():
             返回的数据格式是 dataframe 格式，包含均线信息
 
         Examples:
-            >>> from nature_analysis.mean_line import mline
+            >>> from ticknature.mean_line import mline
             >>> mline.get_mean_line('CZCE', 'MA105', '20210512', '1D', 20)
             Timeindex
             2021-04-12    2401.20

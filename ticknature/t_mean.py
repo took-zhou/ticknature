@@ -18,7 +18,7 @@ class t_mean():
             返回的数据格式是 float类型
 
         Examples:
-            >>> from nature_analysis.t_mean import tmean
+            >>> from ticknature.t_mean import tmean
             >>> tmean.score('DCE', 'c2105', '20210201', '20210202', ['21:00:00', '23:00:00'])
             0.37185
         """

@@ -23,7 +23,7 @@ class cointFutures():
             返回的数据类型是 dataframe
 
         Examples:
-            >>> from nature_analysis.coint import cointfuture
+            >>> from ticknature.coint import cointfuture
             >>> cointfuture.get_pair_data('CZCE', 'MA201', 'CZCE', 'MA205', ['20211101', '20211130'])
                                     MA201_Close  MA205_Close  CloseSub
                 2021-10-29 21:01:00       2840.0       2573.0     267.0
@@ -69,7 +69,7 @@ class cointFutures():
             元数据, 包含协整数据
 
         Examples:
-            >>> from nature_analysis.coint import cointfuture
+            >>> from ticknature.coint import cointfuture
             >>> ret = cointfuture.get_pair_data('CZCE', 'MA201', 'CZCE', 'MA205', ['20211101', '20211130'])
             >>> cointfuture.get_coint(ret)
             (-2.6843397846607586, 0.20526149177619968, array([-3.89788371, -3.33693524, -3.04500891]))

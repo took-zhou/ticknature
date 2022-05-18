@@ -97,7 +97,7 @@ class instrumentInfo():
             列表
 
         Examples:
-            >>> from nature_analysis.instrument_info import instrumentinfo
+            >>> from ticknature.instrument_info import instrumentinfo
             >>> instrumentinfo.find_ins('DCE', 'english')
             '
         """
@@ -151,7 +151,7 @@ class instrumentInfo():
             数值
 
         Examples:
-            >>> from nature_analysis.instrument_info import instrumentinfo
+            >>> from ticknature.instrument_info import instrumentinfo
             >>> instrumentinfo.find_chinese_name('DCE', 'MA109')
             甲醇
         """
@@ -190,7 +190,7 @@ class instrumentInfo():
             数值
 
         Examples:
-            >>> from nature_analysis.instrument_info import instrumentinfo
+            >>> from ticknature.instrument_info import instrumentinfo
             >>> instrumentinfo.find_ins_type('DCE', 'MA109')
             MA
         """
@@ -207,7 +207,7 @@ class instrumentInfo():
             数值
 
         Examples:
-            >>> from nature_analysis.instrument_info import instrumentinfo
+            >>> from ticknature.instrument_info import instrumentinfo
             >>> instrumentinfo.find_exch('MA109')
             DCE
         """

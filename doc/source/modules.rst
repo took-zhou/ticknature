@@ -1,7 +1,7 @@
-nature_analysis
+ticknature
 ===============
 
 .. toctree::
    :maxdepth: 4
 
-   nature_analysis
+   ticknature

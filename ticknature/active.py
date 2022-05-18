@@ -42,7 +42,7 @@ class activeFuture:
             返回的数据类型是 list， 包含所有的日期数据
 
         Examples:
-            >>> from nature_analysis.active import activefuture
+            >>> from ticknature.active import activefuture
             >>> activefuture.get_date('DCE', 'c2105', 10000, 10000)
            ['20200716', '20210205', ... '20200902', '20210428', '20210506', '20210426']
         """
@@ -72,7 +72,7 @@ class activeFuture:
             result[3] 持仓量大于1000000&& 成交量大于1000000占所有天数的比重是百分0.02
 
         Examples:
-            >>> from nature_analysis.active import activefuture
+            >>> from ticknature.active import activefuture
             >>> activefuture.get('DCE', 'c2105')
             ['c2105', 0.96, 0.75, 0.01]
         """

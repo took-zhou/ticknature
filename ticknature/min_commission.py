@@ -96,7 +96,7 @@ class minCommission():
             数值
 
         Examples:
-            >>> from nature_analysis.min_commission import mincommission
+            >>> from ticknature.min_commission import mincommission
             >>> mincommission.find_commission('DCE', 'l2009')
             0.08
         """
@@ -127,7 +127,7 @@ class minCommission():
             返回的数据格式是 dict
 
         Examples:
-            >>> from nature_analysis.min_commission import mincommission
+            >>> from ticknature.min_commission import mincommission
             >>> mincommission.find_all()
             {'SHFE': {'cu': 0.1, 'al': 0.1, ... 'T': 0.02, 'TF': 0.012}}
         """

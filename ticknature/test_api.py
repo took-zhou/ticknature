@@ -1,7 +1,7 @@
 import pytest
 
 def test_active():
-    from nature_analysis.active import activefuture
+    from ticknature.active import activefuture
 
     ret = activefuture.get('CZCE', 'MA201')
     assert(ret[2]>0.5)
@@ -11,7 +11,7 @@ def test_active():
     assert(len(ret) > 10)
 
 def test_coint():
-    from nature_analysis.coint import cointfuture
+    from ticknature.coint import cointfuture
 
     ret = cointfuture.get_pair_data('CZCE', 'MA201', 'CZCE', 'MA205', ['20211101', '20211130'])
     assert(len(ret) > 10)
@@ -19,7 +19,7 @@ def test_coint():
     assert(ret[0]<-2.5)
 
 def test_dominant():
-    from nature_analysis.dominant import dominant
+    from ticknature.dominant import dominant
 
     ret = dominant.get_date('CZCE', 'TA205')
     assert(len(ret)>10)
@@ -31,7 +31,7 @@ def test_dominant():
     assert(ret!='')
 
 def test_instrument_info():
-    from nature_analysis.instrument_info import instrumentinfo
+    from ticknature.instrument_info import instrumentinfo
 
     ret = instrumentinfo.find_chinese_name('CZCE', 'MA205')
     assert(ret=='甲醇')
@@ -43,7 +43,7 @@ def test_instrument_info():
     assert(ret=='MA')
 
 def test_trade_date():
-    from nature_analysis.trade_date import tradedate
+    from ticknature.trade_date import tradedate
     ret = tradedate.get_tick_date('2022-04-04 09:00:00.500')
     assert(ret=='20220404')
 
@@ -60,11 +60,11 @@ def test_trade_date():
     assert(ret=='20220411')
 
 def test_min():
-    from nature_analysis.min_commission import mincommission
-    from nature_analysis.min_deposit import mindeposit
-    from nature_analysis.min_tickprice import mintickprice
-    from nature_analysis.min_ticksize import minticksize
-    from nature_analysis.min_tradeuint import mintradeuint
+    from ticknature.min_commission import mincommission
+    from ticknature.min_deposit import mindeposit
+    from ticknature.min_tickprice import mintickprice
+    from ticknature.min_ticksize import minticksize
+    from ticknature.min_tradeuint import mintradeuint
 
 if __name__ =="__main__":
     pytest.main()

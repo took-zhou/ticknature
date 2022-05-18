@@ -4,7 +4,7 @@ import re
 import datetime
 from tickmine.api import get_date
 from tickmine.api import get_ins
-from nature_analysis.instrument_info import instrumentinfo
+from ticknature.instrument_info import instrumentinfo
 
 class dominantFuture:
     def __init__(self):
@@ -126,7 +126,7 @@ class dominantFuture:
             返回的数据类型是 list， 包含所有的主力合约月份
 
         Examples:
-            >>> from nature_analysis.dominant import dominant
+            >>> from ticknature.dominant import dominant
             >>> dominant.get_year('CZCE', 'MA')
             {'01': ['08', '09', '10', '11'], '05': ['12', '01', '02', '03'], '09': ['04', '05', '06', '07']}
         """
@@ -163,7 +163,7 @@ class dominantFuture:
             返回的数据类型是 list， 包含所有的主力合约月份
 
         Examples:
-            >>> from nature_analysis.dominant import dominant
+            >>> from ticknature.dominant import dominant
             >>> dominant.get_month('CZCE', 'MA')
            ['01', '05', '09']
         """
@@ -204,7 +204,7 @@ class dominantFuture:
             返回的数据类型是 list， 包含所有的日期数据
 
         Examples:
-            >>> from nature_analysis.dominant import dominant
+            >>> from ticknature.dominant import dominant
             >>> dominant.get_date('DCE', 'c2105')
            ['20200716', '20210205', ... '20200902', '20210428', '20210506', '20210426']
         """
@@ -247,7 +247,7 @@ class dominantFuture:
             返回的数据类型是 list， 包含该交易所下面所有的合约
 
         Examples:
-            >>> from nature_analysis.dominant import dominant
+            >>> from ticknature.dominant import dominant
             >>> dominant.get_instruments('CZCE')
            ['c2109', 'pg2109', ... 'jm2105', 'pp2007', 'pp2111', 'eb2204']
         """
@@ -283,7 +283,7 @@ class dominantFuture:
             返回的数据类型是字符串，合约名称
 
         Examples:
-            >>> from nature_analysis.dominant import dominant
+            >>> from ticknature.dominant import dominant
             >>> dominant.get_newest_instrument('DCE', 'c')
            'c2205'
         """

@@ -17,7 +17,7 @@ class tradeDate():
             返回的数据类型是 string, 代表时间
 
         Examples:
-            >>> from nature_analysis.trade_date import tradedate
+            >>> from ticknature.trade_date import tradedate
             >>> tradedate.get_tick_date('2021-05-14-09:02:22.0')
            '20210514'
         """
@@ -61,7 +61,7 @@ class tradeDate():
             返回的数据类型是 string, 代表时间
 
         Examples:
-            >>> from nature_analysis.trade_date import tradedate
+            >>> from ticknature.trade_date import tradedate
             >>> tradedate.get_prev_data('20210806')
            '20210805'
         """
@@ -96,7 +96,7 @@ class tradeDate():
             返回的数据类型是 string, 代表时间
 
         Examples:
-            >>> from nature_analysis.trade_date import tradedate
+            >>> from ticknature.trade_date import tradedate
             >>> tradedate.get_after_date('20210806')
            '20210805'
         """
@@ -130,7 +130,7 @@ class tradeDate():
             返回的数据类型是 string, 代表夜市时间
 
         Examples:
-            >>> from nature_analysis.trade_date import tradedate
+            >>> from ticknature.trade_date import tradedate
             >>> tradedate.get_night_data('20210806')
            '20210805'
         """
@@ -162,7 +162,7 @@ class tradeDate():
             返回的数据类型是 bool
 
         Examples:
-            >>> from nature_analysis.trade_date import tradedate
+            >>> from ticknature.trade_date import tradedate
             >>> tradedate.is_delivery_month('DCE', 'c2105')
            True
         """

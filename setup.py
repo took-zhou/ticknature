@@ -5,7 +5,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name="nature_analysis",
+    name="ticknature",
     version="1.3.8",
     author="zhoufan",
     author_email="zhoufan@cdsslh.com",

@@ -7,7 +7,7 @@ Submodules
 nature\_analysis.check\_ticktime module
 ---------------------------------------
 
-.. automodule:: nature_analysis.check_ticktime
+.. automodule:: ticknature.check_ticktime
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ nature\_analysis.check\_ticktime module
 nature\_analysis.coint module
 -----------------------------
 
-.. automodule:: nature_analysis.coint
+.. automodule:: ticknature.coint
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ nature\_analysis.coint module
 nature\_analysis.dominant module
 --------------------------------
 
-.. automodule:: nature_analysis.dominant
+.. automodule:: ticknature.dominant
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ nature\_analysis.dominant module
 nature\_analysis.global\_config module
 --------------------------------------
 
-.. automodule:: nature_analysis.global_config
+.. automodule:: ticknature.global_config
    :members:
    :undoc-members:
    :show-inheritance:
@@ -39,7 +39,7 @@ nature\_analysis.global\_config module
 nature\_analysis.k\_line module
 -------------------------------
 
-.. automodule:: nature_analysis.k_line
+.. automodule:: ticknature.k_line
    :members:
    :undoc-members:
    :show-inheritance:
@@ -47,7 +47,7 @@ nature\_analysis.k\_line module
 nature\_analysis.mean\_line module
 ----------------------------------
 
-.. automodule:: nature_analysis.mean_line
+.. automodule:: ticknature.mean_line
    :members:
    :undoc-members:
    :show-inheritance:
@@ -55,7 +55,7 @@ nature\_analysis.mean\_line module
 nature\_analysis.min\_tickprice module
 --------------------------------------
 
-.. automodule:: nature_analysis.min_tickprice
+.. automodule:: ticknature.min_tickprice
    :members:
    :undoc-members:
    :show-inheritance:
@@ -63,7 +63,7 @@ nature\_analysis.min\_tickprice module
 nature\_analysis.min\_ticksize module
 -------------------------------------
 
-.. automodule:: nature_analysis.min_ticksize
+.. automodule:: ticknature.min_ticksize
    :members:
    :undoc-members:
    :show-inheritance:
@@ -71,7 +71,7 @@ nature\_analysis.min\_ticksize module
 nature\_analysis.min\_tradeuint module
 --------------------------------------
 
-.. automodule:: nature_analysis.min_tradeuint
+.. automodule:: ticknature.min_tradeuint
    :members:
    :undoc-members:
    :show-inheritance:
@@ -79,7 +79,7 @@ nature\_analysis.min\_tradeuint module
 nature\_analysis.trade\_data module
 -----------------------------------
 
-.. automodule:: nature_analysis.trade_data
+.. automodule:: ticknature.trade_data
    :members:
    :undoc-members:
    :show-inheritance:
@@ -87,7 +87,7 @@ nature\_analysis.trade\_data module
 nature\_analysis.trade\_point module
 ------------------------------------
 
-.. automodule:: nature_analysis.trade_point
+.. automodule:: ticknature.trade_point
    :members:
    :undoc-members:
    :show-inheritance:
@@ -95,7 +95,7 @@ nature\_analysis.trade\_point module
 nature\_analysis.trade\_time module
 -----------------------------------
 
-.. automodule:: nature_analysis.trade_time
+.. automodule:: ticknature.trade_time
    :members:
    :undoc-members:
    :show-inheritance:
@@ -103,7 +103,7 @@ nature\_analysis.trade\_time module
 nature\_analysis.word\_index module
 -----------------------------------
 
-.. automodule:: nature_analysis.word_index
+.. automodule:: ticknature.word_index
    :members:
    :undoc-members:
    :show-inheritance:
@@ -111,7 +111,7 @@ nature\_analysis.word\_index module
 Module contents
 ---------------
 
-.. automodule:: nature_analysis
+.. automodule:: ticknature
    :members:
    :undoc-members:
    :show-inheritance:

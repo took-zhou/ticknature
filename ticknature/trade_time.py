@@ -166,7 +166,7 @@ class tradeTime():
             返回的数据类型是 bool
 
         Examples:
-            >>> from nature_analysis.trade_time import tradetime
+            >>> from ticknature.trade_time import tradetime
             >>> tradetime.is_trade_time('DCE', 'l2109', '2020-10-10 12:10:10')
             False
             >>> tradetime.is_trade_time('DCE', 'l2109', '2020-10-10 11:10:10')
@@ -200,7 +200,7 @@ class tradeTime():
             返回的数据类型是 dict ，包含各个时段的时间.
 
         Examples:
-            >>> from nature_analysis.trade_time import tradetime
+            >>> from ticknature.trade_time import tradetime
             >>> tradetime.get_trade_time('SHFE', 'cu2009')
             {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
                 'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
@@ -256,7 +256,7 @@ class tradeTime():
             返回的数据类型是 dict ，包含各个时段的时间. 数值 = H*60 + M
 
         Examples:
-            >>> from nature_analysis.trade_time import tradetime
+            >>> from ticknature.trade_time import tradetime
             >>> tradetime.find_all()
             ...
         """

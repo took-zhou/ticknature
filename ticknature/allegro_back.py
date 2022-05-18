@@ -1,8 +1,8 @@
 import sys
 
-from nature_analysis.dominant import dominant
-from nature_analysis.gecko_invest import geckoinvest
-from nature_analysis.instrument_info import instrumentinfo
+from ticknature.dominant import dominant
+from ticknature.gecko_invest import geckoinvest
+from ticknature.instrument_info import instrumentinfo
 
 class AllegroBack():
     def __init__(self):

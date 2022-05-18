@@ -10,7 +10,7 @@ tick数据性质分析, 包括原始的性质如最小变动单位, 一手交易
 --------
 
 | 为了统一操作环境，将数据映射到interpreter镜像创建的容器中(或是其他容器)，映射路径/home/zhoufan/baidunetdisk:/share/baidunetdisk
-| 安装nature_analysis包：pip install --index-url http://devpi.cdsslh.com:8090/root/dev nature_analysis --trusted-host devpi.cdsslh.com
+| 安装ticknature包：pip install --index-url http://devpi.cdsslh.com:8090/root/dev ticknature --trusted-host devpi.cdsslh.com
 
 功能
 ----
@@ -19,7 +19,7 @@ tick数据性质分析, 包括原始的性质如最小变动单位, 一手交易
 
 python code::
 
-    from nature_analysis.min_tradeuint import mintradeuint
+    from ticknature.min_tradeuint import mintradeuint
 
     # 查找所有合约品种的交易单位
     mintradeuint.find_all()
@@ -33,7 +33,7 @@ python code::
 
 python code::
 
-    from nature_analysis.min_ticksize import minticksize
+    from ticknature.min_ticksize import minticksize
 
     # 查找所有合约品种的交易单位
     minticksize.find_all()
@@ -47,7 +47,7 @@ python code::
 
 python code::
 
-    from nature_analysis.min_tickprice import mintickprice
+    from ticknature.min_tickprice import mintickprice
 
     # 查找所有合约品种的交易单位
     mintickprice.find_all()
@@ -62,7 +62,7 @@ python code::
 python code::
 
     # 获取单个合约交易时间表
-    from nature_analysis.trade_time import tradetime
+    from ticknature.trade_time import tradetime
     print(tradetime.get_trade_time('SHFE', 'cu2009'))
 
 输出：{'morning': [[540, 615], [630, 690]], 'afternoon': [[810, 900]], 'night': [[1260, 1440], [0, 60]]}
@@ -77,7 +77,7 @@ python code::
 python code::
 
     # 判断某个时刻是否在交易时间内
-    from nature_analysis.trade_time import tradetime
+    from ticknature.trade_time import tradetime
     print(tradetime.is_trade_time('DCE', 'l2109', '2020-10-10 12:10:10'))
 
 输出：False
@@ -90,7 +90,7 @@ python code::
 
 python code::
 
-    from nature_analysis.dominant import dominant
+    from ticknature.dominant import dominant
 
     dominant.paramInput['dataRootPath'] = '/share/baidunetdisk/reconstruct/tick/DCE/DCE/c2105'
     dominant.paramInput['duration']['begin'] = '2021-01-01'
@@ -115,7 +115,7 @@ python code::
 
 python code::
 
-    from nature_analysis.coint import coint
+    from ticknature.coint import coint
 
     coint.paramInput['dataRootPath'] = '/share/baidunetdisk/reconstruct/tick'
 
@@ -135,14 +135,14 @@ python code::
 
 python code::
 
-    from nature_analysis.trade_point import tradepoint
+    from ticknature.trade_point import tradepoint
     tradepoint.get_trade_point('SHFE', 'cu2109', '20210329', include_night=True)
 
 基于提取出的交易点，生成相应的峰
 
 python code::
 
-    from nature_analysis.trade_point import tradepoint
+    from ticknature.trade_point import tradepoint
     tradepoint.get_trade_spectrum('SHFE', 'cu2109', '20210329', include_night=True)
 
 合约交易日期提取
@@ -151,7 +151,7 @@ python code::
 
 python code::
 
-    from nature_analysis.trade_data import tradedata
+    from ticknature.trade_data import tradedata
     tradedata.get_trade_data('DCE', 'c2105')
 
 返回值：['20200716', '20210205', '20210329'...'20210428', '20210426']
@@ -161,7 +161,7 @@ python code::
 
 python code::
 
-    from nature_analysis.trade_data import tradedata
+    from ticknature.trade_data import tradedata
     tradedata.get_instruments('DCE')
 
 返回值：['c2109', 'pg2109', 'pp2201',...'jd2112', 'eb2204']
@@ -170,7 +170,7 @@ python code::
 
 python code::
 
-    from nature_analysis.trade_data import tradedata
+    from ticknature.trade_data import tradedata
     tradedata.get_last_instrument('DCE', 'c2011')
 
 返回值：'c2111'
@@ -179,7 +179,7 @@ python code::
 
 python code::
 
-    from nature_analysis.trade_data import tradedata
+    from ticknature.trade_data import tradedata
     tradedata.is_delivery_month('DCE', 'c2011')
 
 返回值：False or True

@@ -12,12 +12,12 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../nature_analysis'))
+sys.path.insert(0, os.path.abspath('../../ticknature'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'nature_analysis'
+project = 'ticknature'
 copyright = '2021, Chaodai'
 author = 'Chaodai'
 

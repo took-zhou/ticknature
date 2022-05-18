@@ -1,8 +1,8 @@
 from tickmine.api import get_level1
 from tickmine.api import get_rawtick
-from nature_analysis.min_tradeuint import mintradeuint
-from nature_analysis.min_commission import mincommission
-from nature_analysis.min_deposit import mindeposit
+from ticknature.min_tradeuint import mintradeuint
+from ticknature.min_commission import mincommission
+from ticknature.min_deposit import mindeposit
 
 import pandas as pd
 import datetime

@@ -97,7 +97,7 @@ class minTradeUint():
             数值
 
         Examples:
-            >>> from nature_analysis.min_tradeuint import mintradeuint
+            >>> from ticknature.min_tradeuint import mintradeuint
             >>> mintradeuint.find_trade_unit('DCE', 'l2009')
             5
         """
@@ -128,7 +128,7 @@ class minTradeUint():
             返回的数据格式是 dict
 
         Examples:
-            >>> from nature_analysis.min_tradeuint import mintradeuint
+            >>> from ticknature.min_tradeuint import mintradeuint
             >>> mintradeuint.find_all()
             {'SHFE': {'cu': 5, 'al': 5, 'zn': 5, 'pb': 5, 'ni': 1, 'sn': 1, 'au': 1000, 'ag': 15, \
             'rb': 10, 'wr': 10, 'hc': 10, 'ss': 5, 'sc': 1000, 'lu': 10, 'fu': 10, 'bu': 10, \

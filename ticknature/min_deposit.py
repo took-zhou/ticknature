@@ -96,7 +96,7 @@ class minDeposit():
             数值
 
         Examples:
-            >>> from nature_analysis.min_deposit import mindeposit
+            >>> from ticknature.min_deposit import mindeposit
             >>> mindeposit.find_deposit('DCE', 'l2009')
             0.08
         """
@@ -127,7 +127,7 @@ class minDeposit():
             返回的数据格式是 dict
 
         Examples:
-            >>> from nature_analysis.min_ticksize import mindeposit
+            >>> from ticknature.min_ticksize import mindeposit
             >>> mindeposit.find_all()
             {'SHFE': {'cu': 0.1, 'al': 0.1, ... 'T': 0.02, 'TF': 0.012}}
         """

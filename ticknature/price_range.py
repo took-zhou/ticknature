@@ -19,7 +19,7 @@ class priceRange():
             返回的数据格式是 dataframe 格式，包含幅度信息
 
         Examples:
-            >>> from nature_analysis.price_range import pricerange
+            >>> from ticknature.price_range import pricerange
             >>> pricerange.get_range_distribute('CZCE', 'MA105', '20210512', '1D')
             ...
         """
