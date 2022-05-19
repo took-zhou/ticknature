@@ -9,6 +9,18 @@ class instrumentInfo():
         self.DCE = {}
         self.INE = {}
         self.CFFEX = {}
+        self.SHSE = {}
+        self.SZSE = {}
+
+        self.exch = {}
+        self.exch['SHFE'] = self.SHFE
+        self.exch['CZCE'] = self.CZCE
+        self.exch['DCE'] = self.DCE
+        self.exch['INE'] = self.INE
+        self.exch['CFFEX'] = self.CFFEX
+        self.exch['SHSE'] = self.SHSE
+        self.exch['SZSE'] = self.SZSE
+
         self.SHFE['cu'] = '铜'
         self.SHFE['al'] = '铝'
         self.SHFE['zn'] = '锌'
@@ -86,6 +98,42 @@ class instrumentInfo():
         self.CFFEX['T'] = '10年期国债'
         self.CFFEX['TF'] = '5年期国债'
 
+        self.SHSE['110038'] = '济川转债'
+        self.SHSE['110043'] = '无锡转债'
+        self.SHSE['110044'] = '广电转债'
+        self.SHSE['110045'] = '海澜转债'
+        self.SHSE['110047'] = '山鹰转债'
+        self.SHSE['110048'] = '福能转债'
+        self.SHSE['110052'] = '贵广转债'
+        self.SHSE['110053'] = '苏银转债'
+        self.SHSE['110055'] = '伊力转债'
+        self.SHSE['110056'] = '亨通转债'
+        self.SHSE['110057'] = '现代转债'
+        self.SHSE['110058'] = '永鼎转债'
+        self.SHSE['110059'] = '浦发转债'
+        self.SHSE['110060'] = '天路转债'
+        self.SHSE['110061'] = '川投转债'
+        self.SHSE['110062'] = '烽火转债'
+        self.SHSE['110063'] = '鹰19转债'
+        self.SHSE['110064'] = '建工转债'
+        self.SHSE['110067'] = '华安转债'
+        self.SHSE['110068'] = '龙净转债'
+        self.SHSE['110070'] = '凌钢转债'
+        self.SHSE['110071'] = '湖盐转债'
+        self.SHSE['110072'] = '广汇转债'
+        self.SHSE['110073'] = '国投转债'
+        self.SHSE['110074'] = '精达转债'
+        self.SHSE['110075'] = '南航转债'
+        self.SHSE['110076'] = '华海转债'
+        self.SHSE['110077'] = '洪城转债'
+        self.SHSE['110079'] = '杭银转债'
+        self.SHSE['110080'] = '东湖转债	'
+        self.SHSE['110081'] = '闻泰转债'
+        self.SHSE['110082'] = '	宏发转债'
+        self.SHSE['110083'] = '苏租转债'
+        self.SHSE['110084'] = '贵燃转债'
+        self.SHSE['110085'] = '通22转债'
+
     def find_ins(self, exch, type='english', include_once_used=False):
         """ 交易所包含的合约
 
@@ -102,36 +150,12 @@ class instrumentInfo():
             '
         """
         ret = []
-        if exch == 'SHFE':
-            for item in self.SHFE:
-                if type == 'english':
-                    ret.append(item)
-                elif type == 'chinese':
-                    ret.append(self.SHFE[item])
-        elif exch == 'CZCE':
-            for item in self.CZCE:
-                if type == 'english':
-                    ret.append(item)
-                elif type == 'chinese':
-                    ret.append(self.CZCE[item])
-        elif exch == 'DCE':
-            for item in self.DCE:
-                if type == 'english':
-                    ret.append(item)
-                elif type == 'chinese':
-                    ret.append(self.DCE[item])
-        elif exch == 'INE':
-            for item in self.INE:
-                if type == 'english':
-                    ret.append(item)
-                elif type == 'chinese':
-                    ret.append(self.INE[item])
-        elif exch == 'CFFEX':
-            for item in self.CFFEX:
-                if type == 'english':
-                    ret.append(item)
-                elif type == 'chinese':
-                    ret.append(self.CFFEX[item])
+
+        for item in self.exch[exch]:
+            if type == 'english':
+                ret.append(item)
+            elif type == 'chinese':
+                ret.append(self.exch[exch][item])
 
         if include_once_used==False and type == 'english':
             temp_ret = [item for item in ret if item not in self.once_used]
@@ -158,24 +182,12 @@ class instrumentInfo():
         temp = re.split('([0-9]+)', ins)[0]
 
         ret = ''
-        if exch == 'SHFE':
-            if self.SHFE.__contains__(temp):
-                ret = self.SHFE[temp]
-        elif exch == 'CZCE':
-            if self.CZCE.__contains__(temp):
-                ret = self.CZCE[temp]
-        elif exch == 'DCE':
-            if self.DCE.__contains__(temp):
-                ret = self.DCE[temp]
-        elif exch == 'INE':
-            if self.INE.__contains__(temp):
-                ret = self.INE[temp]
-        elif exch == 'CFFEX':
-            if self.CFFEX.__contains__(temp):
-                ret = self.CFFEX[temp]
-            elif temp == 'IO':
-                # IO对应沪深300股指期权，IF对应沪深300股指期货
-                ret = self.CFFEX['IF']
+
+        if self.exch[exch].__contains__(temp):
+            ret = self.exch[exch][temp]
+        elif temp == 'IO':
+            # IO对应沪深300股指期权，IF对应沪深300股指期货
+            ret = self.exch[exch]['IF']
 
         return ret
 
@@ -224,16 +236,43 @@ class instrumentInfo():
             ret = 'CFFEX'
         elif temp in self.INE.keys():
             ret = 'INE'
+        elif temp in self.SHSE.keys():
+            ret = 'SHSE'
+        elif temp in self.SZSE.keys():
+            ret = 'SZSE'
+
+        return ret
+
+    def find_exch_type(self, exch):
+        """ 查询合约对应的交易所
+
+        Args:
+            ins: 合约代码
+
+        Returns:
+            数值
+
+        Examples:
+            >>> from ticknature.instrument_info import instrumentinfo
+            >>> instrumentinfo.find_exch_type('SHSE')
+            DCE
+        """
+        ret = ''
+        if exch in ['SHSE', 'SZSE']:
+            ret = 'security'
+        elif exch in ['DCE', 'CFFEX', 'CZCE', 'INE', 'SHFE']:
+            ret = 'future'
 
         return ret
 
 instrumentinfo = instrumentInfo()
 
 if __name__=="__main__":
-    # print(instrumentinfo.find_ins('CZCE', 'chinese'))
-    # print(instrumentinfo.find_ins('DCE', 'chinese'))
-    # print(instrumentinfo.find_ins('INE', 'english'))
-    # print(instrumentinfo.find_ins('SHFE', 'english'))
+    print(instrumentinfo.find_ins('CZCE', 'chinese'))
+    print(instrumentinfo.find_ins('DCE', 'chinese'))
+    print(instrumentinfo.find_ins('INE', 'english'))
+    print(instrumentinfo.find_ins('SHFE', 'english'))
     print(instrumentinfo.find_chinese_name('CFFEX', 'IO109C200'))
-    # print(instrumentinfo.find_ins_type('CZCE', 'MA109'))
-    # print(instrumentinfo.find_last_instrument('CZCE', 'MA105'))
+    print(instrumentinfo.find_ins_type('CZCE', 'MA109'))
+
+    print(instrumentinfo.find_ins('SHSE'))
