@@ -1,6 +1,8 @@
 import re
 
+
 class instrumentInfo():
+
     def __init__(self):
         self.once_used = ['ME', 'TC']
 
@@ -21,125 +23,736 @@ class instrumentInfo():
         self.exch['SHSE'] = self.SHSE
         self.exch['SZSE'] = self.SZSE
 
-        self.SHFE['cu'] = '铜'
-        self.SHFE['al'] = '铝'
-        self.SHFE['zn'] = '锌'
-        self.SHFE['pb'] = '铅'
-        self.SHFE['ni'] = '镍'
-        self.SHFE['sn'] = '锡'
-        self.SHFE['au'] = '黄金'
-        self.SHFE['ag'] = '白银'
-        self.SHFE['rb'] = '螺纹钢'
-        self.SHFE['wr'] = '线材'
-        self.SHFE['hc'] = '热轧卷板'
-        self.SHFE['ss'] = '不锈钢'
-        self.SHFE['fu'] = '燃料油'
-        self.SHFE['bu'] = '石油沥青'
-        self.SHFE['ru'] = '天然橡胶'
-        self.SHFE['sp'] = '纸浆'
+        self.SHFE['cu'] = {
+            'commission': [0, 0.00005, 0, 0.00005, 0, 0.0001],
+            'deposit': 0.1,
+            'tickprice': 50,
+            'ticksize': 10,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '铜',
+            'include_option': True
+        }
+        self.SHFE['al'] = {
+            'commission': [3, 0, 3, 0, 3, 0],
+            'deposit': 0.1,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '铝',
+            'include_option': True
+        }
+        self.SHFE['zn'] = {
+            'commission': [3, 0, 3, 0, 3, 0],
+            'deposit': 0.1,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '锌',
+            'include_option': True
+        }
+        self.SHFE['pb'] = {
+            'commission': [0, 0.00004, 0, 0, 0, 0],
+            'deposit': 0.1,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '铅',
+            'include_option': False
+        }
+        self.SHFE['ni'] = {
+            'commission': [3, 0, 3, 0, 15, 0],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 10,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '镍',
+            'include_option': False
+        }
+        self.SHFE['sn'] = {
+            'commission': [3, 0, 0, 0, 3, 0],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 10,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '锡',
+            'include_option': False
+        }
+        self.SHFE['au'] = {
+            'commission': [2, 0, 0, 0, 10, 0],
+            'deposit': 0.08,
+            'tickprice': 20,
+            'ticksize': 0.02,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 1],
+            'chinese_name': '黄金',
+            'include_option': True
+        }
+        self.SHFE['ag'] = {
+            'commission': [0, 0.00001, 0, 0.00001, 0, 0.00005],
+            'deposit': 0.12,
+            'tickprice': 15,
+            'ticksize': 1,
+            'tradeunit': 15,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '白银',
+            'include_option': False
+        }
+        self.SHFE['rb'] = {
+            'commission': [0, 0.00001, 0, 0.00001, 0, 0.00003],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '螺纹钢',
+            'include_option': False
+        }
+        self.SHFE['wr'] = {
+            'commission': [0.00004, 0, 0, 0, 0, 0],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '线材',
+            'include_option': False
+        }
+        self.SHFE['hc'] = {
+            'commission': [0, 0.00001, 0, 0.00001, 0, 0.00003],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '热轧卷板',
+            'include_option': False
+        }
+        self.SHFE['ss'] = {
+            'commission': [2, 0, 0, 0, 0, 0],
+            'deposit': 0.09,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '不锈钢',
+            'include_option': False
+        }
+        self.SHFE['fu'] = {
+            'commission': [0, 0.00001, 0, 0, 0, 0.00075],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '燃料油',
+            'include_option': False
+        }
+        self.SHFE['bu'] = {
+            'commission': [0, 0.00001, 0, 0.00001, 0, 0.00001],
+            'deposit': 0.1,
+            'tickprice': 20,
+            'ticksize': 2,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '石油沥青',
+            'include_option': False
+        }
+        self.SHFE['ru'] = {
+            'commission': [3, 0, 0, 0, 9, 0],
+            'deposit': 0.1,
+            'tickprice': 50,
+            'ticksize': 5,
+            'tradeunit': 10,
+            'trademonth': [1, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+            'chinese_name': '天然橡胶',
+            'include_option': True
+        }
+        self.SHFE['sp'] = {
+            'commission': [0, 0.00005, 0, 0, 0, 0.00025],
+            'deposit': 0.09,
+            'tickprice': 20,
+            'ticksize': 2,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纸浆',
+            'include_option': False
+        }
 
-        self.CZCE['WH'] = '强麦'
-        self.CZCE['PM'] = '普麦'
-        self.CZCE['CF'] = '棉花'
-        self.CZCE['SR'] = '白糖'
-        self.CZCE['OI'] = '菜籽油'
-        self.CZCE['RI'] = '早籼稻'
-        self.CZCE['RS'] = '油菜籽'
-        self.CZCE['RM'] = '菜籽粕'
-        self.CZCE['JR'] = '粳稻'
-        self.CZCE['LR'] = '晚籼稻'
-        self.CZCE['CY'] = '棉纱'
-        self.CZCE['AP'] = '苹果'
-        self.CZCE['CJ'] = '红枣'
-        self.CZCE['TA'] = 'PTA'
-        self.CZCE['MA'] = '甲醇'
-        self.CZCE['ME'] = '甲醇(曾用)'
-        self.CZCE['FG'] = '玻璃'
-        self.CZCE['ZC'] = '动力煤'
-        self.CZCE['TC'] = '动力煤(曾用)'
-        self.CZCE['SF'] = '硅铁'
-        self.CZCE['SM'] = '锰硅'
-        self.CZCE['UR'] = '尿素'
-        self.CZCE['SA'] = '纯碱'
-        self.CZCE['PF'] = '短纤'
-        self.CZCE['PK'] = '花生'
+        self.CZCE['WH'] = {
+            'commission': [5, 0, 5, 0, 5, 0],
+            'deposit': 0.07,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '强麦',
+            'include_option': False
+        }
+        self.CZCE['PM'] = {
+            'commission': [5, 0, 5, 0, 5, 0],
+            'deposit': 0.06,
+            'tickprice': 50,
+            'ticksize': 1,
+            'tradeunit': 50,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '普麦',
+            'include_option': False
+        }
+        self.CZCE['CF'] = {
+            'commission': [4.3, 0, 0, 0, 0, 0],
+            'deposit': 0.07,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '棉花',
+            'include_option': True
+        }
+        self.CZCE['SR'] = {
+            'commission': [3, 0, 0, 0, 0, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '白糖',
+            'include_option': True
+        }
+        self.CZCE['OI'] = {
+            'commission': [2, 0, 2, 0, 2, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '菜籽油',
+            'include_option': False
+        }
+        self.CZCE['RI'] = {
+            'commission': [2.5, 0, 2.5, 0, 2.5, 0],
+            'deposit': 0.06,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '早籼稻',
+            'include_option': False
+        }
+        self.CZCE['RS'] = {
+            'commission': [2, 0, 2, 0, 2, 0],
+            'deposit': 0.2,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [7, 8, 9, 11],
+            'chinese_name': '油菜籽',
+            'include_option': False
+        }
+        self.CZCE['RM'] = {
+            'commission': [1.5, 0, 3.0, 0, 3.0, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '菜籽粕',
+            'include_option': True
+        }
+        self.CZCE['JR'] = {
+            'commission': [3.0, 0, 3.0, 0, 3.0, 0],
+            'deposit': 0.06,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '粳稻',
+            'include_option': False
+        }
+        self.CZCE['LR'] = {
+            'commission': [3.0, 0, 3.0, 0, 3.0, 0],
+            'deposit': 0.06,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '晚籼稻',
+            'include_option': False
+        }
+        self.CZCE['CY'] = {
+            'commission': [4, 0, 0, 0, 0, 0],
+            'deposit': 0.07,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '棉纱',
+            'include_option': False
+        }
+        self.CZCE['AP'] = {
+            'commission': [5, 0, 5, 0, 20, 0],
+            'deposit': 0.08,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [1, 3, 4, 5, 10, 11, 12],
+            'chinese_name': '苹果',
+            'include_option': False
+        }
+        self.CZCE['CJ'] = {
+            'commission': [3, 0, 3, 0, 15, 0],
+            'deposit': 0.07,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [1, 3, 5, 7, 9, 12],
+            'chinese_name': '红枣',
+            'include_option': False
+        }
+        self.CZCE['TA'] = {
+            'commission': [3, 0, 0, 0, 0, 0],
+            'deposit': 0.06,
+            'tickprice': 10,
+            'ticksize': 2,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'PTA',
+            'include_option': True
+        }
+        self.CZCE['MA'] = {
+            'commission': [2, 0, 2, 0, 10, 0],
+            'deposit': 0.08,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '甲醇',
+            'include_option': True
+        }
+        self.CZCE['ME'] = {
+            'commission': [2, 0, 2, 0, 10, 0],
+            'deposit': 0.08,
+            'tickprice': 50,
+            'ticksize': 1,
+            'tradeunit': 50,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '甲醇(曾用)',
+            'include_option': False
+        }
+        self.CZCE['FG'] = {
+            'commission': [6, 0, 6, 0, 6, 0],
+            'deposit': 0.09,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '玻璃',
+            'include_option': False
+        }
+        self.CZCE['ZC'] = {
+            'commission': [30, 0, 30, 0, 120, 0],
+            'deposit': 0.12,
+            'tickprice': 20,
+            'ticksize': 0.2,
+            'tradeunit': 100,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '动力煤',
+            'include_option': True
+        }
+        self.CZCE['TC'] = {
+            'commission': [30, 0, 30, 0, 120, 0],
+            'deposit': 0.2,
+            'tickprice': 40,
+            'ticksize': 0.2,
+            'tradeunit': 200,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '动力煤(曾用)',
+            'include_option': False
+        }
+        self.CZCE['SF'] = {
+            'commission': [3, 0, 0, 0, 0, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 2,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '硅铁',
+            'include_option': False
+        }
+        self.CZCE['SM'] = {
+            'commission': [3, 0, 0, 0, 30, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 2,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '锰硅',
+            'include_option': False
+        }
+        self.CZCE['UR'] = {
+            'commission': [5, 0, 5, 0, 15, 0],
+            'deposit': 0.07,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '尿素',
+            'include_option': False
+        }
+        self.CZCE['SA'] = {
+            'commission': [3.5, 0, 0, 0, 15, 0],
+            'deposit': 0.09,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纯碱',
+            'include_option': False
+        }
+        self.CZCE['PF'] = {
+            'commission': [3.0, 0, 3.0, 0, 3.0, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 2,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '短纤',
+            'include_option': False
+        }
+        self.CZCE['PK'] = {
+            'commission': [4.0, 0, 4.0, 0, 4.0, 0],
+            'deposit': 0.08,
+            'tickprice': 10,
+            'ticksize': 2,
+            'tradeunit': 5,
+            'trademonth': [1, 3, 4, 10, 11, 12],
+            'chinese_name': '花生',
+            'include_option': False
+        }
 
-        self.DCE['c'] = '玉米'
-        self.DCE['cs'] = '玉米淀粉'
-        self.DCE['a'] = '黄大豆1号'
-        self.DCE['b'] = '黄大豆2号'
-        self.DCE['m'] = '豆粕'
-        self.DCE['y'] = '豆油'
-        self.DCE['p'] = '棕榈油'
-        self.DCE['fb'] = '纤维板'
-        self.DCE['bb'] = '胶合板'
-        self.DCE['jd'] = '鸡蛋'
-        self.DCE['rr'] = '粳米'
-        self.DCE['l'] = '聚乙烯'
-        self.DCE['v'] = '聚氯乙烯'
-        self.DCE['pp'] = '聚丙烯'
-        self.DCE['j'] = '焦炭'
-        self.DCE['jm'] = '焦煤'
-        self.DCE['i'] = '铁矿石'
-        self.DCE['eg'] = '乙二醇'
-        self.DCE['eb'] = '苯乙烯'
-        self.DCE['pg'] = '液化石油气'
-        self.DCE['lh'] = '生猪'
+        self.DCE['c'] = {
+            'commission': [1.2, 0, 1.2, 0, 1.2, 0],
+            'deposit': 0.11,
+            'tickprice': 50,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '玉米',
+            'include_option': True
+        }
+        self.DCE['cs'] = {
+            'commission': [1.5, 0, 1.5, 0, 1.5, 0],
+            'deposit': 0.07,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '玉米淀粉',
+            'include_option': False
+        }
+        self.DCE['a'] = {
+            'commission': [2, 0, 2, 0, 2, 0],
+            'deposit': 0.12,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '黄大豆1号',
+            'include_option': False
+        }
+        self.DCE['b'] = {
+            'commission': [1, 0, 1, 0, 1, 0],
+            'deposit': 0.09,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '黄大豆2号',
+            'include_option': False
+        }
+        self.DCE['m'] = {
+            'commission': [1.5, 0, 1.5, 0, 1.5, 0],
+            'deposit': 0.08,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [1, 3, 5, 7, 8, 9, 11, 12],
+            'chinese_name': '豆粕',
+            'include_option': True
+        }
+        self.DCE['y'] = {
+            'commission': [2.5, 0, 2.5, 0, 2.5, 0],
+            'deposit': 0.08,
+            'tickprice': 20,
+            'ticksize': 2,
+            'tradeunit': 10,
+            'trademonth': [1, 3, 5, 7, 8, 9, 11, 12],
+            'chinese_name': '豆油',
+            'include_option': False
+        }
+        self.DCE['p'] = {
+            'commission': [2.5, 0, 2.5, 0, 2.5, 0],
+            'deposit': 0.1,
+            'tickprice': 20,
+            'ticksize': 2,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '棕榈油',
+            'include_option': True
+        }
+        self.DCE['fb'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.1,
+            'tickprice': 25,
+            'ticksize': 0.05,
+            'tradeunit': 50,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纤维板',
+            'include_option': False
+        }
+        self.DCE['bb'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.4,
+            'tickprice': 25,
+            'ticksize': 0.05,
+            'tradeunit': 500,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '胶合板',
+            'include_option': False
+        }
+        self.DCE['jd'] = {
+            'commission': [0, 0.00015, 0, 0.00015, 0, 0.00015],
+            'deposit': 0.09,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '鸡蛋',
+            'include_option': False
+        }
+        self.DCE['rr'] = {
+            'commission': [1, 0, 1, 0, 1, 0],
+            'deposit': 0.06,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '粳米',
+            'include_option': False
+        }
+        self.DCE['l'] = {
+            'commission': [1, 0, 1, 0, 1, 0],
+            'deposit': 0.08,
+            'tickprice': 5,
+            'ticksize': 1,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '聚乙烯',
+            'include_option': True
+        }
+        self.DCE['v'] = {
+            'commission': [1, 0, 1, 0, 1, 0],
+            'deposit': 0.08,
+            'tickprice': 5,
+            'ticksize': 1,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '聚氯乙烯',
+            'include_option': True
+        }
+        self.DCE['pp'] = {
+            'commission': [1, 0, 1, 0, 1, 0],
+            'deposit': 0.08,
+            'tickprice': 5,
+            'ticksize': 1,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '聚丙烯',
+            'include_option': True
+        }
+        self.DCE['j'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.00014],
+            'deposit': 0.11,
+            'tickprice': 50,
+            'ticksize': 0.5,
+            'tradeunit': 100,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '焦炭',
+            'include_option': False
+        }
+        self.DCE['jm'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.00014],
+            'deposit': 0.11,
+            'tickprice': 30,
+            'ticksize': 0.5,
+            'tradeunit': 60,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '焦煤',
+            'include_option': False
+        }
+        self.DCE['i'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0002],
+            'deposit': 0.12,
+            'tickprice': 50,
+            'ticksize': 0.5,
+            'tradeunit': 100,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '铁矿石',
+            'include_option': True
+        }
+        self.DCE['eg'] = {
+            'commission': [3, 0, 3, 0, 3, 0],
+            'deposit': 0.11,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '乙二醇',
+            'include_option': False
+        }
+        self.DCE['eb'] = {
+            'commission': [3, 0, 3, 0, 3, 0],
+            'deposit': 0.12,
+            'tickprice': 5,
+            'ticksize': 1,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '苯乙烯',
+            'include_option': False
+        }
+        self.DCE['pg'] = {
+            'commission': [6, 0, 6, 0, 6, 0],
+            'deposit': 0.11,
+            'tickprice': 20,
+            'ticksize': 1,
+            'tradeunit': 20,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '液化石油气',
+            'include_option': True
+        }
+        self.DCE['lh'] = {
+            'commission': [0, 0.0002, 0, 0.0002, 0, 0.0004],
+            'deposit': 0.15,
+            'tickprice': 80,
+            'ticksize': 5,
+            'tradeunit': 16,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '生猪',
+            'include_option': False
+        }
 
-        self.INE['sc'] = '原油'
-        self.INE['lu'] = '低硫燃料油'
-        self.INE['nr'] = '20号胶'
-        self.INE['bc'] = '国际铜'
+        self.INE['sc'] = {
+            'commission': [20, 0, 0, 0, 0, 0],
+            'deposit': 0.1,
+            'tickprice': 100,
+            'ticksize': 0.1,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '原油',
+            'include_option': True
+        }
+        self.INE['lu'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.1,
+            'tickprice': 10,
+            'ticksize': 1,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '低硫燃料油',
+            'include_option': False
+        }
+        self.INE['nr'] = {
+            'commission': [0, 0.0002, 0, 0, 0, 0],
+            'deposit': 0.1,
+            'tickprice': 50,
+            'ticksize': 5,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '20号胶',
+            'include_option': False
+        }
+        self.INE['bc'] = {
+            'commission': [0, 0.0001, 0, 0, 0, 0],
+            'deposit': 0.1,
+            'tickprice': 50,
+            'ticksize': 10,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '国际铜',
+            'include_option': False
+        }
 
-        self.CFFEX['IF'] = '沪深300股指'
-        self.CFFEX['IC'] = '中证500股指'
-        self.CFFEX['IH'] = '上证50股指'
-        self.CFFEX['TS'] = '2年期国债'
-        self.CFFEX['T'] = '10年期国债'
-        self.CFFEX['TF'] = '5年期国债'
+        self.CFFEX['IF'] = {
+            'commission': [0, 0.000023, 0, 0.000023, 0, 0.00345],
+            'deposit': 0.12,
+            'tickprice': 60,
+            'ticksize': 0.2,
+            'tradeunit': 300,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '沪深300股指',
+            'include_option': True
+        }
+        self.CFFEX['IC'] = {
+            'commission': [0, 0.000023, 0, 0.000023, 0, 0.00345],
+            'deposit': 0.11,
+            'tickprice': 40,
+            'ticksize': 0.2,
+            'tradeunit': 200,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '中证500股指',
+            'include_option': False
+        }
+        self.CFFEX['IH'] = {
+            'commission': [0, 0.000023, 0, 0.000023, 0, 0.00345],
+            'deposit': 0.14,
+            'tickprice': 60,
+            'ticksize': 0.2,
+            'tradeunit': 300,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '上证50股指',
+            'include_option': False
+        }
+        self.CFFEX['TS'] = {
+            'commission': [3, 0, 0, 0, 0, 0],
+            'deposit': 0.005,
+            'tickprice': 100,
+            'ticksize': 0.005,
+            'tradeunit': 20000,
+            'trademonth': [3, 6, 9, 12],
+            'chinese_name': '2年期国债',
+            'include_option': False
+        }
+        self.CFFEX['T'] = {
+            'commission': [3, 0, 0, 0, 0, 0],
+            'deposit': 0.02,
+            'tickprice': 50,
+            'ticksize': 0.005,
+            'tradeunit': 10000,
+            'trademonth': [3, 6, 9, 12],
+            'chinese_name': '10年期国债',
+            'include_option': False
+        }
+        self.CFFEX['TF'] = {
+            'commission': [3, 0, 0, 0, 0, 0],
+            'deposit': 0.012,
+            'tickprice': 50,
+            'ticksize': 0.005,
+            'tradeunit': 10000,
+            'trademonth': [3, 6, 9, 12],
+            'chinese_name': '5年期国债',
+            'include_option': False
+        }
 
-        self.SHSE['110038'] = '济川转债'
-        self.SHSE['110043'] = '无锡转债'
-        self.SHSE['110044'] = '广电转债'
-        self.SHSE['110045'] = '海澜转债'
-        self.SHSE['110047'] = '山鹰转债'
-        self.SHSE['110048'] = '福能转债'
-        self.SHSE['110052'] = '贵广转债'
-        self.SHSE['110053'] = '苏银转债'
-        self.SHSE['110055'] = '伊力转债'
-        self.SHSE['110056'] = '亨通转债'
-        self.SHSE['110057'] = '现代转债'
-        self.SHSE['110058'] = '永鼎转债'
-        self.SHSE['110059'] = '浦发转债'
-        self.SHSE['110060'] = '天路转债'
-        self.SHSE['110061'] = '川投转债'
-        self.SHSE['110062'] = '烽火转债'
-        self.SHSE['110063'] = '鹰19转债'
-        self.SHSE['110064'] = '建工转债'
-        self.SHSE['110067'] = '华安转债'
-        self.SHSE['110068'] = '龙净转债'
-        self.SHSE['110070'] = '凌钢转债'
-        self.SHSE['110071'] = '湖盐转债'
-        self.SHSE['110072'] = '广汇转债'
-        self.SHSE['110073'] = '国投转债'
-        self.SHSE['110074'] = '精达转债'
-        self.SHSE['110075'] = '南航转债'
-        self.SHSE['110076'] = '华海转债'
-        self.SHSE['110077'] = '洪城转债'
-        self.SHSE['110079'] = '杭银转债'
-        self.SHSE['110080'] = '东湖转债	'
-        self.SHSE['110081'] = '闻泰转债'
-        self.SHSE['110082'] = '	宏发转债'
-        self.SHSE['110083'] = '苏租转债'
-        self.SHSE['110084'] = '贵燃转债'
-        self.SHSE['110085'] = '通22转债'
-
-    def find_ins(self, exch, type='english', include_once_used=False):
+    def find_ins(self, exch, include_once_used=False):
         """ 交易所包含的合约
 
         Args:
             exch: 交易所简称
-            type: 'english', 'chinese'
 
         Returns:
             列表
@@ -152,19 +765,15 @@ class instrumentInfo():
         ret = []
 
         for item in self.exch[exch]:
-            if type == 'english':
-                ret.append(item)
-            elif type == 'chinese':
-                ret.append(self.exch[exch][item])
+            if include_once_used==False:
+                if '曾用' in self.exch[exch][item]['chinese_name']:
+                    continue
 
-        if include_once_used==False and type == 'english':
-            temp_ret = [item for item in ret if item not in self.once_used]
-        elif include_once_used==False and type == 'chinese':
-            temp_ret = [item for item in ret if '曾用' not in item]
+            ret.append(item)
 
-        return temp_ret
+        return ret
 
-    def find_chinese_name(self, exch, ins):
+    def find_info(self, exch, ins):
         """ 查询英文合约对应的中文名称
 
         Args:
@@ -185,10 +794,6 @@ class instrumentInfo():
 
         if self.exch[exch].__contains__(temp):
             ret = self.exch[exch][temp]
-        elif temp == 'IO':
-            # IO对应沪深300股指期权，IF对应沪深300股指期货
-            ret = self.exch[exch]['IF']
-
         return ret
 
     def find_ins_type(self, exch, ins):
@@ -265,14 +870,11 @@ class instrumentInfo():
 
         return ret
 
+
 instrumentinfo = instrumentInfo()
 
-if __name__=="__main__":
-    print(instrumentinfo.find_ins('CZCE', 'chinese'))
-    print(instrumentinfo.find_ins('DCE', 'chinese'))
-    print(instrumentinfo.find_ins('INE', 'english'))
-    print(instrumentinfo.find_ins('SHFE', 'english'))
-    print(instrumentinfo.find_chinese_name('CFFEX', 'IO109C200'))
-    print(instrumentinfo.find_ins_type('CZCE', 'MA109'))
-
-    print(instrumentinfo.find_ins('SHSE'))
+if __name__ == "__main__":
+    ret = instrumentinfo.find_ins('CZCE')
+    print(ret)
+    ret = instrumentinfo.find_info('CZCE', 'TA')
+    print(ret)

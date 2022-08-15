@@ -1,7 +1,9 @@
-import sys
 import re
+import sys
+
 
 class minTickPrice():
+
     def __init__(self):
         self.SHFE = {}
         self.CZCE = {}
@@ -24,6 +26,11 @@ class minTickPrice():
         self.SHFE['bu'] = 20
         self.SHFE['ru'] = 50
         self.SHFE['sp'] = 20
+        self.SHFE['cu_option'] = 10
+        self.SHFE['al_option'] = 5
+        self.SHFE['zn_option'] = 5
+        self.SHFE['au_option'] = 20
+        self.SHFE['ru_option'] = 10
 
         self.CZCE['WH'] = 20
         self.CZCE['PM'] = 50
@@ -50,6 +57,12 @@ class minTickPrice():
         self.CZCE['SA'] = 20
         self.CZCE['PF'] = 10
         self.CZCE['PK'] = 10
+        self.CZCE['SR_option'] = 0.5
+        self.CZCE['RM_option'] = 0.5
+        self.CZCE['CF_option'] = 1
+        self.CZCE['TA_option'] = 0.5
+        self.CZCE['MA_option'] = 0.5
+        self.CZCE['ZC_option'] = 0.1
 
         self.DCE['c'] = 10
         self.DCE['cs'] = 10
@@ -72,11 +85,20 @@ class minTickPrice():
         self.DCE['eb'] = 5
         self.DCE['pg'] = 20
         self.DCE['lh'] = 80
+        self.DCE['m_option'] = 5
+        self.DCE['c_option'] = 5
+        self.DCE['i_option'] = 10
+        self.DCE['pg_option'] = 4
+        self.DCE['l_option'] = 2.5
+        self.DCE['v_option'] = 2.5
+        self.DCE['pp_option'] = 2.5
+        self.DCE['p_option'] = 5
 
         self.INE['sc'] = 100
         self.INE['lu'] = 10
         self.INE['nr'] = 50
         self.INE['bc'] = 50
+        self.INE['sc_option'] = 50
 
         self.CFFEX['IF'] = 60
         self.CFFEX['IC'] = 40
@@ -84,6 +106,8 @@ class minTickPrice():
         self.CFFEX['TS'] = 100
         self.CFFEX['TF'] = 50
         self.CFFEX['T'] = 50
+        self.CFFEX['IO_option'] = 20
+        self.CFFEX['MO_option'] = 20
 
     def find_tick_price(self, exch, ins):
         """ 最小盈利变动单位
@@ -142,9 +166,10 @@ class minTickPrice():
         """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
+
 mintickprice = minTickPrice()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     mt = minTickPrice()
     print(mt.find_trade_unit('DCE', 'l2009'))
     print(mt.find_trade_unit('DCE', 'l2101'))

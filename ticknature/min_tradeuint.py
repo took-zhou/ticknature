@@ -1,7 +1,9 @@
-import sys
 import re
+import sys
+
 
 class minTradeUint():
+
     def __init__(self):
         self.SHFE = {}
         self.CZCE = {}
@@ -24,6 +26,11 @@ class minTradeUint():
         self.SHFE['bu'] = 10
         self.SHFE['ru'] = 10
         self.SHFE['sp'] = 10
+        self.SHFE['cu_option'] = 5
+        self.SHFE['al_option'] = 5
+        self.SHFE['zn_option'] = 5
+        self.SHFE['au_option'] = 1000
+        self.SHFE['ru_option'] = 10
 
         self.CZCE['WH'] = 20
         self.CZCE['PM'] = 50
@@ -50,7 +57,12 @@ class minTradeUint():
         self.CZCE['SA'] = 20
         self.CZCE['PF'] = 5
         self.CZCE['PK'] = 5
-
+        self.CZCE['SR_option'] = 1
+        self.CZCE['RM_option'] = 1
+        self.CZCE['CF_option'] = 1
+        self.CZCE['TA_option'] = 1
+        self.CZCE['MA_option'] = 1
+        self.CZCE['ZC_option'] = 1
 
         self.DCE['c'] = 10
         self.DCE['cs'] = 10
@@ -73,18 +85,30 @@ class minTradeUint():
         self.DCE['eb'] = 5
         self.DCE['pg'] = 20
         self.DCE['lh'] = 16
+        self.DCE['m_option'] = 10
+        self.DCE['c_option'] = 10
+        self.DCE['i_option'] = 100
+        self.DCE['pg_option'] = 20
+        self.DCE['l_option'] = 5
+        self.DCE['v_option'] = 5
+        self.DCE['pp_option'] = 5
+        self.DCE['p_option'] = 10
 
         self.INE['sc'] = 1000
         self.INE['lu'] = 10
         self.INE['nr'] = 10
         self.INE['bc'] = 5
+        self.INE['sc_option'] = 1000
 
         self.CFFEX['IF'] = 300
         self.CFFEX['IC'] = 200
         self.CFFEX['IH'] = 300
+        self.CFFEX['IM'] = 200
         self.CFFEX['TS'] = 20000
         self.CFFEX['TF'] = 10000
         self.CFFEX['T'] = 10000
+        self.CFFEX['IO_option'] = 100
+        self.CFFEX['MO_option'] = 100
 
     def find_trade_unit(self, exch, ins):
         """ 一手交易单位
@@ -142,9 +166,10 @@ class minTradeUint():
         """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
+
 mintradeuint = minTradeUint()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     mt = minTradeUint()
     print(mt.find_trade_unit('DCE', 'l2009'))
     print(mt.find_trade_unit('DCE', 'l2101'))

@@ -1,7 +1,9 @@
-import sys
 import re
+import sys
+
 
 class minTickSize():
+
     def __init__(self):
         self.SHFE = {}
         self.CZCE = {}
@@ -24,6 +26,11 @@ class minTickSize():
         self.SHFE['bu'] = 2
         self.SHFE['ru'] = 5
         self.SHFE['sp'] = 2
+        self.SHFE['cu_option'] = 2
+        self.SHFE['al_option'] = 1
+        self.SHFE['zn_option'] = 1
+        self.SHFE['au_option'] = 0.02
+        self.SHFE['ru_option'] = 1
 
         self.CZCE['WH'] = 1
         self.CZCE['PM'] = 1
@@ -50,6 +57,12 @@ class minTickSize():
         self.CZCE['SA'] = 1
         self.CZCE['PF'] = 2
         self.CZCE['PK'] = 2
+        self.CZCE['SR_option'] = 0.5
+        self.CZCE['RM_option'] = 0.5
+        self.CZCE['CF_option'] = 1
+        self.CZCE['TA_option'] = 0.5
+        self.CZCE['MA_option'] = 0.5
+        self.CZCE['ZC_option'] = 0.1
 
         self.DCE['c'] = 1
         self.DCE['cs'] = 1
@@ -72,18 +85,30 @@ class minTickSize():
         self.DCE['eb'] = 1
         self.DCE['pg'] = 1
         self.DCE['lh'] = 5
+        self.DCE['m_option'] = 0.5
+        self.DCE['c_option'] = 0.5
+        self.DCE['i_option'] = 0.1
+        self.DCE['pg_option'] = 0.2
+        self.DCE['l_option'] = 0.5
+        self.DCE['v_option'] = 0.5
+        self.DCE['pp_option'] = 0.5
+        self.DCE['p_option'] = 0.5
 
         self.INE['sc'] = 0.1
         self.INE['lu'] = 1
         self.INE['nr'] = 5
         self.INE['bc'] = 10
+        self.INE['sc_option'] = 0.05
 
         self.CFFEX['IF'] = 0.2
         self.CFFEX['IC'] = 0.2
         self.CFFEX['IH'] = 0.2
+        self.CFFEX['IM'] = 0.2
         self.CFFEX['TS'] = 0.005
         self.CFFEX['T'] = 0.005
         self.CFFEX['TF'] = 0.005
+        self.CFFEX['IO_option'] = 0.2
+        self.CFFEX['MO_option'] = 0.2
 
     def find_tick_size(self, exch, ins):
         """ 最小价格变动单位
@@ -141,9 +166,10 @@ class minTickSize():
         """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
+
 minticksize = minTickSize()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     mt = minTickSize()
     print(mt.find_min_ticksize('DCE', 'l2009'))
     print(mt.find_min_ticksize('DCE', 'l2101'))
