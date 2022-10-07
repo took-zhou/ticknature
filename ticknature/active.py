@@ -1,31 +1,32 @@
 #!/usr/bin/python
 # coding=utf-8
-from tickmine.api import get_date
-from tickmine.api import get_kline
+from tickmine.api import get_date, get_kline
+
 
 class activeFuture:
+
     def __init__(self):
         pass
 
     def _valid_dominant1(self, _vo, _op):
-        volume = 10*1000,
-        open_interest = 10*1000
+        volume = 10 * 1000,
+        open_interest = 10 * 1000
         if _vo >= volume and _op >= open_interest:
             return True
         else:
             return False
 
     def _valid_dominant2(self, _vo, _op):
-        volume = 100*1000,
-        open_interest = 100*1000
+        volume = 100 * 1000,
+        open_interest = 100 * 1000
         if _vo >= volume and _op >= open_interest:
             return True
         else:
             return False
 
     def _valid_dominant3(self, _vo, _op):
-        volume = 1000*1000,
-        open_interest = 1000*1000
+        volume = 1000 * 1000,
+        open_interest = 1000 * 1000
         if _vo >= volume and _op >= open_interest:
             return True
         else:
@@ -50,13 +51,13 @@ class activeFuture:
 
         ret_list = []
         for item in date_list:
-            d1_data = get_kline(exch, ins, item, period = '1D', subject='lastprice')
+            d1_data = get_kline(exch, ins, item, period='1D')
             if d1_data['Volume'][0] >= volume and d1_data['OpenInterest'][0] >= openinterest:
                 ret_list.append(item)
 
         return ret_list
 
-    def get(self, exch, ins, date_slice = []):
+    def get(self, exch, ins, date_slice=[]):
         """ 判断合约在特定时间段内是否是主力合约
 
         通过这个时间段内的每天结束时成交量和持仓量来判断
@@ -87,7 +88,7 @@ class activeFuture:
         valid_count3 = 0
         total_count = 0
         for item in temp_list:
-            d1_data = get_kline(exch, ins, item, period = '1D', subject='lastprice')
+            d1_data = get_kline(exch, ins, item, period='1D')
 
             if len(d1_data) == 1:
                 if self._valid_dominant1(d1_data['Volume'][0], d1_data['OpenInterest'][0]):
@@ -99,7 +100,7 @@ class activeFuture:
                 if self._valid_dominant3(d1_data['Volume'][0], d1_data['OpenInterest'][0]):
                     valid_count3 = valid_count3 + 1
 
-                total_count =  total_count + 1
+                total_count = total_count + 1
 
         if total_count == 0:
             return [exch, ins, 0, 0, 0]
@@ -110,9 +111,10 @@ class activeFuture:
                     round((valid_count3/total_count), 2)
                     ]
 
+
 activefuture = activeFuture()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     ret = activefuture.get('CZCE', 'MA201')
     print(ret)
     ret = activefuture.get_date('CZCE', 'MA201')

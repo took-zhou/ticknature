@@ -2,7 +2,7 @@ import datetime
 import re
 
 import pandas as pd
-from tickmine.api import get_date
+from tickmine.api import get_date, get_ins
 
 
 class tradeDate():
@@ -53,11 +53,11 @@ class tradeDate():
 
         return ret
 
-    def get_prev_date(self, datastring):
+    def get_prev_date(self, datestring):
         """ 获取前几天工作日
 
         Args:
-            datastring: 日市时间
+            datestring: 日市时间
             prev: 前几天，默认是1
 
         Returns:
@@ -68,35 +68,21 @@ class tradeDate():
             >>> tradedate.get_prev_data('20210806')
            '20210805'
         """
-        # 判断该日期到底是星期几
         prev_date = ''
-        date_list = get_date('CZCE', 'TA999')
-        if datastring in date_list and date_list.index(datastring) != 0:
-            prev_date = date_list[date_list.index(datastring) - 1]
-        else:
-            ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
-
-            # 获取前一日时间
-            if ins_time_of_week == 1:
-                three_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
-                split = str(three_day_before).split('-')
-                prev_date = split[0] + split[1] + split[2].split(' ')[0]
-            elif 1 < ins_time_of_week <= 6:
-                one_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
-                split = str(one_day_before).split('-')
-                prev_date = split[0] + split[1] + split[2].split(' ')[0]
-            elif ins_time_of_week == 7:
-                one_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-2)
-                split = str(one_day_before).split('-')
-                prev_date = split[0] + split[1] + split[2].split(' ')[0]
+        date_list = self.get_work_date()
+        date_list.reverse()
+        for item in date_list:
+            if item < datestring:
+                prev_date = item
+                break
 
         return prev_date
 
-    def get_after_date(self, datastring):
+    def get_after_date(self, datestring):
         """ 获取前几天工作日
 
         Args:
-            datastring: 日市时间
+            datestring: 日市时间
             prev: 后几天，默认是1
 
         Returns:
@@ -107,31 +93,20 @@ class tradeDate():
             >>> tradedate.get_after_date('20210806')
            '20210805'
         """
-        # 判断该日期到底是星期几
         after_date = ''
-        date_list = get_date('CZCE', 'TA999')
-        if datastring in date_list and date_list.index(datastring) != (len(date_list) - 1):
-            after_date = date_list[date_list.index(datastring) + 1]
-        else:
-            ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
-
-            # 获取前一日时间
-            if ins_time_of_week == 5:
-                three_day_after = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=3)
-                split = str(three_day_after).split('-')
-                after_date = split[0] + split[1] + split[2].split(' ')[0]
-            elif 1 <= ins_time_of_week <= 4:
-                one_day_after = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=1)
-                split = str(one_day_after).split('-')
-                after_date = split[0] + split[1] + split[2].split(' ')[0]
+        date_list = self.get_work_date()
+        for item in date_list:
+            if item > datestring:
+                after_date = item
+                break
 
         return after_date
 
-    def get_night_date(self, datastring):
+    def get_night_date(self, datestring):
         """ 获取日市的夜市时间
 
         Args:
-            datastring: 日市时间
+            datestring: 日市时间
 
         Returns:
             返回的数据类型是 string, 代表夜市时间
@@ -142,15 +117,15 @@ class tradeDate():
            '20210805'
         """
         # 判断该日期到底是星期几
-        ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
+        ins_time_of_week = pd.to_datetime(datestring, format='%Y-%m-%d').dayofweek + 1
 
         # 获取夜市时间
         if ins_time_of_week == 1:
-            three_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
+            three_day_before = pd.to_datetime(datestring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
             split = str(three_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         elif 1 < ins_time_of_week <= 5:
-            one_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
+            one_day_before = pd.to_datetime(datestring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
             split = str(one_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         else:
@@ -184,9 +159,23 @@ class tradeDate():
 
         return ret
 
+    def get_work_date(self):
+        ins_list = get_ins('CZCE', 'TA05')
+        date_list = []
+        for item in ins_list:
+            date_list = date_list + get_date('CZCE', item)
+
+        date_list.sort()
+
+        return date_list
+
 
 tradedate = tradeDate()
 
 if __name__ == "__main__":
-    ret = tradedate.get_prev_date('20220814')
+    timestr = datetime.datetime.now().strftime('%Y%m%d')
+    ret = tradedate.get_after_date(timestr)
+    print(ret)
+
+    ret = tradedate.get_after_date('20160120')
     print(ret)

@@ -1,8 +1,11 @@
-import re
 import datetime
+import re
+
 import pandas as pd
 
+
 class tradeTime():
+
     def __init__(self):
         self.SHFE = {}
         self.CZCE = {}
@@ -10,8 +13,12 @@ class tradeTime():
         self.INE = {}
         self.CFFEX = {}
         # 郑商所，大商所，上期所，能源中心交易白天时间
-        self.day_time_dict1 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00']}
-        
+        self.day_time_dict1 = {
+            'morning_first_half': ['09:00:00', '10:15:00'],
+            'morning_second_half': ['10:30:00', '11:30:00'],
+            'afternoon': ['13:30:00', '15:00:00']
+        }
+
         # 中金所股指期货交易时间
         self.day_time_dict2 = {'morning': ['09:30:00', '11:30:00'], 'afternoon': ['13:00:00', '15:00:00']}
         # 中金所国债交易时间
@@ -139,14 +146,14 @@ class tradeTime():
         self.CFFEX['T'] = self.day_time_dict3
 
     def _get_night_data(self, datastring):
-        ins_time_of_week = pd.to_datetime(datastring, format = '%Y-%m-%d').dayofweek + 1
+        ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
 
         if ins_time_of_week == 1:
-            three_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -3)
+            three_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
             split = str(three_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         elif 1 < ins_time_of_week <= 5:
-            one_day_before = pd.to_datetime(datastring, format = '%Y-%m-%d') + datetime.timedelta(days = -1)
+            one_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
             split = str(one_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         else:
@@ -235,12 +242,18 @@ class tradeTime():
             for item in ret:
                 if item == 'night' or item == 'night_first_half':
                     night_data = self._get_night_data(timestr)
-                    ret[item] = [datetime.datetime.strptime(night_data+item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                    ret[item] = [
+                        datetime.datetime.strptime(night_data + item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S")
+                        for item2 in ret[item]
+                    ]
                 elif item == 'night_second_half':
                     night_data = self._get_night_data(timestr)
-                    ret[item] = [(datetime.datetime.strptime(night_data+item2, '%Y%m%d%H:%M:%S') + datetime.timedelta(days = 1)).strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                    ret[item] = [(datetime.datetime.strptime(night_data + item2, '%Y%m%d%H:%M:%S') +
+                                  datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
                 else:
-                    ret[item] = [datetime.datetime.strptime(timestr+item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
+                    ret[item] = [
+                        datetime.datetime.strptime(timestr + item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]
+                    ]
 
             if 'efp' in ins:
                 return {}
@@ -266,11 +279,12 @@ class tradeTime():
         time_list = timestring.split(':')
         integral_time = int(time_list[0]) * 3600 + int(time_list[1]) * 60 + int(time_list[2])
         integral_time = integral_time + _offset
-        return '%02d:%02d:%02d'%(int(integral_time/3600), int((integral_time%3600)/60), (integral_time%3600)%60)
+        return '%02d:%02d:%02d' % (int(integral_time / 3600), int((integral_time % 3600) / 60), (integral_time % 3600) % 60)
+
 
 tradetime = tradeTime()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     print(tradetime.get_trade_time('CZCE', 'MA109', '20210506', '%Y-%m-%d %H:%M:%S'))
     # print(tradetime.get_trade_time('CZCE', 'MA705', '20190101', '%Y-%m-%d %H:%M:%S'))
     # print(tradetime.get_trade_time('DCE', 'l2101'))

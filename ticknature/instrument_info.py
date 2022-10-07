@@ -748,6 +748,24 @@ class instrumentInfo():
             'include_option': False
         }
 
+        self.SHSE['601155'] = {
+            'commission': [],
+            'tickprice': 1,
+            'ticksize': 0.01,
+            'tradeunit': 100,
+            'chinese_name': '新城控股',
+            'include_option': False
+        }
+
+        self.SZSE['601155'] = {
+            'commission': [],
+            'tickprice': 0.1,
+            'ticksize': 0.001,
+            'tradeunit': 100,
+            'chinese_name': '鸿达转债',
+            'include_option': False
+        }
+
     def find_ins(self, exch, include_once_used=False):
         """ 交易所包含的合约
 
@@ -765,7 +783,7 @@ class instrumentInfo():
         ret = []
 
         for item in self.exch[exch]:
-            if include_once_used==False:
+            if include_once_used == False:
                 if '曾用' in self.exch[exch][item]['chinese_name']:
                     continue
 
@@ -788,8 +806,11 @@ class instrumentInfo():
             >>> instrumentinfo.find_chinese_name('DCE', 'MA109')
             甲醇
         """
-        temp = re.split('([0-9]+)', ins)[0]
-
+        temp = re.split('([0-9]+)', ins)
+        if temp[0] == '':
+            temp = temp[1]
+        else:
+            temp = temp[0]
         ret = ''
 
         if self.exch[exch].__contains__(temp):
@@ -874,7 +895,12 @@ class instrumentInfo():
 instrumentinfo = instrumentInfo()
 
 if __name__ == "__main__":
-    ret = instrumentinfo.find_ins('CZCE')
-    print(ret)
-    ret = instrumentinfo.find_info('CZCE', 'TA')
-    print(ret)
+    # ret = instrumentinfo.find_ins('CZCE')
+    # print(ret)
+    # ret = instrumentinfo.find_info('CZCE', 'TA')
+    # print(ret)
+
+    info = instrumentinfo.find_info('SHSE', '601155')
+    print(info)
+    # group = '%s(%s)' % (ins, info['chinese_name'])
+    # groups.append(group)
