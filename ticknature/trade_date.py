@@ -174,8 +174,8 @@ tradedate = tradeDate()
 
 if __name__ == "__main__":
     timestr = datetime.datetime.now().strftime('%Y%m%d')
-    ret = tradedate.get_after_date(timestr)
+    ret = tradedate.get_prev_date('20221017')
     print(ret)
 
-    ret = tradedate.get_after_date('20160120')
-    print(ret)
+    # ret = tradedate.get_prev_date('20160120')
+    # print(ret)
