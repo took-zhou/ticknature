@@ -239,7 +239,8 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '菜籽油',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.CZCE['RI'] = {
             'commission': [2.5, 0, 2.5, 0, 2.5, 0],
@@ -443,7 +444,8 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [1, 3, 4, 10, 11, 12],
             'chinese_name': '花生',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
 
         self.DCE['c'] = {
@@ -475,7 +477,8 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '黄大豆1号',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.DCE['b'] = {
             'commission': [1, 0, 1, 0, 1, 0],
@@ -485,7 +488,8 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '黄大豆2号',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.DCE['m'] = {
             'commission': [1.5, 0, 1.5, 0, 1.5, 0],
@@ -506,7 +510,8 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [1, 3, 5, 7, 8, 9, 11, 12],
             'chinese_name': '豆油',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.DCE['p'] = {
             'commission': [2.5, 0, 2.5, 0, 2.5, 0],
@@ -845,6 +850,10 @@ class instrumentInfo():
             temp = temp[0]
         ret = ''
 
+        if temp == 'IO':
+            temp = 'IF'
+        elif temp == 'MO':
+            temp = 'IM'
         if self.exch[exch].__contains__(temp):
             ret = self.exch[exch][temp]
         return ret
