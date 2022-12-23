@@ -741,7 +741,8 @@ class instrumentInfo():
             'tradeunit': 300,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '上证50股指',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.2
         }
         self.CFFEX['IM'] = {
             'commission': [0, 0.000023, 0, 0.000023, 0, 0.00345],
@@ -854,6 +855,8 @@ class instrumentInfo():
             temp = 'IF'
         elif temp == 'MO':
             temp = 'IM'
+        elif temp == 'HO':
+            temp = 'IH'
         if self.exch[exch].__contains__(temp):
             ret = self.exch[exch][temp]
         return ret
