@@ -212,7 +212,7 @@ class tradeTime():
             {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
                 'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
         ret = {}
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):

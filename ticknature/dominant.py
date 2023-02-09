@@ -6,7 +6,9 @@ from tickmine.api import get_date
 from tickmine.api import get_ins
 from ticknature.instrument_info import instrumentinfo
 
+
 class dominantFuture:
+
     def __init__(self):
         self.SHFE = {}
         self.CZCE = {}
@@ -99,7 +101,7 @@ class dominantFuture:
         self.DCE['jm'] = self.dominant_compose1
         self.DCE['i'] = self.dominant_compose1
         self.DCE['eg'] = self.dominant_compose1
-        self.DCE['eb']  = self.dominant_compose1
+        self.DCE['eb'] = self.dominant_compose1
         self.DCE['pg'] = self.dominant_compose1
         self.DCE['lh'] = self.dominant_compose1
 
@@ -136,19 +138,19 @@ class dominantFuture:
                 temp_dict = self.SHFE[ins]
         elif exch == 'CZCE':
             if self.CZCE.__contains__(ins):
-                temp_dict =  self.CZCE[ins]
+                temp_dict = self.CZCE[ins]
         elif exch == 'DCE':
             if self.DCE.__contains__(ins):
-                temp_dict =  self.DCE[ins]
+                temp_dict = self.DCE[ins]
         elif exch == 'INE':
             if self.INE.__contains__(ins):
-                temp_dict =  self.INE[ins]
+                temp_dict = self.INE[ins]
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(ins):
-                temp_dict =  self.CFFEX[ins]
+                temp_dict = self.CFFEX[ins]
 
         if 'efp' in ins:
-            temp_dict =  {}
+            temp_dict = {}
 
         return temp_dict
 
@@ -173,19 +175,19 @@ class dominantFuture:
                 temp_dict = self.SHFE[ins]
         elif exch == 'CZCE':
             if self.CZCE.__contains__(ins):
-                temp_dict =  self.CZCE[ins]
+                temp_dict = self.CZCE[ins]
         elif exch == 'DCE':
             if self.DCE.__contains__(ins):
-                temp_dict =  self.DCE[ins]
+                temp_dict = self.DCE[ins]
         elif exch == 'INE':
             if self.INE.__contains__(ins):
-                temp_dict =  self.INE[ins]
+                temp_dict = self.INE[ins]
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(ins):
-                temp_dict =  self.CFFEX[ins]
+                temp_dict = self.CFFEX[ins]
 
         if 'efp' in ins:
-            temp_dict =  {}
+            temp_dict = {}
 
         ret = []
         for item in temp_dict:
@@ -208,7 +210,7 @@ class dominantFuture:
             >>> dominant.get_date('DCE', 'c2105')
            ['20200716', '20210205', ... '20200902', '20210428', '20210506', '20210426']
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
         temp_dict = {}
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
@@ -227,7 +229,7 @@ class dominantFuture:
                 temp_dict = self.CFFEX[temp]
 
         if 'efp' in ins:
-            temp_dict =  {}
+            temp_dict = {}
 
         ret = []
         if ins[-2:] in temp_dict:
@@ -262,8 +264,14 @@ class dominantFuture:
                 temp_ret.append(item)
 
         if exch == 'CZCE':
-            ret_list1 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '5' <= item[-3] <= '9']
-            ret_list2 = [item for item in temp_ret if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '0' <= item[-3] < '5']
+            ret_list1 = [
+                item for item in temp_ret
+                if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '5' <= item[-3] <= '9'
+            ]
+            ret_list2 = [
+                item for item in temp_ret
+                if (ins_type == '' or ins_type == instrumentinfo.find_ins_type(exch, item)) and '0' <= item[-3] < '5'
+            ]
             ret_list1.sort()
             ret_list2.sort()
             ret_list = ret_list1 + ret_list2
@@ -299,23 +307,24 @@ class dominantFuture:
         year_list = dominant.get_year(exch, ins_type)
         for key_item in year_list:
             for mon_item in year_list[key_item]:
-                if mon_item == '%02d'%now_time.month:
-                    if '%02d'%now_time.month > key_item:
+                if mon_item == '%02d' % now_time.month:
+                    if '%02d' % now_time.month > key_item:
                         if exch == 'CZCE':
-                            ret = '%s%s%s'%(ins_type, str(now_time.year+1)[-1], key_item)
+                            ret = '%s%s%s' % (ins_type, str(now_time.year + 1)[-1], key_item)
                         else:
-                            ret = '%s%s%s'%(ins_type, str(now_time.year+1)[-2:], key_item)
+                            ret = '%s%s%s' % (ins_type, str(now_time.year + 1)[-2:], key_item)
                     else:
                         if exch == 'CZCE':
-                            ret = '%s%s%s'%(ins_type, str(now_time.year)[-1], key_item)
+                            ret = '%s%s%s' % (ins_type, str(now_time.year)[-1], key_item)
                         else:
-                            ret = '%s%s%s'%(ins_type, str(now_time.year)[-2:], key_item)
+                            ret = '%s%s%s' % (ins_type, str(now_time.year)[-2:], key_item)
 
         return ret
 
+
 dominant = dominantFuture()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     # years = dominant.get_year('CZCE', 'FG')
     # print(years)
     # months = dominant.get_month('CZCE', 'FG')
@@ -330,20 +339,20 @@ if __name__=="__main__":
 
     for item in dominant.SHFE.keys():
         ins = dominant.get_newest_instrument('SHFE', item)
-        print('SHFE %s'%ins)
+        print('SHFE %s' % ins)
 
     for item in dominant.CZCE.keys():
         ins = dominant.get_newest_instrument('CZCE', item)
-        print('CZCE %s'%ins)
+        print('CZCE %s' % ins)
 
     for item in dominant.INE.keys():
         ins = dominant.get_newest_instrument('INE', item)
-        print('INE %s'%ins)
+        print('INE %s' % ins)
 
     for item in dominant.DCE.keys():
         ins = dominant.get_newest_instrument('DCE', item)
-        print('DCE %s'%ins)
+        print('DCE %s' % ins)
 
     for item in dominant.CFFEX.keys():
         ins = dominant.get_newest_instrument('CFFEX', item)
-        print('CFFEX %s'%ins)
+        print('CFFEX %s' % ins)

@@ -125,7 +125,7 @@ class minTradeUint():
             >>> mintradeuint.find_trade_unit('DCE', 'l2009')
             5
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
                 return self.SHFE[temp]

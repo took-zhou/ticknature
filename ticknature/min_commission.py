@@ -124,7 +124,7 @@ class minCommission():
             >>> mincommission.find_commission('DCE', 'l2009')
             0.08
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
                 return self.SHFE[temp]

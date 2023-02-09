@@ -105,7 +105,8 @@ class instrumentInfo():
             'tradeunit': 15,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '白银',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.SHFE['rb'] = {
             'commission': [0, 0.00001, 0, 0.00001, 0, 0.00003],
@@ -115,7 +116,8 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '螺纹钢',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.SHFE['wr'] = {
             'commission': [0.00004, 0, 0, 0, 0, 0],
@@ -268,7 +270,7 @@ class instrumentInfo():
             'tickprice': 10,
             'ticksize': 1,
             'tradeunit': 10,
-            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0] + [8],
             'chinese_name': '菜籽粕',
             'include_option': True,
             'option_ticksize': 0.5

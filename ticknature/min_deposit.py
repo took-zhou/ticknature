@@ -1,7 +1,9 @@
 import sys
 import re
 
+
 class minDeposit():
+
     def __init__(self):
         self.SHFE = {}
         self.CZCE = {}
@@ -100,7 +102,7 @@ class minDeposit():
             >>> mindeposit.find_deposit('DCE', 'l2009')
             0.08
         """
-        temp = ''.join(re.findall(r'[A-Za-z]', ins))
+        temp = re.split('([0-9]+)', ins)[0]
         if exch == 'SHFE':
             if self.SHFE.__contains__(temp):
                 return self.SHFE[temp]
@@ -133,9 +135,10 @@ class minDeposit():
         """
         return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
 
+
 mindeposit = minDeposit()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     print(mindeposit.find_deposit('DCE', 'l2009'))
     print(mindeposit.find_deposit('DCE', 'l2101'))
     print(mindeposit.find_deposit('SHFE', 'cu2009'))
