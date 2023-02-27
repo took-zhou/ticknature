@@ -937,6 +937,29 @@ class instrumentInfo():
 
         return ret
 
+    def find_group(self, ins):
+        """ 查询合约对应的连续集
+
+        Args:
+            ins: 合约代码
+
+        Returns:
+            数值
+
+        Examples:
+            >>> from ticknature.instrument_info import instrumentinfo
+            >>> instrumentinfo.find_group('MA109')
+            DCE
+        """
+        temp = re.split('([0-9]+)', ins)
+
+        ret = ''
+        if len(temp) == 5:
+            ret = '%s%s-%s'%(temp[0], temp[1][-2:], temp[2].upper().replace('-',''))
+        elif len(temp) == 3:
+            ret = '%s%s'%(temp[0], temp[1][-2:])
+
+        return ret
 
 instrumentinfo = instrumentInfo()
 
@@ -946,7 +969,7 @@ if __name__ == "__main__":
     # ret = instrumentinfo.find_info('CZCE', 'TA')
     # print(ret)
 
-    info = instrumentinfo.find_info('CZCE', 'TA301-C-4000')
+    info = instrumentinfo.find_group('TA301c600')
     print(info)
     # group = '%s(%s)' % (ins, info['chinese_name'])
     # groups.append(group)

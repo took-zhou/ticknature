@@ -2,6 +2,7 @@ import datetime
 import re
 
 import pandas as pd
+
 from tickmine.api import get_date, get_ins
 
 
@@ -133,7 +134,7 @@ class tradeDate():
 
         return night_date
 
-    def is_delivery_month(self, exch, ins):
+    def is_delivery_month(self, exch, ins, date):
         """ 判断该合约是否是交割月，只在真实交易时间判断有效
 
         Args:
@@ -145,14 +146,13 @@ class tradeDate():
 
         Examples:
             >>> from ticknature.trade_date import tradedate
-            >>> tradedate.is_delivery_month('DCE', 'c2105')
+            >>> tradedate.is_delivery_month('DCE', 'c2105', '20210510')
            True
         """
         resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
-        kind = resplit[0][1]
-        month = resplit[1][0][-2:]
+        year_month = resplit[1][0][-3:]
 
-        if int(month) == datetime.datetime.now().month:
+        if year_month == date[3:6]:
             ret = True
         else:
             ret = False
@@ -173,9 +173,10 @@ class tradeDate():
 tradedate = tradeDate()
 
 if __name__ == "__main__":
-    timestr = datetime.datetime.now().strftime('%Y%m%d')
-    ret = tradedate.get_prev_date('20221017')
-    print(ret)
+    print(tradedate.is_delivery_month('CZCE', 'l2405C200', '20240510'))
+    # timestr = datetime.datetime.now().strftime('%Y%m%d')
+    # ret = tradedate.get_prev_date('20221017')
+    # print(ret)
 
     # ret = tradedate.get_prev_date('20160120')
     # print(ret)
