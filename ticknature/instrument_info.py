@@ -881,7 +881,7 @@ class instrumentInfo():
         temp = re.split('([0-9]+)', ins)[0]
         return temp
 
-    def find_exch(self, ins):
+    def find_exch(self, ins=''):
         """ 查询合约对应的交易所
 
         Args:
@@ -912,6 +912,9 @@ class instrumentInfo():
             ret = 'SHSE'
         elif temp in self.SZSE.keys():
             ret = 'SZSE'
+
+        if ins == '':
+            ret = list(self.exch.keys())
 
         return ret
 
@@ -955,11 +958,12 @@ class instrumentInfo():
 
         ret = ''
         if len(temp) == 5:
-            ret = '%s%s-%s'%(temp[0], temp[1][-2:], temp[2].upper().replace('-',''))
+            ret = '%s%s-%s' % (temp[0], temp[1][-2:], temp[2].upper().replace('-', ''))
         elif len(temp) == 3:
-            ret = '%s%s'%(temp[0], temp[1][-2:])
+            ret = '%s%s' % (temp[0], temp[1][-2:])
 
         return ret
+
 
 instrumentinfo = instrumentInfo()
 
