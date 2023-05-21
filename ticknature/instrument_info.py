@@ -150,7 +150,7 @@ class instrumentInfo():
             'include_option': False
         }
         self.SHFE['fu'] = {
-            'commission': [0, 0.00001, 0, 0, 0, 0.00075],
+            'commission': [0, 0.00001, 0, 0, 0, 0.00005],
             'deposit': 0.1,
             'tickprice': 10,
             'ticksize': 1,
@@ -162,8 +162,8 @@ class instrumentInfo():
         self.SHFE['bu'] = {
             'commission': [0, 0.00001, 0, 0.00001, 0, 0.00001],
             'deposit': 0.1,
-            'tickprice': 20,
-            'ticksize': 2,
+            'tickprice': 10,
+            'ticksize': 1,
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '石油沥青',
@@ -419,7 +419,7 @@ class instrumentInfo():
             'include_option': False
         }
         self.CZCE['SA'] = {
-            'commission': [3.5, 0, 0, 0, 15, 0],
+            'commission': [3.5, 0, 0, 0, 3.5, 0],
             'deposit': 0.09,
             'tickprice': 20,
             'ticksize': 1,
@@ -794,6 +794,15 @@ class instrumentInfo():
             'ticksize': 0.01,
             'tradeunit': 100,
             'chinese_name': '新城控股',
+            'include_option': False
+        }
+
+        self.SHSE['600970'] = {
+            'commission': [],
+            'tickprice': 1,
+            'ticksize': 0.01,
+            'tradeunit': 100,
+            'chinese_name': '中材国际',
             'include_option': False
         }
 
