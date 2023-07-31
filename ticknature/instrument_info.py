@@ -219,6 +219,18 @@ class instrumentInfo():
             'plate': '有色金属',
             'include_option': False
         }
+        self.SHFE['br'] = {
+            'commission': [0, 0.00001, 0, 0, 0, 0],
+            'deposit': 0.12,
+            'tickprice': 25,
+            'ticksize': 5,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '合成橡胶',
+            'plate': '化工',
+            'include_option': True,
+            'option_ticksize': 1
+        }
 
         self.CZCE['WH'] = {
             'commission': [5, 0, 5, 0, 5, 0],
@@ -898,6 +910,19 @@ class instrumentInfo():
             'plate': '有色金属',
             'include_option': True,
             'option_ticksize': 1
+        }
+
+        self.GFEX['lc'] = {
+            'commission': [0, 0.00008, 0, 0, 0, 0],
+            'deposit': 0.09,
+            'tickprice': 50,
+            'ticksize': 50,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '碳酸锂',
+            'plate': '新能源',
+            'include_option': True,
+            'option_ticksize': 10
         }
 
         self.SHSE['601155'] = {
