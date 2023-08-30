@@ -806,6 +806,17 @@ class instrumentInfo():
             'plate': '有色金属',
             'include_option': False
         }
+        self.INE['ec'] = {
+            'commission': [0, 0.00001, 0, 0, 0, 0],
+            'deposit': 0.12,
+            'tickprice': 5,
+            'ticksize': 0.1,
+            'tradeunit': 50,
+            'trademonth': [2, 4, 6, 8, 10, 12],
+            'chinese_name': '集运欧线',
+            'plate': '航线',
+            'include_option': False
+        }
 
         self.CFFEX['IF'] = {
             'commission': [0, 0.000023, 0, 0.000023, 0, 0.00345],

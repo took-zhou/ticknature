@@ -28,7 +28,7 @@ class tradeDate():
         ret = ''
         split_timestr = timestring.split(' ')
 
-        if '20:55:00' <= split_timestr[-1] <= '24:00:00':
+        if '20:00:00' <= split_timestr[-1] <= '24:00:00':
             # 判断该日期到底是星期几
             ins_time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
 
