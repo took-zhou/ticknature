@@ -10,7 +10,7 @@ tick数据性质分析, 包括原始的性质如最小变动单位, 一手交易
 --------
 
 | 为了统一操作环境，将数据映射到interpreter镜像创建的容器中(或是其他容器)，映射路径/home/zhoufan/baidunetdisk:/share/baidunetdisk
-| 安装ticknature包：pip install --index-url http://devpi.cdsslh.com:8090/root/dev ticknature --trusted-host devpi.cdsslh.com
+| 安装ticknature包：pip install --index-url http://devpi.tsaodai.com/root/dev ticknature --trusted-host devpi.tsaodai.com
 
 功能
 ----
@@ -188,7 +188,7 @@ python code::
 ------------
 
 代码通过git仓库进行管理，下载命令：git clone
-ssh://zhoufan@gerrit.cdsslh.com:29418/PY/nature\_analysis -b fen
+ssh://zhoufan@gerrit.tsaodai.com:29418/PY/nature\_analysis -b fen
 
 | 开发模式下安装包： pip install -e 
 | 这个命令在部署目录(site-packages)中创建一个指向项目源代码的特殊链接，而不是将整个包复制过去。可以编辑包的源代码而无需重新安装。

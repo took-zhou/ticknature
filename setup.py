@@ -6,14 +6,14 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name="ticknature",
-    version="2.4.9",
+    version="2.5.0",
     author="zhoufan",
     author_email="zhoufan@cdsslh.com",
     description="Nature layer",
     long_description=long_description,
 
     # 项目主页
-    url="http://devpi.cdsslh.com:8090",
+    url="http://devpi.tsaodai.com",
 
     # 项目的依赖库，读取的requirements.txt内容
     install_requires=['numpy>=1.19.1', 'pytz>=2021.1', 'statsmodels>=0.12.2', 'mplfinance>=0.12.7a17', 'tickmine>=1.0.0', 'pytest>=7.0.1'],

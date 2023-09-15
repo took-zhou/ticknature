@@ -515,6 +515,30 @@ class instrumentInfo():
             'include_option': True,
             'option_ticksize': 0.5
         }
+        self.CZCE['SH'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.09,
+            'tickprice': 30,
+            'ticksize': 1,
+            'tradeunit': 30,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '烧碱',
+            'plate': '化工',
+            'include_option': True,
+            'option_ticksize': 0.5
+        }
+        self.CZCE['PX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.12,
+            'tickprice': 10,
+            'ticksize': 2,
+            'tradeunit': 5,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '对二甲苯',
+            'plate': '化工',
+            'include_option': True,
+            'option_ticksize': 0.5
+        }
 
         self.DCE['c'] = {
             'commission': [1.2, 0, 1.2, 0, 1.2, 0],
