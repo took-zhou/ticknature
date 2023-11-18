@@ -6,7 +6,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name="ticknature",
-    version="2.5.0",
+    version="2.5.1",
     author="zhoufan",
     author_email="zhoufan@cdsslh.com",
     description="Nature layer",
@@ -16,7 +16,7 @@ setup(
     url="http://devpi.tsaodai.com",
 
     # 项目的依赖库，读取的requirements.txt内容
-    install_requires=['numpy>=1.19.1', 'pytz>=2021.1', 'statsmodels>=0.12.2', 'mplfinance>=0.12.7a17', 'tickmine>=1.0.0', 'pytest>=7.0.1'],
+    install_requires=['numpy>=1.23.2', 'statsmodels>=0.13.2', 'pytest>=7.1.2', 'pandas>=1.4.3', 'setuptools>=39.0.1'],
 
     # 你要安装的包，通过 setuptools.find_packages 找到当前目录下有哪些包
     packages=find_packages())

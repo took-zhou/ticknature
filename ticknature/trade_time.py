@@ -12,6 +12,7 @@ class tradeTime():
         self.DCE = {}
         self.INE = {}
         self.CFFEX = {}
+        self.GFEX = {}
         # 郑商所，大商所，上期所，能源中心交易白天时间
         self.day_time_dict1 = {
             'morning_first_half': ['09:00:00', '10:15:00'],
@@ -58,6 +59,8 @@ class tradeTime():
         self.SHFE['bu'] = self.time_compose3
         self.SHFE['ru'] = self.time_compose3
         self.SHFE['sp'] = self.time_compose3
+        self.SHFE['ao'] = self.time_compose1
+        self.SHFE['br'] = self.time_compose3
 
         self.CZCE['WH_old'] = self.day_time_dict1
         self.CZCE['PM_old'] = self.day_time_dict1
@@ -110,6 +113,8 @@ class tradeTime():
         self.CZCE['SA'] = self.time_compose3
         self.CZCE['PF'] = self.time_compose3
         self.CZCE['PK'] = self.day_time_dict1
+        self.CZCE['SH'] = self.time_compose3
+        self.CZCE['PX'] = self.time_compose3
 
         self.DCE['c'] = self.time_compose3
         self.DCE['cs'] = self.time_compose3
@@ -137,13 +142,19 @@ class tradeTime():
         self.INE['lu'] = self.time_compose3
         self.INE['nr'] = self.time_compose3
         self.INE['bc'] = self.time_compose1
+        self.INE['ec'] = self.day_time_dict1
 
         self.CFFEX['IF'] = self.day_time_dict2
         self.CFFEX['IC'] = self.day_time_dict2
         self.CFFEX['IH'] = self.day_time_dict2
-        self.CFFEX['TS'] = self.day_time_dict3
-        self.CFFEX['TF'] = self.day_time_dict3
-        self.CFFEX['T'] = self.day_time_dict3
+        self.CFFEX['IM'] = self.day_time_dict2
+        self.CFFEX['TS'] = self.day_time_dict2
+        self.CFFEX['T'] = self.day_time_dict2
+        self.CFFEX['TF'] = self.day_time_dict2
+        self.CFFEX['TL'] = self.day_time_dict2
+
+        self.GFEX['si'] = self.day_time_dict1
+        self.GFEX['lc'] = self.day_time_dict1
 
     def _get_night_data(self, datastring):
         ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
