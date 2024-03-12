@@ -366,7 +366,8 @@ class instrumentInfo():
             'trademonth': [1, 3, 4, 5, 10, 11, 12],
             'chinese_name': '苹果',
             'plate': '农副',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.CZCE['CJ'] = {
             'commission': [3, 0, 3, 0, 15, 0],
@@ -457,7 +458,8 @@ class instrumentInfo():
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '硅铁',
             'plate': '黑色金属',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 1
         }
         self.CZCE['SM'] = {
             'commission': [3, 0, 0, 0, 30, 0],
@@ -468,7 +470,8 @@ class instrumentInfo():
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '锰硅',
             'plate': '黑色金属',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 1
         }
         self.CZCE['UR'] = {
             'commission': [5, 0, 5, 0, 15, 0],
@@ -479,7 +482,8 @@ class instrumentInfo():
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '尿素',
             'plate': '化工',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.CZCE['SA'] = {
             'commission': [3.5, 0, 0, 0, 3.5, 0],
@@ -490,7 +494,8 @@ class instrumentInfo():
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '纯碱',
             'plate': '化工',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.CZCE['PF'] = {
             'commission': [3.0, 0, 3.0, 0, 3.0, 0],
@@ -501,7 +506,8 @@ class instrumentInfo():
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '短纤',
             'plate': '化工',
-            'include_option': False
+            'include_option': True,
+            'option_ticksize': 0.5
         }
         self.CZCE['PK'] = {
             'commission': [4.0, 0, 4.0, 0, 4.0, 0],
