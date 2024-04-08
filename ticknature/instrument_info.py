@@ -1180,6 +1180,23 @@ class instrumentInfo():
 
         return ret
 
+    def find_plate(self, exch, ins):
+        """ 查询合约对应的板块
+
+        Args:
+            ins: 合约代码
+
+        Returns:
+            数值
+
+        Examples:
+            >>> from ticknature.instrument_info import instrumentinfo
+            >>> instrumentinfo.find_plate('CZCE','MA109')
+            DCE
+        """
+        ins_type = self.find_ins_type(exch, ins)
+        return self.exch[exch][ins_type]['plate']
+
 
 instrumentinfo = instrumentInfo()
 
@@ -1189,7 +1206,15 @@ if __name__ == "__main__":
     # ret = instrumentinfo.find_info('CZCE', 'TA')
     # print(ret)
 
-    info = instrumentinfo.find_group('TA301c600')
-    print(info)
+    #info = instrumentinfo.find_group('TA301c600')
+    #print(info)
+
+    print(instrumentinfo.find_plate('CZCE', 'MA309'))
+    print(instrumentinfo.find_plate('CZCE', 'MA'))
+    print(instrumentinfo.find_plate('CZCE', 'MA09'))
+
+    print(instrumentinfo.find_plate('DCE', 'i2309'))
+    print(instrumentinfo.find_plate('DCE', 'i'))
+    print(instrumentinfo.find_plate('DCE', 'i09'))
     # group = '%s(%s)' % (ins, info['chinese_name'])
     # groups.append(group)

@@ -160,6 +160,19 @@ class tradeDate():
         return ret
 
     def get_work_date(self):
+        """ 获取所有的工作日
+
+        Args:
+            None
+
+        Returns:
+            返回的数据类型是 list
+
+        Examples:
+            >>> from ticknature.trade_date import tradedate
+            >>> tradedate.get_work_date()
+           ['20150111', '20150112'...'20240111']
+        """
         ins_list = get_ins('CZCE', 'TA05')
         date_list = []
         for item in ins_list:
@@ -168,6 +181,61 @@ class tradeDate():
         date_list.sort()
 
         return date_list
+
+    def get_close_date(self, ins, date):
+        """ 获取合约的强制平仓日
+
+        Args:
+            ins: 合约
+            date: 正常交易日期
+
+        Returns:
+            返回的数据类型是 string, 强制平仓日期
+
+        Examples:
+            >>> from ticknature.trade_date import tradedate
+            >>> tradedate.get_close_date('AP501', '20250111')
+           20241225
+        """
+        resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
+        begin = 200
+        split_date = ''
+        for i in range(10):
+            split_date = str(begin + i) + resplit[1][0][-3:] + '31'
+            if split_date >= date:
+                break
+
+        if split_date[4:6] == '01':
+            ret_date = str(int(split_date[0:4]) - 1) + '1225'
+        else:
+            ret_date = split_date[0:4] + '%02d' % (int(split_date[4:6]) - 1) + '25'
+
+        return ret_date
+
+    def get_year(self, exch, ins, date):
+        """ 获取合约存储的年份
+
+        Args:
+            ins: 合约
+            date: 正常交易日期
+
+        Returns:
+            返回的数据类型是 string, 强制平仓日期
+
+        Examples:
+            >>> from ticknature.trade_date import tradedate
+            >>> tradedate.get_year('CZCE', 'AP501', '20250111')
+           2025
+        """
+        resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
+        begin = 200
+        split_date = ''
+        for i in range(10):
+            split_date = str(begin + i) + resplit[1][0][-3:] + '31'
+            if split_date >= date:
+                break
+
+        return split_date[0:4]
 
 
 tradedate = tradeDate()
