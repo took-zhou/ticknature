@@ -33,7 +33,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '铜',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': True,
             'option_ticksize': 2
         }
@@ -45,7 +45,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '铝',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -57,7 +57,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '锌',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -69,7 +69,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '铅',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': False
         }
         self.SHFE['ni'] = {
@@ -80,7 +80,7 @@ class instrumentInfo():
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '镍',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': False
         }
         self.SHFE['sn'] = {
@@ -91,7 +91,7 @@ class instrumentInfo():
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '锡',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': False
         }
         self.SHFE['au'] = {
@@ -102,7 +102,7 @@ class instrumentInfo():
             'tradeunit': 1000,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 1],
             'chinese_name': '黄金',
-            'plate': '贵金属',
+            'plate': 'precious_metals',
             'include_option': True,
             'option_ticksize': 0.02
         }
@@ -114,7 +114,7 @@ class instrumentInfo():
             'tradeunit': 15,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '白银',
-            'plate': '贵金属',
+            'plate': 'precious_metals',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -126,7 +126,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '螺纹钢',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -138,7 +138,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '线材',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': False
         }
         self.SHFE['hc'] = {
@@ -149,7 +149,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '热轧卷板',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': False
         }
         self.SHFE['ss'] = {
@@ -160,7 +160,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '不锈钢',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': False
         }
         self.SHFE['fu'] = {
@@ -171,7 +171,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '燃料油',
-            'plate': '石油',
+            'plate': 'oil',
             'include_option': False
         }
         self.SHFE['bu'] = {
@@ -182,7 +182,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '石油沥青',
-            'plate': '石油',
+            'plate': 'oil',
             'include_option': False
         }
         self.SHFE['ru'] = {
@@ -193,7 +193,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [1, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             'chinese_name': '天然橡胶',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -205,7 +205,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '纸浆',
-            'plate': '轻工',
+            'plate': 'light_industry',
             'include_option': False
         }
         self.SHFE['ao'] = {
@@ -216,7 +216,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '氧化铝',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': False
         }
         self.SHFE['br'] = {
@@ -227,7 +227,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '合成橡胶',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -240,7 +240,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '强麦',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.CZCE['PM'] = {
@@ -251,7 +251,7 @@ class instrumentInfo():
             'tradeunit': 50,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '普麦',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.CZCE['CF'] = {
@@ -262,7 +262,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '棉花',
-            'plate': '软商品',
+            'plate': 'soft_goods',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -274,7 +274,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '白糖',
-            'plate': '软商品',
+            'plate': 'soft_goods',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -286,7 +286,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '菜籽油',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -298,7 +298,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '早籼稻',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.CZCE['RS'] = {
@@ -309,7 +309,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [7, 8, 9, 11],
             'chinese_name': '油菜籽',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': False
         }
         self.CZCE['RM'] = {
@@ -320,7 +320,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0] + [8],
             'chinese_name': '菜籽粕',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -332,7 +332,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '粳稻',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.CZCE['LR'] = {
@@ -343,7 +343,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '晚籼稻',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.CZCE['CY'] = {
@@ -354,7 +354,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '棉纱',
-            'plate': '软商品',
+            'plate': 'soft_goods',
             'include_option': False
         }
         self.CZCE['AP'] = {
@@ -365,7 +365,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [1, 3, 4, 5, 10, 11, 12],
             'chinese_name': '苹果',
-            'plate': '农副',
+            'plate': 'agricultural_deputy',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -377,7 +377,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [1, 3, 5, 7, 9, 12],
             'chinese_name': '红枣',
-            'plate': '农副',
+            'plate': 'agricultural_deputy',
             'include_option': False
         }
         self.CZCE['TA'] = {
@@ -388,7 +388,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'PTA',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -400,7 +400,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '甲醇',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -412,7 +412,7 @@ class instrumentInfo():
             'tradeunit': 50,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '甲醇(曾用)',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': False
         }
         self.CZCE['FG'] = {
@@ -423,7 +423,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '玻璃',
-            'plate': '轻工',
+            'plate': 'light_industry',
             'include_option': False
         }
         self.CZCE['ZC'] = {
@@ -434,7 +434,7 @@ class instrumentInfo():
             'tradeunit': 100,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '动力煤',
-            'plate': '煤炭',
+            'plate': 'coal',
             'include_option': True,
             'option_ticksize': 0.1
         }
@@ -446,7 +446,7 @@ class instrumentInfo():
             'tradeunit': 200,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '动力煤(曾用)',
-            'plate': '煤炭',
+            'plate': 'coal',
             'include_option': False
         }
         self.CZCE['SF'] = {
@@ -457,7 +457,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '硅铁',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -469,7 +469,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '锰硅',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -481,7 +481,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '尿素',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -493,7 +493,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '纯碱',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -505,7 +505,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '短纤',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -517,7 +517,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [1, 3, 4, 10, 11, 12],
             'chinese_name': '花生',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -529,7 +529,7 @@ class instrumentInfo():
             'tradeunit': 30,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '烧碱',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -541,7 +541,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '对二甲苯',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -554,7 +554,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '玉米',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -566,7 +566,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '玉米淀粉',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.DCE['a'] = {
@@ -577,7 +577,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
             'chinese_name': '黄大豆1号',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -589,7 +589,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '黄大豆2号',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -601,7 +601,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [1, 3, 5, 7, 8, 9, 11, 12],
             'chinese_name': '豆粕',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -613,7 +613,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [1, 3, 5, 7, 8, 9, 11, 12],
             'chinese_name': '豆油',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -625,7 +625,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '棕榈油',
-            'plate': '油脂油料',
+            'plate': 'grease_oil',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -637,7 +637,7 @@ class instrumentInfo():
             'tradeunit': 50,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '纤维板',
-            'plate': '轻工',
+            'plate': 'light_industry',
             'include_option': False
         }
         self.DCE['bb'] = {
@@ -648,7 +648,7 @@ class instrumentInfo():
             'tradeunit': 500,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '胶合板',
-            'plate': '轻工',
+            'plate': 'light_industry',
             'include_option': False
         }
         self.DCE['jd'] = {
@@ -659,7 +659,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '鸡蛋',
-            'plate': '农副',
+            'plate': 'agricultural_deputy',
             'include_option': False
         }
         self.DCE['rr'] = {
@@ -670,7 +670,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '粳米',
-            'plate': '谷物',
+            'plate': 'cereals',
             'include_option': False
         }
         self.DCE['l'] = {
@@ -681,7 +681,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '聚乙烯',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -693,7 +693,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '聚氯乙烯',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -705,7 +705,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '聚丙烯',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -717,7 +717,7 @@ class instrumentInfo():
             'tradeunit': 100,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '焦炭',
-            'plate': '煤炭',
+            'plate': 'coal',
             'include_option': False
         }
         self.DCE['jm'] = {
@@ -728,7 +728,7 @@ class instrumentInfo():
             'tradeunit': 60,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '焦煤',
-            'plate': '煤炭',
+            'plate': 'coal',
             'include_option': False
         }
         self.DCE['i'] = {
@@ -739,7 +739,7 @@ class instrumentInfo():
             'tradeunit': 100,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '铁矿石',
-            'plate': '黑色金属',
+            'plate': 'black_metals',
             'include_option': True,
             'option_ticksize': 0.1
         }
@@ -751,7 +751,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '乙二醇',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -763,7 +763,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '苯乙烯',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.5
         }
@@ -775,7 +775,7 @@ class instrumentInfo():
             'tradeunit': 20,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '液化石油气',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': True,
             'option_ticksize': 0.2
         }
@@ -787,7 +787,7 @@ class instrumentInfo():
             'tradeunit': 16,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '生猪',
-            'plate': '农副',
+            'plate': 'agricultural_deputy',
             'include_option': False
         }
 
@@ -799,7 +799,7 @@ class instrumentInfo():
             'tradeunit': 1000,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '原油',
-            'plate': '石油',
+            'plate': 'oil',
             'include_option': True,
             'option_ticksize': 0.05
         }
@@ -811,7 +811,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '低硫燃料油',
-            'plate': '石油',
+            'plate': 'oil',
             'include_option': False
         }
         self.INE['nr'] = {
@@ -822,7 +822,7 @@ class instrumentInfo():
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '20号胶',
-            'plate': '化工',
+            'plate': 'chemical_industry',
             'include_option': False
         }
         self.INE['bc'] = {
@@ -833,7 +833,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '国际铜',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': False
         }
         self.INE['ec'] = {
@@ -844,7 +844,7 @@ class instrumentInfo():
             'tradeunit': 50,
             'trademonth': [2, 4, 6, 8, 10, 12],
             'chinese_name': '集运欧线',
-            'plate': '航线',
+            'plate': 'route',
             'include_option': False
         }
 
@@ -856,7 +856,7 @@ class instrumentInfo():
             'tradeunit': 300,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '沪深300股指',
-            'plate': '股指期货',
+            'plate': 'stock_index_futures',
             'include_option': True,
             'option_ticksize': 0.2
         }
@@ -868,7 +868,7 @@ class instrumentInfo():
             'tradeunit': 200,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '中证500股指',
-            'plate': '股指期货',
+            'plate': 'stock_index_futures',
             'include_option': False
         }
         self.CFFEX['IH'] = {
@@ -879,7 +879,7 @@ class instrumentInfo():
             'tradeunit': 300,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '上证50股指',
-            'plate': '股指期货',
+            'plate': 'stock_index_futures',
             'include_option': True,
             'option_ticksize': 0.2
         }
@@ -891,7 +891,7 @@ class instrumentInfo():
             'tradeunit': 200,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '中证1000股指',
-            'plate': '股指期货',
+            'plate': 'stock_index_futures',
             'include_option': True,
             'option_ticksize': 0.2
         }
@@ -903,7 +903,7 @@ class instrumentInfo():
             'tradeunit': 20000,
             'trademonth': [3, 6, 9, 12],
             'chinese_name': '2年期国债',
-            'plate': '国债期货',
+            'plate': 'treasury_futures',
             'include_option': False
         }
         self.CFFEX['T'] = {
@@ -914,7 +914,7 @@ class instrumentInfo():
             'tradeunit': 10000,
             'trademonth': [3, 6, 9, 12],
             'chinese_name': '10年期国债',
-            'plate': '国债期货',
+            'plate': 'treasury_futures',
             'include_option': False
         }
         self.CFFEX['TF'] = {
@@ -925,7 +925,7 @@ class instrumentInfo():
             'tradeunit': 10000,
             'trademonth': [3, 6, 9, 12],
             'chinese_name': '5年期国债',
-            'plate': '国债期货',
+            'plate': 'treasury_futures',
             'include_option': False
         }
         self.CFFEX['TL'] = {
@@ -936,7 +936,7 @@ class instrumentInfo():
             'tradeunit': 10000,
             'trademonth': [3, 6, 9, 12],
             'chinese_name': '30年期国债',
-            'plate': '国债期货',
+            'plate': 'treasury_futures',
             'include_option': False
         }
 
@@ -948,7 +948,7 @@ class instrumentInfo():
             'tradeunit': 5,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '工业硅',
-            'plate': '有色金属',
+            'plate': 'nonferrous_metals',
             'include_option': True,
             'option_ticksize': 1
         }
@@ -961,7 +961,7 @@ class instrumentInfo():
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '碳酸锂',
-            'plate': '新能源',
+            'plate': 'new_energy',
             'include_option': True,
             'option_ticksize': 10
         }
