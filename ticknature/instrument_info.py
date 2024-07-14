@@ -12,6 +12,7 @@ class instrumentInfo():
         self.INE = {}
         self.CFFEX = {}
         self.GFEX = {}
+        self.GATE = {}
         self.SHSE = {}
         self.SZSE = {}
 
@@ -22,6 +23,7 @@ class instrumentInfo():
         self.exch['INE'] = self.INE
         self.exch['CFFEX'] = self.CFFEX
         self.exch['GFEX'] = self.GFEX
+        self.exch['GATE'] = self.GATE
         self.exch['SHSE'] = self.SHSE
         self.exch['SZSE'] = self.SZSE
 
@@ -966,6 +968,726 @@ class instrumentInfo():
             'option_ticksize': 10
         }
 
+        self.GATE['BTC_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.00001,
+            'ticksize': 0.1,
+            'tradeunit': 0.0001,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'BTC永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ETH_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0005,
+            'ticksize': 0.05,
+            'tradeunit': 0.01,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ETH永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['SOL_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'SOL永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['NOT_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.000001,
+            'tradeunit': 100,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'NOT永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['PEPE_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.0000000001,
+            'tradeunit': 10000000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'PEPE永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['PEOPLE_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.00001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'PEOPLE永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['DOGE_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.00001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'DOGE永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ORDI_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ORDI永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ZRO_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ZRO永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ETHFI_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ETHFI永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['WIF_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'WIF永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['SATS_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.00000000001,
+            'tradeunit': 10000000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'SATS永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['CEL_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CEL永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['CRV_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CRV永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['WLD_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'WLD永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ENS_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ENS永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['TURBO_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0000001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'TURBO永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['XRP_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.0001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'XRP永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['BONK_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0000000001,
+            'tradeunit': 1000000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'BONK永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['SHIB_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.00001,
+            'ticksize': 0.000000001,
+            'tradeunit': 10000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'SHIB永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['BNB_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.00005,
+            'ticksize': 0.05,
+            'tradeunit': 0.001,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'BNB永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['TIA_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'TIA永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['BCH_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0005,
+            'ticksize': 0.05,
+            'tradeunit': 0.01,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'BCH永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['TON_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.00001,
+            'ticksize': 0.0001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'TON永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['LTC_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.01,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'LTC永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['FIL_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.00001,
+            'ticksize': 0.001,
+            'tradeunit': 0.01,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'FIL永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ADA_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.0001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ADA永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['TRB_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'TRB永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['EOS_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'EOS永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['AVAX_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'AVAX永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['LINK_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'LINK永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ARB_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ARB永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ULTI_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.00001,
+            'tradeunit': 100,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ULTI永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['OP_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'OP永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ZKU_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ZKU永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['MATIC_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.0001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'MATIC永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['DOT_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'DOT永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['NEAR_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'NEAR永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['LDO_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'LDO永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['JUP_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'JUP永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['SUI_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'SUI永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['ETC_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'ETC永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['TNSR_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'TNSR永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['CORE_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CORE永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['AEVO_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'AEVO永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['OM_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'OM永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['FLOKI_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.00000001,
+            'tradeunit': 10000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'FLOKI永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['FTM_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.00000001,
+            'tradeunit': 10000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'FTM永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['UNI_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.00000001,
+            'tradeunit': 10000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'UNI永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['INJ_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'INJ永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['CFX_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.0001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CFX永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['STRK_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'STRK永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['GLM_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.0001,
+            'tradeunit': 10,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'GLM永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['YGG_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'YGG永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['JTO_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'JTO永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['DYDX_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'DYDX永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['BLUR_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'BLUR永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['APT_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'APT永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['SSV_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.0005,
+            'ticksize': 0.005,
+            'tradeunit': 0.1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'SSV永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.GATE['MEW_USDT'] = {
+            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
+            'deposit': 0.025,
+            'tickprice': 0.001,
+            'ticksize': 0.000001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'MEW永续合约',
+            'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
         self.SHSE['601155'] = {
             'commission': [],
             'tickprice': 1,
@@ -1124,6 +1846,8 @@ class instrumentInfo():
             ret = 'INE'
         elif temp in self.GFEX.keys():
             ret = 'GFEX'
+        elif temp in self.GATE.keys():
+            ret = 'GATE'
         elif temp in self.SHSE.keys():
             ret = 'SHSE'
         elif temp in self.SZSE.keys():
@@ -1153,6 +1877,8 @@ class instrumentInfo():
             ret = 'security'
         elif exch in ['DCE', 'CFFEX', 'CZCE', 'INE', 'SHFE', 'GFEX']:
             ret = 'future'
+        elif exch in ['GATE']:
+            ret = 'crypto'
 
         return ret
 

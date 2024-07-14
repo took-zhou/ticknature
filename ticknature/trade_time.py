@@ -13,17 +13,19 @@ class tradeTime():
         self.INE = {}
         self.CFFEX = {}
         self.GFEX = {}
+        self.GATE = {}
         # 郑商所，大商所，上期所，能源中心交易白天时间
         self.day_time_dict1 = {
             'morning_first_half': ['09:00:00', '10:15:00'],
             'morning_second_half': ['10:30:00', '11:30:00'],
             'afternoon': ['13:30:00', '15:00:00']
         }
-
         # 中金所股指期货交易时间
         self.day_time_dict2 = {'morning': ['09:30:00', '11:30:00'], 'afternoon': ['13:00:00', '15:00:00']}
         # 中金所国债交易时间
         self.day_time_dict3 = {'morning': ['09:15:00', '11:30:00'], 'afternoon': ['13:00:00', '15:15:00']}
+        # 加密货币交易时间
+        self.day_time_dict4 = {'day_first_half': ['07:00:00', '23:59:59'], 'day_second_half': ['00:00:00', '05:00:00']}
 
         # 夜9点到凌晨2点半
         self.night_time_dict1 = {'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '02:30:00']}
@@ -34,14 +36,32 @@ class tradeTime():
         # 夜9点到夜11点半
         self.night_time_dict4 = {'night': ['21:00:00', '23:30:00']}
 
-        self.time_compose1 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-            'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
-        self.time_compose2 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-            'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '02:30:00']}
-        self.time_compose3 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-            'night': ['21:00:00', '23:00:00']}
-        self.time_compose4 = {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
-            'night': ['21:00:00', '23:30:00']}
+        self.time_compose1 = {
+            'morning_first_half': ['09:00:00', '10:15:00'],
+            'morning_second_half': ['10:30:00', '11:30:00'],
+            'afternoon': ['13:30:00', '15:00:00'],
+            'night_first_half': ['21:00:00', '23:59:59'],
+            'night_second_half': ['00:00:00', '01:00:00']
+        }
+        self.time_compose2 = {
+            'morning_first_half': ['09:00:00', '10:15:00'],
+            'morning_second_half': ['10:30:00', '11:30:00'],
+            'afternoon': ['13:30:00', '15:00:00'],
+            'night_first_half': ['21:00:00', '23:59:59'],
+            'night_second_half': ['00:00:00', '02:30:00']
+        }
+        self.time_compose3 = {
+            'morning_first_half': ['09:00:00', '10:15:00'],
+            'morning_second_half': ['10:30:00', '11:30:00'],
+            'afternoon': ['13:30:00', '15:00:00'],
+            'night': ['21:00:00', '23:00:00']
+        }
+        self.time_compose4 = {
+            'morning_first_half': ['09:00:00', '10:15:00'],
+            'morning_second_half': ['10:30:00', '11:30:00'],
+            'afternoon': ['13:30:00', '15:00:00'],
+            'night': ['21:00:00', '23:30:00']
+        }
 
         self.SHFE['cu'] = self.time_compose1
         self.SHFE['al'] = self.time_compose1
@@ -156,6 +176,67 @@ class tradeTime():
         self.GFEX['si'] = self.day_time_dict1
         self.GFEX['lc'] = self.day_time_dict1
 
+        self.GATE['BTC_USDT'] = self.day_time_dict4
+        self.GATE['ETH_USDT'] = self.day_time_dict4
+        self.GATE['SOL_USDT'] = self.day_time_dict4
+        self.GATE['NOT_USDT'] = self.day_time_dict4
+        self.GATE['PEPE_USDT'] = self.day_time_dict4
+        self.GATE['PEOPLE_USDT'] = self.day_time_dict4
+        self.GATE['DOGE_USDT'] = self.day_time_dict4
+        self.GATE['ORDI_USDT'] = self.day_time_dict4
+        self.GATE['ZRO_USDT'] = self.day_time_dict4
+        self.GATE['ETHFI_USDT'] = self.day_time_dict4
+        self.GATE['WIF_USDT'] = self.day_time_dict4
+        self.GATE['SATS_USDT'] = self.day_time_dict4
+        self.GATE['CEL_USDT'] = self.day_time_dict4
+        self.GATE['CRV_USDT'] = self.day_time_dict4
+        self.GATE['WLD_USDT'] = self.day_time_dict4
+        self.GATE['ENS_USDT'] = self.day_time_dict4
+        self.GATE['TURBO_USDT'] = self.day_time_dict4
+        self.GATE['XRP_USDT'] = self.day_time_dict4
+        self.GATE['BONK_USDT'] = self.day_time_dict4
+        self.GATE['SHIB_USDT'] = self.day_time_dict4
+        self.GATE['BNB_USDT'] = self.day_time_dict4
+        self.GATE['TIA_USDT'] = self.day_time_dict4
+        self.GATE['BCH_USDT'] = self.day_time_dict4
+        self.GATE['TON_USDT'] = self.day_time_dict4
+        self.GATE['LTC_USDT'] = self.day_time_dict4
+        self.GATE['FIL_USDT'] = self.day_time_dict4
+        self.GATE['ADA_USDT'] = self.day_time_dict4
+        self.GATE['TRB_USDT'] = self.day_time_dict4
+        self.GATE['EOS_USDT'] = self.day_time_dict4
+        self.GATE['AVAX_USDT'] = self.day_time_dict4
+        self.GATE['LINK_USDT'] = self.day_time_dict4
+        self.GATE['ARB_USDT'] = self.day_time_dict4
+        self.GATE['ULTI_USDT'] = self.day_time_dict4
+        self.GATE['OP_USDT'] = self.day_time_dict4
+        self.GATE['ZKU_USDT'] = self.day_time_dict4
+        self.GATE['MATIC_USDT'] = self.day_time_dict4
+        self.GATE['DOT_USDT'] = self.day_time_dict4
+        self.GATE['NEAR_USDT'] = self.day_time_dict4
+        self.GATE['LDO_USDT'] = self.day_time_dict4
+        self.GATE['JUP_USDT'] = self.day_time_dict4
+        self.GATE['SUI_USDT'] = self.day_time_dict4
+        self.GATE['ETC_USDT'] = self.day_time_dict4
+        self.GATE['TNSR_USDT'] = self.day_time_dict4
+        self.GATE['CORE_USDT'] = self.day_time_dict4
+        self.GATE['AEVO_USDT'] = self.day_time_dict4
+        self.GATE['OM_USDT'] = self.day_time_dict4
+        self.GATE['FLOKI_USDT'] = self.day_time_dict4
+        self.GATE['FTM_USDT'] = self.day_time_dict4
+        self.GATE['UNI_USDT'] = self.day_time_dict4
+        self.GATE['INJ_USDT'] = self.day_time_dict4
+        self.GATE['CFX_USDT'] = self.day_time_dict4
+        self.GATE['STRK_USDT'] = self.day_time_dict4
+        self.GATE['GLM_USDT'] = self.day_time_dict4
+        self.GATE['YGG_USDT'] = self.day_time_dict4
+        self.GATE['JTO_USDT'] = self.day_time_dict4
+        self.GATE['DYDX_USDT'] = self.day_time_dict4
+        self.GATE['BLUR_USDT'] = self.day_time_dict4
+        self.GATE['APT_USDT'] = self.day_time_dict4
+        self.GATE['SSV_USDT'] = self.day_time_dict4
+        self.GATE['MEW_USDT'] = self.day_time_dict4
+
     def _get_night_data(self, datastring):
         ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
 
@@ -220,7 +301,7 @@ class tradeTime():
         Examples:
             >>> from ticknature.trade_time import tradetime
             >>> tradetime.get_trade_time('SHFE', 'cu2009')
-            {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], \
+            {'morning_first_half': ['09:00:00', '10:15:00'], 'morning_second_half': ['10:30:00', '11:30:00'], 'afternoon': ['13:30:00', '15:00:00'], 
                 'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '01:00:00']}
         """
         temp = re.split('([0-9]+)', ins)[0]
