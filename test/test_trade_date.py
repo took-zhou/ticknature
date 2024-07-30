@@ -14,17 +14,17 @@ def test_get_year():
 
 
 def test_get_close_date():
-    assert (tradedate.get_close_date('CF501', '20240301') == '20241225')
-    assert (tradedate.get_close_date('CF501', '20150101') == '20141225')
-    assert (tradedate.get_close_date('CF501', '20150121') == '20141225')
-    assert (tradedate.get_close_date('al2501', '20240301') == '20241225')
-    assert (tradedate.get_close_date('al1501', '20150101') == '20141225')
-    assert (tradedate.get_close_date('SA503', '20240320') == '20250225')
-    assert (tradedate.get_close_date('sc2703', '20240320') == '20270225')
+    assert (tradedate.get_close_date('CZCE', 'CF501', '20240301') == '20241225')
+    assert (tradedate.get_close_date('CZCE', 'CF501', '20150101') == '20141225')
+    assert (tradedate.get_close_date('CZCE', 'CF501', '20150121') == '20241225')
+    assert (tradedate.get_close_date('CZCE', 'al2501', '20240301') == '20241225')
+    assert (tradedate.get_close_date('CZCE', 'al1501', '20150101') == '20141225')
+    assert (tradedate.get_close_date('CZCE', 'SA503', '20240320') == '20250225')
+    assert (tradedate.get_close_date('CZCE', 'sc2703', '20240320') == '20270225')
 
 
 def test_get_prev_date():
-    assert (tradedate.get_prev_date('20240410') == '20240409')
+    assert (tradedate.get_prev_date('CZCE', '20240410') == '20240409')
 
 
 if __name__ == "__main__":

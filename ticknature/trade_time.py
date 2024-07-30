@@ -237,15 +237,15 @@ class tradeTime():
         self.GATE['SSV_USDT'] = self.day_time_dict4
         self.GATE['MEW_USDT'] = self.day_time_dict4
 
-    def _get_night_data(self, datastring):
-        ins_time_of_week = pd.to_datetime(datastring, format='%Y-%m-%d').dayofweek + 1
+    def _get_night_data(self, datestring):
+        ins_time_of_week = pd.to_datetime(datestring, format='%Y-%m-%d').dayofweek + 1
 
         if ins_time_of_week == 1:
-            three_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
+            three_day_before = pd.to_datetime(datestring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
             split = str(three_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         elif 1 < ins_time_of_week <= 5:
-            one_day_before = pd.to_datetime(datastring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
+            one_day_before = pd.to_datetime(datestring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
             split = str(one_day_before).split('-')
             night_date = split[0] + split[1] + split[2].split(' ')[0]
         else:
@@ -274,12 +274,11 @@ class tradeTime():
         ret = False
         str_list = timestring.split(' ')
         time_dict = self.get_trade_time(exch, ins, str_list[0])
-
         for item in time_dict:
             if time_type == 'all':
                 if time_dict[item][0] <= str_list[1] <= time_dict[item][1]:
                     ret = True
-            elif time_type == 'day' and ('morning' in item or 'afternoon' in item):
+            elif time_type == 'day' and ('morning' in item or 'afternoon' in item or 'day' in item):
                 if time_dict[item][0] <= str_list[1] <= time_dict[item][1]:
                     ret = True
             elif time_type == 'night' and 'night' in item:
@@ -287,7 +286,7 @@ class tradeTime():
                     ret = True
         return ret
 
-    def get_trade_time(self, exch, ins, timestr='', timetype='%H:%M:%S'):
+    def get_trade_time(self, exch, ins, timestring='', timetype='%H:%M:%S'):
         """ 获取单个合约交易时间表
 
         Args:
@@ -310,7 +309,7 @@ class tradeTime():
             if self.SHFE.__contains__(temp):
                 ret = self.SHFE[temp].copy()
         elif exch == 'CZCE':
-            if timestr != '' and timestr < '20191212':
+            if timestring != '' and timestring < '20191212':
                 temp = temp + '_old'
             if self.CZCE.__contains__(temp):
                 ret = self.CZCE[temp].copy()
@@ -323,6 +322,12 @@ class tradeTime():
         elif exch == 'CFFEX':
             if self.CFFEX.__contains__(temp):
                 ret = self.CFFEX[temp].copy()
+        elif exch == 'GFEX':
+            if self.GFEX.__contains__(temp):
+                ret = self.GFEX[temp].copy()
+        elif exch == 'GATE':
+            if self.GATE.__contains__(temp):
+                ret = self.GATE[temp].copy()
 
         if timetype == '%H:%M:%S':
             if 'efp' in ins:
@@ -333,18 +338,19 @@ class tradeTime():
         elif timetype == '%Y-%m-%d %H:%M:%S':
             for item in ret:
                 if item == 'night' or item == 'night_first_half':
-                    night_data = self._get_night_data(timestr)
+                    night_data = self._get_night_data(timestring)
                     ret[item] = [
                         datetime.datetime.strptime(night_data + item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S")
                         for item2 in ret[item]
                     ]
                 elif item == 'night_second_half':
-                    night_data = self._get_night_data(timestr)
+                    night_data = self._get_night_data(timestring)
                     ret[item] = [(datetime.datetime.strptime(night_data + item2, '%Y%m%d%H:%M:%S') +
                                   datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]]
                 else:
                     ret[item] = [
-                        datetime.datetime.strptime(timestr + item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S") for item2 in ret[item]
+                        datetime.datetime.strptime(timestring + item2, '%Y%m%d%H:%M:%S').strftime("%Y-%m-%d %H:%M:%S")
+                        for item2 in ret[item]
                     ]
 
             if 'efp' in ins:
@@ -365,19 +371,93 @@ class tradeTime():
             >>> tradetime.find_all()
             ...
         """
-        return {'SHFE': self.SHFE, 'CZCE': self.CZCE, 'DCE': self.DCE, 'INE': self.INE, 'CFFEX': self.CFFEX}
+        return {
+            'SHFE': self.SHFE,
+            'CZCE': self.CZCE,
+            'DCE': self.DCE,
+            'INE': self.INE,
+            'CFFEX': self.CFFEX,
+            'GFEX': self.GFEX,
+            'GATE': self.GATE
+        }
 
-    def get_offset_time(self, timestring, _offset):
-        time_list = timestring.split(':')
-        integral_time = int(time_list[0]) * 3600 + int(time_list[1]) * 60 + int(time_list[2])
-        integral_time = integral_time + _offset
-        return '%02d:%02d:%02d' % (int(integral_time / 3600), int((integral_time % 3600) / 60), (integral_time % 3600) % 60)
+    def get_offset_time(self, exch, timestring, offset):
+        """ 获取偏移时间
+
+        Args:
+            exch: 交易所简称
+            timestring: 时间字符串
+            offset: 偏移时间，单位秒
+        Returns:
+            返回的数据类型是 string ，最新的时间字符串
+
+        Examples:
+            >>> from ticknature.trade_time import tradetime
+            >>> tradetime.get_offset_time('DCE', '2024-07-29 09:00:01', 1)
+            2024-07-30  09:00:01
+        """
+        split_timestr = timestring.split(' ')
+        time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
+        offset_days = offset / 24 / 60 / 60
+
+        if exch in ['CZCE', 'DCE', 'CFFEX', 'INE', 'SHFE', 'GFEX']:
+            if (time_of_week == 5 and split_timestr[-1] >= '20:00:00') or (time_of_week == 6 and split_timestr[-1] <= '03:00:00'):
+                offset_time = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=2 + offset_days)
+            elif (time_of_week == 4 and split_timestr[-1] >= '20:00:00') or (time_of_week == 5 and split_timestr[-1] <= '03:00:00'):
+                offset_time = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=offset_days - 2)
+            else:
+                offset_time = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=offset_days)
+        else:
+            offset_time = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=offset_days)
+
+        return str(offset_time)
+
+    def get_date_time(self, exch, datestring, timestring):
+        """ 依据日期，以及登录登出时间，获取开始时间和结束时间
+
+        Args:
+            exch: 交易所简称
+            datestring: 交易日
+            timestring: 时间字符串
+        Returns:
+            返回的数据类型是 string ，交易时间
+
+        Examples:
+            >>> from ticknature.trade_time import tradetime
+            >>> tradetime.get_date_time('DCE', '20240729' '20:00:01')
+            2024-07-28  20:00:01
+        """
+        ret = ''
+        ins_time_of_week = pd.to_datetime(datestring, format='%Y%m%d').dayofweek + 1
+
+        if exch in ['CZCE', 'DCE', 'CFFEX', 'INE', 'SHFE', 'GFEX']:
+            if '20:00:00' <= timestring <= '24:00:00':
+                if ins_time_of_week == 1:
+                    ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') - datetime.timedelta(days=3)
+                else:
+                    ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') - datetime.timedelta(days=1)
+            elif '00:00:00' <= timestring <= '03:00:00':
+                if ins_time_of_week == 1:
+                    ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') - datetime.timedelta(days=2)
+                else:
+                    ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
+            else:
+                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
+        elif exch in ['GATE']:
+            if '00:00:00' <= timestring <= '05:00:00':
+                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
+            else:
+                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
+        else:
+            ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
+
+        return str(ret)
 
 
 tradetime = tradeTime()
 
 if __name__ == "__main__":
-    print(tradetime.get_trade_time('CZCE', 'MA109', '20210506', '%Y-%m-%d %H:%M:%S'))
+    print(tradetime.get_date_time('CZCE', '20240729', '03:00:00'))
     # print(tradetime.get_trade_time('CZCE', 'MA705', '20190101', '%Y-%m-%d %H:%M:%S'))
     # print(tradetime.get_trade_time('DCE', 'l2101'))
     # print(tradetime.get_trade_time('SHFE', 'cu2009'))

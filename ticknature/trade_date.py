@@ -145,7 +145,7 @@ class tradeDate():
 
         return night_date
 
-    def is_delivery_month(self, exch, ins, date):
+    def is_delivery_month(self, exch, ins, datestring):
         """ 判断该合约是否是交割月，只在真实交易时间判断有效
 
         Args:
@@ -163,7 +163,7 @@ class tradeDate():
         resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
         year_month = resplit[1][0][-3:]
 
-        if year_month == date[3:6]:
+        if year_month == datestring[3:6]:
             ret = True
         else:
             ret = False
@@ -196,7 +196,7 @@ class tradeDate():
 
         return date_list
 
-    def get_close_date(self, exch, ins, date):
+    def get_close_date(self, exch, ins, datestring):
         """ 获取合约的强制平仓日
 
         Args:
@@ -218,7 +218,7 @@ class tradeDate():
             split_date = ''
             for i in range(10):
                 split_date = str(begin + i) + resplit[1][0][-3:] + '15'
-                if split_date >= date:
+                if split_date >= datestring:
                     break
 
             if split_date[4:6] == '01':
@@ -228,7 +228,48 @@ class tradeDate():
 
         return ret_date
 
-    def get_year(self, exch, ins, date):
+    def get_login_date(self, timestring):
+        """ 依据登录时间获取交易日
+
+        Args:
+            timestring: 登录时间
+
+        Returns:
+            返回的数据类型是 string, 交易日
+
+        Examples:
+            >>> from ticknature.trade_date import tradedate
+            >>> tradedate.get_login_date('2023-02-01 20:00:00')
+            20230202
+        """
+        ret = ''
+        split_timestr = timestring.split(' ')
+        time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
+
+        if '19:00:00' <= split_timestr[-1] <= '24:00:00':  # 期货夜盘登录时间段
+            if time_of_week == 5:
+                three_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=3)
+                ret = '%04d%02d%02d' % (three_day_after.year, three_day_after.month, three_day_after.day)
+            else:
+                one_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=1)
+                ret = '%04d%02d%02d' % (one_day_after.year, one_day_after.month, one_day_after.day)
+        elif '00:00:00' <= split_timestr[-1] <= '03:00:00':  # 期货夜盘登出时间段
+            if time_of_week == 6:
+                two_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=2)
+                ret = '%04d%02d%02d' % (two_day_after.year, two_day_after.month, two_day_after.day)
+            else:
+                split_ymd = split_timestr[0].split('-')
+                ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
+        elif '00:00:00' <= split_timestr[-1] <= '03:00:00':  # 加密货币登出时间段
+            one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
+            ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
+        else:
+            split_ymd = split_timestr[0].split('-')
+            ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
+
+        return ret
+
+    def get_year(self, exch, ins, datestring):
         """ 获取合约存储的年份
 
         Args:
@@ -249,10 +290,10 @@ class tradeDate():
             split_date = ''
             for i in range(10):
                 split_date = str(begin + i) + resplit[1][0][-3:] + '31'
-                if split_date >= date:
+                if split_date >= datestring:
                     break
         else:
-            split_date = date
+            split_date = datestring
 
         return split_date[0:4]
 

@@ -1744,9 +1744,10 @@ class instrumentInfo():
         """ 查询所有的板块
 
         Args:
+            无
 
         Returns:
-            []
+            列表
 
         Examples:
             >>> from ticknature.instrument_info import instrumentinfo
@@ -1765,6 +1766,15 @@ class instrumentInfo():
         for item in self.INE:
             if self.INE[item]['plate'] not in plate_set:
                 plate_set.append(self.INE[item]['plate'])
+        for item in self.CFFEX:
+            if self.CFFEX[item]['plate'] not in plate_set:
+                plate_set.append(self.CFFEX[item]['plate'])
+        for item in self.GFEX:
+            if self.GFEX[item]['plate'] not in plate_set:
+                plate_set.append(self.GFEX[item]['plate'])
+        for item in self.GATE:
+            if self.GATE[item]['plate'] not in plate_set:
+                plate_set.append(self.GATE[item]['plate'])
         return plate_set
 
     def find_info(self, exch, ins):
@@ -1775,12 +1785,12 @@ class instrumentInfo():
             ins: 合约代码
 
         Returns:
-            数值
+            字典
 
         Examples:
             >>> from ticknature.instrument_info import instrumentinfo
-            >>> instrumentinfo.find_chinese_name('DCE', 'MA109')
-            甲醇
+            >>> instrumentinfo.find_info('DCE', 'MA109')
+            ...
         """
         temp = re.split('([0-9]+)', ins)
         if temp[0] == '':
@@ -1807,7 +1817,7 @@ class instrumentInfo():
             ins: 合约代码
 
         Returns:
-            数值
+            字符串
 
         Examples:
             >>> from ticknature.instrument_info import instrumentinfo
@@ -1862,10 +1872,10 @@ class instrumentInfo():
         """ 查询合约对应的交易所
 
         Args:
-            ins: 合约代码
+            exch: 交易所
 
         Returns:
-            数值
+            字符串
 
         Examples:
             >>> from ticknature.instrument_info import instrumentinfo
@@ -1882,27 +1892,30 @@ class instrumentInfo():
 
         return ret
 
-    def find_group(self, ins):
+    def find_group(self, exch, ins):
         """ 查询合约对应的连续集
 
         Args:
+            exch: 交易所
             ins: 合约代码
 
         Returns:
-            数值
+            字符串
 
         Examples:
             >>> from ticknature.instrument_info import instrumentinfo
-            >>> instrumentinfo.find_group('MA109')
+            >>> instrumentinfo.find_group('CZCE', 'MA109')
             DCE
         """
-        temp = re.split('([0-9]+)', ins)
-
         ret = ''
-        if len(temp) == 5:
-            ret = '%s%s-%s' % (temp[0], temp[1][-2:], temp[2].upper().replace('-', ''))
-        elif len(temp) == 3:
-            ret = '%s%s' % (temp[0], temp[1][-2:])
+        if exch in ['DCE', 'CFFEX', 'CZCE', 'INE', 'SHFE', 'GFEX']:
+            temp = re.split('([0-9]+)', ins)
+            if len(temp) == 5:
+                ret = '%s%s-%s' % (temp[0], temp[1][-2:], temp[2].upper().replace('-', ''))
+            elif len(temp) == 3:
+                ret = '%s%s' % (temp[0], temp[1][-2:])
+        else:
+            ret = ins
 
         return ret
 
@@ -1910,10 +1923,11 @@ class instrumentInfo():
         """ 查询合约对应的板块
 
         Args:
+            exch: 交易所
             ins: 合约代码
 
         Returns:
-            数值
+            字符串
 
         Examples:
             >>> from ticknature.instrument_info import instrumentinfo
@@ -1921,7 +1935,32 @@ class instrumentInfo():
             DCE
         """
         ins_type = self.find_ins_type(exch, ins)
-        return self.exch[exch][ins_type]['plate']
+        if ins_type in self.exch[exch]:
+            return self.exch[exch][ins_type]['plate']
+        else:
+            return ''
+
+    def is_option(self, exch, ins):
+        """ 查询合约是否是期权
+
+        Args:
+            exch: 交易所
+            ins: 合约代码
+
+        Returns:
+            True or Fasle
+
+        Examples:
+            >>> from ticknature.instrument_info import instrumentinfo
+            >>> instrumentinfo.is_option('CZCE','MA109')
+            False
+        """
+        if exch in ['DCE', 'CFFEX', 'CZCE', 'INE', 'SHFE', 'GFEX']:
+            return len(ins) > 6
+        elif exch in ['GATE']:
+            return len(ins) > 12
+        else:
+            return False
 
 
 instrumentinfo = instrumentInfo()
@@ -1929,18 +1968,18 @@ instrumentinfo = instrumentInfo()
 if __name__ == "__main__":
     # ret = instrumentinfo.find_ins('CZCE')
     # print(ret)
-    # ret = instrumentinfo.find_info('CZCE', 'TA')
-    # print(ret)
+    ret = instrumentinfo.find_group('111111')
+    print(ret)
 
     #info = instrumentinfo.find_group('TA301c600')
     #print(info)
 
-    print(instrumentinfo.find_plate('CZCE', 'MA309'))
-    print(instrumentinfo.find_plate('CZCE', 'MA'))
-    print(instrumentinfo.find_plate('CZCE', 'MA09'))
+    # print(instrumentinfo.find_plate('CZCE', 'MA309'))
+    # print(instrumentinfo.find_plate('CZCE', 'MA'))
+    # print(instrumentinfo.find_plate('CZCE', 'MA09'))
 
-    print(instrumentinfo.find_plate('DCE', 'i2309'))
-    print(instrumentinfo.find_plate('DCE', 'i'))
-    print(instrumentinfo.find_plate('DCE', 'i09'))
+    # print(instrumentinfo.find_plate('DCE', 'i2309'))
+    # print(instrumentinfo.find_plate('DCE', 'i'))
+    # print(instrumentinfo.find_plate('DCE', 'i09'))
     # group = '%s(%s)' % (ins, info['chinese_name'])
     # groups.append(group)
