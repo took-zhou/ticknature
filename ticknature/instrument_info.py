@@ -1962,6 +1962,27 @@ class instrumentInfo():
         else:
             return False
 
+    def find_volume(self, exch, ins):
+        """ 查询合约最小和最大下单手数
+
+        Args:
+            exch: 交易所
+            ins: 合约代码
+
+        Returns:
+            [min, max]
+
+        Examples:
+            >>> from ticknature.instrument_info import instrumentinfo
+            >>> instrumentinfo.find_volume('CZCE','MA109')
+            [1, 1000]
+        """
+        if exch in ['DCE', 'CFFEX', 'CZCE', 'INE', 'SHFE', 'GFEX']:
+            return [1, 1000]
+        elif exch in ['GATE']:
+            return [1, 1000000]
+        else:
+            return [1, 1000]
 
 instrumentinfo = instrumentInfo()
 
