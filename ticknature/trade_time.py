@@ -25,7 +25,7 @@ class tradeTime():
         # 中金所国债交易时间
         self.day_time_dict3 = {'morning': ['09:15:00', '11:30:00'], 'afternoon': ['13:00:00', '15:15:00']}
         # 加密货币交易时间
-        self.day_time_dict4 = {'day_first_half': ['07:00:00', '23:59:59'], 'day_second_half': ['00:00:00', '05:00:00']}
+        self.day_time_dict4 = {'day_first_half': ['08:00:00', '23:59:59'], 'day_second_half': ['00:00:00', '07:00:00']}
 
         # 夜9点到凌晨2点半
         self.night_time_dict1 = {'night_first_half': ['21:00:00', '23:59:59'], 'night_second_half': ['00:00:00', '02:30:00']}
@@ -444,7 +444,7 @@ class tradeTime():
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
         elif exch in ['GATE']:
-            if '00:00:00' <= timestring <= '05:00:00':
+            if '00:00:00' <= timestring <= '07:30:00':
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
