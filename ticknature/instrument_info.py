@@ -1376,18 +1376,6 @@ class instrumentInfo():
             'include_option': False,
         }
 
-        self.GATE['ZKU_USDT'] = {
-            'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.0001,
-            'tradeunit': 1,
-            'trademonth': [i + 1 for i in range(12)],
-            'chinese_name': 'ZKU永续合约',
-            'plate': '索拉纳生态系统',
-            'include_option': False,
-        }
-
         self.GATE['MATIC_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
