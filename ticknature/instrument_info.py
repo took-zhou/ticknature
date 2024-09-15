@@ -995,8 +995,8 @@ class instrumentInfo():
         self.GATE['SOL_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.001,
-            'ticksize': 0.001,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'SOL永续合约',
@@ -1019,8 +1019,8 @@ class instrumentInfo():
         self.GATE['PEPE_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.001,
-            'ticksize': 0.0000000001,
+            'tickprice': 0.01,
+            'ticksize': 0.000000001,
             'tradeunit': 10000000,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'PEPE永续合约',
@@ -1103,8 +1103,8 @@ class instrumentInfo():
         self.GATE['SATS_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.00000000001,
+            'tickprice': 0.001,
+            'ticksize': 0.0000000001,
             'tradeunit': 10000000,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'SATS永续合约',
@@ -1127,8 +1127,8 @@ class instrumentInfo():
         self.GATE['CRV_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.001,
+            'tickprice': 0.00001,
+            'ticksize': 0.0001,
             'tradeunit': 0.1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'CRV永续合约',
@@ -1188,7 +1188,7 @@ class instrumentInfo():
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
             'tickprice': 0.0001,
-            'ticksize': 0.0000000001,
+            'ticksize': 0.000000001,
             'tradeunit': 1000000,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'BONK永续合约',
@@ -1235,8 +1235,8 @@ class instrumentInfo():
         self.GATE['BCH_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0005,
-            'ticksize': 0.05,
+            'tickprice': 0.0001,
+            'ticksize': 0.01,
             'tradeunit': 0.01,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'BCH永续合约',
@@ -1295,8 +1295,8 @@ class instrumentInfo():
         self.GATE['TRB_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.001,
+            'tickprice': 0.001,
+            'ticksize': 0.01,
             'tradeunit': 0.1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'TRB永续合约',
@@ -1307,8 +1307,8 @@ class instrumentInfo():
         self.GATE['EOS_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.001,
-            'ticksize': 0.001,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'EOS永续合约',
@@ -1355,8 +1355,8 @@ class instrumentInfo():
         self.GATE['ULTI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.001,
-            'ticksize': 0.00001,
+            'tickprice': 0.0001,
+            'ticksize': 0.000001,
             'tradeunit': 100,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'ULTI永续合约',
@@ -1463,8 +1463,8 @@ class instrumentInfo():
         self.GATE['TNSR_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.001,
-            'ticksize': 0.001,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'TNSR永续合约',
@@ -1524,8 +1524,8 @@ class instrumentInfo():
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
             'tickprice': 0.0001,
-            'ticksize': 0.00000001,
-            'tradeunit': 10000,
+            'ticksize': 0.0001,
+            'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'FTM永续合约',
             'plate': '索拉纳生态系统',
@@ -1535,9 +1535,9 @@ class instrumentInfo():
         self.GATE['UNI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.00000001,
-            'tradeunit': 10000,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
+            'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'UNI永续合约',
             'plate': '索拉纳生态系统',
@@ -1607,8 +1607,8 @@ class instrumentInfo():
         self.GATE['JTO_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.0001,
+            'tickprice': 0.001,
+            'ticksize': 0.001,
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'JTO永续合约',
@@ -1655,8 +1655,8 @@ class instrumentInfo():
         self.GATE['SSV_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0005,
-            'ticksize': 0.005,
+            'tickprice': 0.0001,
+            'ticksize': 0.001,
             'tradeunit': 0.1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'SSV永续合约',
@@ -1971,6 +1971,7 @@ class instrumentInfo():
             return [1, 1000000]
         else:
             return [1, 1000]
+
 
 instrumentinfo = instrumentInfo()
 
