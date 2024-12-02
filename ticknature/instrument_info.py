@@ -13,6 +13,7 @@ class instrumentInfo():
         self.CFFEX = {}
         self.GFEX = {}
         self.GATE = {}
+        self.FXCM = {}
         self.SHSE = {}
         self.SZSE = {}
 
@@ -24,6 +25,7 @@ class instrumentInfo():
         self.exch['CFFEX'] = self.CFFEX
         self.exch['GFEX'] = self.GFEX
         self.exch['GATE'] = self.GATE
+        self.exch['FXCM'] = self.FXCM
         self.exch['SHSE'] = self.SHSE
         self.exch['SZSE'] = self.SZSE
 
@@ -1079,8 +1081,8 @@ class instrumentInfo():
         self.GATE['ETHFI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.001,
+            'tickprice': 0.00001,
+            'ticksize': 0.0001,
             'tradeunit': 0.1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'ETHFI永续合约',
@@ -1559,8 +1561,8 @@ class instrumentInfo():
         self.GATE['CFX_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.001,
-            'ticksize': 0.0001,
+            'tickprice': 0.0001,
+            'ticksize': 0.00001,
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'CFX永续合约',
@@ -1619,8 +1621,8 @@ class instrumentInfo():
         self.GATE['DYDX_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.025,
-            'tickprice': 0.0001,
-            'ticksize': 0.001,
+            'tickprice': 0.00001,
+            'ticksize': 0.0001,
             'tradeunit': 0.1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'DYDX永续合约',
@@ -1673,6 +1675,522 @@ class instrumentInfo():
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'MEW永续合约',
             'plate': '索拉纳生态系统',
+            'include_option': False,
+        }
+
+        self.FXCM['AUD/CAD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '澳元/加元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['AUD/CHF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '澳元/瑞郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['AUD/CNH'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '澳元/离岸人民币',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['AUD/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '澳元/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['AUD/NZD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '澳元/纽元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['AUD/USD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '澳元/美元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['CAD/CHF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '加元/瑞郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['CAD/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '加元/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['CHF/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '瑞郎/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/AUD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/澳元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/CAD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/加元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/CHF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/瑞郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/GBP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/英镑',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/NOK'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/挪威克郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/NZD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/纽元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/SEK'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/瑞典克郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/TRY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/土耳其元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/USD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/美元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['GBP/AUD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英镑/澳元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['GBP/CAD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英镑/加元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['GBP/CHF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英镑/瑞郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['GBP/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英镑/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['GBP/NZD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英镑/纽元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['GBP/USD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英镑/美元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['NZD/CAD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纽元/加元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['NZD/CHF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纽元/瑞郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['NZD/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纽元/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['NZD/USD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '纽元/美元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['TRY/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '土耳其里拉/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/CAD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/加元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/CHF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/瑞郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/CNH'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/离岸人民币',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/HKD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/港元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/MXN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/墨西哥披索',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/NOK'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/挪威克郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/SEK'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/瑞典克郎',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/TRY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/土耳其里拉',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/ZAR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/南非兰特',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['ZAR/JPY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '南非兰特/日元',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['EUR/HUF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧元/匈牙利福林',
+            'plate': '外汇',
+            'include_option': False,
+        }
+
+        self.FXCM['USD/HUF'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.01,
+            'tickprice': 0.1,
+            'ticksize': 0.0001,
+            'tradeunit': 1000,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美元/匈牙利福林',
+            'plate': '外汇',
             'include_option': False,
         }
 
@@ -1763,6 +2281,9 @@ class instrumentInfo():
         for item in self.GATE:
             if self.GATE[item]['plate'] not in plate_set:
                 plate_set.append(self.GATE[item]['plate'])
+        for item in self.FXCM:
+            if self.FXCM[item]['plate'] not in plate_set:
+                plate_set.append(self.FXCM[item]['plate'])
         return plate_set
 
     def find_info(self, exch, ins):
@@ -1846,6 +2367,8 @@ class instrumentInfo():
             ret = 'GFEX'
         elif temp in self.GATE.keys():
             ret = 'GATE'
+        elif temp in self.FXCM.keys():
+            ret = 'FXCM'
         elif temp in self.SHSE.keys():
             ret = 'SHSE'
         elif temp in self.SZSE.keys():
@@ -1877,6 +2400,8 @@ class instrumentInfo():
             ret = 'future'
         elif exch in ['GATE']:
             ret = 'crypto'
+        elif exch in ['FXCM']:
+            ret = 'forex'
 
         return ret
 
@@ -1947,6 +2472,8 @@ class instrumentInfo():
             return len(ins) > 6
         elif exch in ['GATE']:
             return len(ins) > 12
+        elif exch in ['FXCM']:
+            return len(ins) > 12
         else:
             return False
 
@@ -1968,6 +2495,8 @@ class instrumentInfo():
         if exch in ['DCE', 'CFFEX', 'CZCE', 'INE', 'SHFE', 'GFEX']:
             return [1, 1000]
         elif exch in ['GATE']:
+            return [1, 1000000]
+        elif exch in ['FXCM']:
             return [1, 1000000]
         else:
             return [1, 1000]
