@@ -902,8 +902,8 @@ class instrumentInfo():
         self.CFFEX['TS'] = {
             'commission': [3, 0, 0, 0, 0, 0],
             'deposit': 0.005,
-            'tickprice': 100,
-            'ticksize': 0.005,
+            'tickprice': 40,
+            'ticksize': 0.002,
             'tradeunit': 20000,
             'trademonth': [3, 6, 9, 12],
             'chinese_name': '2年期国债',
