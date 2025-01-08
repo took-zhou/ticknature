@@ -794,6 +794,18 @@ class instrumentInfo():
             'plate': 'agricultural_deputy',
             'include_option': False
         }
+        self.DCE['lg'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.07,
+            'tickprice': 45,
+            'ticksize': 0.5,
+            'tradeunit': 90,
+            'trademonth': [i + 1 for i in range(12) if i % 2 == 0],
+            'chinese_name': '原木',
+            'plate': 'soft_goods',
+            'include_option': True,
+            'option_ticksize': 1
+        }
 
         self.INE['sc'] = {
             'commission': [20, 0, 0, 0, 0, 0],
@@ -956,7 +968,6 @@ class instrumentInfo():
             'include_option': True,
             'option_ticksize': 1
         }
-
         self.GFEX['lc'] = {
             'commission': [0, 0.00008, 0, 0, 0, 0],
             'deposit': 0.09,
@@ -965,14 +976,26 @@ class instrumentInfo():
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': '碳酸锂',
-            'plate': 'new_energy',
+            'plate': 'nonferrous_metals',
             'include_option': True,
             'option_ticksize': 10
+        }
+        self.GFEX['ps'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.09,
+            'tickprice': 15,
+            'ticksize': 5,
+            'tradeunit': 3,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '多晶硅',
+            'plate': 'nonferrous_metals',
+            'include_option': True,
+            'option_ticksize': 1
         }
 
         self.GATE['BTC_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.1,
             'tradeunit': 0.0001,
@@ -984,7 +1007,7 @@ class instrumentInfo():
 
         self.GATE['ETH_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0005,
             'ticksize': 0.05,
             'tradeunit': 0.01,
@@ -996,7 +1019,7 @@ class instrumentInfo():
 
         self.GATE['SOL_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.01,
             'ticksize': 0.01,
             'tradeunit': 1,
@@ -1008,7 +1031,7 @@ class instrumentInfo():
 
         self.GATE['NOT_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.000001,
             'tradeunit': 100,
@@ -1020,7 +1043,7 @@ class instrumentInfo():
 
         self.GATE['PEPE_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.01,
             'ticksize': 0.000000001,
             'tradeunit': 10000000,
@@ -1032,7 +1055,7 @@ class instrumentInfo():
 
         self.GATE['PEOPLE_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.00001,
             'tradeunit': 10,
@@ -1044,7 +1067,7 @@ class instrumentInfo():
 
         self.GATE['DOGE_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.00001,
             'tradeunit': 10,
@@ -1056,7 +1079,7 @@ class instrumentInfo():
 
         self.GATE['ORDI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.001,
             'tradeunit': 0.1,
@@ -1068,7 +1091,7 @@ class instrumentInfo():
 
         self.GATE['ZRO_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1080,7 +1103,7 @@ class instrumentInfo():
 
         self.GATE['ETHFI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.0001,
             'tradeunit': 0.1,
@@ -1092,7 +1115,7 @@ class instrumentInfo():
 
         self.GATE['WIF_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1104,7 +1127,7 @@ class instrumentInfo():
 
         self.GATE['SATS_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.0000000001,
             'tradeunit': 10000000,
@@ -1116,7 +1139,7 @@ class instrumentInfo():
 
         self.GATE['CEL_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1128,7 +1151,7 @@ class instrumentInfo():
 
         self.GATE['CRV_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.0001,
             'tradeunit': 0.1,
@@ -1140,7 +1163,7 @@ class instrumentInfo():
 
         self.GATE['WLD_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1152,7 +1175,7 @@ class instrumentInfo():
 
         self.GATE['ENS_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.001,
             'tradeunit': 0.1,
@@ -1164,7 +1187,7 @@ class instrumentInfo():
 
         self.GATE['TURBO_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0000001,
             'tradeunit': 1000,
@@ -1176,7 +1199,7 @@ class instrumentInfo():
 
         self.GATE['XRP_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.0001,
             'tradeunit': 10,
@@ -1188,7 +1211,7 @@ class instrumentInfo():
 
         self.GATE['BONK_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.000000001,
             'tradeunit': 1000000,
@@ -1200,7 +1223,7 @@ class instrumentInfo():
 
         self.GATE['SHIB_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.000000001,
             'tradeunit': 10000,
@@ -1212,7 +1235,7 @@ class instrumentInfo():
 
         self.GATE['BNB_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00005,
             'ticksize': 0.05,
             'tradeunit': 0.001,
@@ -1224,7 +1247,7 @@ class instrumentInfo():
 
         self.GATE['TIA_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1236,7 +1259,7 @@ class instrumentInfo():
 
         self.GATE['BCH_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.01,
             'tradeunit': 0.01,
@@ -1248,7 +1271,7 @@ class instrumentInfo():
 
         self.GATE['TON_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.0001,
             'tradeunit': 0.1,
@@ -1260,7 +1283,7 @@ class instrumentInfo():
 
         self.GATE['LTC_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.01,
             'tradeunit': 0.1,
@@ -1272,7 +1295,7 @@ class instrumentInfo():
 
         self.GATE['FIL_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.001,
             'tradeunit': 0.01,
@@ -1284,7 +1307,7 @@ class instrumentInfo():
 
         self.GATE['ADA_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.0001,
             'tradeunit': 10,
@@ -1296,7 +1319,7 @@ class instrumentInfo():
 
         self.GATE['TRB_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.01,
             'tradeunit': 0.1,
@@ -1308,7 +1331,7 @@ class instrumentInfo():
 
         self.GATE['EOS_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1320,7 +1343,7 @@ class instrumentInfo():
 
         self.GATE['AVAX_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.01,
             'ticksize': 0.01,
             'tradeunit': 1,
@@ -1332,7 +1355,7 @@ class instrumentInfo():
 
         self.GATE['LINK_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1344,7 +1367,7 @@ class instrumentInfo():
 
         self.GATE['ARB_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1356,7 +1379,7 @@ class instrumentInfo():
 
         self.GATE['ULTI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.000001,
             'tradeunit': 100,
@@ -1368,7 +1391,7 @@ class instrumentInfo():
 
         self.GATE['OP_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1380,7 +1403,7 @@ class instrumentInfo():
 
         self.GATE['MATIC_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.0001,
             'tradeunit': 10,
@@ -1392,7 +1415,7 @@ class instrumentInfo():
 
         self.GATE['DOT_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1404,7 +1427,7 @@ class instrumentInfo():
 
         self.GATE['NEAR_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1416,7 +1439,7 @@ class instrumentInfo():
 
         self.GATE['LDO_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1428,7 +1451,7 @@ class instrumentInfo():
 
         self.GATE['JUP_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1440,7 +1463,7 @@ class instrumentInfo():
 
         self.GATE['SUI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1452,7 +1475,7 @@ class instrumentInfo():
 
         self.GATE['ETC_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.001,
             'tradeunit': 0.1,
@@ -1464,7 +1487,7 @@ class instrumentInfo():
 
         self.GATE['TNSR_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1476,7 +1499,7 @@ class instrumentInfo():
 
         self.GATE['CORE_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1488,7 +1511,7 @@ class instrumentInfo():
 
         self.GATE['AEVO_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1500,7 +1523,7 @@ class instrumentInfo():
 
         self.GATE['OM_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1512,7 +1535,7 @@ class instrumentInfo():
 
         self.GATE['FLOKI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.00000001,
             'tradeunit': 10000,
@@ -1524,7 +1547,7 @@ class instrumentInfo():
 
         self.GATE['FTM_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1536,7 +1559,7 @@ class instrumentInfo():
 
         self.GATE['UNI_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1548,7 +1571,7 @@ class instrumentInfo():
 
         self.GATE['INJ_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.001,
             'tradeunit': 0.1,
@@ -1560,7 +1583,7 @@ class instrumentInfo():
 
         self.GATE['CFX_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.00001,
             'tradeunit': 10,
@@ -1572,7 +1595,7 @@ class instrumentInfo():
 
         self.GATE['STRK_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1584,7 +1607,7 @@ class instrumentInfo():
 
         self.GATE['GLM_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.0001,
             'tradeunit': 10,
@@ -1596,7 +1619,7 @@ class instrumentInfo():
 
         self.GATE['YGG_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1608,7 +1631,7 @@ class instrumentInfo():
 
         self.GATE['JTO_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.001,
             'tradeunit': 1,
@@ -1620,7 +1643,7 @@ class instrumentInfo():
 
         self.GATE['DYDX_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.00001,
             'ticksize': 0.0001,
             'tradeunit': 0.1,
@@ -1632,7 +1655,7 @@ class instrumentInfo():
 
         self.GATE['BLUR_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.0001,
             'tradeunit': 1,
@@ -1644,7 +1667,7 @@ class instrumentInfo():
 
         self.GATE['APT_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.001,
             'tradeunit': 0.1,
@@ -1656,7 +1679,7 @@ class instrumentInfo():
 
         self.GATE['SSV_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.0001,
             'ticksize': 0.001,
             'tradeunit': 0.1,
@@ -1668,7 +1691,7 @@ class instrumentInfo():
 
         self.GATE['MEW_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
-            'deposit': 0.025,
+            'deposit': 0.1,
             'tickprice': 0.001,
             'ticksize': 0.000001,
             'tradeunit': 1000,
