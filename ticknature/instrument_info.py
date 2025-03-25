@@ -1164,8 +1164,8 @@ class instrumentInfo():
         self.GATE['WLD_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.1,
-            'tickprice': 0.001,
-            'ticksize': 0.001,
+            'tickprice': 0.0001,
+            'ticksize': 0.0001,
             'tradeunit': 1,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'WLD永续合约',
