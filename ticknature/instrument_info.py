@@ -1056,8 +1056,8 @@ class instrumentInfo():
         self.GATE['PEOPLE_USDT'] = {
             'commission': [0, 0.00075, 0, 0.00075, 0, 0.00075],
             'deposit': 0.1,
-            'tickprice': 0.0001,
-            'ticksize': 0.00001,
+            'tickprice': 0.00001,
+            'ticksize': 0.000001,
             'tradeunit': 10,
             'trademonth': [i + 1 for i in range(12)],
             'chinese_name': 'PEOPLE永续合约',
