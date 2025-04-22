@@ -14,6 +14,7 @@ class instrumentInfo():
         self.GFEX = {}
         self.GATE = {}
         self.FXCM = {}
+        self.NASDAQ = {}
         self.SHSE = {}
         self.SZSE = {}
 
@@ -26,6 +27,7 @@ class instrumentInfo():
         self.exch['GFEX'] = self.GFEX
         self.exch['GATE'] = self.GATE
         self.exch['FXCM'] = self.FXCM
+        self.exch['NASDAQ'] = self.NASDAQ
         self.exch['SHSE'] = self.SHSE
         self.exch['SZSE'] = self.SZSE
 
@@ -2217,6 +2219,1207 @@ class instrumentInfo():
             'include_option': False,
         }
 
+        # 纳斯达克100指数成分股
+        self.NASDAQ['APPL'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '苹果公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ABNB'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '爱彼迎',
+            'plate': 'finance',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ADBE'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '奥多比',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ADI'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '亚德诺半导体',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ADP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '自动数据处理公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ADSK'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '欧特克',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AEP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美国电力公司',
+            'plate': 'utilities',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AMAT'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '应用材料公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AMD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '超威半导体',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AMGN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '安进',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AMZN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '亚马逊',
+            'plate': 'consumer_discretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ANSS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '安世亚太',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['APP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'Applovin公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ARM'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '安谋',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ASML'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '阿斯麦',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AVGO'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '博通',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AXON'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '艾克森',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['AZN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '阿斯利康',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['BIIB'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '百健',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['BKNG'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '缤客',
+            'plate': 'consumer_discretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['BKR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '贝克休斯',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CCEP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '可口可乐欧洲太平洋',
+            'plate': 'consumerstaples',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CDNS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '铿腾电子',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CDW'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CDW公司',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CEG'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '星座能源',
+            'plate': 'utilities',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CHTR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '特许通讯',
+            'plate': 'telecommunications',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CMCSA'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '康卡斯特',
+            'plate': 'telecommunications',
+            'include_option': False,
+        }
+
+        self.NASDAQ['COST'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '好市多',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CPRT'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '科帕特',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CRWD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '科沃德',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CSCO'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '思科',
+            'plate': 'telecommunications',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CSGP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CoStar集团',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CSX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'CSX运输',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CTAS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '信达思',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['CTSH'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '高知特',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['DASH'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'DoorDash',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['DDOG'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'Datadog',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['DXCM'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '德康医疗',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['EA'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '艺电',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['EXC'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '爱克斯龙',
+            'plate': 'utilities',
+            'include_option': False,
+        }
+
+        self.NASDAQ['FANG'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '戴蒙德巴克能源',
+            'plate': 'energy',
+            'include_option': False,
+        }
+
+        self.NASDAQ['FAST'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '快扣公司',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['FTNT'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '飞塔信息',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['GEHC'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '通用电气医疗',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['GFS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '格芯',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['GILD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '吉利德科学',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['GOOGL'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '谷歌',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['HON'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '霍尼韦尔',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['IDXX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '爱德士实验室',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['INTC'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英特尔',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['INTU'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '财捷集团',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ISRG'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '直觉外科',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['KDP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '绿山咖啡博士',
+            'plate': 'consumerstaples',
+            'include_option': False,
+        }
+
+        self.NASDAQ['KHC'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '卡夫亨氏',
+            'plate': 'consumerstaples',
+            'include_option': False,
+        }
+
+        self.NASDAQ['KLAC'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '科磊',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['LIN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '林德集团',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['LRCX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '泛林集团',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['LULU'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '露露乐蒙',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MAR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '万豪国际',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MCHP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '微芯科技',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MDB'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'MongoDB',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MDLZ'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '亿滋国际',
+            'plate': 'consumerstaples',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MELI'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美客多',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['META'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'Meta',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MNST'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '怪兽饮料',
+            'plate': 'consumerstaples',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MRVL'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美满电子',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MSFT'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '微软',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MSTR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '微策略',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['MU'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '美光科技',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['NFLX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '奈飞',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['NVDA'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '英伟达',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['NXPI'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '恩智浦半导体',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ODFL'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '老道明货运',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ON'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '安森美半导体',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ORLY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '奥莱利汽车配件',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PANW'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '帕洛阿尔托',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PAYX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '佩希斯',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PCAR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '帕卡',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PDD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '拼多多',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PEP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '百事公司',
+            'plate': 'consumerstaples',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PLTR'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '帕兰提尔',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['PYPL'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '贝宝',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['QCOM'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '高通',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['REGN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'REGN',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ROP'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '罗珀技术',
+            'plate': 'industrials',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ROST'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '罗斯百货',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['SBUX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '星巴克',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['SNPS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '新思科技',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['TEAM'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'Atlassian公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['TMUS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'T-Mobile美国',
+            'plate': 'telecommunications',
+            'include_option': False,
+        }
+
+        self.NASDAQ['TSLA'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '特斯拉',
+            'plate': 'consumerdiscretionary',
+            'include_option': False,
+        }
+
+        self.NASDAQ['TTD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '萃弈广告',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['TTWO'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'Take-Two互动软件',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['TXN'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '德州仪器',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['VRSK'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '威达信数据分析公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['VRTX'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '福泰制药',
+            'plate': 'healthcare',
+            'include_option': False,
+        }
+
+        self.NASDAQ['WBD'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '华纳兄弟探索公司',
+            'plate': 'telecommunications',
+            'include_option': False,
+        }
+
+        self.NASDAQ['WDAY'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': '工作日公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
+        self.NASDAQ['XEL'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': ' 埃克西尔能源公司',
+            'plate': 'utilities',
+            'include_option': False,
+        }
+
+        self.NASDAQ['ZS'] = {
+            'commission': [0, 0.0001, 0, 0.0001, 0, 0.0001],
+            'deposit': 0.25,
+            'tickprice': 0.01,
+            'ticksize': 0.01,
+            'tradeunit': 1,
+            'trademonth': [i + 1 for i in range(12)],
+            'chinese_name': 'Zscaler公司',
+            'plate': 'technology',
+            'include_option': False,
+        }
+
         self.SHSE['601155'] = {
             'commission': [],
             'tickprice': 1,
@@ -2243,6 +3446,9 @@ class instrumentInfo():
             'chinese_name': '鸿达转债',
             'include_option': False
         }
+
+    def _add(self, exch, ins, commission, deposit, tickprice, ticksize, tradeunit, trademonth, chinese_name, plate, include_option):
+        pass
 
     def find_ins(self, exch, include_once_used=False):
         """ 交易所包含的合约
