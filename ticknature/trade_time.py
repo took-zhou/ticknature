@@ -14,6 +14,7 @@ class tradeTime():
         self.CFFEX = {}
         self.GFEX = {}
         self.GATE = {}
+        self.NASDAQ = {}
         # 郑商所，大商所，上期所，能源中心交易白天时间
         self.day_time_dict1 = {
             'morning_first_half': ['09:00:00', '10:15:00'],
@@ -35,6 +36,8 @@ class tradeTime():
         self.night_time_dict3 = {'night': ['21:00:00', '23:00:00']}
         # 夜9点到夜11点半
         self.night_time_dict4 = {'night': ['21:00:00', '23:30:00']}
+        # 夜9点半到凌晨5点
+        self.night_time_dict5 = {'night_first_half': ['21:30:00', '23:59:59'], 'night_second_half': ['00:00:00', '05:00:00']}
 
         self.time_compose1 = {
             'morning_first_half': ['09:00:00', '10:15:00'],
@@ -236,6 +239,107 @@ class tradeTime():
         self.GATE['APT_USDT'] = self.day_time_dict4
         self.GATE['SSV_USDT'] = self.day_time_dict4
         self.GATE['MEW_USDT'] = self.day_time_dict4
+
+        self.NASDAQ['APPL'] = self.night_time_dict5
+        self.NASDAQ['ABNB'] = self.night_time_dict5
+        self.NASDAQ['ADBE'] = self.night_time_dict5
+        self.NASDAQ['ADI'] = self.night_time_dict5
+        self.NASDAQ['ADP'] = self.night_time_dict5
+        self.NASDAQ['ADSK'] = self.night_time_dict5
+        self.NASDAQ['AEP'] = self.night_time_dict5
+        self.NASDAQ['AMAT'] = self.night_time_dict5
+        self.NASDAQ['AMD'] = self.night_time_dict5
+        self.NASDAQ['AMGN'] = self.night_time_dict5
+        self.NASDAQ['AMZN'] = self.night_time_dict5
+        self.NASDAQ['ANSS'] = self.night_time_dict5
+        self.NASDAQ['APP'] = self.night_time_dict5
+        self.NASDAQ['ARM'] = self.night_time_dict5
+        self.NASDAQ['ASML'] = self.night_time_dict5
+        self.NASDAQ['AVGO'] = self.night_time_dict5
+        self.NASDAQ['AXON'] = self.night_time_dict5
+        self.NASDAQ['AZN'] = self.night_time_dict5
+        self.NASDAQ['BIIB'] = self.night_time_dict5
+        self.NASDAQ['BKNG'] = self.night_time_dict5
+        self.NASDAQ['BKR'] = self.night_time_dict5
+        self.NASDAQ['CCEP'] = self.night_time_dict5
+        self.NASDAQ['CDNS'] = self.night_time_dict5
+        self.NASDAQ['CDW'] = self.night_time_dict5
+        self.NASDAQ['CEG'] = self.night_time_dict5
+        self.NASDAQ['CHTR'] = self.night_time_dict5
+        self.NASDAQ['CMCSA'] = self.night_time_dict5
+        self.NASDAQ['COST'] = self.night_time_dict5
+        self.NASDAQ['CPRT'] = self.night_time_dict5
+        self.NASDAQ['CRWD'] = self.night_time_dict5
+        self.NASDAQ['CSCO'] = self.night_time_dict5
+        self.NASDAQ['CSGP'] = self.night_time_dict5
+        self.NASDAQ['CSX'] = self.night_time_dict5
+        self.NASDAQ['CTAS'] = self.night_time_dict5
+        self.NASDAQ['CTSH'] = self.night_time_dict5
+        self.NASDAQ['DASH'] = self.night_time_dict5
+        self.NASDAQ['DDOG'] = self.night_time_dict5
+        self.NASDAQ['DXCM'] = self.night_time_dict5
+        self.NASDAQ['EA'] = self.night_time_dict5
+        self.NASDAQ['EXC'] = self.night_time_dict5
+        self.NASDAQ['FANG'] = self.night_time_dict5
+        self.NASDAQ['FAST'] = self.night_time_dict5
+        self.NASDAQ['FTNT'] = self.night_time_dict5
+        self.NASDAQ['GEHC'] = self.night_time_dict5
+        self.NASDAQ['GFS'] = self.night_time_dict5
+        self.NASDAQ['GILD'] = self.night_time_dict5
+        self.NASDAQ['GOOGL'] = self.night_time_dict5
+        self.NASDAQ['HON'] = self.night_time_dict5
+        self.NASDAQ['IDXX'] = self.night_time_dict5
+        self.NASDAQ['INTC'] = self.night_time_dict5
+        self.NASDAQ['INTU'] = self.night_time_dict5
+        self.NASDAQ['ISRG'] = self.night_time_dict5
+        self.NASDAQ['KDP'] = self.night_time_dict5
+        self.NASDAQ['KHC'] = self.night_time_dict5
+        self.NASDAQ['KLAC'] = self.night_time_dict5
+        self.NASDAQ['LIN'] = self.night_time_dict5
+        self.NASDAQ['LRCX'] = self.night_time_dict5
+        self.NASDAQ['LULU'] = self.night_time_dict5
+        self.NASDAQ['MAR'] = self.night_time_dict5
+        self.NASDAQ['MCHP'] = self.night_time_dict5
+        self.NASDAQ['MDB'] = self.night_time_dict5
+        self.NASDAQ['MDLZ'] = self.night_time_dict5
+        self.NASDAQ['MELI'] = self.night_time_dict5
+        self.NASDAQ['META'] = self.night_time_dict5
+        self.NASDAQ['MNST'] = self.night_time_dict5
+        self.NASDAQ['MRVL'] = self.night_time_dict5
+        self.NASDAQ['MSFT'] = self.night_time_dict5
+        self.NASDAQ['MSTR'] = self.night_time_dict5
+        self.NASDAQ['MU'] = self.night_time_dict5
+        self.NASDAQ['NFLX'] = self.night_time_dict5
+        self.NASDAQ['NVDA'] = self.night_time_dict5
+        self.NASDAQ['NXPI'] = self.night_time_dict5
+        self.NASDAQ['ODFL'] = self.night_time_dict5
+        self.NASDAQ['ON'] = self.night_time_dict5
+        self.NASDAQ['ORLY'] = self.night_time_dict5
+        self.NASDAQ['PANW'] = self.night_time_dict5
+        self.NASDAQ['PAYX'] = self.night_time_dict5
+        self.NASDAQ['PCAR'] = self.night_time_dict5
+        self.NASDAQ['PDD'] = self.night_time_dict5
+        self.NASDAQ['PEP'] = self.night_time_dict5
+        self.NASDAQ['PLTR'] = self.night_time_dict5
+        self.NASDAQ['PYPL'] = self.night_time_dict5
+        self.NASDAQ['QCOM'] = self.night_time_dict5
+        self.NASDAQ['REGN'] = self.night_time_dict5
+        self.NASDAQ['ROP'] = self.night_time_dict5
+        self.NASDAQ['ROST'] = self.night_time_dict5
+        self.NASDAQ['SBUX'] = self.night_time_dict5
+        self.NASDAQ['SNPS'] = self.night_time_dict5
+        self.NASDAQ['TEAM'] = self.night_time_dict5
+        self.NASDAQ['TMUS'] = self.night_time_dict5
+        self.NASDAQ['TSLA'] = self.night_time_dict5
+        self.NASDAQ['TTD'] = self.night_time_dict5
+        self.NASDAQ['TTWO'] = self.night_time_dict5
+        self.NASDAQ['TXN'] = self.night_time_dict5
+        self.NASDAQ['VRSK'] = self.night_time_dict5
+        self.NASDAQ['VRTX'] = self.night_time_dict5
+        self.NASDAQ['WBD'] = self.night_time_dict5
+        self.NASDAQ['WDAY'] = self.night_time_dict5
+        self.NASDAQ['XEL'] = self.night_time_dict5
+        self.NASDAQ['ZS'] = self.night_time_dict5
 
     def _get_night_data(self, datestring):
         ins_time_of_week = pd.to_datetime(datestring, format='%Y-%m-%d').dayofweek + 1
