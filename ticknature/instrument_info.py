@@ -85,7 +85,7 @@ class instrumentInfo():
         self._add(self.DCE, 'm', [1.5, 0, 1.5, 0, 1.5, 0], 0.08, 10, 1, 10, [1, 3, 5, 7, 8, 9, 11, 12], '豆粕', 'grease_oil', True, 0.5)
         self._add(self.DCE, 'y', [2.5, 0, 2.5, 0, 2.5, 0], 0.08, 20, 2, 10, [1, 3, 5, 7, 8, 9, 11, 12], '豆油', 'grease_oil', True, 0.5)
         self._add(self.DCE, 'p', [2.5, 0, 2.5, 0, 2.5, 0], 0.1, 20, 2, 10, [i + 1 for i in range(12)], '棕榈油', 'grease_oil', True, 0.5)
-        self._add(self.DCE, 'fb', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.1, 25, 0.05, 50, [i + 1 for i in range(12)], '纤维板', 'light_industry', False)
+        self._add(self.DCE, 'fb', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.1, 25, 0.5, 10, [i + 1 for i in range(12)], '纤维板', 'light_industry', False)
         self._add(self.DCE, 'bb', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.4, 25, 0.05, 500, [i + 1 for i in range(12)], '胶合板', 'light_industry', False)
         self._add(self.DCE, 'jd', [0, 0.00015, 0, 0.00015, 0, 0.00015], 0.09, 10, 1, 10, [i + 1 for i in range(12)], '鸡蛋', 'agricultural_deputy', False)
         self._add(self.DCE, 'rr', [1, 0, 1, 0, 1, 0], 0.06, 10, 1, 10, [i + 1 for i in range(12)], '粳米', 'cereals', False)
@@ -116,6 +116,7 @@ class instrumentInfo():
         self._add(self.GFEX, 'si', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.09, 25, 5, 5, [i + 1 for i in range(12)], '工业硅', 'nonferrous_metals', True, 1)
         self._add(self.GFEX, 'lc', [0, 0.00008, 0, 0, 0, 0], 0.09, 50, 50, 1, [i + 1 for i in range(12)], '碳酸锂', 'nonferrous_metals', True, 10)
         self._add(self.GFEX, 'ps', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.09, 15, 5, 3, [i + 1 for i in range(12)], '多晶硅', 'nonferrous_metals', True, 1)
+
         self._add(self.GATE, 'BTC_USDT', [0, 0.00075, 0, 0.00075, 0, 0.00075], 0.1, 0.00001, 0.1, 0.0001, [i + 1 for i in range(12)], 'BTC永续合约', '索拉纳生态系统', False)
         self._add(self.GATE, 'ETH_USDT', [0, 0.00075, 0, 0.00075, 0, 0.00075], 0.1, 0.0005, 0.05, 0.01, [i + 1 for i in range(12)], 'ETH永续合约', '索拉纳生态系统', False)
         self._add(self.GATE, 'SOL_USDT', [0, 0.00075, 0, 0.00075, 0, 0.00075], 0.1, 0.01, 0.01, 1, [i + 1 for i in range(12)], 'SOL永续合约', '索拉纳生态系统', False)
@@ -175,6 +176,7 @@ class instrumentInfo():
         self._add(self.GATE, 'APT_USDT', [0, 0.00075, 0, 0.00075, 0, 0.00075], 0.1, 0.0001, 0.001, 0.1, [i + 1 for i in range(12)], 'APT永续合约', '索拉纳生态系统', False)
         self._add(self.GATE, 'SSV_USDT', [0, 0.00075, 0, 0.00075, 0, 0.00075], 0.1, 0.0001, 0.001, 0.1, [i + 1 for i in range(12)], 'SSV永续合约', '索拉纳生态系统', False)
         self._add(self.GATE, 'MEW_USDT', [0, 0.00075, 0, 0.00075, 0, 0.00075], 0.1, 0.001, 0.000001, 1000, [i + 1 for i in range(12)], 'MEW永续合约', '索拉纳生态系统', False)
+
         self._add(self.FXCM, 'AUD_CAD', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.01, 0.1, 0.0001, 1000, [i + 1 for i in range(12)], '澳元_加元', '外汇', False)
         self._add(self.FXCM, 'AUD_CHF', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.01, 0.1, 0.0001, 1000, [i + 1 for i in range(12)], '澳元_瑞郎', '外汇', False)
         self._add(self.FXCM, 'AUD_CNH', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.01, 0.1, 0.0001, 1000, [i + 1 for i in range(12)], '澳元_离岸人民币', '外汇', False)
@@ -218,6 +220,7 @@ class instrumentInfo():
         self._add(self.FXCM, 'ZAR_JPY', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.01, 0.1, 0.0001, 1000, [i + 1 for i in range(12)], '南非兰特_日元', '外汇', False)
         self._add(self.FXCM, 'EUR_HUF', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.01, 0.1, 0.0001, 1000, [i + 1 for i in range(12)], '欧元_匈牙利福林', '外汇', False)
         self._add(self.FXCM, 'USD_HUF', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.01, 0.1, 0.0001, 1000, [i + 1 for i in range(12)], '美元_匈牙利福林', '外汇', False)
+
         self._add(self.NASDAQ, 'AAPL', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.25, 0.01, 0.01, 1, [i + 1 for i in range(12)], '苹果公司', 'technology', False)
         self._add(self.NASDAQ, 'ABNB', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.25, 0.01, 0.01, 1, [i + 1 for i in range(12)], '爱彼迎', 'finance', False)
         self._add(self.NASDAQ, 'ADBE', [0, 0.0001, 0, 0.0001, 0, 0.0001], 0.25, 0.01, 0.01, 1, [i + 1 for i in range(12)], '奥多比', 'technology', False)
