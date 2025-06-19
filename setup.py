@@ -6,11 +6,12 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name="ticknature",
-    version="2.6.4",
+    version="2.6.5",
     author="zhoufan",
     author_email="zhoufan@tsaodai.com",
     description="Nature layer",
     long_description=long_description,
+    package_data={"": ["*.csv"]},
 
     # 项目主页
     url="https://devpi.tsaodai.com",

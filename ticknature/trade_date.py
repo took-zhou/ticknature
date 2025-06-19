@@ -9,35 +9,24 @@ from tickmine.api import get_date, get_ins
 class tradeDate():
 
     def __init__(self):
-        pass
+        self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
+        self.stock_list = ['NASDAQ']
+        self.crypto_list = ['GATE']
 
     def get_tick_date(self, exch, timestring):
-        """ 获取tick数据对应的交易日
-
-        Args:
-            timestring: tick数据时间
-
-        Returns:
-            返回的数据类型是 string, 代表时间
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_tick_date('CZCE', '2021-05-14-09:02:22.0')
-           '20210514'
-        """
+        """ 获取tick数据对应的交易日 """
         ret = ''
         split_timestr = timestring.split(' ')
 
-        if exch in ['GATE']:
+        if exch in self.crypto_list or exch in self.stock_list:
             if '00:00:00' <= split_timestr[-1] <= '07:30:00':
                 one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
                 ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
             else:
                 split_ymd = split_timestr[0].split('-')
                 ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
-        elif exch in ['CZCE', 'DCE', 'CFFEX', 'INE', 'SHFE', 'GFEX']:
+        elif exch in self.future_list:
             if '20:00:00' <= split_timestr[-1] <= '24:00:00':
-                # 判断该日期到底是星期几
                 ins_time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
 
                 if ins_time_of_week == 5:
@@ -47,7 +36,6 @@ class tradeDate():
                     one_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=1)
                     ret = '%04d%02d%02d' % (one_day_after.year, one_day_after.month, one_day_after.day)
             elif '00:00:00' <= split_timestr[-1] <= '03:00:00':
-                # 判断该日期到底是星期几
                 ins_time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
 
                 if ins_time_of_week == 6:
@@ -65,23 +53,26 @@ class tradeDate():
 
         return ret
 
+    def get_trade_dates(self, exch):
+        """ 获取所有的工作日 """
+        date_list = []
+        if exch in self.crypto_list:
+            date_list = date_list + get_date('GATE', 'BTC_USDT')
+        elif exch in self.future_list:
+            ins_list = get_ins('CZCE', 'TA05')
+            for item in ins_list:
+                date_list = date_list + get_date('CZCE', item)
+        elif exch in self.stock_list:
+            date_list = date_list + get_date('NASDAQ', 'AAPL')
+
+        date_list.sort()
+
+        return date_list
+
     def get_prev_date(self, exch, datestring):
-        """ 获取前几天工作日
-
-        Args:
-            datestring: 日市时间
-            prev: 前几天，默认是1
-
-        Returns:
-            返回的数据类型是 string, 代表时间
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_prev_data('20210806')
-           '20210805'
-        """
+        """ 获取前几天工作日 """
         prev_date = ''
-        date_list = self.get_work_date(exch)
+        date_list = self.get_trade_dates(exch)
         date_list.reverse()
         for item in date_list:
             if item < datestring:
@@ -91,22 +82,9 @@ class tradeDate():
         return prev_date
 
     def get_after_date(self, exch, datestring):
-        """ 获取前几天工作日
-
-        Args:
-            datestring: 日市时间
-            prev: 后几天，默认是1
-
-        Returns:
-            返回的数据类型是 string, 代表时间
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_after_date('20210806')
-           '20210805'
-        """
+        """ 获取后几天工作日 """
         after_date = ''
-        date_list = self.get_work_date(exch)
+        date_list = self.get_trade_dates(exch)
         for item in date_list:
             if item > datestring:
                 after_date = item
@@ -114,105 +92,10 @@ class tradeDate():
 
         return after_date
 
-    def get_night_date(self, datestring):
-        """ 获取日市的夜市时间
-
-        Args:
-            datestring: 日市时间
-
-        Returns:
-            返回的数据类型是 string, 代表夜市时间
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_night_data('20210806')
-           '20210805'
-        """
-        # 判断该日期到底是星期几
-        ins_time_of_week = pd.to_datetime(datestring, format='%Y-%m-%d').dayofweek + 1
-
-        # 获取夜市时间
-        if ins_time_of_week == 1:
-            three_day_before = pd.to_datetime(datestring, format='%Y-%m-%d') + datetime.timedelta(days=-3)
-            split = str(three_day_before).split('-')
-            night_date = split[0] + split[1] + split[2].split(' ')[0]
-        elif 1 < ins_time_of_week <= 5:
-            one_day_before = pd.to_datetime(datestring, format='%Y-%m-%d') + datetime.timedelta(days=-1)
-            split = str(one_day_before).split('-')
-            night_date = split[0] + split[1] + split[2].split(' ')[0]
-        else:
-            night_date = ''
-
-        return night_date
-
-    def is_delivery_month(self, exch, ins, datestring):
-        """ 判断该合约是否是交割月，只在真实交易时间判断有效
-
-        Args:
-            exch: 交易所简称
-            ins: 合约
-
-        Returns:
-            返回的数据类型是 bool
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.is_delivery_month('DCE', 'c2105', '20210510')
-           True
-        """
-        resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
-        year_month = resplit[1][0][-3:]
-
-        if year_month == datestring[3:6]:
-            ret = True
-        else:
-            ret = False
-
-        return ret
-
-    def get_work_date(self, exch):
-        """ 获取所有的工作日
-
-        Args:
-            None
-
-        Returns:
-            返回的数据类型是 list
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_work_date()
-           ['20150111', '20150112'...'20240111']
-        """
-        date_list = []
-        if exch in ['GATE']:
-            date_list = date_list + get_date('GATE', 'BTC_USDT')
-        elif exch in ['CZCE', 'DCE', 'CFFEX', 'INE', 'SHFE', 'GFEX']:
-            ins_list = get_ins('CZCE', 'TA05')
-            for item in ins_list:
-                date_list = date_list + get_date('CZCE', item)
-
-        date_list.sort()
-
-        return date_list
-
     def get_close_date(self, exch, ins, datestring):
-        """ 获取合约的强制平仓日
-
-        Args:
-            ins: 合约
-            date: 正常交易日期
-
-        Returns:
-            返回的数据类型是 string, 强制平仓日期
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_close_date('AP501', '20250111')
-           20241225
-        """
-        ret_date = '30000101'
-        if exch in ['CZCE', 'DCE', 'CFFEX', 'INE', 'SHFE', 'GFEX']:
+        """ 获取合约的强制平仓日 """
+        ret_date = '21001225'
+        if exch in self.future_list:
             resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
             begin = 200
             split_date = ''
@@ -225,26 +108,15 @@ class tradeDate():
                 ret_date = str(int(split_date[0:4]) - 1) + '1225'
             else:
                 ret_date = split_date[0:4] + '%02d' % (int(split_date[4:6]) - 1) + '25'
+        else:
+            ret_date = '21001225'
 
         return ret_date
 
     def get_delivery_date(self, exch, ins, datestring):
-        """ 获取合约的交割日
-
-        Args:
-            ins: 合约
-            date: 正常交易日期
-
-        Returns:
-            返回的数据类型是 string, 交割日期
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_delivery_date('AP501', '20250111')
-           20250115
-        """
-        ret_date = '30000101'
-        if exch in ['CZCE', 'DCE', 'CFFEX', 'INE', 'SHFE', 'GFEX']:
+        """ 获取合约的交割日 """
+        ret_date = '21001231'
+        if exch in self.future_list:
             resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
             begin = 200
             split_date = ''
@@ -254,23 +126,28 @@ class tradeDate():
                     break
 
             ret_date = split_date[0:6] + '15'
+        else:
+            ret_date = '21001231'
 
         return ret_date
 
+    def get_year(self, exch, ins, datestring):
+        """ 获取合约存储的年份 """
+        if exch in self.future_list:
+            resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
+            begin = 200
+            split_date = ''
+            for i in range(10):
+                split_date = str(begin + i) + resplit[1][0][-3:] + '31'
+                if split_date >= datestring:
+                    break
+        else:
+            split_date = datestring
+
+        return split_date[0:4]
+
     def get_login_date(self, timestring):
-        """ 依据登录时间获取交易日
-
-        Args:
-            timestring: 登录时间
-
-        Returns:
-            返回的数据类型是 string, 交易日
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_login_date('2023-02-01 20:00:00')
-            20230202
-        """
+        """ 依据登录时间获取交易日 """
         ret = ''
         split_timestr = timestring.split(' ')
         time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
@@ -289,10 +166,10 @@ class tradeDate():
             else:
                 split_ymd = split_timestr[0].split('-')
                 ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
-        elif '05:00:00' <= split_timestr[-1] <= '05:30:00':  # 美股市场登出时间段
+        elif '07:00:00' <= split_timestr[-1] <= '07:30:00':  # 加密货币登出时间段
             one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
             ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
-        elif '07:00:00' <= split_timestr[-1] <= '07:30:00':  # 加密货币登出时间段
+        elif '05:00:00' <= split_timestr[-1] <= '05:30:00':  # 美股登出时间段
             one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
             ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
         else:
@@ -300,34 +177,6 @@ class tradeDate():
             ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
 
         return ret
-
-    def get_year(self, exch, ins, datestring):
-        """ 获取合约存储的年份
-
-        Args:
-            ins: 合约
-            date: 正常交易日期
-
-        Returns:
-            返回的数据类型是 string, 强制平仓日期
-
-        Examples:
-            >>> from ticknature.trade_date import tradedate
-            >>> tradedate.get_year('CZCE', 'AP501', '20250111')
-           2025
-        """
-        if exch in ['CZCE', 'DCE', 'SHFE', 'INE', 'CFFEX', 'GFEX']:
-            resplit = re.findall(r'([0-9]*)([A-Z,a-z]*)', ins)
-            begin = 200
-            split_date = ''
-            for i in range(10):
-                split_date = str(begin + i) + resplit[1][0][-3:] + '31'
-                if split_date >= datestring:
-                    break
-        else:
-            split_date = datestring
-
-        return split_date[0:4]
 
 
 tradedate = tradeDate()

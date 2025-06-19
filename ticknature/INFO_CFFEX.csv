@@ -1,0 +1,9 @@
+ins,commission,deposit,ticksize,tradeunit,trademonth,plate,include_option,option_ticksize
+IC,0_2.3e-05_0_2.3e-05_0_0.00345,0.11,0.2,200,1_2_3_4_5_6_7_8_9_10_11_12,stock_index_futures,0,0
+IF,0_2.3e-05_0_2.3e-05_0_0.00345,0.12,0.2,300,1_2_3_4_5_6_7_8_9_10_11_12,stock_index_futures,1,0.2
+IH,0_2.3e-05_0_2.3e-05_0_0.00345,0.14,0.2,300,1_2_3_4_5_6_7_8_9_10_11_12,stock_index_futures,1,0.2
+IM,0_2.3e-05_0_2.3e-05_0_0.00345,0.14,0.2,200,1_2_3_4_5_6_7_8_9_10_11_12,stock_index_futures,1,0.2
+T,3_0_0_0_0_0,0.02,0.005,10000,3_6_9_12,treasury_futures,0,0
+TF,3_0_0_0_0_0,0.012,0.005,10000,3_6_9_12,treasury_futures,0,0
+TL,3_0_0_0_0_0,0.035,0.01,10000,3_6_9_12,treasury_futures,0,0
+TS,3_0_0_0_0_0,0.005,0.002,20000,3_6_9_12,treasury_futures,0,0
