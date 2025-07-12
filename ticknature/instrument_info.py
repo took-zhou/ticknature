@@ -17,6 +17,7 @@ class instrumentInfo():
         self.GATE = {}
         self.FXCM = {}
         self.NASDAQ = {}
+        self.SEHK = {}
 
         self.exch = {}
         self.exch['SHFE'] = self.SHFE
@@ -28,9 +29,10 @@ class instrumentInfo():
         self.exch['GATE'] = self.GATE
         self.exch['FXCM'] = self.FXCM
         self.exch['NASDAQ'] = self.NASDAQ
+        self.exch['SEHK'] = self.SEHK
 
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
-        self.stock_list = ['NASDAQ']
+        self.stock_list = ['NASDAQ', 'SEHK']
         self.crypto_list = ['GATE']
         self.exch_list = self.future_list + self.stock_list + self.crypto_list
 
@@ -53,24 +55,24 @@ class instrumentInfo():
         else:
             if exch == 'GATE':
                 exch_dict[ins]['commission'] = [0, 0.00075, 0, 0.00075, 0, 0.00075]
-            elif exch == 'NASDAQ':
+            elif exch == 'NASDAQ' or exch == 'SEHK':
                 exch_dict[ins]['commission'] = [0, 0.0001, 0, 0.0001, 0, 0.0001]
         if 'deposit' in para:
             exch_dict[ins]['deposit'] = float(para['deposit'])
         else:
             if exch == 'GATE':
                 exch_dict[ins]['deposit'] = 0.1
-            elif exch == 'NASDAQ':
+            elif exch == 'NASDAQ' or exch == 'SEHK':
                 exch_dict[ins]['deposit'] = 0.25
         if 'ticksize' in para:
             exch_dict[ins]['ticksize'] = float(para['ticksize'])
         else:
-            if exch == 'NASDAQ':
+            if exch == 'NASDAQ' or exch == 'SEHK':
                 exch_dict[ins]['ticksize'] = 0.01
         if 'tradeunit' in para:
             exch_dict[ins]['tradeunit'] = float(para['tradeunit'])
         else:
-            if exch == 'NASDAQ':
+            if exch == 'NASDAQ' or exch == 'SEHK':
                 exch_dict[ins]['tradeunit'] = 1
         if 'trademonth' in para:
             exch_dict[ins]['trademonth'] = [int(item) for item in para['trademonth'].split('_')]
@@ -79,7 +81,7 @@ class instrumentInfo():
         if 'plate' in para:
             exch_dict[ins]['plate'] = para['plate']
         else:
-            if exch == 'GATE':
+            if exch == 'GATE' or exch == 'SEHK':
                 exch_dict[ins]['plate'] = 'nodefine'
         if 'include_option' in para:
             exch_dict[ins]['include_option'] = int(para['include_option'])

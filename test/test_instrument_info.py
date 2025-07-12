@@ -4,7 +4,7 @@ from ticknature.instrument_info import instrumentinfo
 
 
 def test_get_exchs():
-    assert (len(instrumentinfo.get_exchs()) == 8)
+    assert (len(instrumentinfo.get_exchs()) == 9)
 
 
 def test_get_exch_type():
@@ -14,11 +14,11 @@ def test_get_exch_type():
 
 
 def test_get_plates():
-    assert (len(instrumentinfo.get_plates("")) == 25)
+    assert (len(instrumentinfo.get_plates("")) == 27)
 
 
 def test_get_groups():
-    assert (len(instrumentinfo.get_groups("")) == 2385)
+    assert (len(instrumentinfo.get_groups("")) == 5974)
 
 
 def test_get_ins_exch():

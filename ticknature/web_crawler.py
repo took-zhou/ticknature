@@ -1,11 +1,5 @@
 import requests
-from bs4 import BeautifulSoup
-import requests
 import pandas as pd
-
-import requests
-import pandas as pd
-import time
 
 headers = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
@@ -31,16 +25,23 @@ def fetch_gateio_futures_data():
 
 
 # 通过nasdaq的股票筛选器工具，可以很方便的获取所有股票以及板块信息
+# https://www.nasdaq.com/market-activity/stocks/screener
 def update_nasdaq_stock_data():
     ret = pd.read_csv("INFO_NASDAQ.csv")
     ret["plate"] = ret["plate"].str.replace(" ", "_").str.lower()
+    if 'cap' in ret.columns and 'price' in ret.columns:
+        ret["shares"] = ret['cap'] / ret['price']
+        ret = ret.drop(["cap", "price"], axis=1)
+    ret = ret[ret['shares'] > 1e-12]
+    ret["shares"] = ret["shares"].round()
+    ret = ret.dropna()
     ret.to_csv('INFO_NASDAQ.csv', index=False)
 
 
-import requests
+# import requests
 
-url = "https://api.coingecko.com/api/v3/coins/categories"
-response = requests.get(url)
-print(response.json())  # 返回所有分类及对应代币
+# url = "https://api.coingecko.com/api/v3/coins/categories"
+# response = requests.get(url)
+# print(response.json())  # 返回所有分类及对应代币
 
-# update_nasdaq_stock_data()
+update_nasdaq_stock_data()

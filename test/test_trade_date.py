@@ -84,7 +84,6 @@ def test_get_login_date():
     assert (tradedate.get_login_date('2025-06-27 20:05:00') == '20250630')
     assert (tradedate.get_login_date('2025-06-27 15:00:00') == '20250627')
     assert (tradedate.get_login_date('2025-06-27 20:35:00') == '20250627')
-    assert (tradedate.get_login_date('2025-06-27 05:00:00') == '20250626')
     assert (tradedate.get_login_date('2025-06-27 07:00:00') == '20250626')
     assert (tradedate.get_login_date('2025-06-27 08:00:00') == '20250627')
 

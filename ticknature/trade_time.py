@@ -7,8 +7,7 @@ class tradeTime():
 
     def __init__(self):
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
-        self.stock_list = ['NASDAQ']
-        self.crypto_list = ['GATE']
+        self.global_list = ['NASDAQ', 'SEHK', 'GATE']
 
         self.time_compose1 = {
             'day': ['09:00:00', '15:30:00'],
@@ -16,7 +15,6 @@ class tradeTime():
             'night_second': ['00:00:00', '02:30:00']
         }
         self.time_compose2 = {'day_first': ['08:00:00', '23:59:59'], 'day_second': ['00:00:00', '07:00:00']}
-        self.time_compose3 = {'day_first': ['21:00:00', '23:59:59'], 'day_second': ['00:00:00', '05:00:00']}
 
     def _get_night_date(self, exch, datestring):
         """ 获取日市的夜市时间 """
@@ -45,10 +43,8 @@ class tradeTime():
         ret = {}
         if exch in self.future_list:
             ret = self.time_compose1.copy()
-        elif exch in self.crypto_list:
+        elif exch in self.global_list:
             ret = self.time_compose2.copy()
-        elif exch in self.stock_list:
-            ret = self.time_compose3.copy()
 
         if datestring != '':
             for item in ret:
@@ -108,13 +104,8 @@ class tradeTime():
                     ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
-        elif exch in self.crypto_list:
+        elif exch in self.global_list:
             if '00:00:00' <= timestring <= '07:30:00':
-                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
-            else:
-                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
-        elif exch in self.stock_list:
-            if '00:00:00' <= timestring <= '05:30:00':
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')

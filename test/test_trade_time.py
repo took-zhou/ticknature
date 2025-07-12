@@ -8,8 +8,8 @@ def test_get_trade_time():
     assert (tradetime.get_trade_time('CZCE', '20250630')['night_second'] == ['2025-06-28 00:00:00', '2025-06-28 02:30:00'])
     assert (tradetime.get_trade_time('GATE')['day_second'] == ['00:00:00', '07:00:00'])
     assert (tradetime.get_trade_time('GATE', '20250627')['day_second'] == ['2025-06-28 00:00:00', '2025-06-28 07:00:00'])
-    assert (tradetime.get_trade_time('NASDAQ')['day_second'] == ['00:00:00', '05:00:00'])
-    assert (tradetime.get_trade_time('NASDAQ', '20250627')['day_second'] == ['2025-06-28 00:00:00', '2025-06-28 05:00:00'])
+    assert (tradetime.get_trade_time('NASDAQ')['day_second'] == ['00:00:00', '07:00:00'])
+    assert (tradetime.get_trade_time('NASDAQ', '20250627')['day_second'] == ['2025-06-28 00:00:00', '2025-06-28 07:00:00'])
 
 
 def test_get_is_time():
@@ -19,7 +19,7 @@ def test_get_is_time():
     assert (tradetime.get_is_time('GATE', '2024-03-01 09:00:00') == True)
     assert (tradetime.get_is_time('GATE', '2024-03-01 07:30:00') == False)
     assert (tradetime.get_is_time('NASDAQ', '2024-03-01 21:00:00') == True)
-    assert (tradetime.get_is_time('NASDAQ', '2024-03-01 05:30:00') == False)
+    assert (tradetime.get_is_time('NASDAQ', '2024-03-01 07:30:00') == False)
 
 
 def test_get_date_time():
