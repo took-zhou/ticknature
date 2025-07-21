@@ -48,7 +48,7 @@ class instrumentInfo():
 
     def _add(self, exch, para):
         exch_dict = getattr(self, exch)
-        ins = para['ins']
+        ins = str(para['ins'])
         exch_dict[ins] = {}
         if 'commission' in para:
             exch_dict[ins]['commission'] = [float(item) for item in para['commission'].split('_')]
@@ -144,7 +144,8 @@ class instrumentInfo():
         if '_USDT' in ins:
             temp = ins
         else:
-            temp = re.split('([0-9]+)', ins)[0]
+            split_ins = [item for item in re.split('([0-9]+)', ins) if item != '']
+            temp = split_ins[0]
 
         ret = ''
         for exch in self.exch_list:
