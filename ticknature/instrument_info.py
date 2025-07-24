@@ -163,6 +163,15 @@ class instrumentInfo():
         else:
             return ''
 
+    def get_ins_month(self, exch, ins):
+        """ 查询合约的交割月份 """
+        ret = ''
+        if exch in self.future_list:
+            temp = re.split('([0-9]+)', ins)
+            if len(temp) >= 2:
+                ret = temp[1]
+        return ret
+
     def get_ins_type(self, exch, ins):
         """ 查询合约所在的品种 """
         if exch in self.future_list:

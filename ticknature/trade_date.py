@@ -10,7 +10,7 @@ class tradeDate():
 
     def __init__(self):
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
-        self.stock_list = ['NASDAQ']
+        self.stock_list = ['NASDAQ', 'SEHK']
         self.crypto_list = ['GATE']
 
     def get_tick_date(self, exch, timestring):
