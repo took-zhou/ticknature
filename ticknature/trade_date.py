@@ -17,34 +17,40 @@ class tradeDate():
         """ 获取tick数据对应的交易日 """
         ret = ''
         split_timestr = timestring.split(' ')
+        ins_time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
 
-        if exch in self.crypto_list or exch in self.stock_list:
+        if exch in self.crypto_list:
             if '00:00:00' <= split_timestr[-1] <= '07:30:00':
                 one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
                 ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
             else:
                 split_ymd = split_timestr[0].split('-')
                 ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
+        elif exch in self.stock_list:
+            if '00:00:00' <= split_timestr[-1] <= '07:30:00':
+                if ins_time_of_week != 7 and ins_time_of_week != 1:
+                    one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
+                    ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
+            else:
+                if ins_time_of_week != 6 and ins_time_of_week != 7:
+                    split_ymd = split_timestr[0].split('-')
+                    ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
         elif exch in self.future_list:
             if '20:00:00' <= split_timestr[-1] <= '24:00:00':
-                ins_time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
-
                 if ins_time_of_week == 5:
                     three_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=3)
                     ret = '%04d%02d%02d' % (three_day_after.year, three_day_after.month, three_day_after.day)
-                else:
+                elif ins_time_of_week != 6 and ins_time_of_week != 7:
                     one_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=1)
                     ret = '%04d%02d%02d' % (one_day_after.year, one_day_after.month, one_day_after.day)
             elif '00:00:00' <= split_timestr[-1] <= '03:00:00':
-                ins_time_of_week = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f').dayofweek + 1
-
                 if ins_time_of_week == 6:
                     two_day_after = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') + datetime.timedelta(days=2)
                     ret = '%04d%02d%02d' % (two_day_after.year, two_day_after.month, two_day_after.day)
-                else:
+                elif ins_time_of_week != 7 and ins_time_of_week != 1:
                     split_ymd = split_timestr[0].split('-')
                     ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
-            else:
+            elif ins_time_of_week != 6 and ins_time_of_week != 7:
                 split_ymd = split_timestr[0].split('-')
                 ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
         else:
