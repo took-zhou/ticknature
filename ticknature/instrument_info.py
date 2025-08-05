@@ -67,8 +67,10 @@ class instrumentInfo():
         if 'ticksize' in para:
             exch_dict[ins]['ticksize'] = float(para['ticksize'])
         else:
-            if exch == 'NASDAQ' or exch == 'SEHK':
+            if exch == 'NASDAQ':
                 exch_dict[ins]['ticksize'] = 0.01
+            elif exch == 'SEHK':
+                exch_dict[ins]['ticksize'] = 0.001
         if 'tradeunit' in para:
             exch_dict[ins]['tradeunit'] = float(para['tradeunit'])
         else:
