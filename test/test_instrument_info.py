@@ -18,7 +18,7 @@ def test_get_plates():
 
 
 def test_get_groups():
-    assert (len(instrumentinfo.get_groups("")) == 5974)
+    assert (len(instrumentinfo.get_groups("")) == 8326)
 
 
 def test_get_ins_exch():

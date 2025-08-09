@@ -3,3 +3,4 @@ pandas==1.4.3
 pytest==7.1.2
 setuptools==39.0.1
 statsmodels==0.13.2
+pandas_market_calendars==5.1.1

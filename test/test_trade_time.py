@@ -8,8 +8,8 @@ def test_get_trade_time():
     assert (tradetime.get_trade_time('CZCE', '20250630')['night_second'] == ['2025-06-28 00:00:00', '2025-06-28 02:30:00'])
     assert (tradetime.get_trade_time('GATE')['day_second'] == ['00:00:00', '07:00:00'])
     assert (tradetime.get_trade_time('GATE', '20250627')['day_second'] == ['2025-06-28 00:00:00', '2025-06-28 07:00:00'])
-    assert (tradetime.get_trade_time('NASDAQ')['day_second'] == ['00:00:00', '07:00:00'])
-    assert (tradetime.get_trade_time('NASDAQ', '20250627')['day_second'] == ['2025-06-28 00:00:00', '2025-06-28 07:00:00'])
+    assert (tradetime.get_trade_time('NASDAQ')['day_second'] == ['00:00:00', '04:30:00'])
+    assert (tradetime.get_trade_time('NASDAQ', '20250627')['day_second'] == ['2025-06-28 00:00:00', '2025-06-28 04:30:00'])
 
 
 def test_get_is_time():

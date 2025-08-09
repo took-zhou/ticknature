@@ -2,6 +2,7 @@ import datetime
 import re
 
 import pandas as pd
+from pandas_market_calendars import get_calendar
 
 from tickmine.api import get_date, get_ins
 
@@ -178,6 +179,19 @@ class tradeDate():
         else:
             split_ymd = split_timestr[0].split('-')
             ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
+
+        return ret
+
+    def get_is_holiday(self, exch, date):
+        """ 获取该交易日是否是该交易所的非交易日 """
+        ret = False
+        current_date = pd.Timestamp(date)
+        if exch == 'SEHK':
+            calendar = get_calendar('HKEX')
+            ret = calendar.valid_days(start_date=current_date, end_date=current_date).shape[0] == 0
+        elif exch == 'NASDAQ':
+            calendar = get_calendar('NASDAQ')
+            ret = calendar.valid_days(start_date=current_date, end_date=current_date).shape[0] == 0
 
         return ret
 
