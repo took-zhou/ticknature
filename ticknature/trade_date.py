@@ -173,7 +173,7 @@ class tradeDate():
             else:
                 split_ymd = split_timestr[0].split('-')
                 ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
-        elif '04:30:00' <= split_timestr[-1] <= '05:00:00':  # 美股登出时间段
+        elif '04:30:00' <= split_timestr[-1] <= '06:00:00':  # 美股登出时间段
             one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
             ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
         elif '07:00:00' <= split_timestr[-1] <= '07:30:00':  # 加密货币登出时间段

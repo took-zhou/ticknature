@@ -17,7 +17,7 @@ class tradeTime():
             'night_second': ['00:00:00', '02:30:00']
         }
         self.time_compose2 = {'day_first': ['08:00:00', '23:59:59'], 'day_second': ['00:00:00', '07:00:00']}
-        self.time_compose3 = {'day_first': ['20:30:00', '23:59:59'], 'day_second': ['00:00:00', '04:30:00']}
+        self.time_compose3 = {'day_first': ['20:30:00', '23:59:59'], 'day_second': ['00:00:00', '05:30:00']}
         self.time_compose4 = {'day': ['08:30:00', '16:30:00']}
 
     def _get_night_date(self, exch, datestring):
@@ -118,7 +118,7 @@ class tradeTime():
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
         elif exch in self.stock_list1:
-            if '00:00:00' <= timestring <= '04:30:00':
+            if '00:00:00' <= timestring <= '05:30:00':
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
