@@ -4,8 +4,6 @@ import re
 import pandas as pd
 from pandas_market_calendars import get_calendar
 
-from tickmine.api import get_date, get_ins
-
 
 class tradeDate():
 
@@ -62,6 +60,7 @@ class tradeDate():
 
     def get_trade_dates(self, exch):
         """ 获取所有的工作日 """
+        from tickmine.api import get_date, get_ins
         date_list = []
         if exch in self.crypto_list:
             date_list = date_list + get_date('GATE', 'BTC_USDT')
