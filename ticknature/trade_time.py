@@ -7,9 +7,10 @@ class tradeTime():
 
     def __init__(self):
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
-        self.global_list = ['GATE']
+        self.crypto_list = ['GATE']
         self.stock_list1 = ['NASDAQ']
         self.stock_list2 = ['SEHK']
+        self.forex_list = ['FXCM']
 
         self.time_compose1 = {
             'day': ['09:00:00', '15:30:00'],
@@ -19,6 +20,7 @@ class tradeTime():
         self.time_compose2 = {'day_first': ['08:00:00', '23:59:59'], 'day_second': ['00:00:00', '07:00:00']}
         self.time_compose3 = {'day_first': ['20:30:00', '23:59:59'], 'day_second': ['00:00:00', '05:30:00']}
         self.time_compose4 = {'day': ['08:30:00', '16:30:00']}
+        self.time_compose5 = {'day_first': ['06:00:00', '23:59:59'], 'day_second': ['00:00:00', '05:00:00']}
 
     def _get_night_date(self, exch, datestring):
         """ 获取日市的夜市时间 """
@@ -47,12 +49,14 @@ class tradeTime():
         ret = {}
         if exch in self.future_list:
             ret = self.time_compose1.copy()
-        elif exch in self.global_list:
+        elif exch in self.crypto_list:
             ret = self.time_compose2.copy()
         elif exch in self.stock_list1:
             ret = self.time_compose3.copy()
         elif exch in self.stock_list2:
             ret = self.time_compose4.copy()
+        elif exch in self.forex_list:
+            ret = self.time_compose5.copy()
 
         if datestring != '':
             for item in ret:
@@ -112,12 +116,17 @@ class tradeTime():
                     ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
-        elif exch in self.global_list:
+        elif exch in self.crypto_list:
             if '00:00:00' <= timestring <= '07:30:00':
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
             else:
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
         elif exch in self.stock_list1:
+            if '00:00:00' <= timestring <= '05:30:00':
+                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
+            else:
+                ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S')
+        elif exch in self.forex_list:
             if '00:00:00' <= timestring <= '05:30:00':
                 ret = pd.to_datetime(datestring + timestring, format='%Y%m%d%H:%M:%S') + datetime.timedelta(days=1)
             else:

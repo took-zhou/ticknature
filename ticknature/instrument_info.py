@@ -34,7 +34,8 @@ class instrumentInfo():
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
         self.stock_list = ['NASDAQ', 'SEHK']
         self.crypto_list = ['GATE']
-        self.exch_list = self.future_list + self.stock_list + self.crypto_list
+        self.forex_list = ['FXCM']
+        self.exch_list = self.future_list + self.stock_list + self.crypto_list + self.forex_list
 
         csv_dir = ticknature.__path__[0]
         for file_name in os.listdir(csv_dir):
@@ -71,6 +72,8 @@ class instrumentInfo():
                 exch_dict[ins]['ticksize'] = 0.01
             elif exch == 'SEHK':
                 exch_dict[ins]['ticksize'] = 0.001
+            elif exch == 'FXCM':
+                exch_dict[ins]['ticksize'] = 0.0001
         if 'tradeunit' in para:
             exch_dict[ins]['tradeunit'] = float(para['tradeunit'])
         else:
@@ -107,6 +110,8 @@ class instrumentInfo():
             ret = 'future'
         elif exch in self.crypto_list:
             ret = 'crypto'
+        elif exch in self.forex_list:
+            ret = 'forex'
 
         return ret
 
@@ -131,7 +136,7 @@ class instrumentInfo():
             exch_type = self.get_exch_type(item)
             exch_dict = getattr(self, item)
             for type in exch_dict:
-                if exch_type == 'stock' or exch_type == 'crypto':
+                if exch_type == 'stock' or exch_type == 'crypto' or exch_type == 'forex':
                     group_set.append(type)
                 elif exch_type == 'future':
                     for month in exch_dict[type]['trademonth']:

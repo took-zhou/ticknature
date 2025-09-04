@@ -11,6 +11,7 @@ class tradeDate():
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
         self.stock_list = ['NASDAQ', 'SEHK']
         self.crypto_list = ['GATE']
+        self.forex_list = ['FXCM']
 
     def get_tick_date(self, exch, timestring):
         """ 获取tick数据对应的交易日 """
@@ -25,6 +26,15 @@ class tradeDate():
             else:
                 split_ymd = split_timestr[0].split('-')
                 ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
+        elif exch in self.forex_list:
+            if '00:00:00' <= split_timestr[-1] <= '05:30:00':
+                if ins_time_of_week != 7 and ins_time_of_week != 1:
+                    one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
+                    ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
+            else:
+                if ins_time_of_week != 6 and ins_time_of_week != 7:
+                    split_ymd = split_timestr[0].split('-')
+                    ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
         elif exch in self.stock_list:
             if '00:00:00' <= split_timestr[-1] <= '07:30:00':
                 if ins_time_of_week != 7 and ins_time_of_week != 1:
@@ -64,6 +74,8 @@ class tradeDate():
         date_list = []
         if exch in self.crypto_list:
             date_list = date_list + get_date('GATE', 'BTC_USDT')
+        elif exch in self.forex_list:
+            date_list = date_list + get_date('FXCM', 'EUR_USD')
         elif exch in self.future_list:
             ins_list = get_ins('CZCE', 'TA05')
             for item in ins_list:
@@ -176,6 +188,9 @@ class tradeDate():
             one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
             ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
         elif '07:00:00' <= split_timestr[-1] <= '07:30:00':  # 加密货币登出时间段
+            one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
+            ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
+        elif '05:00:00' <= split_timestr[-1] <= '05:30:00':  # 外汇登出时间段
             one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
             ret = '%04d%02d%02d' % (one_day_before.year, one_day_before.month, one_day_before.day)
         else:
