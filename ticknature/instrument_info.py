@@ -79,6 +79,8 @@ class instrumentInfo():
         else:
             if exch == 'NASDAQ' or exch == 'SEHK':
                 exch_dict[ins]['tradeunit'] = 1
+            elif exch == 'FXCM':
+                exch_dict[ins]['tradeunit'] = 1000
         if 'trademonth' in para:
             exch_dict[ins]['trademonth'] = [int(item) for item in para['trademonth'].split('_')]
         else:
@@ -86,7 +88,7 @@ class instrumentInfo():
         if 'plate' in para:
             exch_dict[ins]['plate'] = para['plate']
         else:
-            if exch == 'GATE' or exch == 'SEHK':
+            if exch == 'GATE' or exch == 'SEHK' or exch == 'FXCM':
                 exch_dict[ins]['plate'] = 'nodefine'
         if 'include_option' in para:
             exch_dict[ins]['include_option'] = int(para['include_option'])

@@ -1,4 +1,4 @@
-ins,commission,deposit,ticksize,tradeunit,trademonth,plate,include_option,option_ticksize
-lc,0_8e-05_0_0_0_0,0.09,50,1,1_2_3_4_5_6_7_8_9_10_11_12,nonferrous_metals,1,10
-ps,0_0.0001_0_0.0001_0_0.0001,0.09,5,3,1_2_3_4_5_6_7_8_9_10_11_12,nonferrous_metals,1,1
-si,0_0.0001_0_0.0001_0_0.0001,0.09,5,5,1_2_3_4_5_6_7_8_9_10_11_12,nonferrous_metals,1,1
+﻿ins,commission,deposit,ticksize,tradeunit,trademonth,plate,include_option,option_ticksize
+lc,0_8e-05_0_0_0_0,0.05,50,1,1_2_3_4_5_6_7_8_9_10_11_12,nonferrous_metals,1,10
+ps,0_0.0001_0_0.0001_0_0.0001,0.05,5,3,1_2_3_4_5_6_7_8_9_10_11_12,nonferrous_metals,1,1
+si,0_0.0001_0_0.0001_0_0.0001,0.05,5,5,1_2_3_4_5_6_7_8_9_10_11_12,nonferrous_metals,1,1

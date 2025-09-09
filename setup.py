@@ -11,7 +11,7 @@ setup(
     author_email="zhoufan@tsaodai.com",
     description="Nature layer",
     long_description=long_description,
-    package_data={"": ["*.csv"]},
+    package_data={"": ["*.csv", "*.html", ".json"]},
 
     # 项目主页
     url="https://devpi.tsaodai.com",
