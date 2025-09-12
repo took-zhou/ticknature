@@ -89,4 +89,5 @@ def test_get_login_date():
 
 
 if __name__ == "__main__":
+    # python test_trade_date.py -k "test_get_login_date"
     pytest.main()
