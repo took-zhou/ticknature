@@ -5,6 +5,7 @@ from lxml import html
 import pandas as pd
 from datetime import date
 import requests
+from tickmine.api import get_exch, get_ins, get_date, get_rawtick, stream_kline, get_kline
 
 
 #######更新商品期货基本面信息方法#########
@@ -213,7 +214,7 @@ def update_gate():
                 price = float(price)
                 ins_dict['%s_USDT' % (name)] = {}
                 ins_dict['%s_USDT' % (name)]['ins'] = '%s_USDT' % (name)
-                ins_dict['%s_USDT' % (name)]['share'] = '%04d%02d%02d_%d' % (today.year, today.month, today.day, int(market_cap / price))
+                ins_dict['%s_USDT' % (name)]['shares'] = '%04d%02d%02d_%d' % (today.year, today.month, today.day, int(market_cap / price))
 
     with open(info_file, 'r', encoding='utf-8') as file:
         data = json.load(file)
@@ -348,12 +349,43 @@ def update_fxcm():
     df.to_csv('INFO_FXCM.csv', index=False, encoding='utf-8-sig')
 
 
+#######更新股票拆股信息#########
+####拆股信息
+# 1.确保SEHK NASDAQ股票历史数据 更新到最新
+# 2.通过tickmine获取历史数据，依据历史数据的规则跳变识别拆股
+def update_split():
+    stock_exch = ['NASDAQ', 'SEHK']
+    possible_splits = [1.5, 2.0, 3.0, 6.0, 10.0, 15.0, 0.5, 0.333, 0.1]
+    split_dict = {}
+    for exch in stock_exch:
+        stock_ins = get_ins(exch)
+        for ins in stock_ins:
+            prev_d1_kline = ''
+            for d1_kline in stream_kline(exch, ins, period='1D'):
+                if len(prev_d1_kline) > 0:
+                    price_change = prev_d1_kline.Close[0] / d1_kline.Open[0]
+                    for item in possible_splits:
+                        if abs(price_change - item) < 0.052:  # 291 在20150918拆股产生了2.05148价格倍数波动
+                            if ins not in split_dict:
+                                split_dict[ins] = []
+                            prev_dete_index = prev_d1_kline.index[0]
+                            prev_date = '%04d%02d%02d' % (prev_dete_index.year, prev_dete_index.month, prev_dete_index.day)
+                            date_index = d1_kline.index[0]
+                            date = '%04d%02d%02d' % (date_index.year, date_index.month, date_index.day)
+                            split_dict[ins].append({'exch': exch, 'prev_date': prev_date, 'date': date, 'bias': price_change})
+                prev_d1_kline = d1_kline
+
+    with open('INFO_SPLIT.json', 'w', encoding='utf-8') as f:
+        json.dump(split_dict, f, indent=4, ensure_ascii=False)
+
+
 def update():
     update_cfachina()
     update_gate()
     update_sehk()
     update_nasdaq()
     update_fxcm()
+    update_split()
 
 
 def show():
