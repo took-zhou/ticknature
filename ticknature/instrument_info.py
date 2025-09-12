@@ -72,8 +72,6 @@ class instrumentInfo():
                 exch_dict[ins]['ticksize'] = 0.01
             elif exch == 'SEHK':
                 exch_dict[ins]['ticksize'] = 0.001
-            elif exch == 'FXCM':
-                exch_dict[ins]['ticksize'] = 0.0001
         if 'tradeunit' in para:
             exch_dict[ins]['tradeunit'] = float(para['tradeunit'])
         else:
@@ -88,8 +86,14 @@ class instrumentInfo():
         if 'plate' in para:
             exch_dict[ins]['plate'] = para['plate']
         else:
-            if exch == 'GATE' or exch == 'SEHK' or exch == 'FXCM':
+            if exch == 'GATE' or exch == 'FXCM':
                 exch_dict[ins]['plate'] = 'nodefine'
+        if 'shares' in para:
+            exch_dict[ins]['date'] = para['shares'].split('_')[0]
+            exch_dict[ins]['value'] = float(para['shares'].split('_')[1])
+        else:
+            exch_dict[ins]['date'] = ''
+            exch_dict[ins]['value'] = 0
         if 'include_option' in para:
             exch_dict[ins]['include_option'] = int(para['include_option'])
         else:
