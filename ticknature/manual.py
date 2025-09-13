@@ -220,7 +220,9 @@ def update_gate():
         data = json.load(file)
         for item in data:
             if item['name'] in ins_dict:
-                ins_dict[item['name']]['commission'] = '%s_%s' % (item['maker_fee_rate'], item['taker_fee_rate'])
+                taker_fee = item['taker_fee_rate']
+                maker_fee = item['maker_fee_rate']
+                ins_dict[item['name']]['commission'] = '0_%s_0_%s_0_%s' % (taker_fee, taker_fee, maker_fee)
                 ins_dict[item['name']]['ticksize'] = item['order_price_round']
                 ins_dict[item['name']]['tradeunit'] = item['quanto_multiplier']
 

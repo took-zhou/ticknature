@@ -58,9 +58,7 @@ class instrumentInfo():
         if 'commission' in para:
             exch_dict[ins]['commission'] = [float(item) for item in para['commission'].split('_')]
         else:
-            if exch == 'GATE':
-                exch_dict[ins]['commission'] = [0, 0.00075, 0, 0.00075, 0, 0.00075]
-            elif exch == 'NASDAQ' or exch == 'SEHK':
+            if exch == 'NASDAQ' or exch == 'SEHK':
                 exch_dict[ins]['commission'] = [0, 0.0001, 0, 0.0001, 0, 0.0001]
         if 'deposit' in para:
             exch_dict[ins]['deposit'] = float(para['deposit'])
