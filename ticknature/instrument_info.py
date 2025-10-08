@@ -39,9 +39,6 @@ class instrumentInfo():
         self.exch_list = self.future_list + self.stock_list + self.crypto_list + self.forex_list
 
         csv_dir = ticknature.__path__[0]
-        with open('%s/INFO_SPLIT.json' % (csv_dir), 'r', encoding='utf-8') as file:
-            self.info_split = json.load(file)
-
         for file_name in os.listdir(csv_dir):
             if '.csv' not in file_name:
                 continue
@@ -91,36 +88,9 @@ class instrumentInfo():
             if exch == 'GATE' or exch == 'FXCM':
                 exch_dict[ins]['plate'] = 'nodefine'
         if 'shares' in para:
-            exch_dict[ins]['shares'] = []
-            date = para['shares'].split('_')[0]
-            value = float(para['shares'].split('_')[1])
-            if ins in self.info_split:
-                split_dates = [item['date'] for item in self.info_split[ins]]
-                refer_index = bisect_right(split_dates, date)
-
-                for info_item in self.info_split[ins]:
-                    prev_factor = 1.0
-                    prev_date_index = bisect_right(split_dates, info_item['prev_date'])
-                    if refer_index > prev_date_index:
-                        for index in range(prev_date_index, refer_index):
-                            prev_factor = prev_factor * self.info_split[ins][index]['bias']
-                    elif refer_index < prev_date_index:
-                        for index in range(refer_index, prev_date_index):
-                            prev_factor = prev_factor / self.info_split[ins][index]['bias']
-                    exch_dict[ins]['shares'].append({'date': info_item['prev_date'], 'value': value / prev_factor})
-                    factor = 1.0
-                    date_index = bisect_right(split_dates, info_item['date'])
-                    if refer_index > date_index:
-                        for index in range(date_index, refer_index):
-                            factor = factor * self.info_split[ins][index]['bias']
-                    elif refer_index < date_index:
-                        for index in range(refer_index, date_index):
-                            factor = factor / self.info_split[ins][index]['bias']
-                    exch_dict[ins]['shares'].append({'date': info_item['date'], 'value': value / factor})
-            else:
-                exch_dict[ins]['shares'].append({'date': date, 'value': value})
+            exch_dict[ins]['shares'] = float(para['shares'])
         else:
-            exch_dict[ins]['shares'] = []
+            exch_dict[ins]['shares'] = 0
         if 'include_option' in para:
             exch_dict[ins]['include_option'] = int(para['include_option'])
         else:

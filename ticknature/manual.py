@@ -351,14 +351,14 @@ def update_fxcm():
     df.to_csv('INFO_FXCM.csv', index=False, encoding='utf-8-sig')
 
 
-#######更新股票拆股信息#########
+#######更新股票异常变动信息#########
 ####拆股信息
 # 1.确保SEHK NASDAQ股票历史数据 更新到最新
-# 2.通过tickmine获取历史数据，依据历史数据的规则跳变识别拆股
-def update_split():
+# 2.通过tickmine获取历史数据，依据历史数据的规则跳变识别异常变动
+# 3.核对多个平台，排查原因，可修复即修复
+def update_abnormal():
     stock_exch = ['NASDAQ', 'SEHK']
-    possible_splits = [1.5, 2.0, 3.0, 6.0, 10.0, 15.0, 0.5, 0.333, 0.1]
-    split_dict = {}
+    abnormal_dict = {}
     for exch in stock_exch:
         stock_ins = get_ins(exch)
         for ins in stock_ins:
@@ -366,37 +366,48 @@ def update_split():
             for d1_kline in stream_kline(exch, ins, period='1D'):
                 if len(prev_d1_kline) > 0:
                     price_change = prev_d1_kline.Close[0] / d1_kline.Open[0]
-                    for item in possible_splits:
-                        if abs(price_change - item) < 0.052:  # 291 在20150918拆股产生了2.05148价格倍数波动
-                            if ins not in split_dict:
-                                split_dict[ins] = []
-                            prev_dete_index = prev_d1_kline.index[0]
-                            prev_date = '%04d%02d%02d' % (prev_dete_index.year, prev_dete_index.month, prev_dete_index.day)
-                            date_index = d1_kline.index[0]
-                            date = '%04d%02d%02d' % (date_index.year, date_index.month, date_index.day)
-                            split_dict[ins].append({'exch': exch, 'prev_date': prev_date, 'date': date, 'bias': price_change})
+                    if not (0.55 < price_change < 1.8):  # 前复权数据还存在价格剧烈波动是异常的
+                        if ins not in abnormal_dict:
+                            abnormal_dict[ins] = []
+                        prev_dete_index = prev_d1_kline.index[0]
+                        prev_date = '%04d%02d%02d' % (prev_dete_index.year, prev_dete_index.month, prev_dete_index.day)
+                        date_index = d1_kline.index[0]
+                        date = '%04d%02d%02d' % (date_index.year, date_index.month, date_index.day)
+                        abnormal_dict[ins].append({'exch': exch, 'prev_date': prev_date, 'date': date, 'bias': price_change})
                 prev_d1_kline = d1_kline
 
-    with open('INFO_SPLIT.json', 'w', encoding='utf-8') as f:
-        json.dump(split_dict, f, indent=4, ensure_ascii=False)
+    with open('INFO_ABNORMAL.json', 'w', encoding='utf-8') as f:
+        json.dump(abnormal_dict, f, indent=4, ensure_ascii=False)
 
 
-def update():
-    update_cfachina()
-    update_gate()
-    update_sehk()
-    update_nasdaq()
-    update_fxcm()
-    update_split()
+def update(module=''):
+    if module in 'cfachina':
+        update_cfachina()
+    elif module in 'gate':
+        update_gate()
+    elif module in 'sehk':
+        update_sehk()
+    elif module in 'nasdaq':
+        update_nasdaq()
+    elif module in 'fxcm':
+        update_fxcm()
+    elif module in 'abnormal':
+        update_abnormal()
 
 
-def show():
+def show(module=''):
     print('show instrument info')
     pass
 
 
 if __name__ == "__main__":
-    if sys.argv[1] == 'update':
-        update()
-    elif sys.argv[1] == 'show':
-        show()
+    if len(sys.argv) == 2:
+        if sys.argv[1] == 'update':
+            update()
+        elif sys.argv[1] == 'show':
+            show()
+    elif len(sys.argv) == 3:
+        if sys.argv[1] == 'update':
+            update(sys.argv[2])
+        elif sys.argv[1] == 'show':
+            show(sys.argv[2])
