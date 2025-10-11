@@ -1,0 +1,3174 @@
+{
+    "0": {
+        "group": "NVDA",
+        "is_open_short": "no"
+    },
+    "1": {
+        "group": "MSFT",
+        "is_open_short": "no"
+    },
+    "2": {
+        "group": "AAPL",
+        "is_open_short": "no"
+    },
+    "3": {
+        "group": "GOOG",
+        "is_open_short": "no"
+    },
+    "4": {
+        "group": "GOOGL",
+        "is_open_short": "no"
+    },
+    "5": {
+        "group": "AMZN",
+        "is_open_short": "no"
+    },
+    "6": {
+        "group": "META",
+        "is_open_short": "no"
+    },
+    "7": {
+        "group": "AVGO",
+        "is_open_short": "no"
+    },
+    "8": {
+        "group": "TSLA",
+        "is_open_short": "no"
+    },
+    "9": {
+        "group": "NFLX",
+        "is_open_short": "no"
+    },
+    "10": {
+        "group": "COST",
+        "is_open_short": "no"
+    },
+    "11": {
+        "group": "PLTR",
+        "is_open_short": "no"
+    },
+    "12": {
+        "group": "ASML",
+        "is_open_short": "no"
+    },
+    "13": {
+        "group": "TMUS",
+        "is_open_short": "no"
+    },
+    "14": {
+        "group": "CSCO",
+        "is_open_short": "no"
+    },
+    "15": {
+        "group": "AZN",
+        "is_open_short": "no"
+    },
+    "16": {
+        "group": "AMD",
+        "is_open_short": "no"
+    },
+    "17": {
+        "group": "LIN",
+        "is_open_short": "no"
+    },
+    "18": {
+        "group": "PEP",
+        "is_open_short": "no"
+    },
+    "19": {
+        "group": "SHOP",
+        "is_open_short": "no"
+    },
+    "20": {
+        "group": "INTU",
+        "is_open_short": "no"
+    },
+    "21": {
+        "group": "APP",
+        "is_open_short": "no"
+    },
+    "22": {
+        "group": "BKNG",
+        "is_open_short": "no"
+    },
+    "23": {
+        "group": "PDD",
+        "is_open_short": "no"
+    },
+    "24": {
+        "group": "QCOM",
+        "is_open_short": "no"
+    },
+    "25": {
+        "group": "TXN",
+        "is_open_short": "no"
+    },
+    "26": {
+        "group": "ISRG",
+        "is_open_short": "no"
+    },
+    "27": {
+        "group": "ADBE",
+        "is_open_short": "no"
+    },
+    "28": {
+        "group": "AMGN",
+        "is_open_short": "no"
+    },
+    "29": {
+        "group": "ARM",
+        "is_open_short": "no"
+    },
+    "30": {
+        "group": "MU",
+        "is_open_short": "no"
+    },
+    "31": {
+        "group": "GILD",
+        "is_open_short": "no"
+    },
+    "32": {
+        "group": "HON",
+        "is_open_short": "no"
+    },
+    "33": {
+        "group": "LRCX",
+        "is_open_short": "no"
+    },
+    "34": {
+        "group": "PANW",
+        "is_open_short": "no"
+    },
+    "35": {
+        "group": "AMAT",
+        "is_open_short": "no"
+    },
+    "36": {
+        "group": "CMCSA",
+        "is_open_short": "no"
+    },
+    "37": {
+        "group": "ADI",
+        "is_open_short": "no"
+    },
+    "38": {
+        "group": "ADP",
+        "is_open_short": "no"
+    },
+    "39": {
+        "group": "KLAC",
+        "is_open_short": "no"
+    },
+    "40": {
+        "group": "MELI",
+        "is_open_short": "no"
+    },
+    "41": {
+        "group": "SNY",
+        "is_open_short": "no"
+    },
+    "42": {
+        "group": "CRWD",
+        "is_open_short": "no"
+    },
+    "43": {
+        "group": "INTC",
+        "is_open_short": "no"
+    },
+    "44": {
+        "group": "DASH",
+        "is_open_short": "no"
+    },
+    "45": {
+        "group": "IBKR",
+        "is_open_short": "no"
+    },
+    "46": {
+        "group": "HOOD",
+        "is_open_short": "no"
+    },
+    "47": {
+        "group": "VRTX",
+        "is_open_short": "no"
+    },
+    "48": {
+        "group": "CDNS",
+        "is_open_short": "no"
+    },
+    "49": {
+        "group": "SBUX",
+        "is_open_short": "no"
+    },
+    "50": {
+        "group": "CME",
+        "is_open_short": "no"
+    },
+    "51": {
+        "group": "SNPS",
+        "is_open_short": "no"
+    },
+    "52": {
+        "group": "MSTR",
+        "is_open_short": "no"
+    },
+    "53": {
+        "group": "CEG",
+        "is_open_short": "no"
+    },
+    "54": {
+        "group": "NTES",
+        "is_open_short": "no"
+    },
+    "55": {
+        "group": "ORLY",
+        "is_open_short": "no"
+    },
+    "56": {
+        "group": "CTAS",
+        "is_open_short": "no"
+    },
+    "57": {
+        "group": "MDLZ",
+        "is_open_short": "no"
+    },
+    "58": {
+        "group": "TRI",
+        "is_open_short": "no"
+    },
+    "59": {
+        "group": "COIN",
+        "is_open_short": "no"
+    },
+    "60": {
+        "group": "ABNB",
+        "is_open_short": "no"
+    },
+    "61": {
+        "group": "EQIX",
+        "is_open_short": "no"
+    },
+    "62": {
+        "group": "MAR",
+        "is_open_short": "no"
+    },
+    "63": {
+        "group": "ADSK",
+        "is_open_short": "no"
+    },
+    "64": {
+        "group": "PYPL",
+        "is_open_short": "no"
+    },
+    "65": {
+        "group": "WDAY",
+        "is_open_short": "no"
+    },
+    "66": {
+        "group": "FTNT",
+        "is_open_short": "no"
+    },
+    "67": {
+        "group": "MNST",
+        "is_open_short": "no"
+    },
+    "68": {
+        "group": "CSX",
+        "is_open_short": "no"
+    },
+    "69": {
+        "group": "ALNY",
+        "is_open_short": "no"
+    },
+    "70": {
+        "group": "REGN",
+        "is_open_short": "no"
+    },
+    "71": {
+        "group": "AXON",
+        "is_open_short": "no"
+    },
+    "72": {
+        "group": "AEP",
+        "is_open_short": "no"
+    },
+    "73": {
+        "group": "MRVL",
+        "is_open_short": "no"
+    },
+    "74": {
+        "group": "NXPI",
+        "is_open_short": "no"
+    },
+    "75": {
+        "group": "ROP",
+        "is_open_short": "no"
+    },
+    "76": {
+        "group": "FAST",
+        "is_open_short": "no"
+    },
+    "77": {
+        "group": "NDAQ",
+        "is_open_short": "no"
+    },
+    "78": {
+        "group": "IDXX",
+        "is_open_short": "no"
+    },
+    "79": {
+        "group": "PCAR",
+        "is_open_short": "no"
+    },
+    "80": {
+        "group": "ROST",
+        "is_open_short": "no"
+    },
+    "81": {
+        "group": "PAYX",
+        "is_open_short": "no"
+    },
+    "82": {
+        "group": "JD",
+        "is_open_short": "no"
+    },
+    "83": {
+        "group": "TCOM",
+        "is_open_short": "no"
+    },
+    "84": {
+        "group": "DDOG",
+        "is_open_short": "no"
+    },
+    "85": {
+        "group": "CPRT",
+        "is_open_short": "no"
+    },
+    "86": {
+        "group": "ARGX",
+        "is_open_short": "no"
+    },
+    "87": {
+        "group": "TTWO",
+        "is_open_short": "no"
+    },
+    "88": {
+        "group": "CRWV",
+        "is_open_short": "no"
+    },
+    "89": {
+        "group": "TEAM",
+        "is_open_short": "no"
+    },
+    "90": {
+        "group": "BKR",
+        "is_open_short": "no"
+    },
+    "91": {
+        "group": "ZS",
+        "is_open_short": "no"
+    },
+    "92": {
+        "group": "EXC",
+        "is_open_short": "no"
+    },
+    "93": {
+        "group": "KMB",
+        "is_open_short": "no"
+    },
+    "94": {
+        "group": "EBAY",
+        "is_open_short": "no"
+    },
+    "95": {
+        "group": "XEL",
+        "is_open_short": "no"
+    },
+    "96": {
+        "group": "EA",
+        "is_open_short": "no"
+    },
+    "97": {
+        "group": "MPWR",
+        "is_open_short": "no"
+    },
+    "98": {
+        "group": "CCEP",
+        "is_open_short": "no"
+    },
+    "99": {
+        "group": "FER",
+        "is_open_short": "no"
+    },
+    "100": {
+        "group": "STX",
+        "is_open_short": "no"
+    },
+    "101": {
+        "group": "FANG",
+        "is_open_short": "no"
+    },
+    "102": {
+        "group": "VRSK",
+        "is_open_short": "no"
+    },
+    "103": {
+        "group": "ONC",
+        "is_open_short": "no"
+    },
+    "104": {
+        "group": "HBANL",
+        "is_open_short": "no"
+    },
+    "105": {
+        "group": "KDP",
+        "is_open_short": "no"
+    },
+    "106": {
+        "group": "BIDU",
+        "is_open_short": "no"
+    },
+    "107": {
+        "group": "CSGP",
+        "is_open_short": "no"
+    },
+    "108": {
+        "group": "CHTR",
+        "is_open_short": "no"
+    },
+    "109": {
+        "group": "ALAB",
+        "is_open_short": "no"
+    },
+    "110": {
+        "group": "GEHC",
+        "is_open_short": "no"
+    },
+    "111": {
+        "group": "MCHP",
+        "is_open_short": "no"
+    },
+    "112": {
+        "group": "UAL",
+        "is_open_short": "no"
+    },
+    "113": {
+        "group": "CTSH",
+        "is_open_short": "no"
+    },
+    "114": {
+        "group": "ACGL",
+        "is_open_short": "no"
+    },
+    "115": {
+        "group": "HBANM",
+        "is_open_short": "no"
+    },
+    "116": {
+        "group": "WTW",
+        "is_open_short": "no"
+    },
+    "117": {
+        "group": "WDC",
+        "is_open_short": "no"
+    },
+    "118": {
+        "group": "MCHPP",
+        "is_open_short": "no"
+    },
+    "119": {
+        "group": "TSCO",
+        "is_open_short": "no"
+    },
+    "120": {
+        "group": "KHC",
+        "is_open_short": "no"
+    },
+    "121": {
+        "group": "ODFL",
+        "is_open_short": "no"
+    },
+    "122": {
+        "group": "RYAAY",
+        "is_open_short": "no"
+    },
+    "123": {
+        "group": "STRF",
+        "is_open_short": "no"
+    },
+    "124": {
+        "group": "SOFI",
+        "is_open_short": "no"
+    },
+    "125": {
+        "group": "INSM",
+        "is_open_short": "no"
+    },
+    "126": {
+        "group": "DXCM",
+        "is_open_short": "no"
+    },
+    "127": {
+        "group": "WBD",
+        "is_open_short": "no"
+    },
+    "128": {
+        "group": "FITB",
+        "is_open_short": "no"
+    },
+    "129": {
+        "group": "VOD",
+        "is_open_short": "no"
+    },
+    "130": {
+        "group": "TW",
+        "is_open_short": "no"
+    },
+    "131": {
+        "group": "SYM",
+        "is_open_short": "no"
+    },
+    "132": {
+        "group": "AFRM",
+        "is_open_short": "no"
+    },
+    "133": {
+        "group": "FOXA",
+        "is_open_short": "no"
+    },
+    "134": {
+        "group": "STRC",
+        "is_open_short": "no"
+    },
+    "135": {
+        "group": "HBANP",
+        "is_open_short": "no"
+    },
+    "136": {
+        "group": "LPLA",
+        "is_open_short": "no"
+    },
+    "137": {
+        "group": "EXPE",
+        "is_open_short": "no"
+    },
+    "138": {
+        "group": "AGNCN",
+        "is_open_short": "no"
+    },
+    "139": {
+        "group": "EXEEW",
+        "is_open_short": "no"
+    },
+    "140": {
+        "group": "AGNCO",
+        "is_open_short": "no"
+    },
+    "141": {
+        "group": "STRK",
+        "is_open_short": "no"
+    },
+    "142": {
+        "group": "ERIC",
+        "is_open_short": "no"
+    },
+    "143": {
+        "group": "VRSN",
+        "is_open_short": "no"
+    },
+    "144": {
+        "group": "AGNCL",
+        "is_open_short": "no"
+    },
+    "145": {
+        "group": "MDB",
+        "is_open_short": "no"
+    },
+    "146": {
+        "group": "AGNCP",
+        "is_open_short": "no"
+    },
+    "147": {
+        "group": "FUTU",
+        "is_open_short": "no"
+    },
+    "148": {
+        "group": "AGNCM",
+        "is_open_short": "no"
+    },
+    "149": {
+        "group": "HBAN",
+        "is_open_short": "no"
+    },
+    "150": {
+        "group": "CRDO",
+        "is_open_short": "no"
+    },
+    "151": {
+        "group": "PTC",
+        "is_open_short": "no"
+    },
+    "152": {
+        "group": "FWONK",
+        "is_open_short": "no"
+    },
+    "153": {
+        "group": "ZM",
+        "is_open_short": "no"
+    },
+    "154": {
+        "group": "TTD",
+        "is_open_short": "no"
+    },
+    "155": {
+        "group": "FOX",
+        "is_open_short": "no"
+    },
+    "156": {
+        "group": "LI",
+        "is_open_short": "no"
+    },
+    "157": {
+        "group": "FCNCA",
+        "is_open_short": "no"
+    },
+    "158": {
+        "group": "BNTX",
+        "is_open_short": "no"
+    },
+    "159": {
+        "group": "PODD",
+        "is_open_short": "no"
+    },
+    "160": {
+        "group": "NTRS",
+        "is_open_short": "no"
+    },
+    "161": {
+        "group": "NTAP",
+        "is_open_short": "no"
+    },
+    "162": {
+        "group": "CINF",
+        "is_open_short": "no"
+    },
+    "163": {
+        "group": "SMCI",
+        "is_open_short": "no"
+    },
+    "164": {
+        "group": "TROW",
+        "is_open_short": "no"
+    },
+    "165": {
+        "group": "ULTA",
+        "is_open_short": "no"
+    },
+    "166": {
+        "group": "CG",
+        "is_open_short": "no"
+    },
+    "167": {
+        "group": "SATS",
+        "is_open_short": "no"
+    },
+    "168": {
+        "group": "CYBR",
+        "is_open_short": "no"
+    },
+    "169": {
+        "group": "FWONA",
+        "is_open_short": "no"
+    },
+    "170": {
+        "group": "DKNG",
+        "is_open_short": "no"
+    },
+    "171": {
+        "group": "NTRA",
+        "is_open_short": "no"
+    },
+    "172": {
+        "group": "RKLB",
+        "is_open_short": "no"
+    },
+    "173": {
+        "group": "STRD",
+        "is_open_short": "no"
+    },
+    "174": {
+        "group": "EXE",
+        "is_open_short": "no"
+    },
+    "175": {
+        "group": "TPG",
+        "is_open_short": "no"
+    },
+    "176": {
+        "group": "CDW",
+        "is_open_short": "no"
+    },
+    "177": {
+        "group": "ESLT",
+        "is_open_short": "no"
+    },
+    "178": {
+        "group": "FSLR",
+        "is_open_short": "no"
+    },
+    "179": {
+        "group": "Z",
+        "is_open_short": "no"
+    },
+    "180": {
+        "group": "SSNC",
+        "is_open_short": "no"
+    },
+    "181": {
+        "group": "CHKP",
+        "is_open_short": "no"
+    },
+    "182": {
+        "group": "GRAB",
+        "is_open_short": "no"
+    },
+    "183": {
+        "group": "ZG",
+        "is_open_short": "no"
+    },
+    "184": {
+        "group": "FLEX",
+        "is_open_short": "no"
+    },
+    "185": {
+        "group": "RPRX",
+        "is_open_short": "no"
+    },
+    "186": {
+        "group": "BIIB",
+        "is_open_short": "no"
+    },
+    "187": {
+        "group": "SBAC",
+        "is_open_short": "no"
+    },
+    "188": {
+        "group": "DLTR",
+        "is_open_short": "no"
+    },
+    "189": {
+        "group": "NTNX",
+        "is_open_short": "no"
+    },
+    "190": {
+        "group": "ON",
+        "is_open_short": "no"
+    },
+    "191": {
+        "group": "STLD",
+        "is_open_short": "no"
+    },
+    "192": {
+        "group": "EXEEL",
+        "is_open_short": "no"
+    },
+    "193": {
+        "group": "CASY",
+        "is_open_short": "no"
+    },
+    "194": {
+        "group": "TRMB",
+        "is_open_short": "no"
+    },
+    "195": {
+        "group": "NWS",
+        "is_open_short": "no"
+    },
+    "196": {
+        "group": "LULU",
+        "is_open_short": "no"
+    },
+    "197": {
+        "group": "TER",
+        "is_open_short": "no"
+    },
+    "198": {
+        "group": "GEN",
+        "is_open_short": "no"
+    },
+    "199": {
+        "group": "FFIV",
+        "is_open_short": "no"
+    },
+    "200": {
+        "group": "GMAB",
+        "is_open_short": "no"
+    },
+    "201": {
+        "group": "GFS",
+        "is_open_short": "no"
+    },
+    "202": {
+        "group": "UTHR",
+        "is_open_short": "no"
+    },
+    "203": {
+        "group": "PFG",
+        "is_open_short": "no"
+    },
+    "204": {
+        "group": "WMG",
+        "is_open_short": "no"
+    },
+    "205": {
+        "group": "TLN",
+        "is_open_short": "no"
+    },
+    "206": {
+        "group": "FITBI",
+        "is_open_short": "no"
+    },
+    "207": {
+        "group": "FTAI",
+        "is_open_short": "no"
+    },
+    "208": {
+        "group": "RIVN",
+        "is_open_short": "no"
+    },
+    "209": {
+        "group": "NWSA",
+        "is_open_short": "no"
+    },
+    "210": {
+        "group": "INCY",
+        "is_open_short": "no"
+    },
+    "211": {
+        "group": "BPYPM",
+        "is_open_short": "no"
+    },
+    "212": {
+        "group": "DOCU",
+        "is_open_short": "no"
+    },
+    "213": {
+        "group": "BSY",
+        "is_open_short": "no"
+    },
+    "214": {
+        "group": "LNT",
+        "is_open_short": "no"
+    },
+    "215": {
+        "group": "FITBP",
+        "is_open_short": "no"
+    },
+    "216": {
+        "group": "OKTA",
+        "is_open_short": "no"
+    },
+    "217": {
+        "group": "EVRG",
+        "is_open_short": "no"
+    },
+    "218": {
+        "group": "LOGI",
+        "is_open_short": "no"
+    },
+    "219": {
+        "group": "ZBRA",
+        "is_open_short": "no"
+    },
+    "220": {
+        "group": "ARCC",
+        "is_open_short": "no"
+    },
+    "221": {
+        "group": "DPZ",
+        "is_open_short": "no"
+    },
+    "222": {
+        "group": "SLMBP",
+        "is_open_short": "no"
+    },
+    "223": {
+        "group": "BTSGU",
+        "is_open_short": "no"
+    },
+    "224": {
+        "group": "BPYPP",
+        "is_open_short": "no"
+    },
+    "225": {
+        "group": "ERIE",
+        "is_open_short": "no"
+    },
+    "226": {
+        "group": "NBIS",
+        "is_open_short": "no"
+    },
+    "227": {
+        "group": "BPYPO",
+        "is_open_short": "no"
+    },
+    "228": {
+        "group": "EWBC",
+        "is_open_short": "no"
+    },
+    "229": {
+        "group": "ILMN",
+        "is_open_short": "no"
+    },
+    "230": {
+        "group": "CHRW",
+        "is_open_short": "no"
+    },
+    "231": {
+        "group": "HOLX",
+        "is_open_short": "no"
+    },
+    "232": {
+        "group": "VLYPN",
+        "is_open_short": "no"
+    },
+    "233": {
+        "group": "ROKU",
+        "is_open_short": "no"
+    },
+    "234": {
+        "group": "ASTS",
+        "is_open_short": "no"
+    },
+    "235": {
+        "group": "WWD",
+        "is_open_short": "no"
+    },
+    "236": {
+        "group": "SMMT",
+        "is_open_short": "no"
+    },
+    "237": {
+        "group": "VLYPP",
+        "is_open_short": "no"
+    },
+    "238": {
+        "group": "ICLR",
+        "is_open_short": "no"
+    },
+    "239": {
+        "group": "CELH",
+        "is_open_short": "no"
+    },
+    "240": {
+        "group": "NBIX",
+        "is_open_short": "no"
+    },
+    "241": {
+        "group": "VLYPO",
+        "is_open_short": "no"
+    },
+    "242": {
+        "group": "BPYPN",
+        "is_open_short": "no"
+    },
+    "243": {
+        "group": "TEM",
+        "is_open_short": "no"
+    },
+    "244": {
+        "group": "JBHT",
+        "is_open_short": "no"
+    },
+    "245": {
+        "group": "MEDP",
+        "is_open_short": "no"
+    },
+    "246": {
+        "group": "FITBO",
+        "is_open_short": "no"
+    },
+    "247": {
+        "group": "COOP",
+        "is_open_short": "no"
+    },
+    "248": {
+        "group": "COO",
+        "is_open_short": "no"
+    },
+    "249": {
+        "group": "SFM",
+        "is_open_short": "no"
+    },
+    "250": {
+        "group": "GLPI",
+        "is_open_short": "no"
+    },
+    "251": {
+        "group": "LECO",
+        "is_open_short": "no"
+    },
+    "252": {
+        "group": "REG",
+        "is_open_short": "no"
+    },
+    "253": {
+        "group": "MANH",
+        "is_open_short": "no"
+    },
+    "254": {
+        "group": "LAMR",
+        "is_open_short": "no"
+    },
+    "255": {
+        "group": "WYNN",
+        "is_open_short": "no"
+    },
+    "256": {
+        "group": "NDSN",
+        "is_open_short": "no"
+    },
+    "257": {
+        "group": "SAIL",
+        "is_open_short": "no"
+    },
+    "258": {
+        "group": "ASND",
+        "is_open_short": "no"
+    },
+    "259": {
+        "group": "ENTG",
+        "is_open_short": "no"
+    },
+    "260": {
+        "group": "POOL",
+        "is_open_short": "no"
+    },
+    "261": {
+        "group": "DUOL",
+        "is_open_short": "no"
+    },
+    "262": {
+        "group": "RGLD",
+        "is_open_short": "no"
+    },
+    "263": {
+        "group": "VTRS",
+        "is_open_short": "no"
+    },
+    "264": {
+        "group": "PAA",
+        "is_open_short": "no"
+    },
+    "265": {
+        "group": "HST",
+        "is_open_short": "no"
+    },
+    "266": {
+        "group": "CART",
+        "is_open_short": "no"
+    },
+    "267": {
+        "group": "DGNX",
+        "is_open_short": "no"
+    },
+    "268": {
+        "group": "JKHY",
+        "is_open_short": "no"
+    },
+    "269": {
+        "group": "HTHT",
+        "is_open_short": "no"
+    },
+    "270": {
+        "group": "AKAM",
+        "is_open_short": "no"
+    },
+    "271": {
+        "group": "SWKS",
+        "is_open_short": "no"
+    },
+    "272": {
+        "group": "MMYT",
+        "is_open_short": "no"
+    },
+    "273": {
+        "group": "TXRH",
+        "is_open_short": "no"
+    },
+    "274": {
+        "group": "HAS",
+        "is_open_short": "no"
+    },
+    "275": {
+        "group": "DRS",
+        "is_open_short": "no"
+    },
+    "276": {
+        "group": "MORN",
+        "is_open_short": "no"
+    },
+    "277": {
+        "group": "KTOS",
+        "is_open_short": "no"
+    },
+    "278": {
+        "group": "BMRN",
+        "is_open_short": "no"
+    },
+    "279": {
+        "group": "AVAV",
+        "is_open_short": "no"
+    },
+    "280": {
+        "group": "SEIC",
+        "is_open_short": "no"
+    },
+    "281": {
+        "group": "VNOM",
+        "is_open_short": "no"
+    },
+    "282": {
+        "group": "TTAN",
+        "is_open_short": "no"
+    },
+    "283": {
+        "group": "AGNC",
+        "is_open_short": "no"
+    },
+    "284": {
+        "group": "COKE",
+        "is_open_short": "no"
+    },
+    "285": {
+        "group": "AUR",
+        "is_open_short": "no"
+    },
+    "286": {
+        "group": "PPC",
+        "is_open_short": "no"
+    },
+    "287": {
+        "group": "LITE",
+        "is_open_short": "no"
+    },
+    "288": {
+        "group": "BZ",
+        "is_open_short": "no"
+    },
+    "289": {
+        "group": "BBIO",
+        "is_open_short": "no"
+    },
+    "290": {
+        "group": "NXT",
+        "is_open_short": "no"
+    },
+    "291": {
+        "group": "SNDK",
+        "is_open_short": "no"
+    },
+    "292": {
+        "group": "APPF",
+        "is_open_short": "no"
+    },
+    "293": {
+        "group": "PSKY",
+        "is_open_short": "no"
+    },
+    "294": {
+        "group": "EXAS",
+        "is_open_short": "no"
+    },
+    "295": {
+        "group": "EXEL",
+        "is_open_short": "no"
+    },
+    "296": {
+        "group": "MDGL",
+        "is_open_short": "no"
+    },
+    "297": {
+        "group": "CPB",
+        "is_open_short": "no"
+    },
+    "298": {
+        "group": "ENSG",
+        "is_open_short": "no"
+    },
+    "299": {
+        "group": "XP",
+        "is_open_short": "no"
+    },
+    "300": {
+        "group": "ALGN",
+        "is_open_short": "no"
+    },
+    "301": {
+        "group": "ONBPP",
+        "is_open_short": "no"
+    },
+    "302": {
+        "group": "FRHC",
+        "is_open_short": "no"
+    },
+    "303": {
+        "group": "ONBPO",
+        "is_open_short": "no"
+    },
+    "304": {
+        "group": "PEGA",
+        "is_open_short": "no"
+    },
+    "305": {
+        "group": "CAI",
+        "is_open_short": "no"
+    },
+    "306": {
+        "group": "IONS",
+        "is_open_short": "no"
+    },
+    "307": {
+        "group": "MTSI",
+        "is_open_short": "no"
+    },
+    "308": {
+        "group": "DOX",
+        "is_open_short": "no"
+    },
+    "309": {
+        "group": "MNDY",
+        "is_open_short": "no"
+    },
+    "310": {
+        "group": "MRNA",
+        "is_open_short": "no"
+    },
+    "311": {
+        "group": "PCTY",
+        "is_open_short": "no"
+    },
+    "312": {
+        "group": "UMBF",
+        "is_open_short": "no"
+    },
+    "313": {
+        "group": "BILI",
+        "is_open_short": "no"
+    },
+    "314": {
+        "group": "FSV",
+        "is_open_short": "no"
+    },
+    "315": {
+        "group": "TTEK",
+        "is_open_short": "no"
+    },
+    "316": {
+        "group": "FYBR",
+        "is_open_short": "no"
+    },
+    "317": {
+        "group": "MTCH",
+        "is_open_short": "no"
+    },
+    "318": {
+        "group": "WTFC",
+        "is_open_short": "no"
+    },
+    "319": {
+        "group": "SRAD",
+        "is_open_short": "no"
+    },
+    "320": {
+        "group": "SFD",
+        "is_open_short": "no"
+    },
+    "321": {
+        "group": "DSGX",
+        "is_open_short": "no"
+    },
+    "322": {
+        "group": "LLYVK",
+        "is_open_short": "no"
+    },
+    "323": {
+        "group": "VRNA",
+        "is_open_short": "no"
+    },
+    "324": {
+        "group": "LINE",
+        "is_open_short": "no"
+    },
+    "325": {
+        "group": "LSCC",
+        "is_open_short": "no"
+    },
+    "326": {
+        "group": "GLXY",
+        "is_open_short": "no"
+    },
+    "327": {
+        "group": "CHYM",
+        "is_open_short": "no"
+    },
+    "328": {
+        "group": "NICE",
+        "is_open_short": "no"
+    },
+    "329": {
+        "group": "ONB",
+        "is_open_short": "no"
+    },
+    "330": {
+        "group": "LLYVA",
+        "is_open_short": "no"
+    },
+    "331": {
+        "group": "HALO",
+        "is_open_short": "no"
+    },
+    "332": {
+        "group": "ROIV",
+        "is_open_short": "no"
+    },
+    "333": {
+        "group": "STRL",
+        "is_open_short": "no"
+    },
+    "334": {
+        "group": "LBRDK",
+        "is_open_short": "no"
+    },
+    "335": {
+        "group": "LBRDA",
+        "is_open_short": "no"
+    },
+    "336": {
+        "group": "OTEX",
+        "is_open_short": "no"
+    },
+    "337": {
+        "group": "AAL",
+        "is_open_short": "no"
+    },
+    "338": {
+        "group": "WIX",
+        "is_open_short": "no"
+    },
+    "339": {
+        "group": "WING",
+        "is_open_short": "no"
+    },
+    "340": {
+        "group": "QRVO",
+        "is_open_short": "no"
+    },
+    "341": {
+        "group": "BPOP",
+        "is_open_short": "no"
+    },
+    "342": {
+        "group": "CIGI",
+        "is_open_short": "no"
+    },
+    "343": {
+        "group": "ZION",
+        "is_open_short": "no"
+    },
+    "344": {
+        "group": "TECH",
+        "is_open_short": "no"
+    },
+    "345": {
+        "group": "LKQ",
+        "is_open_short": "no"
+    },
+    "346": {
+        "group": "FIVE",
+        "is_open_short": "no"
+    },
+    "347": {
+        "group": "SAIA",
+        "is_open_short": "no"
+    },
+    "348": {
+        "group": "HLNE",
+        "is_open_short": "no"
+    },
+    "349": {
+        "group": "SIRI",
+        "is_open_short": "no"
+    },
+    "350": {
+        "group": "HSIC",
+        "is_open_short": "no"
+    },
+    "351": {
+        "group": "DBX",
+        "is_open_short": "no"
+    },
+    "352": {
+        "group": "ACGLO",
+        "is_open_short": "no"
+    },
+    "353": {
+        "group": "CVLT",
+        "is_open_short": "no"
+    },
+    "354": {
+        "group": "OLLI",
+        "is_open_short": "no"
+    },
+    "355": {
+        "group": "CBSH",
+        "is_open_short": "no"
+    },
+    "356": {
+        "group": "MASI",
+        "is_open_short": "no"
+    },
+    "357": {
+        "group": "COLB",
+        "is_open_short": "no"
+    },
+    "358": {
+        "group": "TIGO",
+        "is_open_short": "no"
+    },
+    "359": {
+        "group": "HQY",
+        "is_open_short": "no"
+    },
+    "360": {
+        "group": "NVMI",
+        "is_open_short": "no"
+    },
+    "361": {
+        "group": "APA",
+        "is_open_short": "no"
+    },
+    "362": {
+        "group": "RMBS",
+        "is_open_short": "no"
+    },
+    "363": {
+        "group": "JAZZ",
+        "is_open_short": "no"
+    },
+    "364": {
+        "group": "IDCC",
+        "is_open_short": "no"
+    },
+    "365": {
+        "group": "RVMD",
+        "is_open_short": "no"
+    },
+    "366": {
+        "group": "PNFP",
+        "is_open_short": "no"
+    },
+    "367": {
+        "group": "VFS",
+        "is_open_short": "no"
+    },
+    "368": {
+        "group": "LNW",
+        "is_open_short": "no"
+    },
+    "369": {
+        "group": "CORT",
+        "is_open_short": "no"
+    },
+    "370": {
+        "group": "GH",
+        "is_open_short": "no"
+    },
+    "371": {
+        "group": "CGNX",
+        "is_open_short": "no"
+    },
+    "372": {
+        "group": "MKSI",
+        "is_open_short": "no"
+    },
+    "373": {
+        "group": "STEP",
+        "is_open_short": "no"
+    },
+    "374": {
+        "group": "TSEM",
+        "is_open_short": "no"
+    },
+    "375": {
+        "group": "LYFT",
+        "is_open_short": "no"
+    },
+    "376": {
+        "group": "MIDD",
+        "is_open_short": "no"
+    },
+    "377": {
+        "group": "BOKF",
+        "is_open_short": "no"
+    },
+    "378": {
+        "group": "IESC",
+        "is_open_short": "no"
+    },
+    "379": {
+        "group": "EXLS",
+        "is_open_short": "no"
+    },
+    "380": {
+        "group": "IREN",
+        "is_open_short": "no"
+    },
+    "381": {
+        "group": "WAY",
+        "is_open_short": "no"
+    },
+    "382": {
+        "group": "GTLB",
+        "is_open_short": "no"
+    },
+    "383": {
+        "group": "CHDN",
+        "is_open_short": "no"
+    },
+    "384": {
+        "group": "MKTX",
+        "is_open_short": "no"
+    },
+    "385": {
+        "group": "CFLT",
+        "is_open_short": "no"
+    },
+    "386": {
+        "group": "GRFS",
+        "is_open_short": "no"
+    },
+    "387": {
+        "group": "ROAD",
+        "is_open_short": "no"
+    },
+    "388": {
+        "group": "GDS",
+        "is_open_short": "no"
+    },
+    "389": {
+        "group": "OLED",
+        "is_open_short": "no"
+    },
+    "390": {
+        "group": "ACGLN",
+        "is_open_short": "no"
+    },
+    "391": {
+        "group": "RGEN",
+        "is_open_short": "no"
+    },
+    "392": {
+        "group": "ABVX",
+        "is_open_short": "no"
+    },
+    "393": {
+        "group": "CGABL",
+        "is_open_short": "no"
+    },
+    "394": {
+        "group": "RGC",
+        "is_open_short": "no"
+    },
+    "395": {
+        "group": "RYTM",
+        "is_open_short": "no"
+    },
+    "396": {
+        "group": "AAON",
+        "is_open_short": "no"
+    },
+    "397": {
+        "group": "NNNN",
+        "is_open_short": "no"
+    },
+    "398": {
+        "group": "UPST",
+        "is_open_short": "no"
+    },
+    "399": {
+        "group": "FCFS",
+        "is_open_short": "no"
+    },
+    "400": {
+        "group": "URBN",
+        "is_open_short": "no"
+    },
+    "401": {
+        "group": "LFUS",
+        "is_open_short": "no"
+    },
+    "402": {
+        "group": "RRR",
+        "is_open_short": "no"
+    },
+    "403": {
+        "group": "AXSM",
+        "is_open_short": "no"
+    },
+    "404": {
+        "group": "VRNS",
+        "is_open_short": "no"
+    },
+    "405": {
+        "group": "CCCS",
+        "is_open_short": "no"
+    },
+    "406": {
+        "group": "SITM",
+        "is_open_short": "no"
+    },
+    "407": {
+        "group": "LEGN",
+        "is_open_short": "no"
+    },
+    "408": {
+        "group": "SLM",
+        "is_open_short": "no"
+    },
+    "409": {
+        "group": "SANM",
+        "is_open_short": "no"
+    },
+    "410": {
+        "group": "NXST",
+        "is_open_short": "no"
+    },
+    "411": {
+        "group": "GNTX",
+        "is_open_short": "no"
+    },
+    "412": {
+        "group": "SOUN",
+        "is_open_short": "no"
+    },
+    "413": {
+        "group": "CYTK",
+        "is_open_short": "no"
+    },
+    "414": {
+        "group": "RNA",
+        "is_open_short": "no"
+    },
+    "415": {
+        "group": "BULL",
+        "is_open_short": "no"
+    },
+    "416": {
+        "group": "GLBE",
+        "is_open_short": "no"
+    },
+    "417": {
+        "group": "AMKR",
+        "is_open_short": "no"
+    },
+    "418": {
+        "group": "CRUS",
+        "is_open_short": "no"
+    },
+    "419": {
+        "group": "VLY",
+        "is_open_short": "no"
+    },
+    "420": {
+        "group": "FLY",
+        "is_open_short": "no"
+    },
+    "421": {
+        "group": "IRTC",
+        "is_open_short": "no"
+    },
+    "422": {
+        "group": "UFPI",
+        "is_open_short": "no"
+    },
+    "423": {
+        "group": "MAT",
+        "is_open_short": "no"
+    },
+    "424": {
+        "group": "OZK",
+        "is_open_short": "no"
+    },
+    "425": {
+        "group": "CWST",
+        "is_open_short": "no"
+    },
+    "426": {
+        "group": "CHRD",
+        "is_open_short": "no"
+    },
+    "427": {
+        "group": "FROG",
+        "is_open_short": "no"
+    },
+    "428": {
+        "group": "PI",
+        "is_open_short": "no"
+    },
+    "429": {
+        "group": "AEIS",
+        "is_open_short": "no"
+    },
+    "430": {
+        "group": "LOPE",
+        "is_open_short": "no"
+    },
+    "431": {
+        "group": "ETSY",
+        "is_open_short": "no"
+    },
+    "432": {
+        "group": "CACC",
+        "is_open_short": "no"
+    },
+    "433": {
+        "group": "NUVL",
+        "is_open_short": "no"
+    },
+    "434": {
+        "group": "ACT",
+        "is_open_short": "no"
+    },
+    "435": {
+        "group": "LCID",
+        "is_open_short": "no"
+    },
+    "436": {
+        "group": "MARA",
+        "is_open_short": "no"
+    },
+    "437": {
+        "group": "ALGM",
+        "is_open_short": "no"
+    },
+    "438": {
+        "group": "GENVR",
+        "is_open_short": "no"
+    },
+    "439": {
+        "group": "CAR",
+        "is_open_short": "no"
+    },
+    "440": {
+        "group": "RDNT",
+        "is_open_short": "no"
+    },
+    "441": {
+        "group": "ATAT",
+        "is_open_short": "no"
+    },
+    "442": {
+        "group": "ITRI",
+        "is_open_short": "no"
+    },
+    "443": {
+        "group": "CZR",
+        "is_open_short": "no"
+    },
+    "444": {
+        "group": "MMSI",
+        "is_open_short": "no"
+    },
+    "445": {
+        "group": "UBSI",
+        "is_open_short": "no"
+    },
+    "446": {
+        "group": "CALM",
+        "is_open_short": "no"
+    },
+    "447": {
+        "group": "HWC",
+        "is_open_short": "no"
+    },
+    "448": {
+        "group": "ACIW",
+        "is_open_short": "no"
+    },
+    "449": {
+        "group": "BCPC",
+        "is_open_short": "no"
+    },
+    "450": {
+        "group": "SMTC",
+        "is_open_short": "no"
+    },
+    "451": {
+        "group": "FFIN",
+        "is_open_short": "no"
+    },
+    "452": {
+        "group": "OMAB",
+        "is_open_short": "no"
+    },
+    "453": {
+        "group": "TGTX",
+        "is_open_short": "no"
+    },
+    "454": {
+        "group": "MRUS",
+        "is_open_short": "no"
+    },
+    "455": {
+        "group": "DORM",
+        "is_open_short": "no"
+    },
+    "456": {
+        "group": "ENPH",
+        "is_open_short": "no"
+    },
+    "457": {
+        "group": "MZTI",
+        "is_open_short": "no"
+    },
+    "458": {
+        "group": "SNEX",
+        "is_open_short": "no"
+    },
+    "459": {
+        "group": "PONY",
+        "is_open_short": "no"
+    },
+    "460": {
+        "group": "DOOO",
+        "is_open_short": "no"
+    },
+    "461": {
+        "group": "RIOT",
+        "is_open_short": "no"
+    },
+    "462": {
+        "group": "GGAL",
+        "is_open_short": "no"
+    },
+    "463": {
+        "group": "CRSP",
+        "is_open_short": "no"
+    },
+    "464": {
+        "group": "RGTI",
+        "is_open_short": "no"
+    },
+    "465": {
+        "group": "OS",
+        "is_open_short": "no"
+    },
+    "466": {
+        "group": "QLYS",
+        "is_open_short": "no"
+    },
+    "467": {
+        "group": "TTMI",
+        "is_open_short": "no"
+    },
+    "468": {
+        "group": "SIGI",
+        "is_open_short": "no"
+    },
+    "469": {
+        "group": "IEP",
+        "is_open_short": "no"
+    },
+    "470": {
+        "group": "REYN",
+        "is_open_short": "no"
+    },
+    "471": {
+        "group": "GSAT",
+        "is_open_short": "no"
+    },
+    "472": {
+        "group": "OPCH",
+        "is_open_short": "no"
+    },
+    "473": {
+        "group": "VCTR",
+        "is_open_short": "no"
+    },
+    "474": {
+        "group": "CROX",
+        "is_open_short": "no"
+    },
+    "475": {
+        "group": "FTDR",
+        "is_open_short": "no"
+    },
+    "476": {
+        "group": "BGC",
+        "is_open_short": "no"
+    },
+    "477": {
+        "group": "DJT",
+        "is_open_short": "no"
+    },
+    "478": {
+        "group": "SAIC",
+        "is_open_short": "no"
+    },
+    "479": {
+        "group": "ALKS",
+        "is_open_short": "no"
+    },
+    "480": {
+        "group": "STNE",
+        "is_open_short": "no"
+    },
+    "481": {
+        "group": "BRKR",
+        "is_open_short": "no"
+    },
+    "482": {
+        "group": "CRVL",
+        "is_open_short": "no"
+    },
+    "483": {
+        "group": "SBRA",
+        "is_open_short": "no"
+    },
+    "484": {
+        "group": "RUSHB",
+        "is_open_short": "no"
+    },
+    "485": {
+        "group": "LSTR",
+        "is_open_short": "no"
+    },
+    "486": {
+        "group": "PTCT",
+        "is_open_short": "no"
+    },
+    "487": {
+        "group": "RUSHA",
+        "is_open_short": "no"
+    },
+    "488": {
+        "group": "SHC",
+        "is_open_short": "no"
+    },
+    "489": {
+        "group": "BTSG",
+        "is_open_short": "no"
+    },
+    "490": {
+        "group": "BANF",
+        "is_open_short": "no"
+    },
+    "491": {
+        "group": "PECO",
+        "is_open_short": "no"
+    },
+    "492": {
+        "group": "DHCNL",
+        "is_open_short": "no"
+    },
+    "493": {
+        "group": "AVT",
+        "is_open_short": "no"
+    },
+    "494": {
+        "group": "OPEN",
+        "is_open_short": "no"
+    },
+    "495": {
+        "group": "IBOC",
+        "is_open_short": "no"
+    },
+    "496": {
+        "group": "WFRD",
+        "is_open_short": "no"
+    },
+    "497": {
+        "group": "SLAB",
+        "is_open_short": "no"
+    },
+    "498": {
+        "group": "SKYW",
+        "is_open_short": "no"
+    },
+    "499": {
+        "group": "FELE",
+        "is_open_short": "no"
+    },
+    "500": {
+        "group": "SSRM",
+        "is_open_short": "no"
+    },
+    "501": {
+        "group": "REGCP",
+        "is_open_short": "no"
+    },
+    "502": {
+        "group": "CVCO",
+        "is_open_short": "no"
+    },
+    "503": {
+        "group": "GLNG",
+        "is_open_short": "no"
+    },
+    "504": {
+        "group": "ACAD",
+        "is_open_short": "no"
+    },
+    "505": {
+        "group": "DHCNI",
+        "is_open_short": "no"
+    },
+    "506": {
+        "group": "CORZ",
+        "is_open_short": "no"
+    },
+    "507": {
+        "group": "CORZZ",
+        "is_open_short": "no"
+    },
+    "508": {
+        "group": "OXLCN",
+        "is_open_short": "no"
+    },
+    "509": {
+        "group": "OXLCP",
+        "is_open_short": "no"
+    },
+    "510": {
+        "group": "MENS",
+        "is_open_short": "no"
+    },
+    "511": {
+        "group": "WSC",
+        "is_open_short": "no"
+    },
+    "512": {
+        "group": "OXLCZ",
+        "is_open_short": "no"
+    },
+    "513": {
+        "group": "PCVX",
+        "is_open_short": "no"
+    },
+    "514": {
+        "group": "KRYS",
+        "is_open_short": "no"
+    },
+    "515": {
+        "group": "SPSC",
+        "is_open_short": "no"
+    },
+    "516": {
+        "group": "LBTYB",
+        "is_open_short": "no"
+    },
+    "517": {
+        "group": "OXLCL",
+        "is_open_short": "no"
+    },
+    "518": {
+        "group": "NOVT",
+        "is_open_short": "no"
+    },
+    "519": {
+        "group": "VERX",
+        "is_open_short": "no"
+    },
+    "520": {
+        "group": "LAUR",
+        "is_open_short": "no"
+    },
+    "521": {
+        "group": "MRCY",
+        "is_open_short": "no"
+    },
+    "522": {
+        "group": "RELY",
+        "is_open_short": "no"
+    },
+    "523": {
+        "group": "REGCO",
+        "is_open_short": "no"
+    },
+    "524": {
+        "group": "CLBT",
+        "is_open_short": "no"
+    },
+    "525": {
+        "group": "MLCO",
+        "is_open_short": "no"
+    },
+    "526": {
+        "group": "VEON",
+        "is_open_short": "no"
+    },
+    "527": {
+        "group": "OXLCO",
+        "is_open_short": "no"
+    },
+    "528": {
+        "group": "LBTYK",
+        "is_open_short": "no"
+    },
+    "529": {
+        "group": "VSAT",
+        "is_open_short": "no"
+    },
+    "530": {
+        "group": "NSIT",
+        "is_open_short": "no"
+    },
+    "531": {
+        "group": "TCBI",
+        "is_open_short": "no"
+    },
+    "532": {
+        "group": "LBTYA",
+        "is_open_short": "no"
+    },
+    "533": {
+        "group": "NTRSO",
+        "is_open_short": "no"
+    },
+    "534": {
+        "group": "GBDC",
+        "is_open_short": "no"
+    },
+    "535": {
+        "group": "ACLX",
+        "is_open_short": "no"
+    },
+    "536": {
+        "group": "MLTX",
+        "is_open_short": "no"
+    },
+    "537": {
+        "group": "ADMA",
+        "is_open_short": "no"
+    },
+    "538": {
+        "group": "RUN",
+        "is_open_short": "no"
+    },
+    "539": {
+        "group": "VRRM",
+        "is_open_short": "no"
+    },
+    "540": {
+        "group": "MIRM",
+        "is_open_short": "no"
+    },
+    "541": {
+        "group": "MOBBW",
+        "is_open_short": "no"
+    },
+    "542": {
+        "group": "OSIS",
+        "is_open_short": "no"
+    },
+    "543": {
+        "group": "INTR",
+        "is_open_short": "no"
+    },
+    "544": {
+        "group": "KC",
+        "is_open_short": "no"
+    },
+    "545": {
+        "group": "TFSL",
+        "is_open_short": "no"
+    },
+    "546": {
+        "group": "SLNO",
+        "is_open_short": "no"
+    },
+    "547": {
+        "group": "BWIN",
+        "is_open_short": "no"
+    },
+    "548": {
+        "group": "FRSH",
+        "is_open_short": "no"
+    },
+    "549": {
+        "group": "DLO",
+        "is_open_short": "no"
+    },
+    "550": {
+        "group": "QFIN",
+        "is_open_short": "no"
+    },
+    "551": {
+        "group": "HSAI",
+        "is_open_short": "no"
+    },
+    "552": {
+        "group": "TENB",
+        "is_open_short": "no"
+    },
+    "553": {
+        "group": "PATK",
+        "is_open_short": "no"
+    },
+    "554": {
+        "group": "PLBL",
+        "is_open_short": "no"
+    },
+    "555": {
+        "group": "ARWR",
+        "is_open_short": "no"
+    },
+    "556": {
+        "group": "INTA",
+        "is_open_short": "no"
+    },
+    "557": {
+        "group": "PLXS",
+        "is_open_short": "no"
+    },
+    "558": {
+        "group": "FIZZ",
+        "is_open_short": "no"
+    },
+    "559": {
+        "group": "ETOR",
+        "is_open_short": "no"
+    },
+    "560": {
+        "group": "WGS",
+        "is_open_short": "no"
+    },
+    "561": {
+        "group": "EEFT",
+        "is_open_short": "no"
+    },
+    "562": {
+        "group": "CAMT",
+        "is_open_short": "no"
+    },
+    "563": {
+        "group": "MTSR",
+        "is_open_short": "no"
+    },
+    "564": {
+        "group": "EBC",
+        "is_open_short": "no"
+    },
+    "565": {
+        "group": "HWKN",
+        "is_open_short": "no"
+    },
+    "566": {
+        "group": "FULTP",
+        "is_open_short": "no"
+    },
+    "567": {
+        "group": "IPAR",
+        "is_open_short": "no"
+    },
+    "568": {
+        "group": "LNTH",
+        "is_open_short": "no"
+    },
+    "569": {
+        "group": "PAGP",
+        "is_open_short": "no"
+    },
+    "570": {
+        "group": "APLD",
+        "is_open_short": "no"
+    },
+    "571": {
+        "group": "MGNI",
+        "is_open_short": "no"
+    },
+    "572": {
+        "group": "WULF",
+        "is_open_short": "no"
+    },
+    "573": {
+        "group": "TMDX",
+        "is_open_short": "no"
+    },
+    "574": {
+        "group": "COMM",
+        "is_open_short": "no"
+    },
+    "575": {
+        "group": "EXPO",
+        "is_open_short": "no"
+    },
+    "576": {
+        "group": "AMBA",
+        "is_open_short": "no"
+    },
+    "577": {
+        "group": "LBRDP",
+        "is_open_short": "no"
+    },
+    "578": {
+        "group": "AAPG",
+        "is_open_short": "no"
+    },
+    "579": {
+        "group": "NCNO",
+        "is_open_short": "no"
+    },
+    "580": {
+        "group": "CARG",
+        "is_open_short": "no"
+    },
+    "581": {
+        "group": "AKRO",
+        "is_open_short": "no"
+    },
+    "582": {
+        "group": "ODD",
+        "is_open_short": "no"
+    },
+    "583": {
+        "group": "INDB",
+        "is_open_short": "no"
+    },
+    "584": {
+        "group": "FULT",
+        "is_open_short": "no"
+    },
+    "585": {
+        "group": "TBBK",
+        "is_open_short": "no"
+    },
+    "586": {
+        "group": "VC",
+        "is_open_short": "no"
+    },
+    "587": {
+        "group": "USLM",
+        "is_open_short": "no"
+    },
+    "588": {
+        "group": "AVPT",
+        "is_open_short": "no"
+    },
+    "589": {
+        "group": "IPGP",
+        "is_open_short": "no"
+    },
+    "590": {
+        "group": "PTGX",
+        "is_open_short": "no"
+    },
+    "591": {
+        "group": "ENLT",
+        "is_open_short": "no"
+    },
+    "592": {
+        "group": "OTTR",
+        "is_open_short": "no"
+    },
+    "593": {
+        "group": "NWE",
+        "is_open_short": "no"
+    },
+    "594": {
+        "group": "VSEC",
+        "is_open_short": "no"
+    },
+    "595": {
+        "group": "FIBK",
+        "is_open_short": "no"
+    },
+    "596": {
+        "group": "ZLAB",
+        "is_open_short": "no"
+    },
+    "597": {
+        "group": "CATY",
+        "is_open_short": "no"
+    },
+    "598": {
+        "group": "PSMT",
+        "is_open_short": "no"
+    },
+    "599": {
+        "group": "BRZE",
+        "is_open_short": "no"
+    },
+    "600": {
+        "group": "APLS",
+        "is_open_short": "no"
+    },
+    "601": {
+        "group": "GTM",
+        "is_open_short": "no"
+    },
+    "602": {
+        "group": "ZIONP",
+        "is_open_short": "no"
+    },
+    "603": {
+        "group": "BL",
+        "is_open_short": "no"
+    },
+    "604": {
+        "group": "ASO",
+        "is_open_short": "no"
+    },
+    "605": {
+        "group": "NMRK",
+        "is_open_short": "no"
+    },
+    "606": {
+        "group": "PLMR",
+        "is_open_short": "no"
+    },
+    "607": {
+        "group": "CNXC",
+        "is_open_short": "no"
+    },
+    "608": {
+        "group": "CRNX",
+        "is_open_short": "no"
+    },
+    "609": {
+        "group": "PTON",
+        "is_open_short": "no"
+    },
+    "610": {
+        "group": "PCH",
+        "is_open_short": "no"
+    },
+    "611": {
+        "group": "JOYY",
+        "is_open_short": "no"
+    },
+    "612": {
+        "group": "BLKB",
+        "is_open_short": "no"
+    },
+    "613": {
+        "group": "POWL",
+        "is_open_short": "no"
+    },
+    "614": {
+        "group": "WSFS",
+        "is_open_short": "no"
+    },
+    "615": {
+        "group": "LGND",
+        "is_open_short": "no"
+    },
+    "616": {
+        "group": "ICUI",
+        "is_open_short": "no"
+    },
+    "617": {
+        "group": "FHB",
+        "is_open_short": "no"
+    },
+    "618": {
+        "group": "ALHC",
+        "is_open_short": "no"
+    },
+    "619": {
+        "group": "PCTTU",
+        "is_open_short": "no"
+    },
+    "620": {
+        "group": "MBLY",
+        "is_open_short": "no"
+    },
+    "621": {
+        "group": "AGYS",
+        "is_open_short": "no"
+    },
+    "622": {
+        "group": "LIVN",
+        "is_open_short": "no"
+    },
+    "623": {
+        "group": "RUM",
+        "is_open_short": "no"
+    },
+    "624": {
+        "group": "GSHD",
+        "is_open_short": "no"
+    },
+    "625": {
+        "group": "DRVN",
+        "is_open_short": "no"
+    },
+    "626": {
+        "group": "COLM",
+        "is_open_short": "no"
+    },
+    "627": {
+        "group": "NMIH",
+        "is_open_short": "no"
+    },
+    "628": {
+        "group": "KYMR",
+        "is_open_short": "no"
+    },
+    "629": {
+        "group": "INDV",
+        "is_open_short": "no"
+    },
+    "630": {
+        "group": "WSBC",
+        "is_open_short": "no"
+    },
+    "631": {
+        "group": "OXLC",
+        "is_open_short": "no"
+    },
+    "632": {
+        "group": "AMRX",
+        "is_open_short": "no"
+    },
+    "633": {
+        "group": "MGEE",
+        "is_open_short": "no"
+    },
+    "634": {
+        "group": "MGRC",
+        "is_open_short": "no"
+    },
+    "635": {
+        "group": "RARE",
+        "is_open_short": "no"
+    },
+    "636": {
+        "group": "PGY",
+        "is_open_short": "no"
+    },
+    "637": {
+        "group": "CIFR",
+        "is_open_short": "no"
+    },
+    "638": {
+        "group": "SRRK",
+        "is_open_short": "no"
+    },
+    "639": {
+        "group": "TLX",
+        "is_open_short": "no"
+    },
+    "640": {
+        "group": "SFNC",
+        "is_open_short": "no"
+    },
+    "641": {
+        "group": "CAKE",
+        "is_open_short": "no"
+    },
+    "642": {
+        "group": "SEZL",
+        "is_open_short": "no"
+    },
+    "643": {
+        "group": "CSQ",
+        "is_open_short": "no"
+    },
+    "644": {
+        "group": "XENE",
+        "is_open_short": "no"
+    },
+    "645": {
+        "group": "WDFC",
+        "is_open_short": "no"
+    },
+    "646": {
+        "group": "PENN",
+        "is_open_short": "no"
+    },
+    "647": {
+        "group": "SOUNW",
+        "is_open_short": "no"
+    },
+    "648": {
+        "group": "IAC",
+        "is_open_short": "no"
+    },
+    "649": {
+        "group": "ARLP",
+        "is_open_short": "no"
+    },
+    "650": {
+        "group": "BATRA",
+        "is_open_short": "no"
+    },
+    "651": {
+        "group": "PRVA",
+        "is_open_short": "no"
+    },
+    "652": {
+        "group": "SIMO",
+        "is_open_short": "no"
+    },
+    "653": {
+        "group": "POWWP",
+        "is_open_short": "no"
+    },
+    "654": {
+        "group": "VKTX",
+        "is_open_short": "no"
+    },
+    "655": {
+        "group": "EXTR",
+        "is_open_short": "no"
+    },
+    "656": {
+        "group": "IMVT",
+        "is_open_short": "no"
+    },
+    "657": {
+        "group": "ALRM",
+        "is_open_short": "no"
+    },
+    "658": {
+        "group": "MCHB",
+        "is_open_short": "no"
+    },
+    "659": {
+        "group": "XRAY",
+        "is_open_short": "no"
+    },
+    "660": {
+        "group": "SGRY",
+        "is_open_short": "no"
+    },
+    "661": {
+        "group": "NAMS",
+        "is_open_short": "no"
+    },
+    "662": {
+        "group": "WB",
+        "is_open_short": "no"
+    },
+    "663": {
+        "group": "FA",
+        "is_open_short": "no"
+    },
+    "664": {
+        "group": "HCM",
+        "is_open_short": "no"
+    },
+    "665": {
+        "group": "CVBF",
+        "is_open_short": "no"
+    },
+    "666": {
+        "group": "RNW",
+        "is_open_short": "no"
+    },
+    "667": {
+        "group": "MYRG",
+        "is_open_short": "no"
+    },
+    "668": {
+        "group": "SBCF",
+        "is_open_short": "no"
+    },
+    "669": {
+        "group": "SYNA",
+        "is_open_short": "no"
+    },
+    "670": {
+        "group": "MQ",
+        "is_open_short": "no"
+    },
+    "671": {
+        "group": "TOWN",
+        "is_open_short": "no"
+    },
+    "672": {
+        "group": "FRPT",
+        "is_open_short": "no"
+    },
+    "673": {
+        "group": "KNSA",
+        "is_open_short": "no"
+    },
+    "674": {
+        "group": "FTAIM",
+        "is_open_short": "no"
+    },
+    "675": {
+        "group": "HUT",
+        "is_open_short": "no"
+    },
+    "676": {
+        "group": "ALKT",
+        "is_open_short": "no"
+    },
+    "677": {
+        "group": "HTFL",
+        "is_open_short": "no"
+    },
+    "678": {
+        "group": "GTX",
+        "is_open_short": "no"
+    },
+    "679": {
+        "group": "DAVE",
+        "is_open_short": "no"
+    },
+    "680": {
+        "group": "BATRK",
+        "is_open_short": "no"
+    },
+    "681": {
+        "group": "CELC",
+        "is_open_short": "no"
+    },
+    "682": {
+        "group": "NWL",
+        "is_open_short": "no"
+    },
+    "683": {
+        "group": "SBET",
+        "is_open_short": "no"
+    },
+    "684": {
+        "group": "NEXT",
+        "is_open_short": "no"
+    },
+    "685": {
+        "group": "CHEF",
+        "is_open_short": "no"
+    },
+    "686": {
+        "group": "XMTR",
+        "is_open_short": "no"
+    },
+    "687": {
+        "group": "MEOH",
+        "is_open_short": "no"
+    },
+    "688": {
+        "group": "FTAIN",
+        "is_open_short": "no"
+    },
+    "689": {
+        "group": "IQ",
+        "is_open_short": "no"
+    },
+    "690": {
+        "group": "WRD",
+        "is_open_short": "no"
+    },
+    "691": {
+        "group": "VIAV",
+        "is_open_short": "no"
+    },
+    "692": {
+        "group": "CLSK",
+        "is_open_short": "no"
+    },
+    "693": {
+        "group": "ACLS",
+        "is_open_short": "no"
+    },
+    "694": {
+        "group": "SUPN",
+        "is_open_short": "no"
+    },
+    "695": {
+        "group": "VCYT",
+        "is_open_short": "no"
+    },
+    "696": {
+        "group": "POWI",
+        "is_open_short": "no"
+    },
+    "697": {
+        "group": "FFBC",
+        "is_open_short": "no"
+    },
+    "698": {
+        "group": "DJTWW",
+        "is_open_short": "no"
+    },
+    "699": {
+        "group": "BTDR",
+        "is_open_short": "no"
+    },
+    "700": {
+        "group": "GCMG",
+        "is_open_short": "no"
+    },
+    "701": {
+        "group": "BHF",
+        "is_open_short": "no"
+    },
+    "702": {
+        "group": "WAFD",
+        "is_open_short": "no"
+    },
+    "703": {
+        "group": "MRX",
+        "is_open_short": "no"
+    },
+    "704": {
+        "group": "DIOD",
+        "is_open_short": "no"
+    },
+    "705": {
+        "group": "ALVO",
+        "is_open_short": "no"
+    },
+    "706": {
+        "group": "FOLD",
+        "is_open_short": "no"
+    },
+    "707": {
+        "group": "CPRX",
+        "is_open_short": "no"
+    },
+    "708": {
+        "group": "GT",
+        "is_open_short": "no"
+    },
+    "709": {
+        "group": "BULLW",
+        "is_open_short": "no"
+    },
+    "710": {
+        "group": "TRMK",
+        "is_open_short": "no"
+    },
+    "711": {
+        "group": "KYIV",
+        "is_open_short": "no"
+    },
+    "712": {
+        "group": "QUBT",
+        "is_open_short": "no"
+    },
+    "713": {
+        "group": "PAYO",
+        "is_open_short": "no"
+    },
+    "714": {
+        "group": "WSBCP",
+        "is_open_short": "no"
+    },
+    "715": {
+        "group": "ATEC",
+        "is_open_short": "no"
+    },
+    "716": {
+        "group": "CNTA",
+        "is_open_short": "no"
+    },
+    "717": {
+        "group": "PCT",
+        "is_open_short": "no"
+    },
+    "718": {
+        "group": "HURN",
+        "is_open_short": "no"
+    },
+    "719": {
+        "group": "LQDA",
+        "is_open_short": "no"
+    },
+    "720": {
+        "group": "SPNS",
+        "is_open_short": "no"
+    },
+    "721": {
+        "group": "TARS",
+        "is_open_short": "no"
+    },
+    "722": {
+        "group": "MLYS",
+        "is_open_short": "no"
+    },
+    "723": {
+        "group": "MFICL",
+        "is_open_short": "no"
+    },
+    "724": {
+        "group": "APPN",
+        "is_open_short": "no"
+    },
+    "725": {
+        "group": "CORZW",
+        "is_open_short": "no"
+    },
+    "726": {
+        "group": "FRME",
+        "is_open_short": "no"
+    },
+    "727": {
+        "group": "CENT",
+        "is_open_short": "no"
+    },
+    "728": {
+        "group": "BANR",
+        "is_open_short": "no"
+    },
+    "729": {
+        "group": "SYBT",
+        "is_open_short": "no"
+    },
+    "730": {
+        "group": "XNET",
+        "is_open_short": "no"
+    },
+    "731": {
+        "group": "PRCH",
+        "is_open_short": "no"
+    },
+    "732": {
+        "group": "NBTB",
+        "is_open_short": "no"
+    },
+    "733": {
+        "group": "FBNC",
+        "is_open_short": "no"
+    },
+    "734": {
+        "group": "APGE",
+        "is_open_short": "no"
+    },
+    "735": {
+        "group": "TIGR",
+        "is_open_short": "no"
+    },
+    "736": {
+        "group": "TRMD",
+        "is_open_short": "no"
+    },
+    "737": {
+        "group": "FORM",
+        "is_open_short": "no"
+    },
+    "738": {
+        "group": "SBLK",
+        "is_open_short": "no"
+    },
+    "739": {
+        "group": "ADAMI",
+        "is_open_short": "no"
+    },
+    "740": {
+        "group": "IBRX",
+        "is_open_short": "no"
+    },
+    "741": {
+        "group": "HUBG",
+        "is_open_short": "no"
+    },
+    "742": {
+        "group": "VICR",
+        "is_open_short": "no"
+    },
+    "743": {
+        "group": "IRDM",
+        "is_open_short": "no"
+    },
+    "744": {
+        "group": "OSW",
+        "is_open_short": "no"
+    },
+    "745": {
+        "group": "DNLI",
+        "is_open_short": "no"
+    },
+    "746": {
+        "group": "EFSC",
+        "is_open_short": "no"
+    },
+    "747": {
+        "group": "ADAMM",
+        "is_open_short": "no"
+    },
+    "748": {
+        "group": "BUSEP",
+        "is_open_short": "no"
+    },
+    "749": {
+        "group": "AMSC",
+        "is_open_short": "no"
+    },
+    "750": {
+        "group": "PINC",
+        "is_open_short": "no"
+    },
+    "751": {
+        "group": "PAX",
+        "is_open_short": "no"
+    },
+    "752": {
+        "group": "BUSE",
+        "is_open_short": "no"
+    },
+    "753": {
+        "group": "SHOO",
+        "is_open_short": "no"
+    },
+    "754": {
+        "group": "OCUL",
+        "is_open_short": "no"
+    },
+    "755": {
+        "group": "GLPG",
+        "is_open_short": "no"
+    },
+    "756": {
+        "group": "LMAT",
+        "is_open_short": "no"
+    },
+    "757": {
+        "group": "LFST",
+        "is_open_short": "no"
+    },
+    "758": {
+        "group": "COCO",
+        "is_open_short": "no"
+    },
+    "759": {
+        "group": "BLTE",
+        "is_open_short": "no"
+    },
+    "760": {
+        "group": "PRDO",
+        "is_open_short": "no"
+    },
+    "761": {
+        "group": "PSNY",
+        "is_open_short": "no"
+    },
+    "762": {
+        "group": "PRCT",
+        "is_open_short": "no"
+    },
+    "763": {
+        "group": "PTEN",
+        "is_open_short": "no"
+    },
+    "764": {
+        "group": "IRON",
+        "is_open_short": "no"
+    },
+    "765": {
+        "group": "FORTY",
+        "is_open_short": "no"
+    },
+    "766": {
+        "group": "CENTA",
+        "is_open_short": "no"
+    },
+    "767": {
+        "group": "TMC",
+        "is_open_short": "no"
+    },
+    "768": {
+        "group": "EVCM",
+        "is_open_short": "no"
+    },
+    "769": {
+        "group": "UPWK",
+        "is_open_short": "no"
+    },
+    "770": {
+        "group": "IOSP",
+        "is_open_short": "no"
+    },
+    "771": {
+        "group": "AGIO",
+        "is_open_short": "no"
+    },
+    "772": {
+        "group": "VITL",
+        "is_open_short": "no"
+    },
+    "773": {
+        "group": "JJSF",
+        "is_open_short": "no"
+    },
+    "774": {
+        "group": "ADUS",
+        "is_open_short": "no"
+    },
+    "775": {
+        "group": "NN",
+        "is_open_short": "no"
+    },
+    "776": {
+        "group": "ACHC",
+        "is_open_short": "no"
+    },
+    "777": {
+        "group": "ARQT",
+        "is_open_short": "no"
+    },
+    "778": {
+        "group": "VNET",
+        "is_open_short": "no"
+    },
+    "779": {
+        "group": "ANIP",
+        "is_open_short": "no"
+    },
+    "780": {
+        "group": "AVDX",
+        "is_open_short": "no"
+    },
+    "781": {
+        "group": "HRMY",
+        "is_open_short": "no"
+    },
+    "782": {
+        "group": "FIVN",
+        "is_open_short": "no"
+    },
+    "783": {
+        "group": "IDYA",
+        "is_open_short": "no"
+    },
+    "784": {
+        "group": "METC",
+        "is_open_short": "no"
+    },
+    "785": {
+        "group": "HWCPZ",
+        "is_open_short": "no"
+    },
+    "786": {
+        "group": "SKWD",
+        "is_open_short": "no"
+    },
+    "787": {
+        "group": "CENX",
+        "is_open_short": "no"
+    },
+    "788": {
+        "group": "CHA",
+        "is_open_short": "no"
+    },
+    "789": {
+        "group": "UMBFO",
+        "is_open_short": "no"
+    },
+    "790": {
+        "group": "TRIP",
+        "is_open_short": "no"
+    },
+    "791": {
+        "group": "BEAM",
+        "is_open_short": "no"
+    },
+    "792": {
+        "group": "RXRX",
+        "is_open_short": "no"
+    }
+}

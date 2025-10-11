@@ -177,6 +177,20 @@ def update_cfachina():
         df = df.sort_values('ins', ascending=True)
         df.to_csv('INFO_%s.csv' % (item), index=False, encoding='utf-8-sig')
 
+    batch_dict = {}
+    count = 0
+    for item in info_dict:
+        df = pd.DataFrame(info_dict[item])
+        df = df.sort_values('ins', ascending=True)
+        for index, item in df.iterrows():
+            trademonth = [int(month) for month in item['trademonth'].split('_')]
+            for month in trademonth:
+                batch_dict[count] = {}
+                batch_dict[count]['group'] = '%s%02d' % (item['ins'], month)
+                count = count + 1
+        with open('batch_futures_autotest.json', 'w', encoding='utf-8') as f:
+            json.dump(batch_dict, f, indent=4, ensure_ascii=False)
+
 
 #######更新GATE基本面信息方法#########
 ####合约价格变动以及一手单位信息
@@ -214,7 +228,7 @@ def update_gate():
                 price = float(price)
                 ins_dict['%s_USDT' % (name)] = {}
                 ins_dict['%s_USDT' % (name)]['ins'] = '%s_USDT' % (name)
-                ins_dict['%s_USDT' % (name)]['shares'] = '%04d%02d%02d_%d' % (today.year, today.month, today.day, int(market_cap / price))
+                ins_dict['%s_USDT' % (name)]['shares'] = str(int(market_cap / price))
 
     with open(info_file, 'r', encoding='utf-8') as file:
         data = json.load(file)
@@ -229,6 +243,15 @@ def update_gate():
     ret_dict = [ins_dict[item] for item in ins_dict if 'commission' in ins_dict[item]]
     df = pd.DataFrame(ret_dict)
     df.to_csv('INFO_GATE.csv', index=False, encoding='utf-8-sig')
+
+    batch_dict = {}
+    count = 0
+    for index, item in df.iterrows():
+        batch_dict[count] = {}
+        batch_dict[count]['group'] = item['ins']
+        count = count + 1
+    with open('batch_crypto_autotest.json', 'w', encoding='utf-8') as f:
+        json.dump(batch_dict, f, indent=4, ensure_ascii=False)
 
 
 #######更新港股基本面信息方法#########
@@ -280,7 +303,7 @@ def update_sehk():
             price = float(price)
             ins_dict[code] = {}
             ins_dict[code]['ins'] = code
-            ins_dict[code]['shares'] = '%04d%02d%02d_%d' % (today.year, today.month, today.day, int(market_cap / price))
+            ins_dict[code]['shares'] = str(int(market_cap / price))
 
     sector_list = ['公用事业', '医疗保健业', '原材料业', '地产建筑业', '工业', '必须性消费', '电讯业', '综合企业', '能源业', '资讯科技业', '金融业', '非必须性消费']
     en_list = [
@@ -304,6 +327,16 @@ def update_sehk():
     df = pd.DataFrame(ret_dict)
     df.to_csv('INFO_SEHK.csv', index=False, encoding='utf-8-sig')
 
+    batch_dict = {}
+    count = 0
+    for index, item in df.iterrows():
+        batch_dict[count] = {}
+        batch_dict[count]['group'] = item['ins']
+        batch_dict[count]['is_open_short'] = 'no'
+        count = count + 1
+    with open('batch_sehk_autotest.json', 'w', encoding='utf-8') as f:
+        json.dump(batch_dict, f, indent=4, ensure_ascii=False)
+
 
 #######更新纳斯达克基本面信息方法#########
 ####行业成分股以及市值信息
@@ -314,15 +347,24 @@ def update_sehk():
 def update_nasdaq():
     file_dir = ticknature.__path__[0]
     cap_file = '%s/data/纳斯达克股票列表.csv' % (file_dir)
-    today = date.today()
     ret = pd.read_csv(cap_file)
     ret = ret.sort_values('Market Cap', ascending=False)
     ret["plate"] = ret["Sector"].str.replace(" ", "_").str.lower()
     ret['Last Sale'] = ret['Last Sale'].str.replace('$', '', regex=False).astype(float)
-    ret["shares"] = (ret['Market Cap'] / ret['Last Sale']).astype(int)
-    ret["shares"] = '%04d%02d%02d_' % (today.year, today.month, today.day) + ret["shares"].astype(str)
+    ret["shares"] = (ret['Market Cap'] / ret['Last Sale']).astype(int).astype(str)
     ret['ins'] = ret['Symbol']
+    ret = ret.dropna(subset=['plate'])
     ret[['ins', 'shares', 'plate']].to_csv('INFO_NASDAQ.csv', index=False)
+
+    batch_dict = {}
+    count = 0
+    for index, item in ret.iterrows():
+        batch_dict[count] = {}
+        batch_dict[count]['group'] = item['ins']
+        batch_dict[count]['is_open_short'] = 'no'
+        count = count + 1
+    with open('batch_nasdaq_autotest.json', 'w', encoding='utf-8') as f:
+        json.dump(batch_dict, f, indent=4, ensure_ascii=False)
 
 
 #######更新外汇基本面信息方法#########
@@ -349,6 +391,15 @@ def update_fxcm():
     ret_dict = [ins_dict[item] for item in ins_dict]
     df = pd.DataFrame(ret_dict)
     df.to_csv('INFO_FXCM.csv', index=False, encoding='utf-8-sig')
+
+    batch_dict = {}
+    count = 0
+    for index, item in df.iterrows():
+        batch_dict[count] = {}
+        batch_dict[count]['group'] = item['ins']
+        count = count + 1
+    with open('batch_forex_autotest.json', 'w', encoding='utf-8') as f:
+        json.dump(batch_dict, f, indent=4, ensure_ascii=False)
 
 
 #######更新股票异常变动信息#########

@@ -1,0 +1,251 @@
+{
+    "0": {
+        "group": "BTC_USDT"
+    },
+    "1": {
+        "group": "ETH_USDT"
+    },
+    "2": {
+        "group": "XRP_USDT"
+    },
+    "3": {
+        "group": "BNB_USDT"
+    },
+    "4": {
+        "group": "SOL_USDT"
+    },
+    "5": {
+        "group": "USDC_USDT"
+    },
+    "6": {
+        "group": "DOGE_USDT"
+    },
+    "7": {
+        "group": "ADA_USDT"
+    },
+    "8": {
+        "group": "TRX_USDT"
+    },
+    "9": {
+        "group": "LINK_USDT"
+    },
+    "10": {
+        "group": "HYPE_USDT"
+    },
+    "11": {
+        "group": "SUI_USDT"
+    },
+    "12": {
+        "group": "XLM_USDT"
+    },
+    "13": {
+        "group": "BCH_USDT"
+    },
+    "14": {
+        "group": "AVAX_USDT"
+    },
+    "15": {
+        "group": "HBAR_USDT"
+    },
+    "16": {
+        "group": "LTC_USDT"
+    },
+    "17": {
+        "group": "CRO_USDT"
+    },
+    "18": {
+        "group": "TON_USDT"
+    },
+    "19": {
+        "group": "SHIB_USDT"
+    },
+    "20": {
+        "group": "DOT_USDT"
+    },
+    "21": {
+        "group": "UNI_USDT"
+    },
+    "22": {
+        "group": "ENA_USDT"
+    },
+    "23": {
+        "group": "WLFI_USDT"
+    },
+    "24": {
+        "group": "AAVE_USDT"
+    },
+    "25": {
+        "group": "PEPE_USDT"
+    },
+    "26": {
+        "group": "OKB_USDT"
+    },
+    "27": {
+        "group": "MNT_USDT"
+    },
+    "28": {
+        "group": "WLD_USDT"
+    },
+    "29": {
+        "group": "TAO_USDT"
+    },
+    "30": {
+        "group": "NEAR_USDT"
+    },
+    "31": {
+        "group": "ETC_USDT"
+    },
+    "32": {
+        "group": "APT_USDT"
+    },
+    "33": {
+        "group": "ONDO_USDT"
+    },
+    "34": {
+        "group": "POL_USDT"
+    },
+    "35": {
+        "group": "PI_USDT"
+    },
+    "36": {
+        "group": "ARB_USDT"
+    },
+    "37": {
+        "group": "ICP_USDT"
+    },
+    "38": {
+        "group": "IP_USDT"
+    },
+    "39": {
+        "group": "ATOM_USDT"
+    },
+    "40": {
+        "group": "KAS_USDT"
+    },
+    "41": {
+        "group": "PENGU_USDT"
+    },
+    "42": {
+        "group": "VET_USDT"
+    },
+    "43": {
+        "group": "ALGO_USDT"
+    },
+    "44": {
+        "group": "GT_USDT"
+    },
+    "45": {
+        "group": "RENDER_USDT"
+    },
+    "46": {
+        "group": "SEI_USDT"
+    },
+    "47": {
+        "group": "BONK_USDT"
+    },
+    "48": {
+        "group": "TRUMP_USDT"
+    },
+    "49": {
+        "group": "PUMP_USDT"
+    },
+    "50": {
+        "group": "FIL_USDT"
+    },
+    "51": {
+        "group": "FLR_USDT"
+    },
+    "52": {
+        "group": "JUP_USDT"
+    },
+    "53": {
+        "group": "FET_USDT"
+    },
+    "54": {
+        "group": "QNT_USDT"
+    },
+    "55": {
+        "group": "XDC_USDT"
+    },
+    "56": {
+        "group": "XAUT_USDT"
+    },
+    "57": {
+        "group": "FORM_USDT"
+    },
+    "58": {
+        "group": "OP_USDT"
+    },
+    "59": {
+        "group": "INJ_USDT"
+    },
+    "60": {
+        "group": "TIA_USDT"
+    },
+    "61": {
+        "group": "SPX_USDT"
+    },
+    "62": {
+        "group": "STX_USDT"
+    },
+    "63": {
+        "group": "CRV_USDT"
+    },
+    "64": {
+        "group": "LDO_USDT"
+    },
+    "65": {
+        "group": "IMX_USDT"
+    },
+    "66": {
+        "group": "PAXG_USDT"
+    },
+    "67": {
+        "group": "AERO_USDT"
+    },
+    "68": {
+        "group": "GRT_USDT"
+    },
+    "69": {
+        "group": "FLOKI_USDT"
+    },
+    "70": {
+        "group": "KAIA_USDT"
+    },
+    "71": {
+        "group": "PYTH_USDT"
+    },
+    "72": {
+        "group": "S_USDT"
+    },
+    "73": {
+        "group": "RAY_USDT"
+    },
+    "74": {
+        "group": "CFX_USDT"
+    },
+    "75": {
+        "group": "WIF_USDT"
+    },
+    "76": {
+        "group": "VIRTUAL_USDT"
+    },
+    "77": {
+        "group": "CAKE_USDT"
+    },
+    "78": {
+        "group": "FARTCOIN_USDT"
+    },
+    "79": {
+        "group": "THETA_USDT"
+    },
+    "80": {
+        "group": "PENDLE_USDT"
+    },
+    "81": {
+        "group": "GALA_USDT"
+    },
+    "82": {
+        "group": "XTZ_USDT"
+    }
+}
