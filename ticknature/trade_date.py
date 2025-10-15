@@ -9,7 +9,8 @@ class tradeDate():
 
     def __init__(self):
         self.future_list = ['SHFE', 'CZCE', 'DCE', 'INE', 'CFFEX', 'GFEX']
-        self.stock_list = ['NASDAQ', 'SEHK']
+        self.stock_list1 = ['NASDAQ']
+        self.stock_list2 = ['SEHK']
         self.crypto_list = ['GATE']
         self.forex_list = ['FXCM']
 
@@ -35,7 +36,7 @@ class tradeDate():
                 if ins_time_of_week != 6 and ins_time_of_week != 7:
                     split_ymd = split_timestr[0].split('-')
                     ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
-        elif exch in self.stock_list:
+        elif exch in self.stock_list1:
             if '00:00:00' <= split_timestr[-1] <= '07:30:00':
                 if ins_time_of_week != 7 and ins_time_of_week != 1:
                     one_day_before = pd.to_datetime(timestring, format='%Y-%m-%d %H:%M:%S.%f') - datetime.timedelta(days=1)
@@ -44,6 +45,10 @@ class tradeDate():
                 if ins_time_of_week != 6 and ins_time_of_week != 7:
                     split_ymd = split_timestr[0].split('-')
                     ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
+        elif exch in self.stock_list2:
+            if ins_time_of_week != 6 and ins_time_of_week != 7:
+                split_ymd = split_timestr[0].split('-')
+                ret = split_ymd[0] + split_ymd[1] + split_ymd[2]
         elif exch in self.future_list:
             if '20:00:00' <= split_timestr[-1] <= '24:00:00':
                 if ins_time_of_week == 5:
@@ -80,8 +85,10 @@ class tradeDate():
             ins_list = get_ins('CZCE', 'TA05')
             for item in ins_list:
                 date_list = date_list + get_date('CZCE', item)
-        elif exch in self.stock_list:
+        elif exch in self.stock_list1:
             date_list = date_list + get_date('NASDAQ', 'AAPL')
+        elif exch in self.stock_list2:
+            date_list = date_list + get_date('SEHK', '700')
 
         date_list.sort()
 
