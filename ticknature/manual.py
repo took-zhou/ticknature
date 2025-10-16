@@ -15,7 +15,7 @@ from tickmine.api import get_exch, get_ins, get_date, get_rawtick, stream_kline,
 # 3.https://www.cfachina.org/report/api/fwzc/varieties/findVarieties?varietyType=1&oneLevelVariety=$板块&twoLevelVariety=$商品 获取商品基本信息
 # 4.https://www.cfachina.org/report/api/fwzc/varieties/findVarieties?varietyType=2&oneLevelVariety=$板块&twoLevelVariety=$商品 获取商品期权基本信息
 # 5.通过各大交易所手动汇总中国期货计算参数汇总中的手续费信息
-# 6.鸡蛋一手交易单位需要乘以2，合成橡胶的最小变动单位手动设置5
+# 6.鸡蛋一手交易单位需要乘以2，合成橡胶的最小变动单位手动设置5，碳酸锂最小变动单位设置20
 def update_cfachina():
     file_dir = ticknature.__path__[0]
     settlement_file = '%s/data/中国期货结算参数汇总.csv' % (file_dir)
