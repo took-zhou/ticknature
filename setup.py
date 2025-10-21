@@ -6,7 +6,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name="ticknature",
-    version="2.6.7",
+    version="2.6.8",
     author="zhoufan",
     author_email="zhoufan@tsaodai.com",
     description="Nature layer",
