@@ -125,7 +125,7 @@ class tradeDate():
             begin = 200
             split_date = ''
             for i in range(10):
-                split_date = str(begin + i) + resplit[1][0][-3:] + '15'
+                split_date = str(begin + i) + resplit[1][0][-3:] + '25'
                 if split_date >= datestring:
                     break
 
@@ -146,11 +146,11 @@ class tradeDate():
             begin = 200
             split_date = ''
             for i in range(10):
-                split_date = str(begin + i) + resplit[1][0][-3:] + '15'
+                split_date = str(begin + i) + resplit[1][0][-3:] + '25'
                 if split_date >= datestring:
                     break
 
-            ret_date = split_date[0:6] + '15'
+            ret_date = split_date[0:6] + '25'
         else:
             ret_date = '21001231'
 
