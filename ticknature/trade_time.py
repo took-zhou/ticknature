@@ -18,8 +18,8 @@ class tradeTime():
             'night_second': ['00:00:00', '02:30:00']
         }
         self.time_compose2 = {'day_first': ['08:00:00', '23:59:59'], 'day_second': ['00:00:00', '07:00:00']}
-        self.time_compose3 = {'day_first': ['20:30:00', '23:59:59'], 'day_second': ['00:00:00', '05:30:00']}
-        self.time_compose4 = {'day': ['08:30:00', '16:30:00']}
+        self.time_compose3 = {'day_first': ['21:00:00', '23:59:59'], 'day_second': ['00:00:00', '05:30:00']}
+        self.time_compose4 = {'day': ['09:00:00', '16:30:00']}
         self.time_compose5 = {'day_first': ['06:00:00', '23:59:59'], 'day_second': ['00:00:00', '05:00:00']}
 
     def _get_night_date(self, exch, datestring):
