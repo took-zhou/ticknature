@@ -1,16 +1,11 @@
 from setuptools import find_packages, setup
 
-# 分别读取README.rst和requirements.txt的内容
-with open('README.rst', 'r', encoding='utf-8') as f:
-    long_description = f.read()
-
 setup(
     name="ticknature",
-    version="2.6.8",
+    version="2.6.9",
     author="zhoufan",
     author_email="zhoufan@tsaodai.com",
-    description="Nature layer",
-    long_description=long_description,
+    description="nature layer",
     package_data={"": ["*.csv", "*.html", "*.json"]},
 
     # 项目主页
